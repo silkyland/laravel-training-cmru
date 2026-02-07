@@ -1,56 +1,133 @@
 # 2.2 Project Structure (โครงสร้างโฟลเดอร์)
 
-> 📖 **บทนี้คุณจะได้เรียนรู้**
+> **บทนี้คุณจะได้เรียนรู้**
 > - หน้าที่ของโฟลเดอร์หลักใน Laravel
 > - ไฟล์คอนฟิกูเรชันที่สำคัญ (.env, config/)
 > - การจัดการ Assets ใน resources/
+> - การใช้ AI ช่วยค้นหาไฟล์
 
 ---
 
-## 🎯 วัตถุประสงค์
-เพื่อให้สามารถหาไฟล์ที่ต้องการแก้ไขได้อย่างถูกต้องและรวดเร็ว
+## วัตถุประสงค์การเรียนรู้
 
-## 📚 เนื้อหา
+เมื่อจบบทเรียนนี้ ผู้เรียนจะสามารถ:
+1. อธิบายหน้าที่ของโฟลเดอร์หลักใน Laravel ได้
+2. หาไฟล์ที่ต้องการแก้ไขได้อย่างถูกต้องและรวดเร็ว
+3. เข้าใจความสำคัญของไฟล์ `.env` และการรักษาความปลอดภัย
+4. ใช้ AI ช่วยค้นหาตำแหน่งไฟล์ที่เหมาะสมได้
 
-### โฟลเดอร์ที่ต้องใช้งานบ่อย (The Essential Paths)
+---
 
-- **`app/`**: หัวใจของระบบ ประกอบด้วย Controllers, Models, และ Middleware
-- **`config/`**: ไฟล์ตั้งค่าทั้งหมดของระบบ (App, Database, Mail)
-- **`database/`**: ไฟล์ Migration (สร้างตาราง) และ Seeders (สร้างข้อมูลจำลอง)
-- **`public/`**: จุดเริ่มต้นของแอปและที่เก็บภาพ, CSS, JS ที่เปิดต่อสาธารณะ
-- **`resources/views/`**: ที่เก็บหน้าเว็บ (Blade files)
-- **`routes/`**: ที่กำหนด URL ของระบบ (`web.php` สำหรับหน้าเว็บ, `api.php` สำหรับ API)
-- **`storage/`**: ที่เก็บไฟล์ที่ User อัปโหลดและ Logs ของระบบ
+## เนื้อหา
 
-#### ⚠️ ไฟล์ที่สำคัญที่สุด: `.env`
-ใช้เก็บข้อมูลความลับ เช่น Password ฐานข้อมูล, API Key **ห้ามส่งไฟล์นี้ขึ้น GitHub เด็ดขาด!**
+### 1. โฟลเดอร์ที่ต้องใช้งานบ่อย (The Essential Paths)
 
-#### 💡 ตัวอย่างโครงสร้างเบื้องต้น
-```text
+| โฟลเดอร์ | หน้าที่ | ไฟล์สำคัญ |
+|---------|--------|----------|
+| **`app/`** | หัวใจของระบบ (Controllers, Models, Middleware) | `app/Http/Controllers/`, `app/Models/` |
+| **`config/`** | ไฟล์ตั้งค่าทั้งหมดของระบบ | `app.php`, `database.php`, `mail.php` |
+| **`database/`** | Migration (สร้างตาราง) และ Seeders (ข้อมูลจำลอง) | `migrations/`, `seeders/` |
+| **`public/`** | จุดเริ่มต้นของแอป, ไฟล์ที่เปิดต่อสาธารณะ | `index.php`, ภาพ, CSS, JS |
+| **`resources/`** | ที่เก็บ Views และ Frontend Assets | `views/`, `css/`, `js/` |
+| **`routes/`** | กำหนด URL ของระบบ | `web.php`, `api.php` |
+| **`storage/`** | ไฟล์ที่ User อัปโหลดและ Logs | `app/`, `logs/` |
+
+### 2. โครงสร้างโฟลเดอร์
+
+```
 project/
 ├── app/
-│   ├── Http/Controllers/
-│   └── Models/
+│   ├── Http/
+│   │   ├── Controllers/     ← Controller ทั้งหมด
+│   │   └── Middleware/       ← Middleware ทั้งหมด
+│   ├── Models/               ← Model ทั้งหมด
+│   └── Providers/            ← Service Providers
+├── config/                   ← ไฟล์ตั้งค่า
 ├── database/
-│   └── migrations/
+│   ├── migrations/           ← สร้าง/แก้ไขตาราง
+│   └── seeders/              ← ข้อมูลจำลอง
+├── public/                   ← จุดเริ่มต้นของแอป
+├── resources/
+│   └── views/                ← Blade Templates
 ├── routes/
-│   └── web.php
-└── .env
+│   ├── web.php               ← Route สำหรับหน้าเว็บ
+│   └── api.php               ← Route สำหรับ API
+├── storage/                  ← ไฟล์อัปโหลด, Logs
+├── .env                      ← ข้อมูลความลับ (ห้ามขึ้น Git!)
+└── composer.json             ← Dependencies ของโปรเจกต์
+```
+
+### 3. ไฟล์ที่สำคัญที่สุด: `.env`
+
+ไฟล์ `.env` ใช้เก็บข้อมูลความลับ เช่น Password ฐานข้อมูล, API Key เปรียบเสมือน **"ตู้เซฟ"** ที่เก็บกุญแจทั้งหมดของระบบ
+
+| ข้อควรระวัง | รายละเอียด |
+|------------|-----------|
+| **ห้ามขึ้น Git** | ไฟล์ `.env` ถูก ignore ใน `.gitignore` อยู่แล้ว ห้ามลบออก |
+| **ใช้ `.env.example`** | เก็บโครงสร้างตัวอย่างสำหรับทีม (ไม่มีค่าจริง) |
+| **แยกตาม Environment** | ใช้ค่าต่างกันสำหรับ local, staging, production |
+
+```bash
+# ตัวอย่างเนื้อหาในไฟล์ .env
+APP_NAME=MyApp
+APP_ENV=local
+APP_DEBUG=true
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_DATABASE=my_database
+DB_USERNAME=root
+DB_PASSWORD=secret
 ```
 
 ---
 
-### 🤖 การใช้ AI ช่วยค้นหาไฟล์
+### การใช้ AI ช่วยค้นหาไฟล์
 
 #### Prompt ตัวอย่าง:
-"In Laravel, where should I put my custom helper functions or service classes?"
+
+```
+In Laravel, where should I put my custom helper functions
+or service classes?
+```
+
+#### การ Review คำตอบจาก AI
+
+เมื่อได้คำตอบจาก AI ให้ตรวจสอบ:
+- [ ] ตำแหน่งไฟล์ตรงกับ Convention ของ Laravel หรือไม่
+- [ ] Namespace ถูกต้องตามโครงสร้างโฟลเดอร์หรือไม่
+- [ ] ต้อง Register ใน Service Provider เพิ่มเติมหรือไม่
 
 ---
 
-## 📋 Checklist ทำความเข้าใจ
-- [ ] เข้าใจว่า Model อยู่ในโฟลเดอร์ `app/Models`
-- [ ] รู้ว่า Route อยู่ใน `routes/web.php`
-- [ ] รู้ว่า View อยู่ใน `resources/views`
+## แบบฝึกหัด
+
+### Exercise 1: ค้นหาไฟล์
+
+**โจทย์:** ตอบคำถามต่อไปนี้:
+1. ถ้าต้องการสร้าง Route ใหม่ ต้องแก้ไขไฟล์ไหน?
+2. ถ้าต้องการสร้างหน้าเว็บใหม่ ต้องสร้างไฟล์ไว้ที่โฟลเดอร์ไหน?
+3. ถ้าต้องการสร้างตารางใหม่ในฐานข้อมูล ต้องสร้างไฟล์ไว้ที่โฟลเดอร์ไหน?
+
+<details>
+<summary>ดูเฉลย</summary>
+
+1. **`routes/web.php`** — สำหรับ Route หน้าเว็บ หรือ `routes/api.php` สำหรับ API
+2. **`resources/views/`** — สร้างไฟล์ `.blade.php` ในโฟลเดอร์นี้
+3. **`database/migrations/`** — ใช้คำสั่ง `php artisan make:migration` เพื่อสร้าง Migration
+
+</details>
+
+---
+
+## สรุป
+
+| หัวข้อ | สิ่งที่ได้เรียนรู้ |
+|--------|-------------------|
+| โฟลเดอร์หลัก | `app/`, `config/`, `database/`, `routes/`, `resources/` |
+| โครงสร้างไฟล์ | แยกตามหน้าที่ชัดเจนตาม MVC Pattern |
+| ไฟล์ `.env` | เก็บข้อมูลความลับ ห้ามขึ้น Git เด็ดขาด |
+| AI ช่วยค้นหา | ใช้ AI ถามตำแหน่งไฟล์ที่เหมาะสมตาม Convention |
 
 ---
 
