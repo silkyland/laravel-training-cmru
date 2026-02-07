@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Workshop Step 3</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="css/theme.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="slide-container">
+        <div class="blob-bg-1"></div>
+        <div class="blob-bg-2"></div>
+        <div class="content-wrapper">
+            <div class="mb-5">
+                <div class="flex items-center space-x-3 mb-2">
+                    <span class="text-sm font-bold tracking-widest text-blue-500 uppercase">WORKSHOP</span>
+                    <div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
+                </div>
+                <h1 class="text-4xl font-black text-gray-800">Step 3: Frontend & Polish</h1>
+                <p class="text-gray-500 mt-2 text-lg">UI/UX Implementation</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-6 flex-grow pb-4">
+                <div class="layout-card">
+                    <h3 class="text-lg font-bold text-gray-800 mb-3">Tailwind Views</h3>
+                    <p class="text-xs text-gray-500 mb-2">สร้างหน้าจอด้วย Tailwind CSS</p>
+                    <div
+                        class="bg-yellow-50 p-2 rounded border border-yellow-100 text-[10px] text-yellow-800 italic mb-3">
+                        AI Prompt: "Create a Tailwind Table for displaying products loop. Include columns for Image,
+                        Name, Price, Stock, Actions (Edit/Delete). Use blue color scheme."
+                    </div>
+                    <div class="flex items-center justify-center p-4 bg-gray-50 border border-gray-100 rounded">
+                        <div class="w-full">
+                            <div class="flex border-b border-gray-200 pb-2 mb-2">
+                                <div class="w-1/4 h-3 bg-gray-300 rounded"></div>
+                                <div class="w-1/4 h-3 bg-gray-300 rounded ml-2"></div>
+                                <div class="w-1/4 h-3 bg-gray-300 rounded ml-2"></div>
+                                <div class="w-1/4 h-3 bg-gray-300 rounded ml-2"></div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="h-2 bg-gray-200 rounded w-full"></div>
+                                <div class="h-2 bg-gray-200 rounded w-full"></div>
+                                <div class="h-2 bg-gray-200 rounded w-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layout-card">
+                    <h3 class="text-lg font-bold text-gray-800 mb-3">Final Touches</h3>
+                    <ul class="space-y-3 text-sm text-gray-600">
+                        <li class="flex items-center bg-white p-2 border border-gray-100 rounded shadow-sm">
+                            <i class="fa-solid fa-bell text-yellow-500 mr-3"></i>
+                            <span><strong>Flash Messages:</strong> แจ้งเตือนเมื่อ save/delete สำเร็จ</span>
+                        </li>
+                        <li class="flex items-center bg-white p-2 border border-gray-100 rounded shadow-sm">
+                            <i class="fa-solid fa-filter text-purple-500 mr-3"></i>
+                            <span><strong>Pagination:</strong> แบ่งหน้าข้อมูล (use paginate())</span>
+                        </li>
+                        <li class="flex items-center bg-white p-2 border border-gray-100 rounded shadow-sm">
+                            <i class="fa-solid fa-magnifying-glass text-blue-500 mr-3"></i>
+                            <span><strong>Search:</strong> ค้นหาสินค้า</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-auto pt-4 flex justify-between items-center text-gray-400 text-xs border-t border-gray-100">
+                <p>LARAVEL + AI TRAINING COURSE</p>
+                <p>PAGE 48</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

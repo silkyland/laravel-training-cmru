@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Queues & Jobs</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="css/theme.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="slide-container">
+        <div class="blob-bg-1"></div>
+        <div class="blob-bg-2"></div>
+        <div class="content-wrapper">
+            <div class="mb-5">
+                <div class="flex items-center space-x-3 mb-2">
+                    <span class="text-sm font-bold tracking-widest text-blue-500 uppercase">PERFORMANCE</span>
+                    <div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
+                </div>
+                <h1 class="text-4xl font-black text-gray-800">Queues & Jobs</h1>
+                <p class="text-gray-500 mt-2 text-lg">Background Processing</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-6 flex-grow pb-4">
+                <div class="layout-card">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-purple-500 flex items-center justify-center mr-3">
+                            <i class="fa-solid fa-list-check text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800">Why Queues?</h3>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">
+                        ย้ายงานที่ใช้เวลานานไปทำเบื้องหลัง (Asynchronous) เพื่อไม่ให้ User ต้องรอนาน
+                    </p>
+                    <ul class="text-xs text-gray-600 list-disc pl-5 space-y-2">
+                        <li>ส่งอีเมล (Email Sending)</li>
+                        <li>สร้างรายงาน PDF (Report Generation)</li>
+                        <li>ประมวลผลรูปภาพ/วิดีโอ (Image Processing)</li>
+                        <li>เรียก API ภายนอก (External API Calls)</li>
+                    </ul>
+                </div>
+
+                <div class="layout-card">
+                    <div class="space-y-4">
+                        <div>
+                            <p class="text-xs font-bold text-gray-700 mb-1">Dispatching Job:</p>
+                            <div class="code-block">
+                                ProcessPodcast::dispatch($podcast);
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-gray-700 mb-1">Running Worker:</p>
+                            <div class="code-block">
+                                php artisan queue:work
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-gray-700 mb-1">Job Class Structure:</p>
+                            <div class="code-block">
+                                public function handle()
+                                {
+                                // Long running task...
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-auto pt-4 flex justify-between items-center text-gray-400 text-xs border-t border-gray-100">
+                <p>LARAVEL + AI TRAINING COURSE</p>
+                <p>PAGE 42</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

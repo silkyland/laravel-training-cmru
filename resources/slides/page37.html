@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Data Security</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="css/theme.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="slide-container">
+        <div class="blob-bg-1"></div>
+        <div class="blob-bg-2"></div>
+        <div class="content-wrapper">
+            <div class="mb-5">
+                <div class="flex items-center space-x-3 mb-2">
+                    <span class="text-sm font-bold tracking-widest text-blue-500 uppercase">SECURITY</span>
+                    <div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
+                </div>
+                <h1 class="text-4xl font-black text-gray-800">Data Security</h1>
+                <p class="text-gray-500 mt-2 text-lg">Encryption vs Hashing</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-6 flex-grow pb-4">
+                <div class="layout-card">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-indigo-500 flex items-center justify-center mr-3">
+                            <i class="fa-solid fa-lock text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800">Encryption</h3>
+                            <p class="text-xs text-gray-500">การเข้ารหัสแบบย้อนกลับได้</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <p class="text-blue-600 font-bold text-xs bg-blue-50 p-2 rounded">Two-way (Decryptable)</p>
+                        <p class="text-sm text-gray-600">
+                            ใช้สำหรับข้อมูลที่ต้องการอ่านกลับมาได้ เช่น เลขบัตร, ข้อมูลส่วนตัว, Token ต่างๆ
+                        </p>
+                        <div class="code-block">
+                            use Illuminate\Support\Facades\Crypt;
+
+                            $encrypted = Crypt::encryptString('secret');
+                            $decrypted = Crypt::decryptString($encrypted);
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">
+                            * Laravel ใช้ OpenSSL และ AES-256-CBC
+                        </p>
+                    </div>
+                </div>
+
+                <div class="layout-card">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-pink-500 flex items-center justify-center mr-3">
+                            <i class="fa-solid fa-hashtag text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800">Hashing</h3>
+                            <p class="text-xs text-gray-500">การเข้ารหัสแบบทางเดียว</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <p class="text-pink-600 font-bold text-xs bg-pink-50 p-2 rounded">One-way (Irreversible)</p>
+                        <p class="text-sm text-gray-600">
+                            ใช้สำหรับตรวจสอบความถูกต้อง แต่ไม่ต้องการรู้ค่าจริง เช่น รหัสผ่าน
+                        </p>
+                        <div class="code-block">
+                            use Illuminate\Support\Facades\Hash;
+                            // Store
+                            $hashed = Hash::make('password123');
+
+                            // Verify
+                            if (Hash::check('password123', $hashed)) {
+                            // Correct
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-auto pt-4 flex justify-between items-center text-gray-400 text-xs border-t border-gray-100">
+                <p>LARAVEL + AI TRAINING COURSE</p>
+                <p>PAGE 37</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Validation</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="css/theme.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="slide-container">
+        <div class="blob-bg-1"></div>
+        <div class="blob-bg-2"></div>
+        <div class="content-wrapper">
+            <div class="mb-5">
+                <div class="flex items-center space-x-3 mb-2">
+                    <span class="text-sm font-bold tracking-widest text-blue-500 uppercase">FORMS & VALIDATION</span>
+                    <div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
+                </div>
+                <h1 class="text-4xl font-black text-gray-800">Validation</h1>
+                <p class="text-gray-500 mt-2 text-lg">Validating Incoming Data</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-6 flex-grow pb-4">
+                <div class="layout-card">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-red-500 flex items-center justify-center mr-3">
+                            <i class="fa-solid fa-check-double text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800">Validation Logic</h3>
+                            <p class="text-xs text-gray-500">ตรวจสอบความถูกต้อง</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <p class="text-xs font-bold text-gray-700 mb-1">Controller Validation:</p>
+                        <div class="code-block">
+                            public function store(Request $request) {
+                            $validated = $request->validate([
+                            'title' => 'required|max:255',
+                            'body' => 'required',
+                            ]);
+
+                            // ถ้าไม่ผ่าน จะ redirect กลับอัตโนมัติ
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layout-card">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-purple-500 flex items-center justify-center mr-3">
+                            <i class="fa-solid fa-exclamation-circle text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800">Displaying Errors</h3>
+                            <p class="text-xs text-gray-500">แสดงข้อผิดพลาด</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <p class="text-xs font-bold text-gray-700 mb-1">Blade Template:</p>
+                            <div class="code-block">
+                                @if ($errors->any())
+                                &lt;div class="alert alert-danger"&gt;
+                                @foreach ($errors->all() as $error)
+                                &lt;li&gt;{{ $error }}&lt;/li&gt;
+                                @endforeach
+                                &lt;/div&gt;
+                                @endif
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-gray-700 mb-1">Individual Field:</p>
+                            <div class="code-block">
+                                @error('title')
+                                &lt;div class="text-red-500"&gt;{{ $message }}&lt;/div&gt;
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-auto pt-4 flex justify-between items-center text-gray-400 text-xs border-t border-gray-100">
+                <p>LARAVEL + AI TRAINING COURSE</p>
+                <p>PAGE 32</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

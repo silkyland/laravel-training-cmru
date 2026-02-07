@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Starter Kits</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="css/theme.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="slide-container">
+        <div class="blob-bg-1"></div>
+        <div class="blob-bg-2"></div>
+        <div class="content-wrapper">
+            <div class="mb-5">
+                <div class="flex items-center space-x-3 mb-2">
+                    <span class="text-sm font-bold tracking-widest text-blue-500 uppercase">AUTHENTICATION</span>
+                    <div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
+                </div>
+                <h1 class="text-4xl font-black text-gray-800">Auth Starter Kits</h1>
+                <p class="text-gray-500 mt-2 text-lg">Don't Reinvent the Wheel</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-6 flex-grow pb-4">
+                <div
+                    class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-orange-100 flex items-center justify-center mb-4">
+                        <i class="fa-solid fa-wind text-orange-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Laravel Breeze</h3>
+                    <p class="text-sm text-gray-500 mb-4">Simple & Minimal</p>
+                    <ul class="text-sm text-gray-600 text-left space-y-2 w-full px-4">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> Blade +
+                            Tailwind</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> React / Vue
+                            options</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i>
+                            เหมาะสำหรับโปรเจกต์เริ่มต้น</li>
+                    </ul>
+                    <div class="mt-auto pt-4 w-full">
+                        <div class="code-block text-left">composer require laravel/breeze
+                            php artisan breeze:install</div>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-purple-100 flex items-center justify-center mb-4">
+                        <i class="fa-solid fa-jet-fighter text-purple-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Laravel Jetstream</h3>
+                    <p class="text-sm text-gray-500 mb-4">Robust & Feature Rich</p>
+                    <ul class="text-sm text-gray-600 text-left space-y-2 w-full px-4">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> Livewire +
+                            Blade / Inertia</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> 2FA, Teams,
+                            API Support</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> Profile
+                            Management</li>
+                    </ul>
+                    <div class="mt-auto pt-4 w-full">
+                        <div class="code-block text-left">composer require laravel/jetstream
+                            php artisan jetstream:install livewire</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-auto pt-4 flex justify-between items-center text-gray-400 text-xs border-t border-gray-100">
+                <p>LARAVEL + AI TRAINING COURSE</p>
+                <p>PAGE 34</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

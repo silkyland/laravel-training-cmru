@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Security</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="css/theme.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="slide-container">
+        <div class="blob-bg-1"></div>
+        <div class="blob-bg-2"></div>
+        <div class="content-wrapper">
+            <div class="mb-5">
+                <div class="flex items-center space-x-3 mb-2">
+                    <span class="text-sm font-bold tracking-widest text-blue-500 uppercase">SECURITY</span>
+                    <div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
+                </div>
+                <h1 class="text-4xl font-black text-gray-800">Common Security Threats</h1>
+                <p class="text-gray-500 mt-2 text-lg">OWASP Top 10 & Laravel Protection</p>
+            </div>
+
+            <div class="grid grid-cols-3 gap-5 flex-grow pb-4">
+                <div class="layout-card">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-red-500 flex items-center justify-center mr-3">
+                            <i class="fa-solid fa-database text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800">SQL Injection</h3>
+                    </div>
+                    <p class="text-xs text-gray-600 mb-3">การแทรกคำสั่ง SQL ผ่าน Input เพื่อเจาะฐานข้อมูล</p>
+                    <div class="bg-red-50 p-2 rounded border border-red-100 mb-2">
+                        <p class="text-[10px] text-red-700 font-bold">Risk:</p>
+                        <p class="text-[10px] text-red-600">ข้อมูลรั่วไหล, ถูกลบ, หรือแก้ไข</p>
+                    </div>
+                    <div class="mt-auto">
+                        <p class="text-xs font-bold text-gray-700 mb-1">Laravel Fix:</p>
+                        <div class="code-block">
+                            // Eloquent uses bindings automatically
+                            User::where('email', $input)->first();
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layout-card">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-blue-500 flex items-center justify-center mr-3">
+                            <i class="fa-solid fa-code text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800">XSS (Cross-Site Scripting)</h3>
+                    </div>
+                    <p class="text-xs text-gray-600 mb-3">การฝัง Script อันตรายในหน้าเว็บ เพื่อขโมย Session หรือ Cookie
+                    </p>
+                    <div class="bg-blue-50 p-2 rounded border border-blue-100 mb-2">
+                        <p class="text-[10px] text-blue-700 font-bold">Risk:</p>
+                        <p class="text-[10px] text-blue-600">Hijack session users</p>
+                    </div>
+                    <div class="mt-auto">
+                        <p class="text-xs font-bold text-gray-700 mb-1">Laravel Fix:</p>
+                        <div class="code-block">
+                            // Blade escapes output by default
+                            {{ $user_input }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layout-card">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-green-500 flex items-center justify-center mr-3">
+                            <i class="fa-solid fa-shield-virus text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800">CSRF</h3>
+                    </div>
+                    <p class="text-xs text-gray-600 mb-3">การหลอกให้ User ทำคำสั่งบางอย่างโดยไม่รู้ตัว</p>
+                    <div class="bg-green-50 p-2 rounded border border-green-100 mb-2">
+                        <p class="text-[10px] text-green-700 font-bold">Risk:</p>
+                        <p class="text-[10px] text-green-600">Unwanted actions</p>
+                    </div>
+                    <div class="mt-auto">
+                        <p class="text-xs font-bold text-gray-700 mb-1">Laravel Fix:</p>
+                        <div class="code-block">
+                            // Verify CSRF Token
+                            @csrf
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-auto pt-4 flex justify-between items-center text-gray-400 text-xs border-t border-gray-100">
+                <p>LARAVEL + AI TRAINING COURSE</p>
+                <p>PAGE 36</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

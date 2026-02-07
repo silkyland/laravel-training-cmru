@@ -1,201 +1,239 @@
 <!DOCTYPE html>
 <html lang="th">
-
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Q&A & Closing</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"
-        rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Noto Sans Thai', 'Noto Sans SC', sans-serif;
-            overflow: hidden;
-            background-color: #f3f4f6;
-        }
-
-        .slide-container {
-            width: 1280px;
-            height: 720px;
-            position: relative;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .bg-pattern {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.1;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            z-index: 0;
-        }
-
-        .content-wrapper {
-            position: relative;
-            z-index: 10;
-            padding: 60px 100px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 40px;
-        }
-
-        .takeaway-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-
-        .takeaway-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 16px;
-            flex-shrink: 0;
-        }
-
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 14px 32px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 15px;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-            transition: transform 0.3s;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-        }
-
-        .contact-box {
-            background: #F9FAFB;
-            border-radius: 12px;
-            padding: 16px 20px;
-            border-left: 4px solid #764ba2;
-        }
-    </style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Blade Layouts</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Noto Sans Thai", "Noto Sans SC", sans-serif;
+    background-color: #f3f4f6
+    }
+.slide-container {
+    width: 1280px;
+    height: 720px;
+    position: relative;
+    background-color: #fff;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column
+    }
+.blob-bg-1 {
+    position: absolute;
+    top: -120px;
+    right: -100px;
+    width: 450px;
+    height: 450px;
+    background-color: #F0F9FF;
+    border-radius: 50%;
+    z-index: 0;
+    opacity: 0.8
+    }
+.blob-bg-2 {
+    position: absolute;
+    bottom: -50px;
+    left: -50px;
+    width: 300px;
+    height: 300px;
+    background-color: #ECFDF5;
+    border-radius: 50%;
+    z-index: 0;
+    opacity: 0.8
+    }
+.content-wrapper {
+    position: relative;
+    z-index: 10;
+    padding: 50px 80px;
+    height: 100%;
+    display: flex;
+    flex-direction: column
+    }
+.layout-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #F3F4F6;
+    height: 100%;
+    display: flex;
+    flex-direction: column
+    }
+.code-block {
+    background: #1F2937;
+    color: #10B981;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    line-height: 1.6
+    }
+.section-card {
+    background: #F9FAFB;
+    border-left: 3px solid #3B82F6;
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 12px
+    }
+.command-tag {
+    display: inline-block;
+    padding: 3px 8px;
+    background-color: #DBEAFE;
+    color: #1E40AF;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    margin: 2px
+    }
+</style>
 </head>
-
 <body>
-    <div class="slide-container">
-        <div class="bg-pattern"></div>
-        <div class="content-wrapper">
-            <div class="glass-card">
-                <div class="text-center mb-6">
-                    <div
-                        class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 mb-4 shadow-lg">
-                        <i class="fa-solid fa-graduation-cap text-white text-3xl"></i>
-                    </div>
-                    <h1 class="text-4xl font-black text-gray-800 mb-2">ขอบคุณที่เข้าร่วม!</h1>
-                    <p class="text-lg text-gray-600">Thank you for attending Laravel + AI Training Course</p>
-                </div>
-                <div class="grid grid-cols-5 gap-6 mb-6">
-                    <div class="col-span-3">
-                        <h3 class="text-base font-bold text-gray-800 mb-4 flex items-center">
-                            <i class="fa-solid fa-lightbulb text-yellow-500 mr-2"></i>
-                            สิ่งที่ได้เรียนรู้ / Key Takeaways
-                        </h3>
-                        <div class="space-y-3">
-                            <div class="takeaway-item">
-                                <div class="takeaway-icon" style="background-color: #DBEAFE;">
-                                    <i class="fa-brands fa-laravel text-blue-500"></i>
-                                </div>
-                                <p class="text-sm text-gray-700"><span class="font-bold">Laravel Framework</span> -
-                                    โครงสร้างและการใช้งาน</p>
-                            </div>
-                            <div class="takeaway-item">
-                                <div class="takeaway-icon" style="background-color: #D1FAE5;">
-                                    <i class="fa-solid fa-robot text-green-500"></i>
-                                </div>
-                                <p class="text-sm text-gray-700"><span class="font-bold">AI Development</span> - ใช้ AI
-                                    ช่วยเขียนโค้ด</p>
-                            </div>
-                            <div class="takeaway-item">
-                                <div class="takeaway-icon" style="background-color: #FEE2E2;">
-                                    <i class="fa-solid fa-shield-halved text-red-500"></i>
-                                </div>
-                                <p class="text-sm text-gray-700"><span class="font-bold">Security Best Practices</span>
-                                    - ความปลอดภัย</p>
-                            </div>
-                            <div class="takeaway-item">
-                                <div class="takeaway-icon" style="background-color: #FEF3C7;">
-                                    <i class="fa-solid fa-laptop-code text-yellow-600"></i>
-                                </div>
-                                <p class="text-sm text-gray-700"><span class="font-bold">CRUD System</span> -
-                                    สร้างระบบครบวงจร</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-span-2 flex flex-col justify-between">
-                        <div class="text-center mb-4">
-                            <div
-                                class="inline-block p-4 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 mb-2">
-                                <i class="fa-solid fa-certificate text-white text-3xl"></i>
-                            </div>
-                            <p class="text-sm font-bold text-gray-800">Certificate</p>
-                            <p class="text-xs text-gray-500">Course Completion Certificate</p>
-                        </div>
-                        <div class="contact-box">
-                            <div class="flex items-center mb-2">
-                                <i class="fa-solid fa-user-circle text-purple-500 mr-2"></i>
-                                <p class="text-xs font-bold text-gray-700">วิทยากร</p>
-                            </div>
-                            <p class="text-sm font-bold text-gray-800 mb-1">นายบัณฑิต นันทะเทศ</p>
-                            <p class="text-xs text-gray-600">Senior PHP Developer</p>
-                            <p class="text-xs text-gray-600">Data Horizon Co., Ltd.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid grid-cols-3 gap-4">
-                    <div class="text-center p-3 bg-blue-50 rounded-xl">
-                        <i class="fa-solid fa-clipboard-check text-blue-500 text-xl mb-1"></i>
-                        <p class="text-xs font-bold text-gray-700">แบบประเมิน</p>
-                        <p class="text-[10px] text-gray-500">Feedback Form</p>
-                    </div>
-                    <div class="text-center p-3 bg-green-50 rounded-xl">
-                        <i class="fa-solid fa-comments text-green-500 text-xl mb-1"></i>
-                        <p class="text-xs font-bold text-gray-700">ถาม-ตอบ</p>
-                        <p class="text-[10px] text-gray-500">Q&A Session</p>
-                    </div>
-                    <div class="text-center p-3 bg-purple-50 rounded-xl">
-                        <i class="fa-solid fa-rocket text-purple-500 text-xl mb-1"></i>
-                        <p class="text-xs font-bold text-gray-700">เริ่มต้น!</p>
-                        <p class="text-[10px] text-gray-500">Start Your Journey</p>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center mt-6">
-                <p class="text-white text-sm font-medium">Good luck with your Laravel journey! 🚀</p>
-            </div>
-        </div>
-    </div>
-</body>
+<div class="slide-container">
+<div class="blob-bg-1"></div>
+<div class="blob-bg-2"></div>
+<div class="content-wrapper">
+<div class="mb-5">
+<div class="flex items-center space-x-3 mb-2">
+<span class="text-sm font-bold tracking-widest text-blue-500 uppercase">BLADE LAYOUTS</span>
+<div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
+</div>
+<h1 class="text-4xl font-black text-gray-800">Blade Layouts</h1>
+<p class="text-gray-500 mt-2 text-lg">Template หลักที่ใช้ร่วมกันหลายหน้า</p>
+</div>
 
+<div class="grid grid-cols-3 gap-5 flex-grow pb-4">
+<div class="layout-card">
+<div class="flex items-center mb-4">
+<div class="w-10 h-10 rounded-lg bg-blue-500 flex items-center justify-center mr-3">
+<i class="fa-solid fa-layer-group text-white"></i>
+</div>
+<div>
+<h3 class="text-lg font-bold text-gray-800">Creating Layout</h3>
+<p class="text-xs text-gray-500">สร้าง Layout ใหม่</p>
+</div>
+</div>
+<div class="space-y-3">
+<div>
+<p class="text-xs font-bold text-gray-700 mb-1">Layout File:</p>
+<div class="code-block">
+resources/views/layouts/
+app.blade.php
+</div>
+</div>
+<div>
+<p class="text-xs font-bold text-gray-700 mb-1">Defining Sections:</p>
+<div class="code-block">
+@yield('content')
+@yield('sidebar')
+</div>
+</div>
+</div>
+</div>
+
+<div class="layout-card">
+<div class="flex items-center mb-4">
+<div class="w-10 h-10 rounded-lg bg-green-500 flex items-center justify-center mr-3">
+<i class="fa-solid fa-file-code text-white"></i>
+</div>
+<div>
+<h3 class="text-lg font-bold text-gray-800">Using Layout</h3>
+<p class="text-xs text-gray-500">นำ Layout มาใช้งาน</p>
+</div>
+</div>
+<div class="space-y-3">
+<div>
+<p class="text-xs font-bold text-gray-700 mb-1">Inherit Layout:</p>
+<div class="code-block">
+@extends('layouts.app')
+</div>
+</div>
+<div>
+<p class="text-xs font-bold text-gray-700 mb-1">Fill Sections:</p>
+<div class="code-block">
+@section('content')
+    <h1>Welcome</h1>
+@endsection
+</div>
+</div>
+</div>
+</div>
+
+<div class="layout-card">
+<div class="flex items-center mb-4">
+<div class="w-10 h-10 rounded-lg bg-purple-500 flex items-center justify-center mr-3">
+<i class="fa-solid fa-puzzle-piece text-white"></i>
+</div>
+<div>
+<h3 class="text-lg font-bold text-gray-800">Advanced Features</h3>
+<p class="text-xs text-gray-500">Features ขั้นสูง</p>
+</div>
+</div>
+<div class="space-y-3">
+<div class="section-card">
+<p class="text-xs font-bold text-gray-700 mb-1">Stacks & Push:</p>
+<div class="code-block">
+@stack('scripts')
+    @push('scripts')
+    <script>...</script>
+    @endpush
+</div>
+</div>
+<div class="section-card">
+<p class="text-xs font-bold text-gray-700 mb-1">Include Views:</p>
+<div class="code-block">
+@include('partials.header', ['title' => 'Home'])
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="mt-5">
+<div class="bg-white rounded-xl p-4 border border-gray-200">
+<div class="flex items-center mb-3">
+<div class="w-10 h-10 rounded-lg bg-orange-500 flex items-center justify-center mr-3">
+<i class="fa-solid fa-lightbulb text-white"></i>
+</div>
+<h3 class="text-lg font-bold text-gray-800">Benefits of Using Layouts</h3>
+</div>
+<div class="grid grid-cols-4 gap-4">
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-2 flex-shrink-0">
+<i class="fa-solid fa-check text-blue-500 text-sm"></i>
+</div>
+<p class="text-sm text-gray-700">Reuse common UI</p>
+</div>
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-2 flex-shrink-0">
+<i class="fa-solid fa-check text-green-500 text-sm"></i>
+</div>
+<p class="text-sm text-gray-700">Consistent design</p>
+</div>
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center mr-2 flex-shrink-0">
+<i class="fa-solid fa-check text-purple-500 text-sm"></i>
+</div>
+<p class="text-sm text-gray-700">Easy maintenance</p>
+</div>
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center mr-2 flex-shrink-0">
+<i class="fa-solid fa-check text-orange-500 text-sm"></i>
+</div>
+<p class="text-sm text-gray-700">Nested layouts</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="mt-auto pt-4 flex justify-between items-center text-gray-400 text-xs border-t border-gray-100">
+<p>LARAVEL + AI TRAINING COURSE</p>
+<p>PAGE 29</p>
+</div>
+</div>
+</div>
+</body>
 </html>

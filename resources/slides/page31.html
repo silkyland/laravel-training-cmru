@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Forms & CSRF protection</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="css/theme.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="slide-container">
+        <div class="blob-bg-1"></div>
+        <div class="blob-bg-2"></div>
+        <div class="content-wrapper">
+            <div class="mb-5">
+                <div class="flex items-center space-x-3 mb-2">
+                    <span class="text-sm font-bold tracking-widest text-blue-500 uppercase">FORMS & VALIDATION</span>
+                    <div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
+                </div>
+                <h1 class="text-4xl font-black text-gray-800">Working with Forms</h1>
+                <p class="text-gray-500 mt-2 text-lg">Secure Data Submission & Handling</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-6 flex-grow pb-4">
+                <div class="layout-card">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-green-500 flex items-center justify-center mr-3">
+                            <i class="fa-solid fa-shield-halved text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800">CSRF Protection</h3>
+                            <p class="text-xs text-gray-500">ความปลอดภัยของฟอร์ม</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <p class="text-sm text-gray-600">
+                            Laravel ปกป้องเว็บจาก Cross-Site Request Forgery (CSRF) โดยอัตโนมัติ ทุกฟอร์มที่ส่ง method
+                            POST, PUT, DELETE ต้องมี CSRF Token
+                        </p>
+                        <div class="bg-yellow-50 p-3 rounded border border-yellow-200 text-xs text-yellow-800">
+                            <strong>Required:</strong> ใช้ @csrf ในทุกฟอร์ม
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layout-card">
+                    <div class="space-y-4">
+                        <div>
+                            <p class="text-xs font-bold text-gray-700 mb-1">Standard Form:</p>
+                            <div class="code-block">
+                                &lt;form method="POST" action="/profile"&gt;
+                                @csrf
+                                ...
+                                &lt;/form&gt;
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-gray-700 mb-1">Spoofing Methods (PUT, DELETE):</p>
+                            <div class="code-block">
+                                &lt;form method="POST" action="/post/1"&gt;
+                                @csrf
+                                @method('DELETE')
+                                &lt;button&gt;Delete&lt;/button&gt;
+                                &lt;/form&gt;
+                            </div>
+                            <p class="text-[10px] text-gray-500 mt-1">HTML Form รองรับแค่ GET/POST จึงต้องใช้ @method
+                                ช่วย</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-auto pt-4 flex justify-between items-center text-gray-400 text-xs border-t border-gray-100">
+                <p>LARAVEL + AI TRAINING COURSE</p>
+                <p>PAGE 31</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

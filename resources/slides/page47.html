@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Workshop Step 2</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="css/theme.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="slide-container">
+        <div class="blob-bg-1"></div>
+        <div class="blob-bg-2"></div>
+        <div class="content-wrapper">
+            <div class="mb-5">
+                <div class="flex items-center space-x-3 mb-2">
+                    <span class="text-sm font-bold tracking-widest text-blue-500 uppercase">WORKSHOP</span>
+                    <div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
+                </div>
+                <h1 class="text-4xl font-black text-gray-800">Step 2: Logic & Controller</h1>
+                <p class="text-gray-500 mt-2 text-lg">Business Logic Implementation</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-6 flex-grow pb-4">
+                <div class="layout-card">
+                    <h3 class="text-lg font-bold text-gray-800 mb-3">Resource Controller</h3>
+                    <p class="text-xs text-gray-500 mb-2">สร้าง CRUD Logic</p>
+                    <div class="code-block mb-3">
+                        php artisan make:controller ProductController --resource --model=Product
+                    </div>
+                    <p class="text-xs text-gray-600 mb-2 font-bold">AI Prompt:</p>
+                    <div class="bg-blue-50 p-2 rounded border border-blue-100 text-[10px] text-blue-800 italic">
+                        "Implement index, create, store, edit, update, destroy methods for ProductController. Include
+                        validation: required name, numeric price, unique sku."
+                    </div>
+                </div>
+
+                <div class="layout-card">
+                    <h3 class="text-lg font-bold text-gray-800 mb-3">Relationships</h3>
+                    <p class="text-xs text-gray-500 mb-2">เชื่อมโยงข้อมูล</p>
+                    <div class="code-block mb-3">
+                        // Product Model
+                        public function category() {
+                        return $this->belongsTo(Category::class);
+                        }
+
+                        // Category Model
+                        public function products() {
+                        return $this->hasMany(Product::class);
+                        }
+                    </div>
+                    <p class="text-[10px] text-gray-500 text-center">
+                        * AI ช่วย gen relation method ได้แม่นยำถ้าระบุ foreign key ชัดเจน
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-auto pt-4 flex justify-between items-center text-gray-400 text-xs border-t border-gray-100">
+                <p>LARAVEL + AI TRAINING COURSE</p>
+                <p>PAGE 47</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

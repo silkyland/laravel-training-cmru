@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Best Practices</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="css/theme.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="slide-container">
+        <div class="blob-bg-1"></div>
+        <div class="blob-bg-2"></div>
+        <div class="content-wrapper">
+            <div class="mb-5">
+                <div class="flex items-center space-x-3 mb-2">
+                    <span class="text-sm font-bold tracking-widest text-blue-500 uppercase">QUALITY CODE</span>
+                    <div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
+                </div>
+                <h1 class="text-4xl font-black text-gray-800">Laravel Best Practices</h1>
+                <p class="text-gray-500 mt-2 text-lg">Writing Clean & Maintainable Code</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-6 flex-grow pb-4">
+                <div class="layout-card">
+                    <h3 class="text-lg font-bold text-gray-800 mb-3">Skinny Controllers, Fat Models</h3>
+                    <div class="bg-red-50 p-2 rounded mb-2 border-l-4 border-red-400">
+                        <p class="text-xs font-bold text-red-700">Bad:</p>
+                        <p class="text-[10px] text-gray-600 font-mono">Controller ทำ Database query ซับซ้อน, Validation,
+                            Business Logic...</p>
+                    </div>
+                    <div class="bg-green-50 p-2 rounded border-l-4 border-green-400">
+                        <p class="text-xs font-bold text-green-700">Good:</p>
+                        <p class="text-[10px] text-gray-600 font-mono">Controller รับ Request -> คุยกับ Model/Service ->
+                            Return Response</p>
+                    </div>
+                </div>
+
+                <div class="layout-card">
+                    <h3 class="text-lg font-bold text-gray-800 mb-3">SRP (Single Responsibility)</h3>
+                    <p class="text-sm text-gray-600 mb-3">
+                        อย่าใส่ทุกอย่างใน Controller เดียว แยก Logic ออกไปที่:
+                    </p>
+                    <ul class="text-xs text-gray-600 space-y-2">
+                        <li class="flex items-center"><i class="fa-solid fa-arrow-right text-blue-500 mr-2"></i>
+                            <strong>Form Requests:</strong> สำหรับ Validation</li>
+                        <li class="flex items-center"><i class="fa-solid fa-arrow-right text-blue-500 mr-2"></i>
+                            <strong>Services:</strong> สำหรับ Business Logic ซับซ้อน</li>
+                        <li class="flex items-center"><i class="fa-solid fa-arrow-right text-blue-500 mr-2"></i>
+                            <strong>Observers/Events:</strong> สำหรับ Side effects (เช่น ส่งเมลหลัง Save)</li>
+                        <li class="flex items-center"><i class="fa-solid fa-arrow-right text-blue-500 mr-2"></i>
+                            <strong>Scopes:</strong> สำหรับ Query ที่ใช้ซ้ำ</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-auto pt-4 flex justify-between items-center text-gray-400 text-xs border-t border-gray-100">
+                <p>LARAVEL + AI TRAINING COURSE</p>
+                <p>PAGE 44</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

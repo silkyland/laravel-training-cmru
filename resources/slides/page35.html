@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Authorization</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="css/theme.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="slide-container">
+        <div class="blob-bg-1"></div>
+        <div class="blob-bg-2"></div>
+        <div class="content-wrapper">
+            <div class="mb-5">
+                <div class="flex items-center space-x-3 mb-2">
+                    <span class="text-sm font-bold tracking-widest text-blue-500 uppercase">AUTHORIZATION</span>
+                    <div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
+                </div>
+                <h1 class="text-4xl font-black text-gray-800">ACL & Authorization</h1>
+                <p class="text-gray-500 mt-2 text-lg">Managing User Permissions</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-6 flex-grow pb-4">
+                <div class="layout-card">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-yellow-500 flex items-center justify-center mr-3">
+                            <i class="fa-solid fa-door-open text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800">Gates</h3>
+                            <p class="text-xs text-gray-500">Simple Closure based</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <p class="text-xs font-bold text-gray-700 mb-1">Define Gate (AppServiceProvider):</p>
+                        <div class="code-block">
+                            Gate::define('update-post', function (User $user, Post $post) {
+                            return $user->id === $post->user_id;
+                            });
+                        </div>
+                        <p class="text-xs font-bold text-gray-700 mb-1">Check Gate:</p>
+                        <div class="code-block">
+                            if (Gate::allows('update-post', $post)) {
+                            // The user can update the post...
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layout-card">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-teal-500 flex items-center justify-center mr-3">
+                            <i class="fa-solid fa-file-signature text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800">Policies</h3>
+                            <p class="text-xs text-gray-500">Class based (Model focused)</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <p class="text-xs font-bold text-gray-700 mb-1">Create Policy:</p>
+                        <div class="code-block">php artisan make:policy PostPolicy</div>
+                        <p class="text-xs font-bold text-gray-700 mb-1">Usage in Controller:</p>
+                        <div class="code-block">
+                            $this->authorize('update', $post);
+                        </div>
+                        <p class="text-xs font-bold text-gray-700 mb-1">Usage in Blade:</p>
+                        <div class="code-block">
+                            @can('update', $post)
+                            &lt;button&gt;Edit&lt;/button&gt;
+                            @endcan
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-auto pt-4 flex justify-between items-center text-gray-400 text-xs border-t border-gray-100">
+                <p>LARAVEL + AI TRAINING COURSE</p>
+                <p>PAGE 35</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

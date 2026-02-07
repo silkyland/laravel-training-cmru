@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Reporting System</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="css/theme.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="slide-container">
+        <div class="blob-bg-1"></div>
+        <div class="blob-bg-2"></div>
+        <div class="content-wrapper">
+            <div class="mb-5">
+                <div class="flex items-center space-x-3 mb-2">
+                    <span class="text-sm font-bold tracking-widest text-blue-500 uppercase">SYSTEM DEVELOPMENT</span>
+                    <div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
+                </div>
+                <h1 class="text-4xl font-black text-gray-800">Reporting System</h1>
+                <p class="text-gray-500 mt-2 text-lg">Charts, Exports & PDF</p>
+            </div>
+
+            <div class="grid grid-cols-3 gap-5 flex-grow pb-4">
+                <div class="layout-card">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-blue-500 flex items-center justify-center mr-3">
+                            <i class="fa-solid fa-chart-pie text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800">Charts</h3>
+                    </div>
+                    <p class="text-xs text-gray-600 mb-3">แสดงผลข้อมูลด้วยกราฟ</p>
+                    <ul class="text-xs text-gray-600 list-disc pl-4 space-y-1 mb-3">
+                        <li>Chart.js</li>
+                        <li>ApexCharts</li>
+                    </ul>
+                    <div class="mt-auto">
+                        <p class="text-xs font-bold text-gray-700 mb-1">Example Code:</p>
+                        <div class="code-block">
+                            // Pass data from Controller to View
+                            new Chart(ctx, {
+                            type: 'bar',
+                            data: @json($data)
+                            });
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layout-card">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-green-500 flex items-center justify-center mr-3">
+                            <i class="fa-solid fa-file-excel text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800">Excel Export</h3>
+                    </div>
+                    <p class="text-xs text-gray-600 mb-3">ส่งออกข้อมูลเป็น Excel/CSV</p>
+                    <div class="bg-green-50 p-2 rounded border border-green-100 mb-2">
+                        <p class="text-xs font-bold text-green-700">Package: Laravel Excel</p>
+                    </div>
+                    <div class="mt-auto">
+                        <div class="code-block">
+                            return Excel::download(
+                            new UsersExport,
+                            'users.xlsx'
+                            );
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layout-card">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-red-500 flex items-center justify-center mr-3">
+                            <i class="fa-solid fa-file-pdf text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800">PDF Generation</h3>
+                    </div>
+                    <p class="text-xs text-gray-600 mb-3">สร้างเอกสาร PDF</p>
+                    <div class="bg-red-50 p-2 rounded border border-red-100 mb-2">
+                        <p class="text-xs font-bold text-red-700">Package: DOMPDF / Snappy</p>
+                    </div>
+                    <div class="mt-auto">
+                        <div class="code-block">
+                            $pdf = Pdf::loadView(
+                            'invoice',
+                            $data
+                            );
+                            return $pdf->download();
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-auto pt-4 flex justify-between items-center text-gray-400 text-xs border-t border-gray-100">
+                <p>LARAVEL + AI TRAINING COURSE</p>
+                <p>PAGE 39</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

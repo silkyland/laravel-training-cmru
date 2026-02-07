@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Deployment</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="css/theme.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="slide-container">
+        <div class="blob-bg-1"></div>
+        <div class="blob-bg-2"></div>
+        <div class="content-wrapper">
+            <div class="mb-5">
+                <div class="flex items-center space-x-3 mb-2">
+                    <span class="text-sm font-bold tracking-widest text-blue-500 uppercase">DEPLOYMENT</span>
+                    <div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
+                </div>
+                <h1 class="text-4xl font-black text-gray-800">Deployment Guide</h1>
+                <p class="text-gray-500 mt-2 text-lg">Pushing to Production</p>
+            </div>
+
+            <div class="grid grid-cols-3 gap-5 flex-grow pb-4">
+                <div class="layout-card">
+                    <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center">
+                        <i class="fa-solid fa-server text-indigo-500 mr-2"></i> Environment
+                    </h3>
+                    <p class="text-xs text-gray-600 mb-2">ตั้งค่า .env ให้ถูกต้อง</p>
+                    <div class="code-block bg-gray-900 text-white p-3 rounded">
+                        APP_ENV=production
+                        APP_DEBUG=false
+                    </div>
+                    <p class="text-[10px] text-red-500 mt-2 font-bold">
+                        * ห้ามเปิด APP_DEBUG=true บน Production เด็ดขาด!
+                    </p>
+                </div>
+
+                <div class="layout-card">
+                    <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center">
+                        <i class="fa-solid fa-rocket text-indigo-500 mr-2"></i> Optimization
+                    </h3>
+                    <p class="text-xs text-gray-600 mb-2">รันคำสั่งเพื่อความเร็ว</p>
+                    <ul class="space-y-1 text-xs text-gray-600 font-mono">
+                        <li class="bg-gray-50 p-1">composer install --optimize-autoloader --no-dev</li>
+                        <li class="bg-gray-50 p-1">php artisan config:cache</li>
+                        <li class="bg-gray-50 p-1">php artisan route:cache</li>
+                        <li class="bg-gray-50 p-1">php artisan view:cache</li>
+                    </ul>
+                </div>
+
+                <div class="layout-card">
+                    <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center">
+                        <i class="fa-solid fa-folder-tree text-indigo-500 mr-2"></i> Permission
+                    </h3>
+                    <p class="text-xs text-gray-600 mb-2">โฟลเดอร์ที่ต้องเขียนได้</p>
+                    <ul class="text-xs text-gray-600 list-disc pl-4 space-y-1">
+                        <li>storage/</li>
+                        <li>bootstrap/cache/</li>
+                    </ul>
+                    <div class="mt-3 bg-indigo-50 p-2 rounded">
+                        <p class="text-[10px] text-indigo-700">
+                            Laravel Forge / Envoyer เป็น Tools ช่วย Deploy ที่ยอดเยี่ยม
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-auto pt-4 flex justify-between items-center text-gray-400 text-xs border-t border-gray-100">
+                <p>LARAVEL + AI TRAINING COURSE</p>
+                <p>PAGE 43</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
