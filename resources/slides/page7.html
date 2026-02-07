@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Environment Setup - System Requirements</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Noto Sans Thai", "Noto Sans SC", sans-serif;
+    background-color: #f3f4f6
+    }
+.slide-container {
+    width: 1280px;
+    height: 720px;
+    position: relative;
+    background-color: #fff;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column
+    }
+.blob-bg-1 {
+    position: absolute;
+    top: -120px;
+    right: -100px;
+    width: 450px;
+    height: 450px;
+    background-color: #F0F9FF;
+    border-radius: 50%;
+    z-index: 0;
+    opacity: 0.8
+    }
+.blob-bg-2 {
+    position: absolute;
+    bottom: -50px;
+    left: -50px;
+    width: 300px;
+    height: 300px;
+    background-color: #ECFDF5;
+    border-radius: 50%;
+    z-index: 0;
+    opacity: 0.8
+    }
+.content-wrapper {
+    position: relative;
+    z-index: 10;
+    padding: 50px 80px;
+    height: 100%;
+    display: flex;
+    flex-direction: column
+    }
+.req-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #F3F4F6
+    }
+.version-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    background-color: #DBEAFE;
+    color: #1E40AF;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600
+    }
+.extension-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: #F9FAFB;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    font-size: 13px;
+    color: #4B5563
+    }
+.extension-item:last-child {
+    margin-bottom: 0
+    }
+.check-icon {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #D1FAE5;
+    color: #059669;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    flex-shrink: 0;
+    font-size: 10px
+    }
+.command-box {
+    background-color: #1F2937;
+    color: #10B981;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-family: "Courier New", monospace;
+    font-size: 13px
+    }
+</style>
+</head>
+<body>
+<div class="slide-container">
+<div class="blob-bg-1"></div>
+<div class="blob-bg-2"></div>
+<div class="content-wrapper">
+<div class="mb-5">
+<div class="flex items-center space-x-3 mb-2">
+<span class="text-sm font-bold tracking-widest text-blue-500 uppercase">ENVIRONMENT SETUP</span>
+<div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
+</div>
+<h1 class="text-4xl font-black text-gray-800">System Requirements</h1>
+<p class="text-gray-500 mt-2 text-lg">ตรวจสอบความต้องการของระบบก่อนเริ่มติดตั้ง</p>
+</div>
+
+<div class="grid grid-cols-12 gap-5 flex-grow pb-4">
+<div class="col-span-4 flex flex-col gap-4">
+<div class="req-card">
+<div class="flex items-center mb-3">
+<div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center mr-2">
+<i class="fa-brands fa-php text-blue-500"></i>
+</div>
+<h3 class="text-base font-bold text-gray-800">PHP</h3>
+</div>
+<div class="version-badge mb-2">8.1+ (recommended 8.2+)</div>
+<p class="text-xs text-gray-500">Laravel 11 ต้องการ PHP 8.1 ขึ้นไป</p>
+</div>
+
+<div class="req-card">
+<div class="flex items-center mb-3">
+<div class="w-8 h-8 rounded-lg bg-green-50 flex items-center justify-center mr-2">
+<i class="fa-brands fa-composer text-green-500"></i>
+</div>
+<h3 class="text-base font-bold text-gray-800">Composer</h3>
+</div>
+<div class="version-badge mb-2">2.0+</div>
+<p class="text-xs text-gray-500">Dependency Manager สำหรับ PHP</p>
+</div>
+
+<div class="req-card">
+<div class="flex items-center mb-3">
+<div class="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center mr-2">
+<i class="fa-solid fa-database text-purple-500"></i>
+</div>
+<h3 class="text-base font-bold text-gray-800">Database</h3>
+</div>
+<div class="space-y-1">
+<div class="text-xs text-gray-700">MySQL 5.7+ / 8.0+</div>
+<div class="text-xs text-gray-700">PostgreSQL 12+</div>
+<div class="text-xs text-gray-700">SQLite 3.8.8+</div>
+</div>
+</div>
+</div>
+
+<div class="col-span-4 flex flex-col gap-4">
+<div class="req-card h-full">
+<div class="flex items-center mb-3">
+<div class="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center mr-2">
+<i class="fa-solid fa-puzzle-piece text-orange-500"></i>
+</div>
+<h3 class="text-base font-bold text-gray-800">Required Extensions</h3>
+</div>
+
+<div class="extension-item">
+<div class="check-icon">
+<i class="fa-solid fa-check text-xs"></i>
+</div>
+<span>OpenSSL</span>
+</div>
+<div class="extension-item">
+<div class="check-icon">
+<i class="fa-solid fa-check text-xs"></i>
+</div>
+<span>PDO / PDO_MySQL / PDO_PGSQL</span>
+</div>
+<div class="extension-item">
+<div class="check-icon">
+<i class="fa-solid fa-check text-xs"></i>
+</div>
+<span>Mbstring</span>
+</div>
+<div class="extension-item">
+<div class="check-icon">
+<i class="fa-solid fa-check text-xs"></i>
+</div>
+<span>Tokenizer</span>
+</div>
+<div class="extension-item">
+<div class="check-icon">
+<i class="fa-solid fa-check text-xs"></i>
+</div>
+<span>XML</span>
+</div>
+<div class="extension-item">
+<div class="check-icon">
+<i class="fa-solid fa-check text-xs"></i>
+</div>
+<span>Ctype</span>
+</div>
+<div class="extension-item">
+<div class="check-icon">
+<i class="fa-solid fa-check text-xs"></i>
+</div>
+<span>JSON</span>
+</div>
+<div class="extension-item">
+<div class="check-icon">
+<i class="fa-solid fa-check text-xs"></i>
+</div>
+<span>BCMath</span>
+</div>
+</div>
+</div>
+
+<div class="col-span-4 flex flex-col gap-4">
+<div class="req-card">
+<div class="flex items-center mb-3">
+<div class="w-8 h-8 rounded-lg bg-cyan-50 flex items-center justify-center mr-2">
+<i class="fa-solid fa-server text-cyan-500"></i>
+</div>
+<h3 class="text-base font-bold text-gray-800">Web Server</h3>
+</div>
+<div class="space-y-1">
+<div class="flex items-center text-xs text-gray-700">
+<i class="fa-solid fa-check text-green-500 mr-2"></i>
+<span>Apache 2.4+</span>
+</div>
+<div class="flex items-center text-xs text-gray-700">
+<i class="fa-solid fa-check text-green-500 mr-2"></i>
+<span>Nginx 1.18+</span>
+</div>
+<div class="flex items-center text-xs text-gray-700">
+<i class="fa-solid fa-check text-green-500 mr-2"></i>
+<span>PHP Built-in Server</span>
+</div>
+</div>
+</div>
+
+<div class="req-card">
+<div class="flex items-center mb-3">
+<div class="w-8 h-8 rounded-lg bg-pink-50 flex items-center justify-center mr-2">
+<i class="fa-solid fa-chart-line text-pink-500"></i>
+</div>
+<h3 class="text-base font-bold text-gray-800">System Resources</h3>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div class="text-center bg-blue-50 rounded-lg p-2">
+<p class="text-lg font-black text-blue-600">4GB+</p>
+<p class="text-[10px] text-gray-600">RAM</p>
+</div>
+<div class="text-center bg-green-50 rounded-lg p-2">
+<p class="text-lg font-black text-green-600">10GB+</p>
+<p class="text-[10px] text-gray-600">Free Space</p>
+</div>
+</div>
+</div>
+
+<div class="req-card">
+<div class="flex items-center mb-3">
+<div class="w-8 h-8 rounded-lg bg-yellow-50 flex items-center justify-center mr-2">
+<i class="fa-solid fa-terminal text-yellow-600"></i>
+</div>
+<h3 class="text-base font-bold text-gray-800">Check Commands</h3>
+</div>
+<div class="space-y-2">
+<div class="command-box">php -v</div>
+<div class="command-box">composer --version</div>
+<div class="command-box">php -m | grep -i "pdo"</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="mt-auto pt-4 flex justify-between items-center text-gray-400 text-xs border-t border-gray-100">
+<p>LARAVEL + AI TRAINING COURSE</p>
+<p>PAGE 07</p>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Blade Layouts</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Noto Sans Thai", "Noto Sans SC", sans-serif;
+    background-color: #f3f4f6
+    }
+.slide-container {
+    width: 1280px;
+    height: 720px;
+    position: relative;
+    background-color: #fff;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column
+    }
+.blob-bg-1 {
+    position: absolute;
+    top: -120px;
+    right: -100px;
+    width: 450px;
+    height: 450px;
+    background-color: #F0F9FF;
+    border-radius: 50%;
+    z-index: 0;
+    opacity: 0.8
+    }
+.blob-bg-2 {
+    position: absolute;
+    bottom: -50px;
+    left: -50px;
+    width: 300px;
+    height: 300px;
+    background-color: #ECFDF5;
+    border-radius: 50%;
+    z-index: 0;
+    opacity: 0.8
+    }
+.content-wrapper {
+    position: relative;
+    z-index: 10;
+    padding: 50px 80px;
+    height: 100%;
+    display: flex;
+    flex-direction: column
+    }
+.layout-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #F3F4F6;
+    height: 100%;
+    display: flex;
+    flex-direction: column
+    }
+.code-block {
+    background: #1F2937;
+    color: #10B981;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    line-height: 1.6
+    }
+.section-card {
+    background: #F9FAFB;
+    border-left: 3px solid #3B82F6;
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 12px
+    }
+.command-tag {
+    display: inline-block;
+    padding: 3px 8px;
+    background-color: #DBEAFE;
+    color: #1E40AF;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    margin: 2px
+    }
+</style>
+</head>
+<body>
+<div class="slide-container">
+<div class="blob-bg-1"></div>
+<div class="blob-bg-2"></div>
+<div class="content-wrapper">
+<div class="mb-5">
+<div class="flex items-center space-x-3 mb-2">
+<span class="text-sm font-bold tracking-widest text-blue-500 uppercase">BLADE LAYOUTS</span>
+<div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
+</div>
+<h1 class="text-4xl font-black text-gray-800">Blade Layouts</h1>
+<p class="text-gray-500 mt-2 text-lg">Template หลักที่ใช้ร่วมกันหลายหน้า</p>
+</div>
+
+<div class="grid grid-cols-3 gap-5 flex-grow pb-4">
+<div class="layout-card">
+<div class="flex items-center mb-4">
+<div class="w-10 h-10 rounded-lg bg-blue-500 flex items-center justify-center mr-3">
+<i class="fa-solid fa-layer-group text-white"></i>
+</div>
+<div>
+<h3 class="text-lg font-bold text-gray-800">Creating Layout</h3>
+<p class="text-xs text-gray-500">สร้าง Layout ใหม่</p>
+</div>
+</div>
+<div class="space-y-3">
+<div>
+<p class="text-xs font-bold text-gray-700 mb-1">Layout File:</p>
+<div class="code-block">
+resources/views/layouts/
+app.blade.php
+</div>
+</div>
+<div>
+<p class="text-xs font-bold text-gray-700 mb-1">Defining Sections:</p>
+<div class="code-block">
+@yield('content')
+@yield('sidebar')
+</div>
+</div>
+</div>
+</div>
+
+<div class="layout-card">
+<div class="flex items-center mb-4">
+<div class="w-10 h-10 rounded-lg bg-green-500 flex items-center justify-center mr-3">
+<i class="fa-solid fa-file-code text-white"></i>
+</div>
+<div>
+<h3 class="text-lg font-bold text-gray-800">Using Layout</h3>
+<p class="text-xs text-gray-500">นำ Layout มาใช้งาน</p>
+</div>
+</div>
+<div class="space-y-3">
+<div>
+<p class="text-xs font-bold text-gray-700 mb-1">Inherit Layout:</p>
+<div class="code-block">
+@extends('layouts.app')
+</div>
+</div>
+<div>
+<p class="text-xs font-bold text-gray-700 mb-1">Fill Sections:</p>
+<div class="code-block">
+@section('content')
+    <h1>Welcome</h1>
+@endsection
+</div>
+</div>
+</div>
+</div>
+
+<div class="layout-card">
+<div class="flex items-center mb-4">
+<div class="w-10 h-10 rounded-lg bg-purple-500 flex items-center justify-center mr-3">
+<i class="fa-solid fa-puzzle-piece text-white"></i>
+</div>
+<div>
+<h3 class="text-lg font-bold text-gray-800">Advanced Features</h3>
+<p class="text-xs text-gray-500">Features ขั้นสูง</p>
+</div>
+</div>
+<div class="space-y-3">
+<div class="section-card">
+<p class="text-xs font-bold text-gray-700 mb-1">Stacks & Push:</p>
+<div class="code-block">
+@stack('scripts')
+    @push('scripts')
+    <script>...</script>
+    @endpush
+</div>
+</div>
+<div class="section-card">
+<p class="text-xs font-bold text-gray-700 mb-1">Include Views:</p>
+<div class="code-block">
+@include('partials.header', ['title' => 'Home'])
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="mt-5">
+<div class="bg-white rounded-xl p-4 border border-gray-200">
+<div class="flex items-center mb-3">
+<div class="w-10 h-10 rounded-lg bg-orange-500 flex items-center justify-center mr-3">
+<i class="fa-solid fa-lightbulb text-white"></i>
+</div>
+<h3 class="text-lg font-bold text-gray-800">Benefits of Using Layouts</h3>
+</div>
+<div class="grid grid-cols-4 gap-4">
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-2 flex-shrink-0">
+<i class="fa-solid fa-check text-blue-500 text-sm"></i>
+</div>
+<p class="text-sm text-gray-700">Reuse common UI</p>
+</div>
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-2 flex-shrink-0">
+<i class="fa-solid fa-check text-green-500 text-sm"></i>
+</div>
+<p class="text-sm text-gray-700">Consistent design</p>
+</div>
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center mr-2 flex-shrink-0">
+<i class="fa-solid fa-check text-purple-500 text-sm"></i>
+</div>
+<p class="text-sm text-gray-700">Easy maintenance</p>
+</div>
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center mr-2 flex-shrink-0">
+<i class="fa-solid fa-check text-orange-500 text-sm"></i>
+</div>
+<p class="text-sm text-gray-700">Nested layouts</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="mt-auto pt-4 flex justify-between items-center text-gray-400 text-xs border-t border-gray-100">
+<p>LARAVEL + AI TRAINING COURSE</p>
+<p>PAGE 29</p>
+</div>
+</div>
+</div>
+</body>
+</html>

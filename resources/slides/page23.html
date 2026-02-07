@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Eloquent Query Scopes</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Noto Sans Thai", "Noto Sans SC", sans-serif;
+    background-color: #f3f4f6
+    }
+.slide-container {
+    width: 1280px;
+    height: 720px;
+    position: relative;
+    background-color: #fff;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column
+    }
+.blob-bg-1 {
+    position: absolute;
+    top: -120px;
+    right: -100px;
+    width: 450px;
+    height: 450px;
+    background-color: #F0F9FF;
+    border-radius: 50%;
+    z-index: 0;
+    opacity: 0.8
+    }
+.blob-bg-2 {
+    position: absolute;
+    bottom: -50px;
+    left: -50px;
+    width: 300px;
+    height: 300px;
+    background-color: #ECFDF5;
+    border-radius: 50%;
+    z-index: 0;
+    opacity: 0.8
+    }
+.content-wrapper {
+    position: relative;
+    z-index: 10;
+    padding: 50px 80px;
+    height: 100%;
+    display: flex;
+    flex-direction: column
+    }
+.scope-card {
+    background: white;
+    border-radius: 12px;
+    padding: 18px 22px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #F3F4F6;
+    height: 100%
+    }
+.code-block {
+    background: #1F2937;
+    color: #10B981;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    line-height: 1.5
+    }
+.scope-type {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 3px
+    }
+.local-badge { background-color: #DBEAFE;
+color: #1E40AF }
+.global-badge { background-color: #D1FAE5;
+color: #059669 }
+.dynamic-badge { background-color: #FEF3C7;
+color: #D97706 }
+.scope-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px
+    }
+</style>
+</head>
+<body>
+<div class="slide-container">
+<div class="blob-bg-1"></div>
+<div class="blob-bg-2"></div>
+<div class="content-wrapper">
+<div class="mb-5">
+<div class="flex items-center space-x-3 mb-2">
+<span class="text-sm font-bold tracking-widest text-blue-500 uppercase">ELOQUENT QUERY SCOPES</span>
+<div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
+</div>
+<h1 class="text-4xl font-black text-gray-800">Eloquent Query Scopes</h1>
+<p class="text-gray-500 mt-2 text-lg">Method สำหรับเพิ่มเงื่อนไขให้กับ Query อย่าง Reuse ได้</p>
+</div>
+
+<div class="grid grid-cols-3 gap-5 flex-grow pb-4">
+<div class="scope-card">
+<div class="flex items-center mb-3">
+<div class="scope-icon" style="background-color: #DBEAFE;
+color: #2563EB">
+<i class="fa-solid fa-search"></i>
+</div>
+<div>
+<h3 class="text-lg font-bold text-gray-800">Local Scopes</h3>
+<p class="text-xs text-gray-500 mt-1">Scope ปกติ</p>
+</div>
+</div>
+<div class="mb-3">
+<span class="scope-type local-badge">Local</span>
+</div>
+<div class="space-y-3">
+<div>
+<p class="text-xs font-bold text-gray-700 mb-1">Defining:</p>
+<div class="code-block">
+public function scopeActive($query) {
+    return $query->where('active', 1);
+}
+</div>
+</div>
+<div>
+<p class="text-xs font-bold text-gray-700 mb-1">Usage:</p>
+<div class="code-block">
+User::active()->get();
+User::active()->where('age', '>', 18)->get();
+</div>
+</div>
+</div>
+</div>
+
+<div class="scope-card">
+<div class="flex items-center mb-3">
+<div class="scope-icon" style="background-color: #D1FAE5;
+color: #059669">
+<i class="fa-solid fa-globe"></i>
+</div>
+<div>
+<h3 class="text-lg font-bold text-gray-800">Global Scopes</h3>
+<p class="text-xs text-gray-500 mt-1">Scope ทั่วไป</p>
+</div>
+</div>
+<div class="mb-3">
+<span class="scope-type global-badge">Global</span>
+</div>
+<div class="space-y-3">
+<div>
+<p class="text-xs font-bold text-gray-700 mb-1">Defining:</p>
+<div class="code-block">
+protected static function booted() {
+    static::addGlobalScope('age',
+        function (Builder $builder) {
+            $builder->where('age', '>', 18);
+        });
+}
+</div>
+</div>
+<div class="bg-green-50 rounded-lg p-2">
+<p class="text-xs text-gray-600"><strong>ผล:</strong> ใช้เงื่อนไปกับทุก query อัตโนมัติ</p>
+</div>
+</div>
+</div>
+
+<div class="scope-card">
+<div class="flex items-center mb-3">
+<div class="scope-icon" style="background-color: #FEF3C7;
+color: #D97706">
+<i class="fa-solid fa-sliders"></i>
+</div>
+<div>
+<h3 class="text-lg font-bold text-gray-800">Dynamic Scopes</h3>
+<p class="text-xs text-gray-500 mt-1">Scope รับ Parameters</p>
+</div>
+</div>
+<div class="mb-3">
+<span class="scope-type dynamic-badge">Dynamic</span>
+</div>
+<div class="space-y-3">
+<div>
+<p class="text-xs font-bold text-gray-700 mb-1">Defining:</p>
+<div class="code-block">
+public function scopeOfAge($query, $age) {
+    return $query->where('age', '>', $age);
+}
+</div>
+</div>
+<div>
+<p class="text-xs font-bold text-gray-700 mb-1">Usage:</p>
+<div class="code-block">
+User::ofAge(18)->get();
+User::ofAge(25)->get();
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="grid grid-cols-2 gap-5">
+<div class="scope-card">
+<div class="flex items-center mb-3">
+<div class="w-10 h-10 rounded-lg bg-blue-500 flex items-center justify-center mr-3">
+<i class="fa-solid fa-star text-white"></i>
+</div>
+<h3 class="text-lg font-bold text-gray-800">Benefits</h3>
+</div>
+<div class="space-y-2">
+<div class="flex items-start">
+<div class="w-2 h-2 rounded-full bg-blue-500 mt-2 mr-2 flex-shrink-0"></div>
+<p class="text-sm text-gray-700">Reuse logic ได้</p>
+</div>
+<div class="flex items-start">
+<div class="w-2 h-2 rounded-full bg-green-500 mt-2 mr-2 flex-shrink-0"></div>
+<p class="text-sm text-gray-700">Code กระชับ</p>
+</div>
+<div class="flex items-start">
+<div class="w-2 h-2 rounded-full bg-purple-500 mt-2 mr-2 flex-shrink-0"></div>
+<p class="text-sm text-gray-700">แยก logic ออกจาก controller</p>
+</div>
+<div class="flex items-start">
+<div class="w-2 h-2 rounded-full bg-orange-500 mt-2 mr-2 flex-shrink-0"></div>
+<p class="text-sm text-gray-700">Easy to test</p>
+</div>
+</div>
+</div>
+
+<div class="scope-card">
+<div class="flex items-center mb-3">
+<div class="w-10 h-10 rounded-lg bg-purple-500 flex items-center justify-center mr-3">
+<i class="fa-solid fa-lightbulb text-white"></i>
+</div>
+<h3 class="text-lg font-bold text-gray-800">Best Practices</h3>
+</div>
+<div class="space-y-2">
+<div class="flex items-start">
+<div class="w-2 h-2 rounded-full bg-blue-500 mt-2 mr-2 flex-shrink-0"></div>
+<p class="text-sm text-gray-700">ตั้งชื่อ scope ให้สื่อความ</p>
+</div>
+<div class="flex items-start">
+<div class="w-2 h-2 rounded-full bg-green-500 mt-2 mr-2 flex-shrink-0"></div>
+<p class="text-sm text-gray-700">ใช้ local scope ก่อน global</p>
+</div>
+<div class="flex items-start">
+<div class="w-2 h-2 rounded-full bg-purple-500 mt-2 mr-2 flex-shrink-0"></div>
+<p class="text-sm text-gray-700">Return query builder</p>
+</div>
+<div class="flex items-start">
+<div class="w-2 h-2 rounded-full bg-orange-500 mt-2 mr-2 flex-shrink-0"></div>
+<p class="text-sm text-gray-700">Chain scopes ได้</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="mt-auto pt-4 flex justify-between items-center text-gray-400 text-xs border-t border-gray-100">
+<p>LARAVEL + AI TRAINING COURSE</p>
+<p>PAGE 23</p>
+</div>
+</div>
+</div>
+</body>
+</html>

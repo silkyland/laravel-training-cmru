@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Service Container & Dependency Injection</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Noto Sans Thai", "Noto Sans SC", sans-serif;
+    background-color: #f3f4f6
+    }
+.slide-container {
+    width: 1280px;
+    height: 720px;
+    position: relative;
+    background-color: #fff;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column
+    }
+.blob-bg-1 {
+    position: absolute;
+    top: -120px;
+    right: -100px;
+    width: 450px;
+    height: 450px;
+    background-color: #F0F9FF;
+    border-radius: 50%;
+    z-index: 0;
+    opacity: 0.8
+    }
+.blob-bg-2 {
+    position: absolute;
+    bottom: -50px;
+    left: -50px;
+    width: 300px;
+    height: 300px;
+    background-color: #ECFDF5;
+    border-radius: 50%;
+    z-index: 0;
+    opacity: 0.8
+    }
+.content-wrapper {
+    position: relative;
+    z-index: 10;
+    padding: 50px 80px;
+    height: 100%;
+    display: flex;
+    flex-direction: column
+    }
+.info-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 24px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #F3F4F6;
+    height: 100%;
+    display: flex;
+    flex-direction: column
+    }
+.method-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background-color: #DBEAFE;
+    color: #1E40AF;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 3px
+    }
+.benefit-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px dashed #E5E7EB
+    }
+.benefit-item:last-child {
+    border-bottom: none
+    }
+.benefit-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background-color: #D1FAE5;
+    color: #059669;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    flex-shrink: 0
+    }
+</style>
+</head>
+<body>
+<div class="slide-container">
+<div class="blob-bg-1"></div>
+<div class="blob-bg-2"></div>
+<div class="content-wrapper">
+<div class="mb-5">
+<div class="flex items-center space-x-3 mb-2">
+<span class="text-sm font-bold tracking-widest text-blue-500 uppercase">LARAVEL ARCHITECTURE</span>
+<div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
+</div>
+<h1 class="text-4xl font-black text-gray-800">Service Container & Dependency Injection</h1>
+<p class="text-gray-500 mt-2 text-lg">หัวใจของ Laravel: การจัดการ Dependencies อย่างมีประสิทธิภาพ</p>
+</div>
+
+<div class="grid grid-cols-2 gap-5 flex-grow pb-4">
+<div class="flex flex-col gap-4">
+<div class="info-card">
+<div class="flex items-center mb-3">
+<div class="w-12 h-12 rounded-xl bg-blue-500 flex items-center justify-center mr-3">
+<i class="fa-solid fa-cube text-white text-xl"></i>
+</div>
+<div>
+<h3 class="text-xl font-bold text-gray-800">Service Container</h3>
+<p class="text-sm text-gray-500">IoC Container</p>
+</div>
+</div>
+<ul class="text-sm text-gray-700 space-y-2">
+<li class="flex items-start">
+<i class="fa-solid fa-check-circle text-blue-500 mr-2 mt-1"></i>
+<span>จัดการ dependencies และ class instances</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check-circle text-blue-500 mr-2 mt-1"></i>
+<span>หัวใจของ Laravel Framework</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check-circle text-blue-500 mr-2 mt-1"></i>
+<span>คลาส singleton ที่จัดการทุกการ binding</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check-circle text-blue-500 mr-2 mt-1"></i>
+<span>Resolve dependencies อัตโนมัติ</span>
+</li>
+</ul>
+</div>
+
+<div class="info-card">
+<div class="flex items-center mb-3">
+<div class="w-12 h-12 rounded-xl bg-green-500 flex items-center justify-center mr-3">
+<i class="fa-solid fa-code-branch text-white text-xl"></i>
+</div>
+<div>
+<h3 class="text-xl font-bold text-gray-800">Dependency Injection</h3>
+<p class="text-sm text-gray-500">DI Pattern</p>
+</div>
+</div>
+<ul class="text-sm text-gray-700 space-y-2">
+<li class="flex items-start">
+<i class="fa-solid fa-check-circle text-green-500 mr-2 mt-1"></i>
+<span>แทรก dependencies ผ่าน constructor/method</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check-circle text-green-500 mr-2 mt-1"></i>
+<span>ลด coupling ระหว่าง components</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check-circle text-green-500 mr-2 mt-1"></i>
+<span>ทำให้ code ทดสอบได้ง่าย</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check-circle text-green-500 mr-2 mt-1"></i>
+<span>ยืดหยุ่นและบำรุงรักษาง่าย</span>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="flex flex-col gap-4">
+<div class="info-card">
+<div class="flex items-center mb-3">
+<div class="w-12 h-12 rounded-xl bg-purple-500 flex items-center justify-center mr-3">
+<i class="fa-solid fa-code text-white text-xl"></i>
+</div>
+<h3 class="text-xl font-bold text-gray-800">Binding Methods</h3>
+</div>
+<div class="flex flex-wrap">
+<span class="method-badge">bind()</span>
+<span class="method-badge">singleton()</span>
+<span class="method-badge">instance()</span>
+<span class="method-badge">method()</span>
+</div>
+</div>
+
+<div class="info-card flex-grow">
+<div class="flex items-center mb-3">
+<div class="w-12 h-12 rounded-xl bg-yellow-500 flex items-center justify-center mr-3">
+<i class="fa-solid fa-star text-white text-xl"></i>
+</div>
+<h3 class="text-xl font-bold text-gray-800">Benefits</h3>
+</div>
+<div class="space-y-0">
+<div class="benefit-item">
+<div class="benefit-icon">
+<i class="fa-solid fa-vial"></i>
+</div>
+<span class="text-sm text-gray-700">ทดสอบง่าย (Testable)</span>
+</div>
+<div class="benefit-item">
+<div class="benefit-icon">
+<i class="fa-solid fa-cogs"></i>
+</div>
+<span class="text-sm text-gray-700">จัดการ dependencies ดี (Manageable)</span>
+</div>
+<div class="benefit-item">
+<div class="benefit-icon">
+<i class="fa-solid fa-expand-arrows-alt"></i>
+</div>
+<span class="text-sm text-gray-700">Code ยืดหยุ่น (Flexible)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="mt-auto pt-4 flex justify-between items-center text-gray-400 text-xs border-t border-gray-100">
+<p>LARAVEL + AI TRAINING COURSE</p>
+<p>PAGE 13</p>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Controller Best Practices</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Noto Sans Thai", "Noto Sans SC", sans-serif;
+    background-color: #f3f4f6
+    }
+.slide-container {
+    width: 1280px;
+    height: 720px;
+    position: relative;
+    background-color: #fff;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column
+    }
+.blob-bg-1 {
+    position: absolute;
+    top: -120px;
+    right: -100px;
+    width: 450px;
+    height: 450px;
+    background-color: #F0F9FF;
+    border-radius: 50%;
+    z-index: 0;
+    opacity: 0.8
+    }
+.blob-bg-2 {
+    position: absolute;
+    bottom: -50px;
+    left: -50px;
+    width: 300px;
+    height: 300px;
+    background-color: #ECFDF5;
+    border-radius: 50%;
+    z-index: 0;
+    opacity: 0.8
+    }
+.content-wrapper {
+    position: relative;
+    z-index: 10;
+    padding: 50px 80px;
+    height: 100%;
+    display: flex;
+    flex-direction: column
+    }
+.practice-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #F3F4F6;
+    transition: transform 0.2s, box-shadow 0.2s
+    }
+.practice-card:hover {
+    transform: translatey(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+    }
+.icon-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 12px
+    }
+.example-box {
+    background: #F9FAFB;
+    border-left: 3px solid #10B981;
+    padding: 10px 14px;
+    border-radius: 0 8px 8px 0;
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    color: #374151
+    }
+.badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    margin: 2px
+    }
+</style>
+</head>
+<body>
+<div class="slide-container">
+<div class="blob-bg-1"></div>
+<div class="blob-bg-2"></div>
+<div class="content-wrapper">
+<div class="mb-5">
+<div class="flex items-center space-x-3 mb-2">
+<span class="text-sm font-bold tracking-widest text-blue-500 uppercase">CONTROLLERS</span>
+<div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
+</div>
+<h1 class="text-4xl font-black text-gray-800">Controller Best Practices</h1>
+<p class="text-gray-500 mt-2 text-lg">หลักการเขียน Controller ที่ดีและมีประสิทธิภาพ</p>
+</div>
+
+<div class="grid grid-cols-3 gap-4 flex-grow pb-4">
+<div class="flex flex-col gap-4">
+<div class="practice-card flex-grow">
+<div class="icon-circle" style="background-color: #DBEAFE;
+color: #2563EB">
+<i class="fa-solid fa-cube"></i>
+</div>
+<h3 class="text-lg font-bold text-gray-800 mb-2">Single Responsibility</h3>
+<p class="text-xs text-gray-500 mb-3">Controller มีหน้าที่เดียว</p>
+<div class="example-box">
+<span class="badge" style="background-color: #DBEAFE;
+color: #1E40AF">ดี</span> รับ request และ return response<br>
+<span class="badge" style="background-color: #FEE2E2;
+color: #DC2626">ไม่ดี</span> มี business logic มากเกินไป
+</div>
+</div>
+
+<div class="practice-card">
+<div class="icon-circle" style="background-color: #D1FAE5;
+color: #059669">
+<i class="fa-solid fa-feather"></i>
+</div>
+<h3 class="text-lg font-bold text-gray-800 mb-2">Thin Controllers</h3>
+<p class="text-xs text-gray-500 mb-3">Logic อยู่ใน Models/Services</p>
+<div class="example-box">
+Logic ควรอยู่ใน:<br>
+• Models<br>
+• Services<br>
+• Repositories
+</div>
+</div>
+</div>
+
+<div class="practice-card">
+<div class="icon-circle" style="background-color: #FEF3C7;
+color: #D97706">
+<i class="fa-solid fa-code-branch"></i>
+</div>
+<h3 class="text-lg font-bold text-gray-800 mb-2">Dependency Injection</h3>
+<p class="text-xs text-gray-500 mb-3">Inject ผ่าน Constructor</p>
+<div class="example-box">
+public function __construct(UserService $userService)<br>
+{<br>
+&nbsp;&nbsp;$this->userService = $userService;<br>
+}
+</div>
+</div>
+</div>
+
+<div class="flex flex-col gap-4">
+<div class="practice-card">
+<div class="icon-circle" style="background-color: #E0E7FF;
+color: #4F46E5">
+<i class="fa-solid fa-shield-check"></i>
+</div>
+<h3 class="text-lg font-bold text-gray-800 mb-2">Request Validation</h3>
+<p class="text-xs text-gray-500 mb-3">Validate ก่อน process</p>
+<div class="example-box">
+public function store(StoreUserRequest $request)<br>
+{<br>
+&nbsp;&nbsp;// $request->validated() พร้อมใช้<br>
+}
+</div>
+</div>
+
+<div class="practice-card">
+<div class="icon-circle" style="background-color: #F3E8FF;
+color: #7C3AED">
+<i class="fa-solid fa-reply"></i>
+</div>
+<h3 class="text-lg font-bold text-gray-800 mb-2">Return Responses</h3>
+<p class="text-xs text-gray-500 mb-3">ใช้ Response Helpers</p>
+<div class="example-box">
+return response()->json($data);<br>
+return redirect()->route('users');<br>
+return back()->with('success', 'Saved');
+</div>
+</div>
+
+<div class="practice-card">
+<div class="icon-circle" style="background-color: #FEE2E2;
+color: #DC2626">
+<i class="fa-solid fa-database"></i>
+</div>
+<h3 class="text-lg font-bold text-gray-800 mb-2">Route Model Binding</h3>
+<p class="text-xs text-gray-500 mb-3">Auto-resolve Models</p>
+<div class="example-box">
+public function show(User $user)<br>
+{<br>
+&nbsp;&nbsp;return view('users.show', compact('user'));<br>
+}<br>
+// Auto-resolves User::find($id)
+</div>
+</div>
+</div>
+
+<div class="flex flex-col gap-4">
+<div class="practice-card">
+<div class="icon-circle" style="background-color: #FDF2F8;
+color: #DB2777">
+<i class="fa-solid fa-ruler-short"></i>
+</div>
+<h3 class="text-lg font-bold text-gray-800 mb-2">Keep Methods Short</h3>
+<p class="text-xs text-gray-500 mb-3">ไม่เกิน 20 บรรทัด</p>
+<div class="example-box">
+• แต่ละ method ทำงานเดียว<br>
+• แยก logic ออกไป Services<br>
+• ใช้ Service Classes สำหรับ complex logic
+</div>
+</div>
+
+<div class="practice-card">
+<div class="icon-circle" style="background-color: #F0F9FF;
+color: #0284C7">
+<i class="fa-solid fa-shield-halved"></i>
+</div>
+<h3 class="text-lg font-bold text-gray-800 mb-2">Authorization</h3>
+<p class="text-xs text-gray-500 mb-3">ตรวจสอบสิทธิ์</p>
+<div class="example-box">
+$this->authorize('update', $user);<br>
+// หรือใช้ Gates/Policies
+</div>
+</div>
+
+<div class="practice-card">
+<div class="icon-circle" style="background-color: #ECFDF5;
+color: #059669">
+<i class="fa-solid fa-robot"></i>
+</div>
+<h3 class="text-lg font-bold text-gray-800 mb-2">AI Integration</h3>
+<p class="text-xs text-gray-500 mb-3">ใช้ AI ช่วย generate</p>
+<div class="example-box">
+• Generate Controller methods<br>
+• Create validation rules<br>
+• Write test cases
+</div>
+</div>
+</div>
+</div>
+
+<div class="mt-auto pt-4 flex justify-between items-center text-gray-400 text-xs border-t border-gray-100">
+<p>LARAVEL + AI TRAINING COURSE</p>
+<p>PAGE 19</p>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Laravel Architecture</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Noto Sans Thai", "Noto Sans SC", sans-serif;
+    background-color: #f3f4f6
+    }
+.slide-container {
+    width: 1280px;
+    height: 720px;
+    position: relative;
+    background-color: #fff;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column
+    }
+.blob-bg-1 {
+    position: absolute;
+    top: -120px;
+    right: -100px;
+    width: 450px;
+    height: 450px;
+    background-color: #F0F9FF;
+    border-radius: 50%;
+    z-index: 0;
+    opacity: 0.8
+    }
+.blob-bg-2 {
+    position: absolute;
+    bottom: -50px;
+    left: -50px;
+    width: 300px;
+    height: 300px;
+    background-color: #ECFDF5;
+    border-radius: 50%;
+    z-index: 0;
+    opacity: 0.8
+    }
+.content-wrapper {
+    position: relative;
+    z-index: 10;
+    padding: 50px 80px;
+    height: 100%;
+    display: flex;
+    flex-direction: column
+    }
+.mvc-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #F3F4F6;
+    transition: transform 0.2s;
+    height: 100%;
+    display: flex;
+    flex-direction: column
+    }
+.mvc-card:hover {
+    transform: translatey(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+    }
+.mvc-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 12px
+    }
+.lifecycle-step {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px dashed #E5E7EB
+    }
+.lifecycle-step:last-child {
+    border-bottom: none
+    }
+.step-number {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #3B82F6;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    margin-right: 12px;
+    flex-shrink: 0
+    }
+.step-text {
+    font-size: 12px;
+    color: #374151
+    }
+</style>
+</head>
+<body>
+<div class="slide-container">
+<div class="blob-bg-1"></div>
+<div class="blob-bg-2"></div>
+<div class="content-wrapper">
+<div class="mb-5">
+<div class="flex items-center space-x-3 mb-2">
+<span class="text-sm font-bold tracking-widest text-blue-500 uppercase">LARAVEL ARCHITECTURE</span>
+<div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
+</div>
+<h1 class="text-4xl font-black text-gray-800">MVC Pattern & Request Lifecycle</h1>
+<p class="text-gray-500 mt-2 text-lg">เข้าใจโครงสร้าง MVC และขั้นตอนการทำงานของ Request ใน Laravel</p>
+</div>
+
+<div class="grid grid-cols-5 gap-4 flex-grow pb-4">
+<div class="col-span-2 flex flex-col gap-4">
+<div class="mvc-card">
+<div class="mvc-icon" style="background-color: #DBEAFE;
+color: #2563EB">
+<i class="fa-solid fa-database"></i>
+</div>
+<h3 class="text-lg font-bold text-gray-800 mb-2">Model</h3>
+<p class="text-xs text-gray-500 mb-1">Business Logic & Data</p>
+<ul class="text-xs text-gray-600 space-y-1">
+<li>• Database interaction</li>
+<li>• Data validation</li>
+<li>• Business rules</li>
+</ul>
+</div>
+
+<div class="mvc-card">
+<div class="mvc-icon" style="background-color: #D1FAE5;
+color: #059669">
+<i class="fa-solid fa-eye"></i>
+</div>
+<h3 class="text-lg font-bold text-gray-800 mb-2">View</h3>
+<p class="text-xs text-gray-500 mb-1">User Interface</p>
+<ul class="text-xs text-gray-600 space-y-1">
+<li>• Blade templates</li>
+<li>• Data presentation</li>
+<li>• HTML/CSS/JS</li>
+</ul>
+</div>
+</div>
+
+<div class="col-span-3 flex flex-col gap-4">
+<div class="mvc-card">
+<img src="https://sfile.chatglm.cn/images-ppt/375c9e642e72.jpg" alt="MVC Architecture" class="w-full h-32 object-cover rounded-lg mb-3">
+<div class="grid grid-cols-3 gap-3">
+<div class="text-center">
+<div class="w-10 h-10 rounded-lg mx-auto mb-1 flex items-center justify-center" style="background-color: #DBEAFE">
+<i class="fa-solid fa-database text-blue-500"></i>
+</div>
+<p class="text-xs font-bold text-gray-700">Model</p>
+<p class="text-[10px] text-gray-500">Data</p>
+</div>
+<div class="text-center">
+<div class="w-10 h-10 rounded-lg mx-auto mb-1 flex items-center justify-center" style="background-color: #D1FAE5">
+<i class="fa-solid fa-eye text-green-500"></i>
+</div>
+<p class="text-xs font-bold text-gray-700">View</p>
+<p class="text-[10px] text-gray-500">UI</p>
+</div>
+<div class="text-center">
+<div class="w-10 h-10 rounded-lg mx-auto mb-1 flex items-center justify-center" style="background-color: #FEF3C7">
+<i class="fa-solid fa-code text-yellow-500"></i>
+</div>
+<p class="text-xs font-bold text-gray-700">Controller</p>
+<p class="text-[10px] text-gray-500">Logic</p>
+</div>
+</div>
+</div>
+
+<div class="mvc-card flex-grow">
+<div class="flex items-center mb-3">
+<div class="w-8 h-8 rounded-lg bg-purple-500 flex items-center justify-center mr-2">
+<i class="fa-solid fa-route text-white"></i>
+</div>
+<h3 class="text-base font-bold text-gray-800">Request Lifecycle</h3>
+</div>
+<div class="space-y-0">
+<div class="lifecycle-step">
+<div class="step-number">1</div>
+<div class="step-text">Request enters application</div>
+</div>
+<div class="lifecycle-step">
+<div class="step-number">2</div>
+<div class="step-text">public/index.php entry point</div>
+</div>
+<div class="lifecycle-step">
+<div class="step-number">3</div>
+<div class="step-text">Bootstrap app & load config</div>
+</div>
+<div class="lifecycle-step">
+<div class="step-number">4</div>
+<div class="step-text">HTTP Kernel handles request</div>
+</div>
+<div class="lifecycle-step">
+<div class="step-number">5</div>
+<div class="step-text">Middleware processes request</div>
+</div>
+<div class="lifecycle-step">
+<div class="step-number">6</div>
+<div class="step-text">Router matches route</div>
+</div>
+<div class="lifecycle-step">
+<div class="step-number">7</div>
+<div class="step-text">Controller executes logic</div>
+</div>
+<div class="lifecycle-step">
+<div class="step-number">8</div>
+<div class="step-text">Model interacts with DB</div>
+</div>
+<div class="lifecycle-step">
+<div class="step-number">9</div>
+<div class="step-text">View renders response</div>
+</div>
+<div class="lifecycle-step">
+<div class="step-number">10</div>
+<div class="step-text">Response sent to client</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="mt-auto pt-4 flex justify-between items-center text-gray-400 text-xs border-t border-gray-100">
+<p>LARAVEL + AI TRAINING COURSE</p>
+<p>PAGE 12</p>
+</div>
+</div>
+</div>
+</body>
+</html>

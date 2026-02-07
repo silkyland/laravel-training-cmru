@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Advanced Routing</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Noto Sans Thai", "Noto Sans SC", sans-serif;
+    background-color: #f3f4f6
+    }
+.slide-container {
+    width: 1280px;
+    height: 720px;
+    position: relative;
+    background-color: #fff;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column
+    }
+.blob-bg-1 {
+    position: absolute;
+    top: -120px;
+    right: -100px;
+    width: 450px;
+    height: 450px;
+    background-color: #F0F9FF;
+    border-radius: 50%;
+    z-index: 0;
+    opacity: 0.8
+    }
+.blob-bg-2 {
+    position: absolute;
+    bottom: -50px;
+    left: -50px;
+    width: 300px;
+    height: 300px;
+    background-color: #ECFDF5;
+    border-radius: 50%;
+    z-index: 0;
+    opacity: 0.8
+    }
+.content-wrapper {
+    position: relative;
+    z-index: 10;
+    padding: 50px 80px;
+    height: 100%;
+    display: flex;
+    flex-direction: column
+    }
+.routing-card {
+    background: white;
+    border-radius: 12px;
+    padding: 18px 22px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #F3F4F6;
+    height: 100%;
+    display: flex;
+    flex-direction: column
+    }
+.code-block {
+    background: #1F2937;
+    color: #10B981;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    margin-top: 8px
+    }
+.feature-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    background-color: #DBEAFE;
+    color: #1E40AF;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    margin: 2px
+    }
+.method-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    margin: 2px
+    }
+.get-badge { background-color: #DBEAFE;
+color: #1E40AF }
+.group-badge { background-color: #D1FAE5;
+color: #059669 }
+.model-badge { background-color: #FEF3C7;
+color: #D97706 }
+.middleware-badge { background-color: #FEE2E2;
+color: #DC2626 }
+</style>
+</head>
+<body>
+<div class="slide-container">
+<div class="blob-bg-1"></div>
+<div class="blob-bg-2"></div>
+<div class="content-wrapper">
+<div class="mb-5">
+<div class="flex items-center space-x-3 mb-2">
+<span class="text-sm font-bold tracking-widest text-blue-500 uppercase">ADVANCED ROUTING</span>
+<div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
+</div>
+<h1 class="text-4xl font-black text-gray-800">Advanced Routing Features</h1>
+<p class="text-gray-500 mt-2 text-lg">Named Routes, Route Groups, Model Binding และ Middleware</p>
+</div>
+
+<div class="grid grid-cols-2 gap-5 flex-grow pb-4">
+<div class="routing-card">
+<div class="flex items-center mb-3">
+<div class="w-10 h-10 rounded-lg bg-blue-500 flex items-center justify-center mr-3">
+<i class="fa-solid fa-tag text-white"></i>
+</div>
+<div>
+<h3 class="text-lg font-bold text-gray-800">Named Routes</h3>
+<p class="text-xs text-gray-500">ตั้งชื่อ Route เพื่อเรียกใช้ง่าย</p>
+</div>
+</div>
+<div class="flex flex-wrap mb-2">
+<span class="feature-tag">route('profile')</span>
+<span class="feature-tag">Easy URLs</span>
+<span class="feature-tag">Parameters</span>
+</div>
+<div class="code-block">
+Route::get('/user/profile', [UserProfileController::class, 'show'])->name('profile');
+</div>
+<div class="code-block">
+route('profile')
+route('profile', ['id' => 1])
+</div>
+</div>
+
+<div class="routing-card">
+<div class="flex items-center mb-3">
+<div class="w-10 h-10 rounded-lg bg-green-500 flex items-center justify-center mr-3">
+<i class="fa-solid fa-layer-group text-white"></i>
+</div>
+<div>
+<h3 class="text-lg font-bold text-gray-800">Route Groups</h3>
+<p class="text-xs text-gray-500">จัดกลุ่ม Routes ที่มีคุณสมบัติเหมือนกัน</p>
+</div>
+</div>
+<div class="flex flex-wrap mb-2">
+<span class="feature-tag">Middleware</span>
+<span class="feature-tag">Prefix</span>
+<span class="feature-tag">Namespace</span>
+</div>
+<div class="code-block">
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', 'DashboardController@index');
+    Route::get('/profile', 'ProfileController@index');
+});
+</div>
+</div>
+
+<div class="routing-card">
+<div class="flex items-center mb-3">
+<div class="w-10 h-10 rounded-lg bg-purple-500 flex items-center justify-center mr-3">
+<i class="fa-solid fa-database text-white"></i>
+</div>
+<div>
+<h3 class="text-lg font-bold text-gray-800">Route Model Binding</h3>
+<p class="text-xs text-gray-500">Auto-resolve model จาก route parameters</p>
+</div>
+</div>
+<div class="flex flex-wrap mb-2">
+<span class="feature-tag">Auto Resolution</span>
+<span class="feature-tag">Type Hinting</span>
+<span class="feature-tag">Clean Code</span>
+</div>
+<div class="code-block">
+public function show(User $user) {
+    return $user;
+}
+
+// /users/1 → Auto-resolves User::find(1)
+</div>
+</div>
+
+<div class="routing-card">
+<div class="flex items-center mb-3">
+<div class="w-10 h-10 rounded-lg bg-red-500 flex items-center justify-center mr-3">
+<i class="fa-solid fa-shield-halved text-white"></i>
+</div>
+<div>
+<h3 class="text-lg font-bold text-gray-800">Middleware in Routes</h3>
+<p class="text-xs text-gray-500">Apply middleware โดยตรงใน routes</p>
+</div>
+</div>
+<div class="flex flex-wrap mb-2">
+<span class="feature-tag">Multiple Middleware</span>
+<span class="feature-tag">Parameters</span>
+<span class="feature-tag">Single Route</span>
+</div>
+<div class="code-block">
+Route::get('/admin', 'AdminController@index')
+    ->middleware('auth', 'role:admin');
+</div>
+</div>
+</div>
+
+<div class="mt-auto pt-4 flex justify-between items-center text-gray-400 text-xs border-t border-gray-100">
+<p>LARAVEL + AI TRAINING COURSE</p>
+<p>PAGE 16</p>
+</div>
+</div>
+</div>
+</body>
+</html>
