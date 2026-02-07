@@ -1,6 +1,6 @@
 # 3.1 Basic Routing (พื้นฐานการกำหนดเส้นทาง)
 
-> 📖 **บทนี้คุณจะได้เรียนรู้**
+> **บทนี้คุณจะได้เรียนรู้**
 > - ทำความเข้าใจแนวคิด Routing ใน Laravel
 > - การรับส่งข้อมูลผ่าน URL
 > - HTTP Methods ทั้งหมด (GET, POST, PUT, PATCH, DELETE)
@@ -11,7 +11,7 @@
 
 ---
 
-## 🎯 วัตถุประสงค์การเรียนรู้
+## วัตถุประสงค์การเรียนรู้
 
 เมื่อจบบทเรียนนี้ ผู้เรียนจะสามารถ:
 1. เข้าใจแนวคิดและความสำคัญของ Routing ในเว็บแอปพลิเคชัน
@@ -22,7 +22,7 @@
 
 ---
 
-## 📚 เนื้อหา
+## เนื้อหา
 
 ### 1. ทำความเข้าใจ Routing คืออะไร?
 
@@ -32,7 +32,7 @@
 ผู้ใช้พิมพ์ URL → Laravel Router รับ Request → ส่งไปยัง Controller/Closure → ส่ง Response กลับ
 ```
 
-#### 🏗️ โครงสร้างไฟล์ Routes ใน Laravel
+#### โครงสร้างไฟล์ Routes ใน Laravel
 
 ```
 routes/
@@ -108,7 +108,7 @@ Route::delete($uri, $callback);   // ลบข้อมูล (Delete)
 Route::options($uri, $callback);  // สำหรับ CORS Preflight
 ```
 
-#### 🎯 การเลือกใช้ HTTP Method ที่เหมาะสม
+#### การเลือกใช้ HTTP Method ที่เหมาะสม
 
 | Method | วัตถุประสงค์ | ตัวอย่างการใช้งาน | Idempotent |
 |--------|------------|-----------------|------------|
@@ -413,7 +413,7 @@ php artisan route:list -v
 
 ---
 
-### 🤖 การใช้ AI ช่วยสร้าง Route
+### การใช้ AI ช่วยสร้าง Route
 
 #### Prompt ตัวอย่างที่ 1: สร้าง Route พื้นฐาน
 **Prompt:**
@@ -456,7 +456,7 @@ Route::get('/user/{id}', function ($id) {
 
 ---
 
-## 🧪 ตัวอย่างโค้ดฉบับเต็ม
+## ตัวอย่างโค้ดฉบับเต็ม
 
 สร้างไฟล์ `routes/web.php` สำหรับระบบ E-commerce อย่างง่าย:
 
@@ -544,7 +544,7 @@ Route::permanentRedirect('/old-about', '/about');
 
 ---
 
-## ✅ สรุปสิ่งที่ได้เรียนรู้
+## สรุป
 
 | หัวข้อ | สิ่งที่ได้เรียนรู้ |
 |--------|-------------------|
@@ -558,7 +558,7 @@ Route::permanentRedirect('/old-about', '/about');
 
 ---
 
-## 🎓 แบบฝึกหัด
+## แบบฝึกหัด
 
 ### แบบฝึกหัดที่ 1: Route พื้นฐาน
 **โจทย์:** จงสร้าง Route ต่อไปนี้ใน `routes/web.php`:
@@ -627,7 +627,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 ---
 
-## 📖 อ่านเพิ่มเติม
+## อ่านเพิ่มเติม
 
 - [Laravel Official Documentation - Routing](https://laravel.com/docs/routing)
 - [RESTful API Design Best Practices](https://restfulapi.net/)

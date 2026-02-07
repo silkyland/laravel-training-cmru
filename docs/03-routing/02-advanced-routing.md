@@ -1,6 +1,6 @@
 # 3.2 Advanced Routing (เทคนิค Routing ขั้นสูง)
 
-> 📖 **บทนี้คุณจะได้เรียนรู้**
+> **บทนี้คุณจะได้เรียนรู้**
 > - Route Groups กับ Middleware, Prefix, Namespace
 > - Route Model Binding (Implicit และ Explicit)
 > - Route Caching เพื่อเพิ่มประสิทธิภาพ
@@ -11,7 +11,7 @@
 
 ---
 
-## 🎯 วัตถุประสงค์การเรียนรู้
+## วัตถุประสงค์การเรียนรู้
 
 เมื่อจบบทเรียนนี้ ผู้เรียนจะสามารถ:
 1. จัดกลุ่ม Route อย่างมีระบบด้วย Route Groups
@@ -22,13 +22,13 @@
 
 ---
 
-## 📚 เนื้อหา
+## เนื้อหา
 
 ### 1. Route Groups (การจัดกลุ่ม Route แบบละเอียด)
 
 Route Groups ช่วยให้เรากำหนดคุณสมบัติร่วมกัน เช่น Middleware, Prefix, Name ให้กับ Route หลายตัวในคราวเดียว ลดการเขียนโค้ดซ้ำซ้อน
 
-#### 📊 แผนภาพโครงสร้าง Route Groups
+#### แผนภาพโครงสร้าง Route Groups
 
 ```mermaid
 graph TD
@@ -165,7 +165,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route Model Binding ช่วยให้ Laravel ดึง Model จากฐานข้อมูลให้อัตโนมัติ โดยไม่ต้องเขียน `findOrFail()` เอง
 
-#### 📊 แผนภาพการทำงาน Route Model Binding
+#### แผนภาพการทำงาน Route Model Binding
 
 ```mermaid
 sequenceDiagram
@@ -315,7 +315,7 @@ Route::domain('{tenant}.myapp.com')->group(function () {
 });
 ```
 
-#### 📊 แผนภาพ Subdomain Routing
+#### แผนภาพ Subdomain Routing
 
 ```mermaid
 graph LR
@@ -412,7 +412,7 @@ Route::fallback(function () {
 Route::fallback([ErrorController::class, 'notFound']);
 ```
 
-#### 📊 แผนภาพ Fallback Route
+#### แผนภาพ Fallback Route
 
 ```mermaid
 flowchart TD
@@ -470,7 +470,7 @@ if (request()->routeIs('posts.show')) {
 
 ---
 
-### 🤖 การใช้ AI ช่วยพัฒนา
+### การใช้ AI ช่วยพัฒนา
 
 #### Prompt ตัวอย่างที่ 1: สร้าง Route Group สำหรับ Admin
 
@@ -521,7 +521,7 @@ RateLimiter::for('api-key', function ($request) {
 });
 ```
 
-#### 🔍 การ Review Code จาก AI
+#### การ Review Code จาก AI
 
 เมื่อได้โค้ดจาก AI ให้ตรวจสอบ:
 1. **Middleware ถูกต้องหรือไม่** - ต้องตรงกับที่ลงทะเบียนไว้ใน Kernel.php
@@ -531,7 +531,7 @@ RateLimiter::for('api-key', function ($request) {
 
 ---
 
-## ✅ สรุปสิ่งที่ได้เรียนรู้
+## สรุป
 
 | หัวข้อ | สิ่งที่ได้เรียนรู้ |
 |--------|-------------------|
@@ -545,7 +545,7 @@ RateLimiter::for('api-key', function ($request) {
 
 ---
 
-## 🎓 แบบฝึกหัด
+## แบบฝึกหัด
 
 ### แบบฝึกหัดที่ 1: Route Groups แบบซ้อน
 
@@ -680,7 +680,7 @@ Route::fallback(function () {
 
 ---
 
-## 🔗 Resources เพิ่มเติม
+## อ่านเพิ่มเติม
 
 - [Laravel Official Docs - Routing](https://laravel.com/docs/routing)
 - [Laravel Official Docs - Rate Limiting](https://laravel.com/docs/routing#rate-limiting)

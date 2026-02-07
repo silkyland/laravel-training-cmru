@@ -1,6 +1,6 @@
 # 5.3 Eloquent Relationships (ความสัมพันธ์ของข้อมูล)
 
-> 📖 **บทนี้คุณจะได้เรียนรู้**
+> **บทนี้คุณจะได้เรียนรู้**
 > - ความสัมพันธ์แบบ One to One, One to Many, Many to Many
 > - Has Many Through และ Polymorphic Relations
 > - Eager Loading เพื่อแก้ปัญหา N+1 Query
@@ -8,12 +8,19 @@
 
 ---
 
-## 🎯 วัตถุประสงค์
+## วัตถุประสงค์การเรียนรู้
+
+เมื่อจบบทเรียนนี้ ผู้เรียนจะสามารถ:
+1. อธิบายความสัมพันธ์แบบ One to One, One to Many, Many to Many ได้
+2. ใช้ Has Many Through และ Polymorphic Relations ได้
+3. แก้ปัญหา N+1 Query ด้วย Eager Loading ได้
+4. สร้างและจัดการข้อมูลที่มีความสัมพันธ์กันได้
+
 เพื่อให้เข้าใจการเชื่อมโยงข้อมูลระหว่างตารางต่าง ๆ ผ่าน Eloquent Relationships ซึ่งเป็นหัวใจสำคัญของการพัฒนาแอปพลิเคชันที่มีข้อมูลซับซ้อน เช่น ระบบบล็อก ระบบ E-commerce หรือระบบจัดการนักศึกษา
 
 ---
 
-## 📚 เนื้อหา
+## เนื้อหา
 
 ### 1. ทำไมต้องใช้ Relationships?
 
@@ -48,7 +55,7 @@ erDiagram
     USERS ||--o| PHONES : "has one"
 ```
 
-#### 💡 Migration
+#### Migration
 
 ```php
 // create_phones_table migration
@@ -73,7 +80,7 @@ class User extends Authenticatable
 }
 ```
 
-#### 💡 Model: Phone.php
+#### Model: Phone.php
 
 ```php
 class Phone extends Model
@@ -88,7 +95,7 @@ class Phone extends Model
 }
 ```
 
-#### 💡 การใช้งาน
+#### การใช้งาน
 
 ```php
 // ดึงเบอร์โทรของผู้ใช้
@@ -129,7 +136,7 @@ erDiagram
     USERS ||--o{ COMMENTS : "has many"
 ```
 
-#### 💡 Model: User.php
+#### Model: User.php
 
 ```php
 class User extends Authenticatable
@@ -148,7 +155,7 @@ class User extends Authenticatable
 }
 ```
 
-#### 💡 Model: Post.php
+#### Model: Post.php
 
 ```php
 class Post extends Model
@@ -169,7 +176,7 @@ class Post extends Model
 }
 ```
 
-#### 💡 Model: Comment.php
+#### Model: Comment.php
 
 ```php
 class Comment extends Model
@@ -188,7 +195,7 @@ class Comment extends Model
 }
 ```
 
-#### 💡 การใช้งาน
+#### การใช้งาน
 
 ```php
 // ดึงโพสต์ทั้งหมดของผู้ใช้
@@ -230,7 +237,7 @@ erDiagram
     ROLES ||--o{ ROLE_USER : ""
 ```
 
-#### 💡 Migration สำหรับ Pivot Table
+#### Migration สำหรับ Pivot Table
 
 ```php
 // ชื่อตาราง pivot ต้องเรียงตามตัวอักษร: role_user (ไม่ใช่ user_role)
@@ -245,7 +252,7 @@ Schema::create('role_user', function (Blueprint $table) {
 });
 ```
 
-#### 💡 Models
+#### Models
 
 ```php
 // User.php
@@ -269,7 +276,7 @@ class Role extends Model
 }
 ```
 
-#### 💡 การจัดการข้อมูล Pivot
+#### การจัดการข้อมูล Pivot
 
 ```php
 $user = User::find(1);
@@ -349,7 +356,7 @@ erDiagram
     VIDEOS ||--o{ COMMENTS : "morphMany"
 ```
 
-#### 💡 Migration
+#### Migration
 
 ```php
 Schema::create('comments', function (Blueprint $table) {
@@ -360,7 +367,7 @@ Schema::create('comments', function (Blueprint $table) {
 });
 ```
 
-#### 💡 Models
+#### Models
 
 ```php
 // Comment.php
@@ -391,7 +398,7 @@ class Video extends Model
 }
 ```
 
-#### 💡 การใช้งาน
+#### การใช้งาน
 
 ```php
 // เพิ่ม comment ให้ Post
@@ -423,7 +430,7 @@ graph TD
     style D fill:#51cf66,color:#fff
 ```
 
-#### ⚠️ ตัวอย่างปัญหา N+1 (ห้ามทำแบบนี้!)
+#### ตัวอย่างปัญหา N+1 (ห้ามทำแบบนี้!)
 
 ```php
 // ❌ แบบนี้จะยิง 101 queries (1 + 100)
@@ -434,7 +441,7 @@ foreach ($posts as $post) {
 }
 ```
 
-#### 💡 แก้ไขด้วย with() - Eager Loading
+#### แก้ไขด้วย with() - Eager Loading
 
 ```php
 // ✅ แบบนี้ยิงแค่ 2 queries
@@ -447,7 +454,7 @@ foreach ($posts as $post) {
 }
 ```
 
-#### 💡 Eager Loading หลาย Relationships
+#### Eager Loading หลาย Relationships
 
 ```php
 // โหลดหลาย relationships พร้อมกัน
@@ -464,7 +471,7 @@ $posts = Post::with(['comments' => function ($query) {
 }])->get();
 ```
 
-#### 💡 Lazy Eager Loading (โหลดทีหลัง)
+#### Lazy Eager Loading (โหลดทีหลัง)
 
 ```php
 $posts = Post::all();
@@ -507,7 +514,7 @@ $post->comments()->saveMany([
 
 ---
 
-### 🤖 การใช้ AI ช่วยพัฒนา
+### การใช้ AI ช่วยพัฒนา
 
 #### Prompt ตัวอย่าง 1: ออกแบบ Relationships
 
@@ -549,7 +556,7 @@ foreach ($orders as $order) {
 }
 ```
 
-#### 🔍 การ Review Code จาก AI
+#### การ Review Code จาก AI
 
 เมื่อ AI สร้าง Relationships ให้ ตรวจสอบสิ่งเหล่านี้:
 1. **ชื่อ Foreign Key** - ถูกต้องตาม Convention หรือไม่ (เช่น `user_id` ไม่ใช่ `userId`)
@@ -560,7 +567,7 @@ foreach ($orders as $order) {
 
 ---
 
-## 🎓 แบบฝึกหัด
+## แบบฝึกหัด
 
 ### Exercise 1: ระบบบล็อกมหาวิทยาลัย
 
@@ -705,7 +712,7 @@ foreach ($teachers as $teacher) {
 
 ---
 
-## 🔗 Resources เพิ่มเติม
+## อ่านเพิ่มเติม
 
 - [Laravel Eloquent Relationships](https://laravel.com/docs/11.x/eloquent-relationships)
 - [Laravel Eager Loading](https://laravel.com/docs/11.x/eloquent-relationships#eager-loading)
@@ -713,7 +720,7 @@ foreach ($teachers as $teacher) {
 
 ---
 
-## 📌 สรุป
+## สรุป
 
 | Relationship | Method | ตัวอย่าง |
 |---|---|---|
@@ -729,7 +736,7 @@ foreach ($teachers as $teacher) {
 
 ---
 
-## ⏭️ บทถัดไป
+## บทถัดไป
 
 - [Advanced Eloquent - Query Scopes, Accessors, Observers และอื่น ๆ](04-advanced-eloquent.md)
 

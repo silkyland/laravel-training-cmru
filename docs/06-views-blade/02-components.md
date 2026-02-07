@@ -1,101 +1,205 @@
-# Components
+# 6.2 Blade Components (คอมโพเนนต์)
 
-> 📖 **บทนี้คุณจะได้เรียนรู้**
-> - หัวข้อหลักที่ 1
-> - หัวข้อหลักที่ 2
-> - หัวข้อหลักที่ 3
+> **บทนี้คุณจะได้เรียนรู้**
+> - แนวคิด Component-based UI
+> - Anonymous Components (ไม่มี Class)
+> - Class-based Components
+> - Slots และ Attributes
 
-## 🎯 วัตถุประสงค์
+---
 
-<!-- อธิบายว่าทำไมต้องเรียนหัวข้อนี้ -->
+## วัตถุประสงค์การเรียนรู้
 
-## 📚 เนื้อหา
+เมื่อจบบทเรียนนี้ ผู้เรียนจะสามารถ:
+1. อธิบายแนวคิดของ Component-based UI ได้
+2. สร้าง Anonymous Components สำหรับ UI ที่ใช้ซ้ำได้
+3. สร้าง Class-based Components ที่มี Logic ได้
+4. ใช้ Slots และ Attributes ส่งข้อมูลเข้า Component ได้
 
-### Components Concept
+---
 
-<!-- อธิบายแนวคิด -->
+## เนื้อหา
 
-#### 💡 ตัวอย่างโค้ด
+### 1. แนวคิด Component-based UI
 
-```php
-// โค้ดตัวอย่างที่อธิบายได้ชัดเจน
-// มี comment ภาษาไทย
-```
-
-#### 📊 Diagram/Flowchart (ถ้ามี)
+**Components** คือชิ้นส่วน UI ที่ Reusable ได้ เปรียบเสมือน **"ชิ้นส่วน LEGO"** ที่ประกอบกันเป็นหน้าเว็บ
 
 ```mermaid
 graph TD
-    A[Start] --> B[Process]
-    B --> C[End]
+    A[Page Layout] --> B[Navbar Component]
+    A --> C[Content Area]
+    A --> D[Footer Component]
+    C --> E[Card Component]
+    C --> F[Card Component]
+    C --> G[Card Component]
+    E --> H[Button Component]
 ```
 
-#### ⚠️ ข้อควรระวัง
+| ประเภท | สร้างด้วย | เหมาะกับ |
+|--------|---------|---------|
+| **Anonymous** | ไฟล์ Blade อย่างเดียว | UI ง่ายๆ เช่น Button, Card, Alert |
+| **Class-based** | Class + ไฟล์ Blade | UI ที่มี Logic เช่น Dropdown, Modal |
 
-<!-- สิ่งที่ต้องระวังหรือ common mistakes -->
+### 2. Anonymous Components
 
-#### 💪 Best Practices
+สร้างไฟล์ใน `resources/views/components/`:
 
-<!-- แนวทางปฏิบัติที่ดี -->
+```blade
+{{-- resources/views/components/alert.blade.php --}}
+@props(['type' => 'info', 'message'])
 
-### 🤖 การใช้ AI ช่วยพัฒนา
+<div class="alert alert-{{ $type }}">
+    {{ $message }}
+</div>
+```
 
-<!-- แสดงวิธีใช้ AI สำหรับหัวข้อนี้ -->
+```blade
+{{-- การใช้งาน --}}
+<x-alert type="success" message="บันทึกข้อมูลเรียบร้อย" />
+<x-alert type="error" message="เกิดข้อผิดพลาด" />
+<x-alert message="ข้อมูลทั่วไป" /> {{-- ใช้ค่า default: info --}}
+```
+
+### 3. Class-based Components
+
+```bash
+php artisan make:component Card
+```
+
+```php
+// app/View/Components/Card.php
+class Card extends Component
+{
+    public function __construct(
+        public string $title,
+        public string $description = '',
+        public string $image = '',
+    ) {}
+
+    public function render()
+    {
+        return view('components.card');
+    }
+}
+```
+
+```blade
+{{-- resources/views/components/card.blade.php --}}
+<div {{ $attributes->merge(['class' => 'card']) }}>
+    @if($image)
+        <img src="{{ $image }}" alt="{{ $title }}">
+    @endif
+    <h3>{{ $title }}</h3>
+    <p>{{ $description }}</p>
+    {{ $slot }}
+</div>
+```
+
+```blade
+{{-- การใช้งาน --}}
+<x-card title="สินค้า A" description="รายละเอียด" image="/img/a.jpg">
+    <button>เพิ่มลงตะกร้า</button>
+</x-card>
+```
+
+### 4. Slots
+
+**Slots** คือช่องว่างใน Component ที่ให้ผู้ใช้ใส่เนื้อหาเข้าไปได้:
+
+```blade
+{{-- resources/views/components/modal.blade.php --}}
+<div class="modal">
+    <div class="modal-header">
+        {{ $title }}
+    </div>
+    <div class="modal-body">
+        {{ $slot }} {{-- Default Slot --}}
+    </div>
+    <div class="modal-footer">
+        {{ $footer }}
+    </div>
+</div>
+```
+
+```blade
+{{-- การใช้งาน --}}
+<x-modal>
+    <x-slot:title>ยืนยันการลบ</x-slot:title>
+
+    <p>คุณต้องการลบข้อมูลนี้หรือไม่?</p>
+
+    <x-slot:footer>
+        <button>ยกเลิก</button>
+        <button>ยืนยัน</button>
+    </x-slot:footer>
+</x-modal>
+```
+
+---
+
+### การใช้ AI ช่วยพัฒนา
 
 #### Prompt ตัวอย่าง:
 
 ```
-[Prompt ที่ใช้กับ AI]
+สร้าง Blade Component สำหรับ Alert Box ที่:
+- รับ type (success, error, warning, info)
+- รับ message
+- มีปุ่มปิด (dismiss)
+- ใช้ TailwindCSS
 ```
 
-#### ผลลัพธ์:
+#### การ Review Code จาก AI
 
-```php
-// โค้ดที่ AI generate
-```
+เมื่อได้โค้ดจาก AI ให้ตรวจสอบ:
+- [ ] ใช้ `@props` กำหนดค่า default ถูกต้องหรือไม่
+- [ ] ใช้ `$attributes->merge()` สำหรับ class ที่ยืดหยุ่นหรือไม่
+- [ ] ข้อมูลจากผู้ใช้ใช้ `{{ }}` (escaped) หรือไม่
 
-#### 🔍 การ Review Code จาก AI
+---
 
-<!-- วิธีตรวจสอบและปรับปรุง AI-generated code -->
+## แบบฝึกหัด
 
-## 🎓 แบบฝึกหัด
+### Exercise 1: สร้าง Button Component
 
-### Exercise 1: [ชื่อแบบฝึกหัด]
-
-**โจทย์:**
-<!-- คำอธิบายโจทย์ -->
-
-**เป้าหมาย:**
-<!-- สิ่งที่ต้องทำให้สำเร็จ -->
-
-**Hints:**
-<!-- คำแนะนำ -->
+**โจทย์:** สร้าง Anonymous Component `<x-button>` ที่:
+1. รับ `type` (primary, secondary, danger) มีค่า default เป็น primary
+2. รับ `size` (sm, md, lg) มีค่า default เป็น md
+3. แสดงข้อความผ่าน slot
 
 <details>
-<summary>💡 ดูเฉลย</summary>
+<summary>ดูเฉลย</summary>
 
-```php
-// โค้ดเฉลย
+```blade
+{{-- resources/views/components/button.blade.php --}}
+@props(['type' => 'primary', 'size' => 'md'])
+
+<button {{ $attributes->merge(['class' => "btn btn-{$type} btn-{$size}"]) }}>
+    {{ $slot }}
+</button>
 ```
 
-**คำอธิบาย:**
-<!-- อธิบายเฉลย -->
+```blade
+{{-- การใช้งาน --}}
+<x-button>บันทึก</x-button>
+<x-button type="danger" size="sm">ลบ</x-button>
+<x-button type="secondary" onclick="history.back()">ย้อนกลับ</x-button>
+```
 
 </details>
 
-## 🔗 Resources เพิ่มเติม
+---
 
-- [ลิงก์ไปยัง Laravel Docs](https://laravel.com/docs)
+## สรุป
 
-## 📌 สรุป
-
-<!-- สรุปประเด็นสำคัญของบทนี้ -->
-
-## ⏭️ บทถัดไป
-
-- [ชื่อบทถัดไป](#)
+| หัวข้อ | สิ่งที่ได้เรียนรู้ |
+|--------|-------------------|
+| Anonymous Components | สร้างจากไฟล์ Blade อย่างเดียว ใช้ `@props` |
+| Class-based Components | มี PHP Class + Blade, เหมาะกับ UI ที่มี Logic |
+| Slots | ช่องว่างให้ใส่เนื้อหา ใช้ `{{ $slot }}` และ `<x-slot:name>` |
+| Attributes | ใช้ `$attributes->merge()` สำหรับ class ที่ยืดหยุ่น |
 
 ---
 
 **Navigation:**
-[⬅️ ก่อนหน้า](#) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](#)
+[⬅️ ก่อนหน้า](01-blade-basics.md) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](03-layouts.md)

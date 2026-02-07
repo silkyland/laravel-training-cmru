@@ -7,11 +7,17 @@
 
 ---
 
-## 🎯 วัตถุประสงค์
+## วัตถุประสงค์การเรียนรู้
 
-เพื่อให้มั่นใจว่าระบบฐานข้อมูลขององค์กรจะไม่ถูกลักลอบขโมยข้อมูลหรือลบข้อมูลผ่านการโจมตีแบบ SQL Injection
+เมื่อจบบทเรียนนี้ ผู้เรียนจะสามารถ:
+1. อธิบายการโจมตีแบบ SQL Injection ได้
+2. ระบุจุดเสี่ยงในโค้ดที่อาจถูก SQL Injection ได้
+3. ใช้ Eloquent และ Query Builder ป้องกัน SQL Injection ได้
+4. เขียน Raw Query ที่ปลอดภัยด้วย Parameterized Queries ได้
 
-## 📚 เนื้อหา
+---
+
+## เนื้อหา
 
 ### SQL Injection คืออะไร?
 
@@ -19,11 +25,11 @@
 - ใส่ `' OR '1'='1` ในช่อง Password เพื่อ Bypass การ Login
 - ใส่ `; DROP TABLE users;` เพื่อลบข้อมูล
 
-#### 🛡️ วิธีป้องกันใน Laravel
+#### วิธีป้องกันใน Laravel
 
 Laravel ใช้ **PDO Parameter Binding** ผ่าน Eloquent ORM และ Query Builder ซึ่งจะทำการ "Clean" ข้อมูลก่อนส่งไปที่ฐานข้อมูลเสมอ
 
-#### 💡 ตัวอย่างโค้ดที่ปลอดภัย (Safe)
+#### ตัวอย่างโค้ดที่ปลอดภัย (Safe)
 
 ```php
 // การใช้ Eloquent (ปลอดภัยที่สุด)
@@ -33,7 +39,7 @@ $user = User::where('email', $request->email)->first();
 $user = DB::table('users')->where('email', $request->email)->first();
 ```
 
-#### 💡 ตัวอย่างโค้ดที่อันตราย (Unsafe)
+#### ตัวอย่างโค้ดที่อันตราย (Unsafe)
 
 ```diff
 - // อย่าทำแบบนี้เด็ดขาด!
@@ -43,7 +49,7 @@ $user = DB::table('users')->where('email', $request->email)->first();
 + $user = DB::select("SELECT * FROM users WHERE email = ?", [$request->email]);
 ```
 
-#### 📊 Flow: SQL Injection Protection
+#### Flow: SQL Injection Protection
 
 ```mermaid
 sequenceDiagram
@@ -61,7 +67,7 @@ sequenceDiagram
 
 ---
 
-### 🤖 การใช้ AI ตรวจสอบความปลอดภัย
+### การใช้ AI ตรวจสอบความปลอดภัย
 
 เราสามารถให้ AI ช่วย Review โค้ดของเราว่ามีช่องโหว่หรือไม่
 
@@ -70,7 +76,7 @@ sequenceDiagram
 
 ---
 
-## 🎓 แบบฝึกหัด
+## แบบฝึกหัด
 
 ### Exercise: ปรับปรุง Raw Query ให้ปลอดภัย
 
@@ -81,7 +87,7 @@ $results = DB::select("SELECT * FROM logs WHERE type = '" . $type . "' AND date 
 ```
 
 <details>
-<summary>💡 ดูเฉลย</summary>
+<summary>ดูเฉลย</summary>
 
 ```php
 // วิธีที่ 1: ใช้ Eloquent
@@ -92,6 +98,15 @@ $results = DB::select("SELECT * FROM logs WHERE type = ? AND date = ?", [$type, 
 ```
 
 </details>
+
+## สรุป
+
+| หัวข้อ | สิ่งที่ได้เรียนรู้ |
+|--------|-------------------|
+| SQL Injection | การแทรกคำสั่ง SQL ผ่านข้อมูลจากผู้ใช้ |
+| Eloquent/Query Builder | ป้องกัน SQL Injection อัตโนมัติ |
+| Parameterized Queries | ใช้ `?` placeholder สำหรับ Raw Query |
+| Whitelist | ตรวจสอบค่าที่อนุญาตก่อนใช้ใน Query |
 
 ---
 
