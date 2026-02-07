@@ -1,101 +1,91 @@
-# Api Security
+# 10.4 API Security (ความปลอดภัยของ API)
 
-> 📖 **บทนี้คุณจะได้เรียนรู้**
-> - หัวข้อหลักที่ 1
-> - หัวข้อหลักที่ 2
-> - หัวข้อหลักที่ 3
+> **บทนี้คุณจะได้เรียนรู้**
+> - Laravel Sanctum สำหรับ API Authentication
+> - API Rate Limiting
+> - CORS Configuration
+> - API Best Practices
 
-## 🎯 วัตถุประสงค์
+---
 
-<!-- อธิบายว่าทำไมต้องเรียนหัวข้อนี้ -->
+## วัตถุประสงค์การเรียนรู้
 
-## 📚 เนื้อหา
+เมื่อจบบทเรียนนี้ ผู้เรียนจะสามารถ:
+1. ใช้ Sanctum สำหรับ API Authentication ได้
+2. ตั้งค่า Rate Limiting สำหรับ API ได้
+3. ตั้งค่า CORS ได้
+4. ออกแบบ API ที่ปลอดภัยได้
 
-### Api Security Concept
+---
 
-<!-- อธิบายแนวคิด -->
+## เนื้อหา
 
-#### 💡 ตัวอย่างโค้ด
+### 1. Laravel Sanctum
+
+```bash
+composer require laravel/sanctum
+php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+php artisan migrate
+```
 
 ```php
-// โค้ดตัวอย่างที่อธิบายได้ชัดเจน
-// มี comment ภาษาไทย
+// สร้าง API Token
+$token = $user->createToken('api-token')->plainTextToken;
+
+// ใช้ Token ใน Request
+// Header: Authorization: Bearer <token>
+
+// ป้องกัน Route ด้วย Sanctum
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', fn (Request $request) => $request->user());
+    Route::apiResource('products', ProductController::class);
+});
+
+// ลบ Token (Logout)
+$request->user()->currentAccessToken()->delete();
 ```
 
-#### 📊 Diagram/Flowchart (ถ้ามี)
+### 2. API Best Practices
 
-```mermaid
-graph TD
-    A[Start] --> B[Process]
-    B --> C[End]
-```
+| แนวปฏิบัติ | รายละเอียด |
+|-----------|-----------|
+| **ใช้ HTTPS** | เข้ารหัสข้อมูลระหว่างทาง |
+| **Validate Input** | ตรวจสอบข้อมูลทุก Request |
+| **Rate Limiting** | จำกัดจำนวน Request |
+| **ไม่ส่งข้อมูลเกิน** | ใช้ API Resource เลือก field |
+| **Versioning** | ใช้ `/api/v1/` สำหรับ API version |
+| **Error Handling** | ส่ง Error เป็น JSON ที่สม่ำเสมอ |
 
-#### ⚠️ ข้อควรระวัง
-
-<!-- สิ่งที่ต้องระวังหรือ common mistakes -->
-
-#### 💪 Best Practices
-
-<!-- แนวทางปฏิบัติที่ดี -->
-
-### 🤖 การใช้ AI ช่วยพัฒนา
-
-<!-- แสดงวิธีใช้ AI สำหรับหัวข้อนี้ -->
-
-#### Prompt ตัวอย่าง:
-
-```
-[Prompt ที่ใช้กับ AI]
-```
-
-#### ผลลัพธ์:
+### 3. API Resource
 
 ```php
-// โค้ดที่ AI generate
+// API Resource - ควบคุมข้อมูลที่ส่งออก
+class UserResource extends JsonResource
+{
+    public function toArray($request): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            // ไม่ส่ง password, remember_token
+        ];
+    }
+}
 ```
 
-#### 🔍 การ Review Code จาก AI
+---
 
-<!-- วิธีตรวจสอบและปรับปรุง AI-generated code -->
+## สรุป
 
-## 🎓 แบบฝึกหัด
-
-### Exercise 1: [ชื่อแบบฝึกหัด]
-
-**โจทย์:**
-<!-- คำอธิบายโจทย์ -->
-
-**เป้าหมาย:**
-<!-- สิ่งที่ต้องทำให้สำเร็จ -->
-
-**Hints:**
-<!-- คำแนะนำ -->
-
-<details>
-<summary>💡 ดูเฉลย</summary>
-
-```php
-// โค้ดเฉลย
-```
-
-**คำอธิบาย:**
-<!-- อธิบายเฉลย -->
-
-</details>
-
-## 🔗 Resources เพิ่มเติม
-
-- [ลิงก์ไปยัง Laravel Docs](https://laravel.com/docs)
-
-## 📌 สรุป
-
-<!-- สรุปประเด็นสำคัญของบทนี้ -->
-
-## ⏭️ บทถัดไป
-
-- [ชื่อบทถัดไป](#)
+| หัวข้อ | สิ่งที่ได้เรียนรู้ |
+|--------|-------------------|
+| Sanctum | Token-based API Authentication |
+| Rate Limiting | จำกัด Request ด้วย `RateLimiter` |
+| CORS | ควบคุม Origin ที่อนุญาต |
+| API Resource | ควบคุมข้อมูลที่ส่งออก |
 
 ---
 
 **Navigation:**
-[⬅️ ก่อนหน้า](#) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](#)
+[⬅️ ก่อนหน้า](03-auth-security.md) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](../11-crud-system/01-crud-overview.md)

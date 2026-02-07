@@ -1,101 +1,122 @@
-# Update
+# 11.4 Update (การแก้ไขข้อมูล)
 
-> 📖 **บทนี้คุณจะได้เรียนรู้**
-> - หัวข้อหลักที่ 1
-> - หัวข้อหลักที่ 2
-> - หัวข้อหลักที่ 3
+> **บทนี้คุณจะได้เรียนรู้**
+> - หน้าฟอร์มแก้ไขข้อมูล (edit)
+> - การอัปเดตข้อมูล (update)
+> - การจัดการรูปภาพเดิม/ใหม่
+> - @method('PUT') สำหรับ HTTP Method Spoofing
 
-## 🎯 วัตถุประสงค์
+---
 
-<!-- อธิบายว่าทำไมต้องเรียนหัวข้อนี้ -->
+## วัตถุประสงค์การเรียนรู้
 
-## 📚 เนื้อหา
+เมื่อจบบทเรียนนี้ ผู้เรียนจะสามารถ:
+1. สร้างหน้าฟอร์มแก้ไขข้อมูลพร้อมค่าเดิมได้
+2. เขียน Controller Method `edit()` และ `update()` ได้
+3. จัดการการอัปเดตรูปภาพ (ลบเก่า + อัปโหลดใหม่) ได้
 
-### Update Concept
+---
 
-<!-- อธิบายแนวคิด -->
+## เนื้อหา
 
-#### 💡 ตัวอย่างโค้ด
-
-```php
-// โค้ดตัวอย่างที่อธิบายได้ชัดเจน
-// มี comment ภาษาไทย
-```
-
-#### 📊 Diagram/Flowchart (ถ้ามี)
-
-```mermaid
-graph TD
-    A[Start] --> B[Process]
-    B --> C[End]
-```
-
-#### ⚠️ ข้อควรระวัง
-
-<!-- สิ่งที่ต้องระวังหรือ common mistakes -->
-
-#### 💪 Best Practices
-
-<!-- แนวทางปฏิบัติที่ดี -->
-
-### 🤖 การใช้ AI ช่วยพัฒนา
-
-<!-- แสดงวิธีใช้ AI สำหรับหัวข้อนี้ -->
-
-#### Prompt ตัวอย่าง:
-
-```
-[Prompt ที่ใช้กับ AI]
-```
-
-#### ผลลัพธ์:
+### 1. Controller: edit() และ update()
 
 ```php
-// โค้ดที่ AI generate
+public function edit(Product $product)
+{
+    $categories = Category::all();
+    return view('products.edit', compact('product', 'categories'));
+}
+
+public function update(Request $request, Product $product)
+{
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'price' => 'required|numeric|min:0',
+        'description' => 'nullable|string',
+        'category_id' => 'required|exists:categories,id',
+        'image' => 'nullable|image|max:2048',
+    ]);
+
+    // จัดการรูปภาพ
+    if ($request->hasFile('image')) {
+        // ลบรูปเก่า
+        if ($product->image) {
+            Storage::disk('public')->delete($product->image);
+        }
+        $validated['image'] = $request->file('image')->store('products', 'public');
+    }
+
+    $product->update($validated);
+
+    return redirect()->route('products.index')
+        ->with('success', 'อัปเดตสินค้าเรียบร้อยแล้ว');
+}
 ```
 
-#### 🔍 การ Review Code จาก AI
+### 2. View: edit.blade.php
 
-<!-- วิธีตรวจสอบและปรับปรุง AI-generated code -->
+```blade
+<x-layout title="แก้ไขสินค้า">
+    <h1>แก้ไข: {{ $product->name }}</h1>
 
-## 🎓 แบบฝึกหัด
+    <form action="{{ route('products.update', $product) }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
 
-### Exercise 1: [ชื่อแบบฝึกหัด]
+        <div>
+            <label for="name">ชื่อสินค้า</label>
+            <input type="text" id="name" name="name" value="{{ old('name', $product->name) }}">
+            @error('name') <span class="text-red-500">{{ $message }}</span> @enderror
+        </div>
 
-**โจทย์:**
-<!-- คำอธิบายโจทย์ -->
+        <div>
+            <label for="price">ราคา</label>
+            <input type="number" id="price" name="price" value="{{ old('price', $product->price) }}" step="0.01">
+        </div>
 
-**เป้าหมาย:**
-<!-- สิ่งที่ต้องทำให้สำเร็จ -->
+        <div>
+            <label for="category_id">หมวดหมู่</label>
+            <select id="category_id" name="category_id">
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}"
+                        {{ old('category_id', $product->category_id) == $category->id ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
 
-**Hints:**
-<!-- คำแนะนำ -->
+        @if($product->image)
+            <div>
+                <label>รูปปัจจุบัน</label>
+                <img src="{{ Storage::url($product->image) }}" width="100">
+            </div>
+        @endif
 
-<details>
-<summary>💡 ดูเฉลย</summary>
+        <div>
+            <label for="image">เปลี่ยนรูปภาพ</label>
+            <input type="file" id="image" name="image" accept="image/*">
+        </div>
 
-```php
-// โค้ดเฉลย
+        <button type="submit">อัปเดต</button>
+        <a href="{{ route('products.index') }}">ยกเลิก</a>
+    </form>
+</x-layout>
 ```
 
-**คำอธิบาย:**
-<!-- อธิบายเฉลย -->
+---
 
-</details>
+## สรุป
 
-## 🔗 Resources เพิ่มเติม
-
-- [ลิงก์ไปยัง Laravel Docs](https://laravel.com/docs)
-
-## 📌 สรุป
-
-<!-- สรุปประเด็นสำคัญของบทนี้ -->
-
-## ⏭️ บทถัดไป
-
-- [ชื่อบทถัดไป](#)
+| หัวข้อ | สิ่งที่ได้เรียนรู้ |
+|--------|-------------------|
+| edit() | แสดงฟอร์มพร้อมค่าเดิม |
+| update() | Validate → จัดการรูป → Update → Redirect |
+| @method('PUT') | Spoof HTTP Method สำหรับ Update |
+| old() | `old('field', $model->field)` แสดงค่าเดิม |
 
 ---
 
 **Navigation:**
-[⬅️ ก่อนหน้า](#) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](#)
+[⬅️ ก่อนหน้า](03-read.md) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](05-delete.md)

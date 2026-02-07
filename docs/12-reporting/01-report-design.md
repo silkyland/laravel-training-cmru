@@ -1,101 +1,107 @@
-# Report Design
+# 12.1 Report Design (การออกแบบรายงาน)
 
-> 📖 **บทนี้คุณจะได้เรียนรู้**
-> - หัวข้อหลักที่ 1
-> - หัวข้อหลักที่ 2
-> - หัวข้อหลักที่ 3
+> **บทนี้คุณจะได้เรียนรู้**
+> - การออกแบบ Query สำหรับรายงาน
+> - Aggregate Functions (SUM, COUNT, AVG)
+> - Group By และ Having
+> - การแสดงผลรายงานใน View
 
-## 🎯 วัตถุประสงค์
+---
 
-<!-- อธิบายว่าทำไมต้องเรียนหัวข้อนี้ -->
+## วัตถุประสงค์การเรียนรู้
 
-## 📚 เนื้อหา
+เมื่อจบบทเรียนนี้ ผู้เรียนจะสามารถ:
+1. ออกแบบ Query สำหรับรายงานสรุปได้
+2. ใช้ Aggregate Functions ใน Eloquent ได้
+3. แสดงผลรายงานในรูปแบบตารางและกราฟได้
 
-### Report Design Concept
+---
 
-<!-- อธิบายแนวคิด -->
+## เนื้อหา
 
-#### 💡 ตัวอย่างโค้ด
-
-```php
-// โค้ดตัวอย่างที่อธิบายได้ชัดเจน
-// มี comment ภาษาไทย
-```
-
-#### 📊 Diagram/Flowchart (ถ้ามี)
-
-```mermaid
-graph TD
-    A[Start] --> B[Process]
-    B --> C[End]
-```
-
-#### ⚠️ ข้อควรระวัง
-
-<!-- สิ่งที่ต้องระวังหรือ common mistakes -->
-
-#### 💪 Best Practices
-
-<!-- แนวทางปฏิบัติที่ดี -->
-
-### 🤖 การใช้ AI ช่วยพัฒนา
-
-<!-- แสดงวิธีใช้ AI สำหรับหัวข้อนี้ -->
-
-#### Prompt ตัวอย่าง:
-
-```
-[Prompt ที่ใช้กับ AI]
-```
-
-#### ผลลัพธ์:
+### 1. Query สำหรับรายงาน
 
 ```php
-// โค้ดที่ AI generate
+// รายงานยอดขายรายเดือน
+$monthlySales = Order::selectRaw('
+        MONTH(created_at) as month,
+        YEAR(created_at) as year,
+        COUNT(*) as total_orders,
+        SUM(total_amount) as total_sales
+    ')
+    ->whereYear('created_at', now()->year)
+    ->groupByRaw('YEAR(created_at), MONTH(created_at)')
+    ->orderBy('month')
+    ->get();
+
+// รายงานสินค้าขายดี
+$topProducts = Product::withCount('orders')
+    ->orderByDesc('orders_count')
+    ->take(10)
+    ->get();
+
+// รายงานสรุปตามหมวดหมู่
+$categoryReport = Category::withCount('products')
+    ->withSum('products', 'price')
+    ->get();
 ```
 
-#### 🔍 การ Review Code จาก AI
+### 2. Aggregate Functions
 
-<!-- วิธีตรวจสอบและปรับปรุง AI-generated code -->
+| Function | หน้าที่ | ตัวอย่าง |
+|----------|--------|---------|
+| `count()` | นับจำนวน | `Order::count()` |
+| `sum('col')` | รวมค่า | `Order::sum('total_amount')` |
+| `avg('col')` | ค่าเฉลี่ย | `Product::avg('price')` |
+| `min('col')` | ค่าต่ำสุด | `Product::min('price')` |
+| `max('col')` | ค่าสูงสุด | `Product::max('price')` |
 
-## 🎓 แบบฝึกหัด
+### 3. แสดงผลรายงาน
 
-### Exercise 1: [ชื่อแบบฝึกหัด]
+```blade
+<x-layout title="รายงานยอดขาย">
+    <h1>รายงานยอดขายรายเดือน {{ now()->year }}</h1>
 
-**โจทย์:**
-<!-- คำอธิบายโจทย์ -->
-
-**เป้าหมาย:**
-<!-- สิ่งที่ต้องทำให้สำเร็จ -->
-
-**Hints:**
-<!-- คำแนะนำ -->
-
-<details>
-<summary>💡 ดูเฉลย</summary>
-
-```php
-// โค้ดเฉลย
+    <table>
+        <thead>
+            <tr>
+                <th>เดือน</th>
+                <th>จำนวนออเดอร์</th>
+                <th>ยอดขายรวม</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($monthlySales as $sale)
+                <tr>
+                    <td>{{ $sale->month }}/{{ $sale->year }}</td>
+                    <td>{{ number_format($sale->total_orders) }}</td>
+                    <td>{{ number_format($sale->total_sales, 2) }} บาท</td>
+                </tr>
+            @endforeach
+        </tbody>
+        <tfoot>
+            <tr>
+                <td><strong>รวม</strong></td>
+                <td>{{ number_format($monthlySales->sum('total_orders')) }}</td>
+                <td>{{ number_format($monthlySales->sum('total_sales'), 2) }} บาท</td>
+            </tr>
+        </tfoot>
+    </table>
+</x-layout>
 ```
 
-**คำอธิบาย:**
-<!-- อธิบายเฉลย -->
+---
 
-</details>
+## สรุป
 
-## 🔗 Resources เพิ่มเติม
-
-- [ลิงก์ไปยัง Laravel Docs](https://laravel.com/docs)
-
-## 📌 สรุป
-
-<!-- สรุปประเด็นสำคัญของบทนี้ -->
-
-## ⏭️ บทถัดไป
-
-- [ชื่อบทถัดไป](#)
+| หัวข้อ | สิ่งที่ได้เรียนรู้ |
+|--------|-------------------|
+| Aggregate | `count()`, `sum()`, `avg()`, `min()`, `max()` |
+| Group By | `groupByRaw()` สำหรับรายงานสรุป |
+| withCount | นับ Relationship `withCount('orders')` |
+| View | แสดงผลเป็นตาราง + สรุปรวม |
 
 ---
 
 **Navigation:**
-[⬅️ ก่อนหน้า](#) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](#)
+[⬅️ ก่อนหน้า](../11-crud-system/06-advanced-features.md) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](02-pdf-generation.md)

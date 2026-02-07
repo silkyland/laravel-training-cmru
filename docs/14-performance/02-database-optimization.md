@@ -1,101 +1,104 @@
-# Database Optimization
+# 14.2 Database Optimization (การเพิ่มประสิทธิภาพฐานข้อมูล)
 
-> 📖 **บทนี้คุณจะได้เรียนรู้**
-> - หัวข้อหลักที่ 1
-> - หัวข้อหลักที่ 2
-> - หัวข้อหลักที่ 3
+> **บทนี้คุณจะได้เรียนรู้**
+> - N+1 Query Problem และ Eager Loading
+> - Database Indexing
+> - Query Optimization
+> - Chunking สำหรับข้อมูลจำนวนมาก
 
-## 🎯 วัตถุประสงค์
+---
 
-<!-- อธิบายว่าทำไมต้องเรียนหัวข้อนี้ -->
+## วัตถุประสงค์การเรียนรู้
 
-## 📚 เนื้อหา
+เมื่อจบบทเรียนนี้ ผู้เรียนจะสามารถ:
+1. แก้ปัญหา N+1 Query ด้วย Eager Loading ได้
+2. สร้าง Database Index เพื่อเพิ่มความเร็วได้
+3. เขียน Query ที่มีประสิทธิภาพได้
 
-### Database Optimization Concept
+---
 
-<!-- อธิบายแนวคิด -->
+## เนื้อหา
 
-#### 💡 ตัวอย่างโค้ด
-
-```php
-// โค้ดตัวอย่างที่อธิบายได้ชัดเจน
-// มี comment ภาษาไทย
-```
-
-#### 📊 Diagram/Flowchart (ถ้ามี)
-
-```mermaid
-graph TD
-    A[Start] --> B[Process]
-    B --> C[End]
-```
-
-#### ⚠️ ข้อควรระวัง
-
-<!-- สิ่งที่ต้องระวังหรือ common mistakes -->
-
-#### 💪 Best Practices
-
-<!-- แนวทางปฏิบัติที่ดี -->
-
-### 🤖 การใช้ AI ช่วยพัฒนา
-
-<!-- แสดงวิธีใช้ AI สำหรับหัวข้อนี้ -->
-
-#### Prompt ตัวอย่าง:
-
-```
-[Prompt ที่ใช้กับ AI]
-```
-
-#### ผลลัพธ์:
+### 1. N+1 Query Problem
 
 ```php
-// โค้ดที่ AI generate
+// ❌ N+1 Problem - รัน 101 Queries (1 + 100)
+$products = Product::all(); // Query 1
+foreach ($products as $product) {
+    echo $product->category->name; // Query 2-101
+}
+
+// ✅ Eager Loading - รัน 2 Queries เท่านั้น
+$products = Product::with('category')->get(); // Query 1 + 2
+foreach ($products as $product) {
+    echo $product->category->name; // ไม่มี Query เพิ่ม
+}
 ```
 
-#### 🔍 การ Review Code จาก AI
-
-<!-- วิธีตรวจสอบและปรับปรุง AI-generated code -->
-
-## 🎓 แบบฝึกหัด
-
-### Exercise 1: [ชื่อแบบฝึกหัด]
-
-**โจทย์:**
-<!-- คำอธิบายโจทย์ -->
-
-**เป้าหมาย:**
-<!-- สิ่งที่ต้องทำให้สำเร็จ -->
-
-**Hints:**
-<!-- คำแนะนำ -->
-
-<details>
-<summary>💡 ดูเฉลย</summary>
+### 2. Database Indexing
 
 ```php
-// โค้ดเฉลย
+// Migration: เพิ่ม Index
+Schema::table('products', function (Blueprint $table) {
+    $table->index('category_id');           // Single Index
+    $table->index(['status', 'created_at']); // Composite Index
+    $table->fullText('name');               // Full-text Search
+});
 ```
 
-**คำอธิบาย:**
-<!-- อธิบายเฉลย -->
+| ควร Index | ไม่ควร Index |
+|----------|-------------|
+| Foreign Key columns | Column ที่ไม่ค่อย Query |
+| Column ที่ใช้ WHERE บ่อย | Column ที่มีค่าซ้ำมาก |
+| Column ที่ใช้ ORDER BY | ตารางที่มีข้อมูลน้อย |
 
-</details>
+### 3. Query Optimization
 
-## 🔗 Resources เพิ่มเติม
+```php
+// ❌ ดึงทุก Column
+$products = Product::all();
 
-- [ลิงก์ไปยัง Laravel Docs](https://laravel.com/docs)
+// ✅ ดึงเฉพาะ Column ที่ต้องการ
+$products = Product::select('id', 'name', 'price')->get();
 
-## 📌 สรุป
+// ❌ ดึงทั้งหมดแล้ว Count ใน PHP
+$count = Product::all()->count();
 
-<!-- สรุปประเด็นสำคัญของบทนี้ -->
+// ✅ Count ในฐานข้อมูล
+$count = Product::count();
 
-## ⏭️ บทถัดไป
+// ✅ Chunking สำหรับข้อมูลมาก
+Product::chunk(200, function ($products) {
+    foreach ($products as $product) {
+        // ประมวลผลทีละ 200 Records
+    }
+});
+```
 
-- [ชื่อบทถัดไป](#)
+### 4. ป้องกัน N+1 อัตโนมัติ
+
+```php
+// AppServiceProvider - แจ้งเตือนเมื่อเกิด N+1
+use Illuminate\Database\Eloquent\Model;
+
+public function boot()
+{
+    Model::preventLazyLoading(!app()->isProduction());
+}
+```
+
+---
+
+## สรุป
+
+| หัวข้อ | สิ่งที่ได้เรียนรู้ |
+|--------|-------------------|
+| N+1 Problem | ใช้ `with()` Eager Loading แก้ปัญหา |
+| Indexing | เพิ่ม Index ใน Column ที่ Query บ่อย |
+| select() | ดึงเฉพาะ Column ที่ต้องการ |
+| chunk() | ประมวลผลข้อมูลมากทีละส่วน |
 
 ---
 
 **Navigation:**
-[⬅️ ก่อนหน้า](#) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](#)
+[⬅️ ก่อนหน้า](01-caching.md) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](03-code-optimization.md)

@@ -1,19 +1,25 @@
 # 12.2 PDF Generation (การสร้างรายงาน PDF)
 
-> 📖 **บทนี้คุณจะได้เรียนรู้**
-> - การติดตั้ง package `dompdf`
-> - การเปลี่ยนหน้า HTML ให้เป็น PDF
-> - การจัดการฟอนต์ภาษาไทยใน PDF
+> **บทนี้คุณจะได้เรียนรู้**
+> - การติดตั้งและใช้งาน DomPDF
+> - การสร้าง PDF จาก Blade Template
+> - การจัดรูปแบบ PDF (ภาษาไทย, ตาราง)
+> - การดาวน์โหลดและแสดง PDF
 
 ---
 
-## 🎯 วัตถุประสงค์
-เพื่อให้สามารถออกเอกสารที่เป็นทางการ เช่น ใบเสร็จ, รายงานสรุปผล หรือเกียรติบัตร ผ่านทางหน้าเว็บได้
+## วัตถุประสงค์การเรียนรู้
 
-## 📚 เนื้อหา
+เมื่อจบบทเรียนนี้ ผู้เรียนจะสามารถ:
+1. ติดตั้งและใช้งาน DomPDF ใน Laravel ได้
+2. สร้าง PDF จาก Blade Template ได้
+3. จัดรูปแบบ PDF ให้รองรับภาษาไทยได้
 
-### 1. การติดตั้งเครื่องมือ
-เรามักใช้ `barryvdh/laravel-dompdf`:
+---
+
+## เนื้อหา
+
+### 1. ติดตั้ง DomPDF
 ```bash
 composer require barryvdh/laravel-dompdf
 ```
@@ -24,36 +30,93 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 public function exportPdf()
 {
-    $data = [
-        'title' => 'รายงานสรุปผลการอบรม',
-        'date' => date('d/m/Y'),
-        'users' => User::all()
-    ];
-    
-    $pdf = Pdf::loadView('reports.user-pdf', $data); // โหลด View มาทำ PDF
-    return $pdf->download('report.pdf'); // สั่งให้ Browser ดาวน์โหลดไฟล์
+    $products = Product::with('category')->get();
+
+    $pdf = Pdf::loadView('reports.products-pdf', [
+        'products' => $products,
+        'title' => 'รายงานสินค้า',
+        'date' => now()->format('d/m/Y'),
+    ]);
+
+    // ดาวน์โหลด
+    return $pdf->download('products-report.pdf');
+
+    // หรือแสดงในเบราว์เซอร์
+    // return $pdf->stream('products-report.pdf');
 }
 ```
 
-#### ⚠️ ปัญหาเรื่องภาษาไทย
-การแสดงผลภาษาไทยใน PDF ต้องใช้ฟอนต์ที่รองรับ (เช่น THSarabunNew) และตั้งค่า CSS:
-```css
-body {
-    font-family: 'THSarabunNew', sans-serif;
-}
+### 3. Blade Template สำหรับ PDF
+
+```blade
+{{-- resources/views/reports/products-pdf.blade.php --}}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body { font-family: 'THSarabunNew', sans-serif; font-size: 16px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #333; padding: 8px; text-align: left; }
+        th { background-color: #f0f0f0; }
+        .text-right { text-align: right; }
+        .header { text-align: center; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h2>{{ $title }}</h2>
+        <p>วันที่พิมพ์: {{ $date }}</p>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>ชื่อสินค้า</th>
+                <th>หมวดหมู่</th>
+                <th class="text-right">ราคา</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($products as $product)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $product->name }}</td>
+                    <td>{{ $product->category->name }}</td>
+                    <td class="text-right">{{ number_format($product->price, 2) }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</body>
+</html>
 ```
 
+### 4. ตั้งค่า PDF
+
+```php
+$pdf = Pdf::loadView('reports.products-pdf', $data)
+    ->setPaper('a4', 'landscape')  // กระดาษ A4 แนวนอน
+    ->setOptions(['defaultFont' => 'THSarabunNew']);
+```
+
+| Option | ค่า | หน้าที่ |
+|--------|-----|--------|
+| `setPaper()` | 'a4', 'letter' | ขนาดกระดาษ |
+| orientation | 'portrait', 'landscape' | แนวตั้ง/แนวนอน |
+| `defaultFont` | 'THSarabunNew' | ฟอนต์ภาษาไทย |
+
 ---
 
-### 🤖 การใช้ AI ช่วยจัด Layout รายงาน
+## สรุป
 
-#### Prompt ตัวอย่าง:
-"Create a simple HTML/CSS template for an invoice report that works well with Laravel-dompdf. It should include a header, item table, and a total amount."
-
----
-
-## 🎓 แบบฝึกหัด
-**โจทย์:** ลองติดตั้ง package dompdf และลองสร้างปุ่ม Download PDF ในโปรเจกต์ของคุณ
+| หัวข้อ | สิ่งที่ได้เรียนรู้ |
+|--------|-------------------|
+| DomPDF | Package สำหรับสร้าง PDF |
+| loadView | สร้าง PDF จาก Blade Template |
+| download/stream | ดาวน์โหลดหรือแสดงในเบราว์เซอร์ |
+| ภาษาไทย | ใช้ฟอนต์ THSarabunNew |
 
 ---
 

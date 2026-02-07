@@ -1,101 +1,108 @@
-# Code Optimization
+# 14.3 Code Optimization (การเพิ่มประสิทธิภาพโค้ด)
 
-> 📖 **บทนี้คุณจะได้เรียนรู้**
-> - หัวข้อหลักที่ 1
-> - หัวข้อหลักที่ 2
-> - หัวข้อหลักที่ 3
+> **บทนี้คุณจะได้เรียนรู้**
+> - Laravel Optimization Commands
+> - Route Caching
+> - Config Caching
+> - View Caching และ Autoloader Optimization
 
-## 🎯 วัตถุประสงค์
+---
 
-<!-- อธิบายว่าทำไมต้องเรียนหัวข้อนี้ -->
+## วัตถุประสงค์การเรียนรู้
 
-## 📚 เนื้อหา
+เมื่อจบบทเรียนนี้ ผู้เรียนจะสามารถ:
+1. ใช้ Artisan Commands เพิ่มประสิทธิภาพได้
+2. ตั้งค่า Caching สำหรับ Production ได้
+3. ปรับปรุงโค้ดให้ทำงานเร็วขึ้นได้
 
-### Code Optimization Concept
+---
 
-<!-- อธิบายแนวคิด -->
+## เนื้อหา
 
-#### 💡 ตัวอย่างโค้ด
+### 1. Laravel Optimization Commands
+
+```bash
+# Cache ทุกอย่างสำหรับ Production
+php artisan optimize
+
+# ล้าง Cache ทั้งหมด
+php artisan optimize:clear
+
+# แยกทำทีละอย่าง
+php artisan config:cache    # Cache Config
+php artisan route:cache     # Cache Routes
+php artisan view:cache      # Cache Views
+php artisan event:cache     # Cache Events
+```
+
+| Command | หน้าที่ | ใช้เมื่อ |
+|---------|--------|---------|
+| `config:cache` | Cache Config Files | Deploy Production |
+| `route:cache` | Cache Routes | Deploy Production |
+| `view:cache` | Compile Blade Views | Deploy Production |
+| `optimize` | ทำทุกอย่างข้างต้น | Deploy Production |
+| `optimize:clear` | ล้าง Cache ทั้งหมด | Debug / Development |
+
+### 2. Autoloader Optimization
+
+```bash
+# Composer Autoloader Optimization
+composer install --optimize-autoloader --no-dev
+```
+
+### 3. Code Best Practices
 
 ```php
-// โค้ดตัวอย่างที่อธิบายได้ชัดเจน
-// มี comment ภาษาไทย
+// ❌ Query ใน Loop
+foreach ($orders as $order) {
+    $user = User::find($order->user_id);
+}
+
+// ✅ Eager Load ก่อน
+$orders = Order::with('user')->get();
+
+// ❌ ใช้ Collection Method ที่ไม่จำเป็น
+$total = Product::all()->where('active', true)->sum('price');
+
+// ✅ ใช้ Query Builder
+$total = Product::where('active', true)->sum('price');
+
+// ❌ สร้าง Object ซ้ำ
+foreach ($items as $item) {
+    $formatter = new NumberFormatter('th_TH', NumberFormatter::CURRENCY);
+    echo $formatter->formatCurrency($item->price, 'THB');
+}
+
+// ✅ สร้าง Object ครั้งเดียว
+$formatter = new NumberFormatter('th_TH', NumberFormatter::CURRENCY);
+foreach ($items as $item) {
+    echo $formatter->formatCurrency($item->price, 'THB');
+}
 ```
 
-#### 📊 Diagram/Flowchart (ถ้ามี)
+### 4. Production Checklist
 
-```mermaid
-graph TD
-    A[Start] --> B[Process]
-    B --> C[End]
-```
+| รายการ | คำสั่ง |
+|--------|-------|
+| Cache Config | `php artisan config:cache` |
+| Cache Routes | `php artisan route:cache` |
+| Cache Views | `php artisan view:cache` |
+| Optimize Autoloader | `composer install --optimize-autoloader --no-dev` |
+| ปิด Debug Mode | `APP_DEBUG=false` |
+| ตั้ง App Environment | `APP_ENV=production` |
 
-#### ⚠️ ข้อควรระวัง
+---
 
-<!-- สิ่งที่ต้องระวังหรือ common mistakes -->
+## สรุป
 
-#### 💪 Best Practices
-
-<!-- แนวทางปฏิบัติที่ดี -->
-
-### 🤖 การใช้ AI ช่วยพัฒนา
-
-<!-- แสดงวิธีใช้ AI สำหรับหัวข้อนี้ -->
-
-#### Prompt ตัวอย่าง:
-
-```
-[Prompt ที่ใช้กับ AI]
-```
-
-#### ผลลัพธ์:
-
-```php
-// โค้ดที่ AI generate
-```
-
-#### 🔍 การ Review Code จาก AI
-
-<!-- วิธีตรวจสอบและปรับปรุง AI-generated code -->
-
-## 🎓 แบบฝึกหัด
-
-### Exercise 1: [ชื่อแบบฝึกหัด]
-
-**โจทย์:**
-<!-- คำอธิบายโจทย์ -->
-
-**เป้าหมาย:**
-<!-- สิ่งที่ต้องทำให้สำเร็จ -->
-
-**Hints:**
-<!-- คำแนะนำ -->
-
-<details>
-<summary>💡 ดูเฉลย</summary>
-
-```php
-// โค้ดเฉลย
-```
-
-**คำอธิบาย:**
-<!-- อธิบายเฉลย -->
-
-</details>
-
-## 🔗 Resources เพิ่มเติม
-
-- [ลิงก์ไปยัง Laravel Docs](https://laravel.com/docs)
-
-## 📌 สรุป
-
-<!-- สรุปประเด็นสำคัญของบทนี้ -->
-
-## ⏭️ บทถัดไป
-
-- [ชื่อบทถัดไป](#)
+| หัวข้อ | สิ่งที่ได้เรียนรู้ |
+|--------|-------------------|
+| `optimize` | Cache Config, Route, View พร้อมกัน |
+| Composer | `--optimize-autoloader --no-dev` |
+| Code | หลีกเลี่ยง Query ใน Loop |
+| Production | ปิด Debug, Cache ทุกอย่าง |
 
 ---
 
 **Navigation:**
-[⬅️ ก่อนหน้า](#) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](#)
+[⬅️ ก่อนหน้า](02-database-optimization.md) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](../15-deployment/01-deployment-prep.md)

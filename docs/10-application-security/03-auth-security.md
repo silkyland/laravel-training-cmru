@@ -1,101 +1,113 @@
-# Auth Security
+# 10.3 Auth Security (ความปลอดภัยด้าน Authentication)
 
-> 📖 **บทนี้คุณจะได้เรียนรู้**
-> - หัวข้อหลักที่ 1
-> - หัวข้อหลักที่ 2
-> - หัวข้อหลักที่ 3
+> **บทนี้คุณจะได้เรียนรู้**
+> - Session Security
+> - Rate Limiting สำหรับ Login
+> - Password Security Best Practices
+> - Session Fixation Prevention
 
-## 🎯 วัตถุประสงค์
+---
 
-<!-- อธิบายว่าทำไมต้องเรียนหัวข้อนี้ -->
+## วัตถุประสงค์การเรียนรู้
 
-## 📚 เนื้อหา
+เมื่อจบบทเรียนนี้ ผู้เรียนจะสามารถ:
+1. ตั้งค่า Session ให้ปลอดภัยได้
+2. ใช้ Rate Limiting ป้องกัน Brute Force ได้
+3. กำหนด Password Policy ที่เหมาะสมได้
 
-### Auth Security Concept
+---
 
-<!-- อธิบายแนวคิด -->
+## เนื้อหา
 
-#### 💡 ตัวอย่างโค้ด
-
-```php
-// โค้ดตัวอย่างที่อธิบายได้ชัดเจน
-// มี comment ภาษาไทย
-```
-
-#### 📊 Diagram/Flowchart (ถ้ามี)
-
-```mermaid
-graph TD
-    A[Start] --> B[Process]
-    B --> C[End]
-```
-
-#### ⚠️ ข้อควรระวัง
-
-<!-- สิ่งที่ต้องระวังหรือ common mistakes -->
-
-#### 💪 Best Practices
-
-<!-- แนวทางปฏิบัติที่ดี -->
-
-### 🤖 การใช้ AI ช่วยพัฒนา
-
-<!-- แสดงวิธีใช้ AI สำหรับหัวข้อนี้ -->
-
-#### Prompt ตัวอย่าง:
-
-```
-[Prompt ที่ใช้กับ AI]
-```
-
-#### ผลลัพธ์:
+### 1. Session Security
 
 ```php
-// โค้ดที่ AI generate
+// config/session.php
+return [
+    'lifetime' => 120,          // หมดอายุใน 120 นาที
+    'expire_on_close' => false,  // หมดอายุเมื่อปิดเบราว์เซอร์
+    'encrypt' => true,           // เข้ารหัส Session Data
+    'http_only' => true,         // ป้องกัน JavaScript เข้าถึง Cookie
+    'secure' => true,            // ส่ง Cookie ผ่าน HTTPS เท่านั้น
+    'same_site' => 'lax',       // ป้องกัน CSRF
+];
 ```
 
-#### 🔍 การ Review Code จาก AI
-
-<!-- วิธีตรวจสอบและปรับปรุง AI-generated code -->
-
-## 🎓 แบบฝึกหัด
-
-### Exercise 1: [ชื่อแบบฝึกหัด]
-
-**โจทย์:**
-<!-- คำอธิบายโจทย์ -->
-
-**เป้าหมาย:**
-<!-- สิ่งที่ต้องทำให้สำเร็จ -->
-
-**Hints:**
-<!-- คำแนะนำ -->
-
-<details>
-<summary>💡 ดูเฉลย</summary>
+### 2. Rate Limiting สำหรับ Login
 
 ```php
-// โค้ดเฉลย
+// ป้องกัน Brute Force Attack
+use Illuminate\Support\Facades\RateLimiter;
+
+RateLimiter::for('login', function (Request $request) {
+    return Limit::perMinute(5)->by($request->ip());
+});
+
+// ใช้ใน Route
+Route::post('/login', [AuthController::class, 'login'])
+    ->middleware('throttle:login');
 ```
 
-**คำอธิบาย:**
-<!-- อธิบายเฉลย -->
+### 3. Password Security
 
-</details>
+```php
+// Validation Rules สำหรับ Password ที่แข็งแรง
+use Illuminate\Validation\Rules\Password;
 
-## 🔗 Resources เพิ่มเติม
+$request->validate([
+    'password' => [
+        'required',
+        'confirmed',
+        Password::min(8)
+            ->mixedCase()      // ต้องมีตัวพิมพ์เล็กและใหญ่
+            ->numbers()        // ต้องมีตัวเลข
+            ->symbols()        // ต้องมีอักขระพิเศษ
+            ->uncompromised(), // ตรวจสอบว่าไม่เคยรั่วไหล
+    ],
+]);
+```
 
-- [ลิงก์ไปยัง Laravel Docs](https://laravel.com/docs)
+### 4. Session Fixation Prevention
 
-## 📌 สรุป
+```php
+// หลัง Login สำเร็จ ต้อง Regenerate Session
+public function login(Request $request)
+{
+    if (Auth::attempt($credentials)) {
+        $request->session()->regenerate(); // สำคัญมาก!
+        return redirect()->intended('dashboard');
+    }
+}
 
-<!-- สรุปประเด็นสำคัญของบทนี้ -->
+// หลัง Logout ต้อง Invalidate Session
+public function logout(Request $request)
+{
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+    return redirect('/');
+}
+```
 
-## ⏭️ บทถัดไป
+| แนวปฏิบัติ | รายละเอียด |
+|-----------|-----------|
+| **Regenerate Session** | หลัง Login เสมอ |
+| **Invalidate Session** | หลัง Logout เสมอ |
+| **HTTPS Only** | ตั้ง `secure => true` |
+| **Rate Limiting** | จำกัดจำนวนครั้งที่ Login ผิด |
 
-- [ชื่อบทถัดไป](#)
+---
+
+## สรุป
+
+| หัวข้อ | สิ่งที่ได้เรียนรู้ |
+|--------|-------------------|
+| Session Security | เข้ารหัส, HTTP Only, Secure Cookie |
+| Rate Limiting | ป้องกัน Brute Force ด้วย `throttle` |
+| Password Policy | ใช้ `Password::min(8)->mixedCase()` |
+| Session Fixation | `regenerate()` หลัง Login |
 
 ---
 
 **Navigation:**
-[⬅️ ก่อนหน้า](#) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](#)
+[⬅️ ก่อนหน้า](02-xss-prevention.md) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](04-api-security.md)

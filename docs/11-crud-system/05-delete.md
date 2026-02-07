@@ -1,101 +1,97 @@
-# Delete
+# 11.5 Delete (การลบข้อมูล)
 
-> 📖 **บทนี้คุณจะได้เรียนรู้**
-> - หัวข้อหลักที่ 1
-> - หัวข้อหลักที่ 2
-> - หัวข้อหลักที่ 3
+> **บทนี้คุณจะได้เรียนรู้**
+> - การลบข้อมูลด้วย destroy()
+> - Confirmation Dialog ก่อนลบ
+> - Soft Deletes
+> - การลบไฟล์ที่เกี่ยวข้อง
 
-## 🎯 วัตถุประสงค์
+---
 
-<!-- อธิบายว่าทำไมต้องเรียนหัวข้อนี้ -->
+## วัตถุประสงค์การเรียนรู้
 
-## 📚 เนื้อหา
+เมื่อจบบทเรียนนี้ ผู้เรียนจะสามารถ:
+1. สร้างปุ่มลบพร้อม Confirmation ได้
+2. เขียน Controller Method `destroy()` ได้
+3. ลบไฟล์ที่เกี่ยวข้องพร้อมกับข้อมูลได้
 
-### Delete Concept
+---
 
-<!-- อธิบายแนวคิด -->
+## เนื้อหา
 
-#### 💡 ตัวอย่างโค้ด
-
-```php
-// โค้ดตัวอย่างที่อธิบายได้ชัดเจน
-// มี comment ภาษาไทย
-```
-
-#### 📊 Diagram/Flowchart (ถ้ามี)
-
-```mermaid
-graph TD
-    A[Start] --> B[Process]
-    B --> C[End]
-```
-
-#### ⚠️ ข้อควรระวัง
-
-<!-- สิ่งที่ต้องระวังหรือ common mistakes -->
-
-#### 💪 Best Practices
-
-<!-- แนวทางปฏิบัติที่ดี -->
-
-### 🤖 การใช้ AI ช่วยพัฒนา
-
-<!-- แสดงวิธีใช้ AI สำหรับหัวข้อนี้ -->
-
-#### Prompt ตัวอย่าง:
-
-```
-[Prompt ที่ใช้กับ AI]
-```
-
-#### ผลลัพธ์:
+### 1. Controller: destroy()
 
 ```php
-// โค้ดที่ AI generate
+public function destroy(Product $product)
+{
+    // ลบรูปภาพ (ถ้ามี)
+    if ($product->image) {
+        Storage::disk('public')->delete($product->image);
+    }
+
+    $product->delete();
+
+    return redirect()->route('products.index')
+        ->with('success', 'ลบสินค้าเรียบร้อยแล้ว');
+}
 ```
 
-#### 🔍 การ Review Code จาก AI
+### 2. ปุ่มลบใน View
 
-<!-- วิธีตรวจสอบและปรับปรุง AI-generated code -->
+```blade
+{{-- ปุ่มลบพร้อม Confirmation --}}
+<form action="{{ route('products.destroy', $product) }}" method="POST"
+      onsubmit="return confirm('คุณต้องการลบสินค้านี้หรือไม่?')">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="text-red-500">ลบ</button>
+</form>
+```
 
-## 🎓 แบบฝึกหัด
-
-### Exercise 1: [ชื่อแบบฝึกหัด]
-
-**โจทย์:**
-<!-- คำอธิบายโจทย์ -->
-
-**เป้าหมาย:**
-<!-- สิ่งที่ต้องทำให้สำเร็จ -->
-
-**Hints:**
-<!-- คำแนะนำ -->
-
-<details>
-<summary>💡 ดูเฉลย</summary>
+### 3. Soft Deletes (ลบแบบไม่ถาวร)
 
 ```php
-// โค้ดเฉลย
+// Migration: เพิ่ม softDeletes
+Schema::table('products', function (Blueprint $table) {
+    $table->softDeletes(); // เพิ่ม column deleted_at
+});
+
+// Model: ใช้ SoftDeletes Trait
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class Product extends Model
+{
+    use SoftDeletes;
+}
+
+// การใช้งาน
+$product->delete();          // Soft Delete (ตั้ง deleted_at)
+$product->restore();         // กู้คืน
+$product->forceDelete();     // ลบถาวร
+
+// Query
+Product::withTrashed()->get();    // รวมที่ลบแล้ว
+Product::onlyTrashed()->get();    // เฉพาะที่ลบแล้ว
 ```
 
-**คำอธิบาย:**
-<!-- อธิบายเฉลย -->
+| วิธีลบ | ผลลัพธ์ |
+|--------|--------|
+| `delete()` | Soft Delete (ตั้ง deleted_at) |
+| `forceDelete()` | ลบถาวรจากฐานข้อมูล |
+| `restore()` | กู้คืนข้อมูลที่ Soft Delete |
 
-</details>
+---
 
-## 🔗 Resources เพิ่มเติม
+## สรุป
 
-- [ลิงก์ไปยัง Laravel Docs](https://laravel.com/docs)
-
-## 📌 สรุป
-
-<!-- สรุปประเด็นสำคัญของบทนี้ -->
-
-## ⏭️ บทถัดไป
-
-- [ชื่อบทถัดไป](#)
+| หัวข้อ | สิ่งที่ได้เรียนรู้ |
+|--------|-------------------|
+| destroy() | ลบข้อมูล + ไฟล์ที่เกี่ยวข้อง |
+| @method('DELETE') | Spoof HTTP DELETE Method |
+| Confirmation | `onsubmit="return confirm()"` |
+| Soft Deletes | ลบแบบไม่ถาวร กู้คืนได้ |
 
 ---
 
 **Navigation:**
-[⬅️ ก่อนหน้า](#) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](#)
+[⬅️ ก่อนหน้า](04-update.md) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](06-advanced-features.md)

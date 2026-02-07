@@ -1,101 +1,136 @@
-# Writing Tests
+# 13.2 Writing Tests (การเขียน Test)
 
-> 📖 **บทนี้คุณจะได้เรียนรู้**
-> - หัวข้อหลักที่ 1
-> - หัวข้อหลักที่ 2
-> - หัวข้อหลักที่ 3
+> **บทนี้คุณจะได้เรียนรู้**
+> - การสร้าง Feature Test
+> - การทดสอบ CRUD Operations
+> - การใช้ Factory และ Assertion
+> - Database Testing
 
-## 🎯 วัตถุประสงค์
+---
 
-<!-- อธิบายว่าทำไมต้องเรียนหัวข้อนี้ -->
+## วัตถุประสงค์การเรียนรู้
 
-## 📚 เนื้อหา
+เมื่อจบบทเรียนนี้ ผู้เรียนจะสามารถ:
+1. สร้าง Feature Test สำหรับ CRUD ได้
+2. ใช้ Factory สร้างข้อมูลทดสอบได้
+3. ใช้ Assertion ตรวจสอบผลลัพธ์ได้
 
-### Writing Tests Concept
+---
 
-<!-- อธิบายแนวคิด -->
+## เนื้อหา
 
-#### 💡 ตัวอย่างโค้ด
+### 1. สร้าง Test
+
+```bash
+php artisan make:test ProductTest          # Feature Test
+php artisan make:test ProductTest --unit   # Unit Test
+```
+
+### 2. Feature Test ตัวอย่าง
 
 ```php
-// โค้ดตัวอย่างที่อธิบายได้ชัดเจน
-// มี comment ภาษาไทย
+// tests/Feature/ProductTest.php
+use App\Models\Product;
+use App\Models\User;
+
+class ProductTest extends TestCase
+{
+    use RefreshDatabase;
+
+    public function test_user_can_view_products_list()
+    {
+        Product::factory()->count(5)->create();
+
+        $response = $this->get('/products');
+
+        $response->assertStatus(200);
+        $response->assertViewHas('products');
+    }
+
+    public function test_user_can_create_product()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->post('/products', [
+            'name' => 'สินค้าทดสอบ',
+            'price' => 100.00,
+            'category_id' => 1,
+        ]);
+
+        $response->assertRedirect('/products');
+        $this->assertDatabaseHas('products', ['name' => 'สินค้าทดสอบ']);
+    }
+
+    public function test_user_can_update_product()
+    {
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
+
+        $response = $this->actingAs($user)->put("/products/{$product->id}", [
+            'name' => 'ชื่อใหม่',
+            'price' => 200.00,
+        ]);
+
+        $response->assertRedirect('/products');
+        $this->assertDatabaseHas('products', ['name' => 'ชื่อใหม่']);
+    }
+
+    public function test_user_can_delete_product()
+    {
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
+
+        $response = $this->actingAs($user)->delete("/products/{$product->id}");
+
+        $response->assertRedirect('/products');
+        $this->assertDatabaseMissing('products', ['id' => $product->id]);
+    }
+}
 ```
 
-#### 📊 Diagram/Flowchart (ถ้ามี)
+### 3. Assertion ที่ใช้บ่อย
 
-```mermaid
-graph TD
-    A[Start] --> B[Process]
-    B --> C[End]
-```
+| Assertion | ตรวจสอบอะไร |
+|-----------|-----------|
+| `assertStatus(200)` | HTTP Status Code |
+| `assertRedirect('/url')` | Redirect ไปหน้าที่ถูกต้อง |
+| `assertViewHas('key')` | View มีข้อมูลที่ส่งไป |
+| `assertDatabaseHas('table', [...])` | มีข้อมูลในฐานข้อมูล |
+| `assertDatabaseMissing('table', [...])` | ไม่มีข้อมูลในฐานข้อมูล |
+| `assertSee('text')` | หน้าเว็บมีข้อความ |
+| `assertAuthenticated()` | ผู้ใช้ Login อยู่ |
 
-#### ⚠️ ข้อควรระวัง
-
-<!-- สิ่งที่ต้องระวังหรือ common mistakes -->
-
-#### 💪 Best Practices
-
-<!-- แนวทางปฏิบัติที่ดี -->
-
-### 🤖 การใช้ AI ช่วยพัฒนา
-
-<!-- แสดงวิธีใช้ AI สำหรับหัวข้อนี้ -->
-
-#### Prompt ตัวอย่าง:
-
-```
-[Prompt ที่ใช้กับ AI]
-```
-
-#### ผลลัพธ์:
+### 4. Factory
 
 ```php
-// โค้ดที่ AI generate
+// database/factories/ProductFactory.php
+class ProductFactory extends Factory
+{
+    public function definition(): array
+    {
+        return [
+            'name' => fake()->sentence(3),
+            'price' => fake()->randomFloat(2, 10, 10000),
+            'description' => fake()->paragraph(),
+            'category_id' => Category::factory(),
+            'user_id' => User::factory(),
+        ];
+    }
+}
 ```
 
-#### 🔍 การ Review Code จาก AI
+---
 
-<!-- วิธีตรวจสอบและปรับปรุง AI-generated code -->
+## สรุป
 
-## 🎓 แบบฝึกหัด
-
-### Exercise 1: [ชื่อแบบฝึกหัด]
-
-**โจทย์:**
-<!-- คำอธิบายโจทย์ -->
-
-**เป้าหมาย:**
-<!-- สิ่งที่ต้องทำให้สำเร็จ -->
-
-**Hints:**
-<!-- คำแนะนำ -->
-
-<details>
-<summary>💡 ดูเฉลย</summary>
-
-```php
-// โค้ดเฉลย
-```
-
-**คำอธิบาย:**
-<!-- อธิบายเฉลย -->
-
-</details>
-
-## 🔗 Resources เพิ่มเติม
-
-- [ลิงก์ไปยัง Laravel Docs](https://laravel.com/docs)
-
-## 📌 สรุป
-
-<!-- สรุปประเด็นสำคัญของบทนี้ -->
-
-## ⏭️ บทถัดไป
-
-- [ชื่อบทถัดไป](#)
+| หัวข้อ | สิ่งที่ได้เรียนรู้ |
+|--------|-------------------|
+| Feature Test | ทดสอบ HTTP Request ทั้ง Flow |
+| Factory | สร้างข้อมูลทดสอบอัตโนมัติ |
+| Assertion | ตรวจสอบผลลัพธ์ที่คาดหวัง |
+| RefreshDatabase | รีเซ็ตฐานข้อมูลทุกครั้ง |
 
 ---
 
 **Navigation:**
-[⬅️ ก่อนหน้า](#) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](#)
+[⬅️ ก่อนหน้า](01-testing-introduction.md) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](03-debugging.md)

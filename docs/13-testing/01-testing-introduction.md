@@ -1,101 +1,91 @@
-# Testing Introduction
+# 13.1 Testing Introduction (แนะนำการทดสอบ)
 
-> 📖 **บทนี้คุณจะได้เรียนรู้**
-> - หัวข้อหลักที่ 1
-> - หัวข้อหลักที่ 2
-> - หัวข้อหลักที่ 3
+> **บทนี้คุณจะได้เรียนรู้**
+> - ทำไมต้องเขียน Test
+> - ประเภทของ Test (Unit, Feature, Integration)
+> - PHPUnit และ Pest
+> - การรัน Test ใน Laravel
 
-## 🎯 วัตถุประสงค์
+---
 
-<!-- อธิบายว่าทำไมต้องเรียนหัวข้อนี้ -->
+## วัตถุประสงค์การเรียนรู้
 
-## 📚 เนื้อหา
+เมื่อจบบทเรียนนี้ ผู้เรียนจะสามารถ:
+1. อธิบายความสำคัญของการเขียน Test ได้
+2. แยกประเภทของ Test ได้
+3. รัน Test ด้วย Artisan Command ได้
 
-### Testing Introduction Concept
+---
 
-<!-- อธิบายแนวคิด -->
+## เนื้อหา
 
-#### 💡 ตัวอย่างโค้ด
+### 1. ทำไมต้องเขียน Test?
 
-```php
-// โค้ดตัวอย่างที่อธิบายได้ชัดเจน
-// มี comment ภาษาไทย
-```
+| เหตุผล | รายละเอียด |
+|--------|-----------|
+| **ป้องกัน Bug** | ตรวจจับ Bug ก่อน Deploy |
+| **Refactor ได้มั่นใจ** | แก้โค้ดโดยไม่กลัวพัง |
+| **เอกสารประกอบ** | Test อธิบายว่าโค้ดควรทำงานอย่างไร |
+| **ประหยัดเวลา** | ลดเวลาทดสอบด้วยมือ |
 
-#### 📊 Diagram/Flowchart (ถ้ามี)
+### 2. ประเภทของ Test
 
 ```mermaid
 graph TD
-    A[Start] --> B[Process]
-    B --> C[End]
+    A[Testing] --> B[Unit Test]
+    A --> C[Feature Test]
+    A --> D[Integration Test]
+    B --> B1[ทดสอบ Method/Function เดียว]
+    C --> C1[ทดสอบ HTTP Request ทั้ง Flow]
+    D --> D1[ทดสอบการทำงานร่วมกัน]
 ```
 
-#### ⚠️ ข้อควรระวัง
+| ประเภท | ทดสอบอะไร | ตัวอย่าง |
+|--------|----------|---------|
+| **Unit** | Method/Function เดียว | ทดสอบ `calculateTotal()` |
+| **Feature** | HTTP Request ทั้ง Flow | ทดสอบ POST /products |
+| **Integration** | การทำงานร่วมกัน | ทดสอบ Model + Database |
 
-<!-- สิ่งที่ต้องระวังหรือ common mistakes -->
+### 3. การรัน Test
 
-#### 💪 Best Practices
+```bash
+# รัน Test ทั้งหมด
+php artisan test
 
-<!-- แนวทางปฏิบัติที่ดี -->
+# รัน Test เฉพาะไฟล์
+php artisan test --filter=ProductTest
 
-### 🤖 การใช้ AI ช่วยพัฒนา
+# รัน Test พร้อมแสดงรายละเอียด
+php artisan test --verbose
 
-<!-- แสดงวิธีใช้ AI สำหรับหัวข้อนี้ -->
-
-#### Prompt ตัวอย่าง:
-
-```
-[Prompt ที่ใช้กับ AI]
-```
-
-#### ผลลัพธ์:
-
-```php
-// โค้ดที่ AI generate
+# รัน Test แบบหยุดเมื่อ Fail
+php artisan test --stop-on-failure
 ```
 
-#### 🔍 การ Review Code จาก AI
+### 4. โครงสร้างไฟล์ Test
 
-<!-- วิธีตรวจสอบและปรับปรุง AI-generated code -->
-
-## 🎓 แบบฝึกหัด
-
-### Exercise 1: [ชื่อแบบฝึกหัด]
-
-**โจทย์:**
-<!-- คำอธิบายโจทย์ -->
-
-**เป้าหมาย:**
-<!-- สิ่งที่ต้องทำให้สำเร็จ -->
-
-**Hints:**
-<!-- คำแนะนำ -->
-
-<details>
-<summary>💡 ดูเฉลย</summary>
-
-```php
-// โค้ดเฉลย
+```
+tests/
+├── Feature/          ← Feature Tests
+│   └── ProductTest.php
+├── Unit/             ← Unit Tests
+│   └── ProductModelTest.php
+├── TestCase.php      ← Base Test Class
+└── CreatesApplication.php
 ```
 
-**คำอธิบาย:**
-<!-- อธิบายเฉลย -->
+---
 
-</details>
+## สรุป
 
-## 🔗 Resources เพิ่มเติม
-
-- [ลิงก์ไปยัง Laravel Docs](https://laravel.com/docs)
-
-## 📌 สรุป
-
-<!-- สรุปประเด็นสำคัญของบทนี้ -->
-
-## ⏭️ บทถัดไป
-
-- [ชื่อบทถัดไป](#)
+| หัวข้อ | สิ่งที่ได้เรียนรู้ |
+|--------|-------------------|
+| Unit Test | ทดสอบ Method/Function เดียว |
+| Feature Test | ทดสอบ HTTP Request ทั้ง Flow |
+| `php artisan test` | รัน Test ทั้งหมด |
+| `--filter` | รัน Test เฉพาะไฟล์/Method |
 
 ---
 
 **Navigation:**
-[⬅️ ก่อนหน้า](#) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](#)
+[⬅️ ก่อนหน้า](../12-reporting/04-realtime-reports.md) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](02-writing-tests.md)

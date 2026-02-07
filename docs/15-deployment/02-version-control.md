@@ -1,101 +1,107 @@
-# Version Control
+# 15.2 Version Control (การจัดการเวอร์ชัน)
 
-> 📖 **บทนี้คุณจะได้เรียนรู้**
-> - หัวข้อหลักที่ 1
-> - หัวข้อหลักที่ 2
-> - หัวข้อหลักที่ 3
+> **บทนี้คุณจะได้เรียนรู้**
+> - Git พื้นฐานสำหรับ Laravel
+> - .gitignore ที่สำคัญ
+> - Branching Strategy
+> - การทำงานเป็นทีมด้วย Git
 
-## 🎯 วัตถุประสงค์
+---
 
-<!-- อธิบายว่าทำไมต้องเรียนหัวข้อนี้ -->
+## วัตถุประสงค์การเรียนรู้
 
-## 📚 เนื้อหา
+เมื่อจบบทเรียนนี้ ผู้เรียนจะสามารถ:
+1. ใช้ Git จัดการโค้ด Laravel ได้
+2. ตั้งค่า .gitignore ที่เหมาะสมได้
+3. ใช้ Branching Strategy ทำงานเป็นทีมได้
 
-### Version Control Concept
+---
 
-<!-- อธิบายแนวคิด -->
+## เนื้อหา
 
-#### 💡 ตัวอย่างโค้ด
+### 1. Git พื้นฐาน
 
-```php
-// โค้ดตัวอย่างที่อธิบายได้ชัดเจน
-// มี comment ภาษาไทย
+```bash
+# เริ่มต้น
+git init
+git add .
+git commit -m "Initial commit"
+git remote add origin https://github.com/user/repo.git
+git push -u origin main
+
+# การทำงานประจำวัน
+git pull origin main          # ดึงโค้ดล่าสุด
+git checkout -b feature/name  # สร้าง Branch ใหม่
+git add .
+git commit -m "Add feature"
+git push origin feature/name
 ```
 
-#### 📊 Diagram/Flowchart (ถ้ามี)
+### 2. .gitignore สำหรับ Laravel
+
+```gitignore
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+.env
+.env.backup
+.env.production
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+```
+
+| ไฟล์/โฟลเดอร์ | เหตุผลที่ไม่ Commit |
+|---------------|-------------------|
+| `.env` | มี Credentials |
+| `vendor/` | ติดตั้งจาก composer.lock |
+| `node_modules/` | ติดตั้งจาก package.json |
+| `storage/` | ไฟล์ที่ Generate |
+
+### 3. Branching Strategy
 
 ```mermaid
-graph TD
-    A[Start] --> B[Process]
-    B --> C[End]
+gitGraph
+    commit id: "Initial"
+    branch develop
+    commit id: "Setup"
+    branch feature/auth
+    commit id: "Add login"
+    commit id: "Add register"
+    checkout develop
+    merge feature/auth
+    branch feature/crud
+    commit id: "Add CRUD"
+    checkout develop
+    merge feature/crud
+    checkout main
+    merge develop tag: "v1.0"
 ```
 
-#### ⚠️ ข้อควรระวัง
+| Branch | หน้าที่ |
+|--------|--------|
+| `main` | โค้ดที่ Deploy แล้ว |
+| `develop` | โค้ดที่พัฒนาเสร็จ |
+| `feature/*` | ฟีเจอร์ใหม่ |
+| `hotfix/*` | แก้ Bug เร่งด่วน |
 
-<!-- สิ่งที่ต้องระวังหรือ common mistakes -->
+---
 
-#### 💪 Best Practices
+## สรุป
 
-<!-- แนวทางปฏิบัติที่ดี -->
-
-### 🤖 การใช้ AI ช่วยพัฒนา
-
-<!-- แสดงวิธีใช้ AI สำหรับหัวข้อนี้ -->
-
-#### Prompt ตัวอย่าง:
-
-```
-[Prompt ที่ใช้กับ AI]
-```
-
-#### ผลลัพธ์:
-
-```php
-// โค้ดที่ AI generate
-```
-
-#### 🔍 การ Review Code จาก AI
-
-<!-- วิธีตรวจสอบและปรับปรุง AI-generated code -->
-
-## 🎓 แบบฝึกหัด
-
-### Exercise 1: [ชื่อแบบฝึกหัด]
-
-**โจทย์:**
-<!-- คำอธิบายโจทย์ -->
-
-**เป้าหมาย:**
-<!-- สิ่งที่ต้องทำให้สำเร็จ -->
-
-**Hints:**
-<!-- คำแนะนำ -->
-
-<details>
-<summary>💡 ดูเฉลย</summary>
-
-```php
-// โค้ดเฉลย
-```
-
-**คำอธิบาย:**
-<!-- อธิบายเฉลย -->
-
-</details>
-
-## 🔗 Resources เพิ่มเติม
-
-- [ลิงก์ไปยัง Laravel Docs](https://laravel.com/docs)
-
-## 📌 สรุป
-
-<!-- สรุปประเด็นสำคัญของบทนี้ -->
-
-## ⏭️ บทถัดไป
-
-- [ชื่อบทถัดไป](#)
+| หัวข้อ | สิ่งที่ได้เรียนรู้ |
+|--------|-------------------|
+| Git | จัดการเวอร์ชันโค้ด |
+| .gitignore | ไม่ Commit .env, vendor, node_modules |
+| Branching | main → develop → feature/* |
+| Pull Request | Review โค้ดก่อน Merge |
 
 ---
 
 **Navigation:**
-[⬅️ ก่อนหน้า](#) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](#)
+[⬅️ ก่อนหน้า](01-deployment-prep.md) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](03-best-practices.md)

@@ -1,101 +1,103 @@
-# Debugging
+# 13.3 Debugging (การดีบัก)
 
-> 📖 **บทนี้คุณจะได้เรียนรู้**
-> - หัวข้อหลักที่ 1
-> - หัวข้อหลักที่ 2
-> - หัวข้อหลักที่ 3
+> **บทนี้คุณจะได้เรียนรู้**
+> - เครื่องมือ Debugging ใน Laravel
+> - dd(), dump(), Log
+> - Laravel Debugbar
+> - Error Handling
 
-## 🎯 วัตถุประสงค์
+---
 
-<!-- อธิบายว่าทำไมต้องเรียนหัวข้อนี้ -->
+## วัตถุประสงค์การเรียนรู้
 
-## 📚 เนื้อหา
+เมื่อจบบทเรียนนี้ ผู้เรียนจะสามารถ:
+1. ใช้เครื่องมือ Debugging ใน Laravel ได้
+2. อ่านและเข้าใจ Error Message ได้
+3. ใช้ Logging บันทึกข้อมูลสำหรับ Debug ได้
 
-### Debugging Concept
+---
 
-<!-- อธิบายแนวคิด -->
+## เนื้อหา
 
-#### 💡 ตัวอย่างโค้ด
-
-```php
-// โค้ดตัวอย่างที่อธิบายได้ชัดเจน
-// มี comment ภาษาไทย
-```
-
-#### 📊 Diagram/Flowchart (ถ้ามี)
-
-```mermaid
-graph TD
-    A[Start] --> B[Process]
-    B --> C[End]
-```
-
-#### ⚠️ ข้อควรระวัง
-
-<!-- สิ่งที่ต้องระวังหรือ common mistakes -->
-
-#### 💪 Best Practices
-
-<!-- แนวทางปฏิบัติที่ดี -->
-
-### 🤖 การใช้ AI ช่วยพัฒนา
-
-<!-- แสดงวิธีใช้ AI สำหรับหัวข้อนี้ -->
-
-#### Prompt ตัวอย่าง:
-
-```
-[Prompt ที่ใช้กับ AI]
-```
-
-#### ผลลัพธ์:
+### 1. เครื่องมือ Debug พื้นฐาน
 
 ```php
-// โค้ดที่ AI generate
+// dd() - Dump and Die (หยุดทำงาน)
+dd($variable);
+dd($request->all());
+
+// dump() - Dump แต่ไม่หยุด
+dump($variable);
+
+// logger() - บันทึกลง Log File
+logger('ข้อความ debug', ['data' => $variable]);
+
+// Log Facade
+use Illuminate\Support\Facades\Log;
+Log::info('สร้างสินค้าใหม่', ['product_id' => $product->id]);
+Log::error('เกิดข้อผิดพลาด', ['error' => $e->getMessage()]);
 ```
 
-#### 🔍 การ Review Code จาก AI
+| เครื่องมือ | หยุดทำงาน | บันทึกไฟล์ | ใช้เมื่อ |
+|-----------|----------|-----------|---------|
+| `dd()` | ✅ | ❌ | Debug ระหว่างพัฒนา |
+| `dump()` | ❌ | ❌ | ดูค่าโดยไม่หยุด |
+| `Log::info()` | ❌ | ✅ | บันทึกใน Production |
+| `logger()` | ❌ | ✅ | บันทึกแบบย่อ |
 
-<!-- วิธีตรวจสอบและปรับปรุง AI-generated code -->
+### 2. Laravel Debugbar
 
-## 🎓 แบบฝึกหัด
+```bash
+composer require barryvdh/laravel-debugbar --dev
+```
 
-### Exercise 1: [ชื่อแบบฝึกหัด]
+แสดงข้อมูลที่ด้านล่างหน้าเว็บ:
+- **Queries** - SQL ที่รัน + เวลา
+- **Models** - Model ที่โหลด
+- **Views** - View ที่ Render
+- **Route** - Route ที่ Match
+- **Session** - ข้อมูล Session
 
-**โจทย์:**
-<!-- คำอธิบายโจทย์ -->
-
-**เป้าหมาย:**
-<!-- สิ่งที่ต้องทำให้สำเร็จ -->
-
-**Hints:**
-<!-- คำแนะนำ -->
-
-<details>
-<summary>💡 ดูเฉลย</summary>
+### 3. Error Handling
 
 ```php
-// โค้ดเฉลย
+// Try-Catch
+try {
+    $product = Product::findOrFail($id);
+} catch (ModelNotFoundException $e) {
+    return redirect()->route('products.index')
+        ->with('error', 'ไม่พบสินค้า');
+}
+
+// Custom Error Page
+// resources/views/errors/404.blade.php
+// resources/views/errors/500.blade.php
 ```
 
-**คำอธิบาย:**
-<!-- อธิบายเฉลย -->
+### 4. Debug Query
 
-</details>
+```php
+// ดู SQL Query ที่ Eloquent สร้าง
+$query = Product::where('price', '>', 100)->toSql();
+dd($query); // "select * from `products` where `price` > ?"
 
-## 🔗 Resources เพิ่มเติม
+// ดู Query พร้อม Bindings
+$query = Product::where('price', '>', 100)->toRawSql();
+dd($query); // "select * from `products` where `price` > 100"
+```
 
-- [ลิงก์ไปยัง Laravel Docs](https://laravel.com/docs)
+---
 
-## 📌 สรุป
+## สรุป
 
-<!-- สรุปประเด็นสำคัญของบทนี้ -->
-
-## ⏭️ บทถัดไป
-
-- [ชื่อบทถัดไป](#)
+| หัวข้อ | สิ่งที่ได้เรียนรู้ |
+|--------|-------------------|
+| dd()/dump() | Debug ระหว่างพัฒนา |
+| Log | บันทึกข้อมูลลงไฟล์ |
+| Debugbar | แสดง Query, Model, Route |
+| toSql() | ดู SQL ที่ Eloquent สร้าง |
 
 ---
 
 **Navigation:**
-[⬅️ ก่อนหน้า](#) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](#)
+[⬅️ ก่อนหน้า](02-writing-tests.md) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](../14-performance/01-caching.md)

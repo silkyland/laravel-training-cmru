@@ -1,101 +1,147 @@
-# Encryption
+# 9.3 Encryption (การเข้ารหัสข้อมูล)
 
-> 📖 **บทนี้คุณจะได้เรียนรู้**
-> - หัวข้อหลักที่ 1
-> - หัวข้อหลักที่ 2
-> - หัวข้อหลักที่ 3
+> **บทนี้คุณจะได้เรียนรู้**
+> - Hashing vs Encryption
+> - การเข้ารหัส Password ด้วย bcrypt
+> - การเข้ารหัสข้อมูลด้วย Crypt Facade
+> - Encrypted Casting
 
-## 🎯 วัตถุประสงค์
+---
 
-<!-- อธิบายว่าทำไมต้องเรียนหัวข้อนี้ -->
+## วัตถุประสงค์การเรียนรู้
 
-## 📚 เนื้อหา
+เมื่อจบบทเรียนนี้ ผู้เรียนจะสามารถ:
+1. อธิบายความแตกต่างระหว่าง Hashing กับ Encryption ได้
+2. ใช้ bcrypt เข้ารหัส Password ได้
+3. ใช้ Crypt Facade เข้ารหัส/ถอดรหัสข้อมูลได้
+4. ใช้ Encrypted Casting เข้ารหัสข้อมูลอัตโนมัติได้
 
-### Encryption Concept
+---
 
-<!-- อธิบายแนวคิด -->
+## เนื้อหา
 
-#### 💡 ตัวอย่างโค้ด
+### 1. Hashing vs Encryption
+
+| คุณสมบัติ | Hashing | Encryption |
+|----------|---------|-----------|
+| **ย้อนกลับได้** | ไม่ได้ (One-way) | ได้ (Two-way) |
+| **ใช้สำหรับ** | Password | ข้อมูลที่ต้องอ่านกลับ |
+| **ตัวอย่าง** | bcrypt, argon2 | AES-256-CBC |
+| **ใน Laravel** | `Hash::make()` | `Crypt::encrypt()` |
+
+### 2. Password Hashing
 
 ```php
-// โค้ดตัวอย่างที่อธิบายได้ชัดเจน
-// มี comment ภาษาไทย
+use Illuminate\Support\Facades\Hash;
+
+// เข้ารหัส Password
+$hashed = Hash::make('password123');
+// ผลลัพธ์: $2y$12$xxxxx... (ย้อนกลับไม่ได้)
+
+// ตรวจสอบ Password
+if (Hash::check('password123', $hashed)) {
+    // Password ถูกต้อง
+}
+
+// ใน Model (Mutator อัตโนมัติ)
+// Laravel 11+ จะ hash password อัตโนมัติ
+protected function casts(): array
+{
+    return [
+        'password' => 'hashed',
+    ];
+}
 ```
 
-#### 📊 Diagram/Flowchart (ถ้ามี)
+### 3. Data Encryption
 
-```mermaid
-graph TD
-    A[Start] --> B[Process]
-    B --> C[End]
+```php
+use Illuminate\Support\Facades\Crypt;
+
+// เข้ารหัส
+$encrypted = Crypt::encryptString('เลขบัตรประชาชน: 1234567890123');
+
+// ถอดรหัส
+$decrypted = Crypt::decryptString($encrypted);
+// ผลลัพธ์: "เลขบัตรประชาชน: 1234567890123"
 ```
 
-#### ⚠️ ข้อควรระวัง
+### 4. Encrypted Casting
 
-<!-- สิ่งที่ต้องระวังหรือ common mistakes -->
+```php
+// app/Models/Patient.php
+class Patient extends Model
+{
+    protected function casts(): array
+    {
+        return [
+            'id_card' => 'encrypted',
+            'medical_record' => 'encrypted',
+        ];
+    }
+}
 
-#### 💪 Best Practices
+// การใช้งาน - เข้ารหัส/ถอดรหัสอัตโนมัติ
+$patient = Patient::create([
+    'name' => 'สมชาย',
+    'id_card' => '1234567890123', // เก็บเป็น encrypted ในฐานข้อมูล
+]);
 
-<!-- แนวทางปฏิบัติที่ดี -->
+echo $patient->id_card; // แสดง: 1234567890123 (ถอดรหัสอัตโนมัติ)
+```
 
-### 🤖 การใช้ AI ช่วยพัฒนา
+---
 
-<!-- แสดงวิธีใช้ AI สำหรับหัวข้อนี้ -->
+### การใช้ AI ช่วยพัฒนา
 
 #### Prompt ตัวอย่าง:
 
 ```
-[Prompt ที่ใช้กับ AI]
+ตรวจสอบว่า Model นี้เก็บข้อมูลส่วนบุคคลอย่างปลอดภัยหรือไม่
+แนะนำ field ที่ควรเข้ารหัส:
+[วาง Model Code]
 ```
 
-#### ผลลัพธ์:
+---
 
-```php
-// โค้ดที่ AI generate
-```
+## แบบฝึกหัด
 
-#### 🔍 การ Review Code จาก AI
+### Exercise 1: เข้ารหัสข้อมูลส่วนบุคคล
 
-<!-- วิธีตรวจสอบและปรับปรุง AI-generated code -->
-
-## 🎓 แบบฝึกหัด
-
-### Exercise 1: [ชื่อแบบฝึกหัด]
-
-**โจทย์:**
-<!-- คำอธิบายโจทย์ -->
-
-**เป้าหมาย:**
-<!-- สิ่งที่ต้องทำให้สำเร็จ -->
-
-**Hints:**
-<!-- คำแนะนำ -->
+**โจทย์:** สร้าง Model `Employee` ที่เข้ารหัส field: เลขบัตรประชาชน, เลขบัญชีธนาคาร
 
 <details>
-<summary>💡 ดูเฉลย</summary>
+<summary>ดูเฉลย</summary>
 
 ```php
-// โค้ดเฉลย
-```
+class Employee extends Model
+{
+    protected $fillable = ['name', 'id_card', 'bank_account', 'department'];
 
-**คำอธิบาย:**
-<!-- อธิบายเฉลย -->
+    protected function casts(): array
+    {
+        return [
+            'id_card' => 'encrypted',
+            'bank_account' => 'encrypted',
+        ];
+    }
+}
+```
 
 </details>
 
-## 🔗 Resources เพิ่มเติม
+---
 
-- [ลิงก์ไปยัง Laravel Docs](https://laravel.com/docs)
+## สรุป
 
-## 📌 สรุป
-
-<!-- สรุปประเด็นสำคัญของบทนี้ -->
-
-## ⏭️ บทถัดไป
-
-- [ชื่อบทถัดไป](#)
+| หัวข้อ | สิ่งที่ได้เรียนรู้ |
+|--------|-------------------|
+| Hashing | One-way, ใช้กับ Password (`Hash::make()`) |
+| Encryption | Two-way, ใช้กับข้อมูลที่ต้องอ่านกลับ (`Crypt::encrypt()`) |
+| Encrypted Cast | เข้ารหัส/ถอดรหัสอัตโนมัติใน Model |
+| APP_KEY | กุญแจสำคัญ ห้ามเปิดเผย |
 
 ---
 
 **Navigation:**
-[⬅️ ก่อนหน้า](#) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](#)
+[⬅️ ก่อนหน้า](02-mass-assignment.md) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](04-access-control.md)

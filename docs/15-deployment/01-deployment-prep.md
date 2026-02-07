@@ -1,101 +1,95 @@
-# Deployment Prep
+# 15.1 Deployment Preparation (การเตรียมตัว Deploy)
 
-> 📖 **บทนี้คุณจะได้เรียนรู้**
-> - หัวข้อหลักที่ 1
-> - หัวข้อหลักที่ 2
-> - หัวข้อหลักที่ 3
+> **บทนี้คุณจะได้เรียนรู้**
+> - การเตรียม Environment สำหรับ Production
+> - การตั้งค่า .env สำหรับ Production
+> - Server Requirements
+> - Deployment Checklist
 
-## 🎯 วัตถุประสงค์
+---
 
-<!-- อธิบายว่าทำไมต้องเรียนหัวข้อนี้ -->
+## วัตถุประสงค์การเรียนรู้
 
-## 📚 เนื้อหา
+เมื่อจบบทเรียนนี้ ผู้เรียนจะสามารถ:
+1. เตรียม Environment สำหรับ Production ได้
+2. ตั้งค่า .env ที่ปลอดภัยสำหรับ Production ได้
+3. ตรวจสอบ Server Requirements ได้
 
-### Deployment Prep Concept
+---
 
-<!-- อธิบายแนวคิด -->
+## เนื้อหา
 
-#### 💡 ตัวอย่างโค้ด
+### 1. Server Requirements
 
-```php
-// โค้ดตัวอย่างที่อธิบายได้ชัดเจน
-// มี comment ภาษาไทย
+| ซอฟต์แวร์ | เวอร์ชันขั้นต่ำ |
+|----------|--------------|
+| PHP | 8.2+ |
+| MySQL/MariaDB | 8.0+ / 10.3+ |
+| Composer | 2.x |
+| Node.js | 18+ (สำหรับ Build Assets) |
+| Nginx/Apache | Latest |
+
+### 2. ตั้งค่า .env สำหรับ Production
+
+```bash
+APP_NAME="MyApp"
+APP_ENV=production
+APP_KEY=base64:xxxxx
+APP_DEBUG=false
+APP_URL=https://myapp.com
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_DATABASE=myapp_prod
+DB_USERNAME=myapp_user
+DB_PASSWORD=strong_password
+
+CACHE_DRIVER=redis
+SESSION_DRIVER=redis
+QUEUE_CONNECTION=redis
+
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailgun.org
 ```
 
-#### 📊 Diagram/Flowchart (ถ้ามี)
+### 3. Deployment Steps
 
 ```mermaid
 graph TD
-    A[Start] --> B[Process]
-    B --> C[End]
+    A[Push to Git] --> B[Pull on Server]
+    B --> C[composer install --no-dev]
+    C --> D[php artisan migrate --force]
+    D --> E[npm run build]
+    E --> F[php artisan optimize]
+    F --> G[Restart Queue Workers]
 ```
 
-#### ⚠️ ข้อควรระวัง
+### 4. Deployment Checklist
 
-<!-- สิ่งที่ต้องระวังหรือ common mistakes -->
+| รายการ | คำสั่ง/การตั้งค่า |
+|--------|-----------------|
+| ปิด Debug | `APP_DEBUG=false` |
+| ตั้ง Production | `APP_ENV=production` |
+| Install Dependencies | `composer install --optimize-autoloader --no-dev` |
+| Run Migrations | `php artisan migrate --force` |
+| Build Assets | `npm run build` |
+| Cache Config | `php artisan optimize` |
+| Set Permissions | `chmod -R 775 storage bootstrap/cache` |
+| Create Storage Link | `php artisan storage:link` |
+| Generate Key | `php artisan key:generate` (ครั้งแรกเท่านั้น) |
 
-#### 💪 Best Practices
+---
 
-<!-- แนวทางปฏิบัติที่ดี -->
+## สรุป
 
-### 🤖 การใช้ AI ช่วยพัฒนา
-
-<!-- แสดงวิธีใช้ AI สำหรับหัวข้อนี้ -->
-
-#### Prompt ตัวอย่าง:
-
-```
-[Prompt ที่ใช้กับ AI]
-```
-
-#### ผลลัพธ์:
-
-```php
-// โค้ดที่ AI generate
-```
-
-#### 🔍 การ Review Code จาก AI
-
-<!-- วิธีตรวจสอบและปรับปรุง AI-generated code -->
-
-## 🎓 แบบฝึกหัด
-
-### Exercise 1: [ชื่อแบบฝึกหัด]
-
-**โจทย์:**
-<!-- คำอธิบายโจทย์ -->
-
-**เป้าหมาย:**
-<!-- สิ่งที่ต้องทำให้สำเร็จ -->
-
-**Hints:**
-<!-- คำแนะนำ -->
-
-<details>
-<summary>💡 ดูเฉลย</summary>
-
-```php
-// โค้ดเฉลย
-```
-
-**คำอธิบาย:**
-<!-- อธิบายเฉลย -->
-
-</details>
-
-## 🔗 Resources เพิ่มเติม
-
-- [ลิงก์ไปยัง Laravel Docs](https://laravel.com/docs)
-
-## 📌 สรุป
-
-<!-- สรุปประเด็นสำคัญของบทนี้ -->
-
-## ⏭️ บทถัดไป
-
-- [ชื่อบทถัดไป](#)
+| หัวข้อ | สิ่งที่ได้เรียนรู้ |
+|--------|-------------------|
+| .env | ตั้งค่า Production: debug=false, env=production |
+| Dependencies | `--no-dev --optimize-autoloader` |
+| Optimize | `php artisan optimize` Cache ทุกอย่าง |
+| Permissions | storage และ bootstrap/cache ต้อง writable |
 
 ---
 
 **Navigation:**
-[⬅️ ก่อนหน้า](#) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](#)
+[⬅️ ก่อนหน้า](../14-performance/03-code-optimization.md) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](02-version-control.md)

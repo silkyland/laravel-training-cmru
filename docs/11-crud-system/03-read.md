@@ -1,62 +1,113 @@
-# 11.3 Read Operation (การแสดงรายการข้อมูล)
+# 11.3 Read (การอ่านข้อมูล)
 
-> 📖 **บทนี้คุณจะได้เรียนรู้**
-> - การดึงข้อมูลแบบแบ่งหน้า (Pagination)
-> - การแสดงผลข้อมูลในรูปแบบตาราง
-> - ระบบค้นหาและกรองข้อมูลเบื้องต้น
+> **บทนี้คุณจะได้เรียนรู้**
+> - หน้ารายการข้อมูล (index) พร้อม Pagination
+> - หน้าแสดงรายละเอียด (show)
+> - การค้นหาและกรองข้อมูล
 
 ---
 
-## 🎯 วัตถุประสงค์
-เพื่อให้สามารถนำข้อมูลที่เก็บไว้ในฐานข้อมูลมาแสดงผลให้ผู้ใช้ดูได้อย่างเป็นระเบียบและค้นหาได้ง่าย
+## วัตถุประสงค์การเรียนรู้
 
-## 📚 เนื้อหา
+เมื่อจบบทเรียนนี้ ผู้เรียนจะสามารถ:
+1. สร้างหน้ารายการข้อมูลพร้อม Pagination ได้
+2. สร้างหน้าแสดงรายละเอียดข้อมูลได้
+3. เพิ่มระบบค้นหาและกรองข้อมูลได้
 
-### 1. การดึงข้อมูลใน Controller
-เรามักไม่ดึงข้อมูลทั้งหมดมาแสดงในครั้งเดียวถ้ามีข้อมูลหลักพันแถว ควรใช้ `paginate()`:
+---
+
+## เนื้อหา
+
+### 1. Controller: index() และ show()
 
 ```php
 public function index(Request $request)
 {
-    $query = Student::query();
+    $products = Product::with('category')
+        ->when($request->search, function ($query, $search) {
+            $query->where('name', 'like', "%{$search}%");
+        })
+        ->when($request->category, function ($query, $category) {
+            $query->where('category_id', $category);
+        })
+        ->latest()
+        ->paginate(10);
 
-    // ระบบค้นหา
-    if ($request->has('search')) {
-        $query->where('name', 'like', '%' . $request->search . '%');
-    }
+    $categories = Category::all();
 
-    $students = $query->paginate(10); // แสดงหน้าละ 10 รายการ
-    
-    return view('students.index', compact('students'));
+    return view('products.index', compact('products', 'categories'));
+}
+
+public function show(Product $product)
+{
+    $product->load('category', 'user');
+    return view('products.show', compact('product'));
 }
 ```
 
-### 2. การแสดงผลใน Blade
-```html
-<table>
-    <thead>
-        <tr><th>ชื่อ</th><th>การจัดการ</th></tr>
-    </thead>
-    <tbody>
-        @foreach($students as $student)
-        <tr>
-            <td>{{ $student->name }}</td>
-            <td><a href="{{ route('students.edit', $student->id) }}">แก้ไข</a></td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+### 2. View: index.blade.php
 
-<!-- แสดงปุ่มเปลี่ยนหน้า (Pagination Links) -->
-{{ $students->links() }}
+```blade
+<x-layout title="รายการสินค้า">
+    <h1>สินค้าทั้งหมด</h1>
+
+    {{-- ค้นหา --}}
+    <form action="{{ route('products.index') }}" method="GET">
+        <input type="text" name="search" value="{{ request('search') }}" placeholder="ค้นหาสินค้า...">
+        <select name="category">
+            <option value="">ทุกหมวดหมู่</option>
+            @foreach($categories as $cat)
+                <option value="{{ $cat->id }}" {{ request('category') == $cat->id ? 'selected' : '' }}>
+                    {{ $cat->name }}
+                </option>
+            @endforeach
+        </select>
+        <button type="submit">ค้นหา</button>
+    </form>
+
+    {{-- ตาราง --}}
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>ชื่อ</th>
+                <th>ราคา</th>
+                <th>หมวดหมู่</th>
+                <th>จัดการ</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse($products as $product)
+                <tr>
+                    <td>{{ $loop->iteration + ($products->currentPage() - 1) * $products->perPage() }}</td>
+                    <td>{{ $product->name }}</td>
+                    <td>{{ number_format($product->price, 2) }}</td>
+                    <td>{{ $product->category->name }}</td>
+                    <td>
+                        <a href="{{ route('products.show', $product) }}">ดู</a>
+                        <a href="{{ route('products.edit', $product) }}">แก้ไข</a>
+                    </td>
+                </tr>
+            @empty
+                <tr><td colspan="5">ไม่พบข้อมูล</td></tr>
+            @endforelse
+        </tbody>
+    </table>
+
+    {{ $products->withQueryString()->links() }}
+</x-layout>
 ```
 
 ---
 
-### 🤖 การใช้ AI ช่วยเขียน Logic การกรอง
+## สรุป
 
-#### Prompt ตัวอย่าง:
-"In Laravel, how do I create a search filter that can filter students by both 'name' and 'student_id' simultaneously?"
+| หัวข้อ | สิ่งที่ได้เรียนรู้ |
+|--------|-------------------|
+| index() | แสดงรายการ + Pagination + ค้นหา |
+| show() | แสดงรายละเอียด + Eager Loading |
+| Pagination | `paginate()` + `->links()` |
+| Search | `when()` สำหรับ Conditional Query |
 
 ---
 

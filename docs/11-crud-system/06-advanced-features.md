@@ -1,101 +1,116 @@
-# Advanced Features
+# 11.6 Advanced Features (ฟีเจอร์เพิ่มเติม)
 
-> 📖 **บทนี้คุณจะได้เรียนรู้**
-> - หัวข้อหลักที่ 1
-> - หัวข้อหลักที่ 2
-> - หัวข้อหลักที่ 3
+> **บทนี้คุณจะได้เรียนรู้**
+> - Export ข้อมูลเป็น CSV/Excel
+> - Import ข้อมูลจากไฟล์
+> - Bulk Actions (ลบหลายรายการ)
+> - Activity Log
 
-## 🎯 วัตถุประสงค์
+---
 
-<!-- อธิบายว่าทำไมต้องเรียนหัวข้อนี้ -->
+## วัตถุประสงค์การเรียนรู้
 
-## 📚 เนื้อหา
+เมื่อจบบทเรียนนี้ ผู้เรียนจะสามารถ:
+1. Export ข้อมูลเป็น CSV ได้
+2. สร้าง Bulk Actions สำหรับจัดการหลายรายการพร้อมกันได้
+3. บันทึก Activity Log ได้
 
-### Advanced Features Concept
+---
 
-<!-- อธิบายแนวคิด -->
+## เนื้อหา
 
-#### 💡 ตัวอย่างโค้ด
-
-```php
-// โค้ดตัวอย่างที่อธิบายได้ชัดเจน
-// มี comment ภาษาไทย
-```
-
-#### 📊 Diagram/Flowchart (ถ้ามี)
-
-```mermaid
-graph TD
-    A[Start] --> B[Process]
-    B --> C[End]
-```
-
-#### ⚠️ ข้อควรระวัง
-
-<!-- สิ่งที่ต้องระวังหรือ common mistakes -->
-
-#### 💪 Best Practices
-
-<!-- แนวทางปฏิบัติที่ดี -->
-
-### 🤖 การใช้ AI ช่วยพัฒนา
-
-<!-- แสดงวิธีใช้ AI สำหรับหัวข้อนี้ -->
-
-#### Prompt ตัวอย่าง:
-
-```
-[Prompt ที่ใช้กับ AI]
-```
-
-#### ผลลัพธ์:
+### 1. Export เป็น CSV
 
 ```php
-// โค้ดที่ AI generate
+public function export()
+{
+    $products = Product::all();
+
+    $headers = [
+        'Content-Type' => 'text/csv',
+        'Content-Disposition' => 'attachment; filename="products.csv"',
+    ];
+
+    $callback = function () use ($products) {
+        $file = fopen('php://output', 'w');
+        // Header
+        fputcsv($file, ['ID', 'ชื่อ', 'ราคา', 'หมวดหมู่']);
+        // Data
+        foreach ($products as $product) {
+            fputcsv($file, [
+                $product->id,
+                $product->name,
+                $product->price,
+                $product->category->name,
+            ]);
+        }
+        fclose($file);
+    };
+
+    return response()->stream($callback, 200, $headers);
+}
 ```
 
-#### 🔍 การ Review Code จาก AI
-
-<!-- วิธีตรวจสอบและปรับปรุง AI-generated code -->
-
-## 🎓 แบบฝึกหัด
-
-### Exercise 1: [ชื่อแบบฝึกหัด]
-
-**โจทย์:**
-<!-- คำอธิบายโจทย์ -->
-
-**เป้าหมาย:**
-<!-- สิ่งที่ต้องทำให้สำเร็จ -->
-
-**Hints:**
-<!-- คำแนะนำ -->
-
-<details>
-<summary>💡 ดูเฉลย</summary>
+### 2. Bulk Delete
 
 ```php
-// โค้ดเฉลย
+// Controller
+public function bulkDelete(Request $request)
+{
+    $request->validate(['ids' => 'required|array']);
+    Product::whereIn('id', $request->ids)->delete();
+    return redirect()->back()->with('success', 'ลบข้อมูลที่เลือกแล้ว');
+}
 ```
 
-**คำอธิบาย:**
-<!-- อธิบายเฉลย -->
+```blade
+{{-- View: Checkbox สำหรับเลือกหลายรายการ --}}
+<form action="{{ route('products.bulk-delete') }}" method="POST">
+    @csrf
+    @method('DELETE')
+    @foreach($products as $product)
+        <tr>
+            <td><input type="checkbox" name="ids[]" value="{{ $product->id }}"></td>
+            <td>{{ $product->name }}</td>
+        </tr>
+    @endforeach
+    <button type="submit" onclick="return confirm('ลบรายการที่เลือก?')">
+        ลบที่เลือก
+    </button>
+</form>
+```
 
-</details>
+### 3. Activity Log
 
-## 🔗 Resources เพิ่มเติม
+```php
+// บันทึก Log ใน Controller
+use Illuminate\Support\Facades\Log;
 
-- [ลิงก์ไปยัง Laravel Docs](https://laravel.com/docs)
+public function store(Request $request)
+{
+    $product = Product::create($validated);
 
-## 📌 สรุป
+    Log::info('สร้างสินค้าใหม่', [
+        'product_id' => $product->id,
+        'user_id' => auth()->id(),
+        'name' => $product->name,
+    ]);
 
-<!-- สรุปประเด็นสำคัญของบทนี้ -->
+    return redirect()->route('products.index');
+}
+```
 
-## ⏭️ บทถัดไป
+---
 
-- [ชื่อบทถัดไป](#)
+## สรุป
+
+| หัวข้อ | สิ่งที่ได้เรียนรู้ |
+|--------|-------------------|
+| Export CSV | `response()->stream()` สร้างไฟล์ CSV |
+| Bulk Actions | `whereIn('id', $ids)` จัดการหลายรายการ |
+| Activity Log | `Log::info()` บันทึกกิจกรรม |
 
 ---
 
 **Navigation:**
-[⬅️ ก่อนหน้า](#) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](#)
+[⬅️ ก่อนหน้า](05-delete.md) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](../12-reporting/01-query-reports.md)

@@ -1,101 +1,121 @@
-# Excel Export
+# 12.3 Excel Export (การส่งออกข้อมูลเป็น Excel)
 
-> 📖 **บทนี้คุณจะได้เรียนรู้**
-> - หัวข้อหลักที่ 1
-> - หัวข้อหลักที่ 2
-> - หัวข้อหลักที่ 3
+> **บทนี้คุณจะได้เรียนรู้**
+> - การติดตั้ง Laravel Excel (Maatwebsite)
+> - การ Export ข้อมูลเป็น Excel
+> - การจัดรูปแบบ Excel (Header, Style)
+> - การ Export ข้อมูลจำนวนมาก
 
-## 🎯 วัตถุประสงค์
+---
 
-<!-- อธิบายว่าทำไมต้องเรียนหัวข้อนี้ -->
+## วัตถุประสงค์การเรียนรู้
 
-## 📚 เนื้อหา
+เมื่อจบบทเรียนนี้ ผู้เรียนจะสามารถ:
+1. ติดตั้งและใช้งาน Laravel Excel ได้
+2. สร้าง Export Class สำหรับส่งออกข้อมูลได้
+3. จัดรูปแบบ Excel ให้สวยงามได้
 
-### Excel Export Concept
+---
 
-<!-- อธิบายแนวคิด -->
+## เนื้อหา
 
-#### 💡 ตัวอย่างโค้ด
+### 1. ติดตั้ง Laravel Excel
+
+```bash
+composer require maatwebsite/excel
+```
+
+### 2. สร้าง Export Class
+
+```bash
+php artisan make:export ProductsExport --model=Product
+```
 
 ```php
-// โค้ดตัวอย่างที่อธิบายได้ชัดเจน
-// มี comment ภาษาไทย
+// app/Exports/ProductsExport.php
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+
+class ProductsExport implements FromCollection, WithHeadings
+{
+    public function collection()
+    {
+        return Product::with('category')->get()->map(function ($product) {
+            return [
+                'id' => $product->id,
+                'name' => $product->name,
+                'price' => $product->price,
+                'category' => $product->category->name,
+                'created_at' => $product->created_at->format('d/m/Y'),
+            ];
+        });
+    }
+
+    public function headings(): array
+    {
+        return ['รหัส', 'ชื่อสินค้า', 'ราคา', 'หมวดหมู่', 'วันที่สร้าง'];
+    }
+}
 ```
 
-#### 📊 Diagram/Flowchart (ถ้ามี)
-
-```mermaid
-graph TD
-    A[Start] --> B[Process]
-    B --> C[End]
-```
-
-#### ⚠️ ข้อควรระวัง
-
-<!-- สิ่งที่ต้องระวังหรือ common mistakes -->
-
-#### 💪 Best Practices
-
-<!-- แนวทางปฏิบัติที่ดี -->
-
-### 🤖 การใช้ AI ช่วยพัฒนา
-
-<!-- แสดงวิธีใช้ AI สำหรับหัวข้อนี้ -->
-
-#### Prompt ตัวอย่าง:
-
-```
-[Prompt ที่ใช้กับ AI]
-```
-
-#### ผลลัพธ์:
+### 3. ใช้งานใน Controller
 
 ```php
-// โค้ดที่ AI generate
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ProductsExport;
+
+public function export()
+{
+    return Excel::download(new ProductsExport, 'products.xlsx');
+}
 ```
 
-#### 🔍 การ Review Code จาก AI
-
-<!-- วิธีตรวจสอบและปรับปรุง AI-generated code -->
-
-## 🎓 แบบฝึกหัด
-
-### Exercise 1: [ชื่อแบบฝึกหัด]
-
-**โจทย์:**
-<!-- คำอธิบายโจทย์ -->
-
-**เป้าหมาย:**
-<!-- สิ่งที่ต้องทำให้สำเร็จ -->
-
-**Hints:**
-<!-- คำแนะนำ -->
-
-<details>
-<summary>💡 ดูเฉลย</summary>
+### 4. Export แบบมีเงื่อนไข
 
 ```php
-// โค้ดเฉลย
+class ProductsExport implements FromQuery, WithHeadings
+{
+    protected $categoryId;
+
+    public function __construct($categoryId = null)
+    {
+        $this->categoryId = $categoryId;
+    }
+
+    public function query()
+    {
+        $query = Product::query();
+        if ($this->categoryId) {
+            $query->where('category_id', $this->categoryId);
+        }
+        return $query;
+    }
+}
+
+// ใช้งาน
+return Excel::download(new ProductsExport($request->category_id), 'products.xlsx');
 ```
 
-**คำอธิบาย:**
-<!-- อธิบายเฉลย -->
+| Interface | หน้าที่ |
+|-----------|--------|
+| `FromCollection` | Export จาก Collection |
+| `FromQuery` | Export จาก Query (ประหยัด Memory) |
+| `WithHeadings` | เพิ่ม Header Row |
+| `WithMapping` | จัดรูปแบบข้อมูลแต่ละแถว |
+| `WithStyles` | จัดรูปแบบ Excel (สี, ฟอนต์) |
 
-</details>
+---
 
-## 🔗 Resources เพิ่มเติม
+## สรุป
 
-- [ลิงก์ไปยัง Laravel Docs](https://laravel.com/docs)
-
-## 📌 สรุป
-
-<!-- สรุปประเด็นสำคัญของบทนี้ -->
-
-## ⏭️ บทถัดไป
-
-- [ชื่อบทถัดไป](#)
+| หัวข้อ | สิ่งที่ได้เรียนรู้ |
+|--------|-------------------|
+| Laravel Excel | Package สำหรับ Export/Import Excel |
+| FromCollection | Export จาก Collection |
+| FromQuery | Export จาก Query (ข้อมูลมาก) |
+| WithHeadings | เพิ่ม Header Row |
 
 ---
 
 **Navigation:**
-[⬅️ ก่อนหน้า](#) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](#)
+[⬅️ ก่อนหน้า](02-pdf-generation.md) | [📚 สารบัญ](../../README.md) | [➡️ ถัดไป](04-realtime-reports.md)

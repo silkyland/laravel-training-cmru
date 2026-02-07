@@ -1,59 +1,114 @@
-# 11.2 Create Operation (การเพิ่มข้อมูล)
+# 11.2 Create (การสร้างข้อมูล)
 
-> 📖 **บทนี้คุณจะได้เรียนรู้**
-> - การสร้างฟอร์มรับข้อมูล (Blade Input)
-> - การรับค่าจาก Request
-> - การบันทึกข้อมูลแบบปลอดภัยลงฐานข้อมูล
+> **บทนี้คุณจะได้เรียนรู้**
+> - หน้าฟอร์มสร้างข้อมูล (create)
+> - การบันทึกข้อมูล (store)
+> - Validation และ Error Handling
+> - การอัปโหลดรูปภาพ
 
 ---
 
-## 🎯 วัตถุประสงค์
-เพื่อให้สามารถสร้างระบบลงทะเบียนหรือเพิ่มข้อมูลเข้าระบบได้อย่างถูกต้องและปลอดภัย
+## วัตถุประสงค์การเรียนรู้
 
-## 📚 เนื้อหา
+เมื่อจบบทเรียนนี้ ผู้เรียนจะสามารถ:
+1. สร้างหน้าฟอร์มสำหรับเพิ่มข้อมูลได้
+2. เขียน Controller Method `create()` และ `store()` ได้
+3. ใช้ Validation ตรวจสอบข้อมูลก่อนบันทึกได้
 
-### 1. การสร้างฟอร์ม (The View)
-ในไฟล์ `resources/views/students/create.blade.php`:
-```html
-<form action="{{ route('students.store') }}" method="POST">
-    @csrf <!-- สิ่งสำคัญ: ป้องกัน CSRF Attack -->
-    <input type="text" name="name" placeholder="ชื่อ-นามสกุล">
-    <button type="submit">บันทึก</button>
-</form>
-```
+---
 
-### 2. การจัดการใน Controller
-ในไฟล์ `StudentController.php`:
+## เนื้อหา
+
+### 1. Controller: create() และ store()
 ```php
-public function store(Request $request)
+class ProductController extends Controller
 {
-    // 1. ตรวจสอบข้อมูล (Validation)
-    $validated = $request->validate([
-        'name' => 'required|max:255',
-    ]);
+    public function create()
+    {
+        $categories = Category::all();
+        return view('products.create', compact('categories'));
+    }
 
-    // 2. บันทึกข้อมูล
-    Student::create($validated);
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric|min:0',
+            'description' => 'nullable|string',
+            'category_id' => 'required|exists:categories,id',
+            'image' => 'nullable|image|max:2048',
+        ]);
 
-    // 3. กลับไปยังหน้าแรกพร้อมข้อความแจ้งเตือน
-    return redirect()->route('students.index')->with('success', 'เพิ่มข้อมูลสำเร็จ!');
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('products', 'public');
+        }
+
+        $validated['user_id'] = auth()->id();
+
+        Product::create($validated);
+
+        return redirect()->route('products.index')
+            ->with('success', 'เพิ่มสินค้าเรียบร้อยแล้ว');
+    }
 }
 ```
 
-#### 🔒 ความปลอดภัยที่ควรทราบ: Mass Assignment
-อย่าลืมตั้งค่า `$fillable` ใน Model เสมอ:
-```php
-class Student extends Model {
-    protected $fillable = ['name'];
-}
+### 2. View: create.blade.php (ตัวอย่างเต็ม)
+
+```blade
+<x-layout title="เพิ่มสินค้า">
+    <h1>เพิ่มสินค้าใหม่</h1>
+
+    <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+
+        <div>
+            <label for="name">ชื่อสินค้า</label>
+            <input type="text" id="name" name="name" value="{{ old('name') }}">
+            @error('name') <span class="text-red-500">{{ $message }}</span> @enderror
+        </div>
+
+        <div>
+            <label for="price">ราคา</label>
+            <input type="number" id="price" name="price" value="{{ old('price') }}" step="0.01">
+            @error('price') <span class="text-red-500">{{ $message }}</span> @enderror
+        </div>
+
+        <div>
+            <label for="category_id">หมวดหมู่</label>
+            <select id="category_id" name="category_id">
+                <option value="">-- เลือกหมวดหมู่ --</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
+            @error('category_id') <span class="text-red-500">{{ $message }}</span> @enderror
+        </div>
+
+        <div>
+            <label for="image">รูปภาพ</label>
+            <input type="file" id="image" name="image" accept="image/*">
+            @error('image') <span class="text-red-500">{{ $message }}</span> @enderror
+        </div>
+
+        <button type="submit">บันทึก</button>
+        <a href="{{ route('products.index') }}">ยกเลิก</a>
+    </form>
+</x-layout>
 ```
 
 ---
 
-### 🤖 การใช้ AI ช่วยสร้างฟอร์ม
+## สรุป
 
-#### Prompt ตัวอย่าง:
-"Create a Laravel Blade form using Tailwind CSS for adding a new product with fields: name, description, price, and category (dropdown)."
+| หัวข้อ | สิ่งที่ได้เรียนรู้ |
+|--------|-------------------|
+| create() | แสดงฟอร์มเปล่า + ส่งข้อมูลที่จำเป็น |
+| store() | Validate → Upload → Create → Redirect |
+| Validation | ตรวจสอบก่อนบันทึก + แสดง Error |
+| File Upload | `store('folder', 'public')` |
 
 ---
 
