@@ -10,7 +10,8 @@
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"
         rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         body {
             margin: 0;
@@ -305,20 +306,27 @@
             const originalText = exportBtn.innerHTML;
 
             // Show loading state
-            exportBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i>Generating PDF...';
+            exportBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i>Initializing...';
             exportBtn.disabled = true;
 
             try {
-                // Create a container for all slides
-                const container = document.createElement('div');
-                container.style.width = '1280px';
+                // Import jsPDF and html2canvas from CDN
+                const { jsPDF } = window.jspdf;
 
-                // Load all slides
+                // Create new PDF document
+                const pdf = new jsPDF({
+                    orientation: 'landscape',
+                    unit: 'px',
+                    format: [1280, 720],
+                    compress: true
+                });
+
+                // Load and process each slide
                 for (let i = 0; i < slides.length; i++) {
                     const slideNum = slides[i].num;
 
                     // Update progress
-                    exportBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i>Loading slide ${slideNum}/${slides.length}...`;
+                    exportBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i>Processing slide ${slideNum}/${slides.length}...`;
 
                     // Fetch slide content
                     const response = await fetch(`page${slideNum}.html`);
@@ -330,41 +338,74 @@
 
                     // Get slide container
                     const slideContainer = doc.querySelector('.slide-container');
+
                     if (slideContainer) {
-                        // Add page break after each slide except the last one
-                        if (i < slides.length - 1) {
-                            slideContainer.style.pageBreakAfter = 'always';
+                        // Create temporary container in DOM for rendering
+                        const tempContainer = document.createElement('div');
+                        tempContainer.style.position = 'absolute';
+                        tempContainer.style.left = '-9999px';
+                        tempContainer.style.top = '0';
+                        document.body.appendChild(tempContainer);
+
+                        // Clone and append slide
+                        const clonedSlide = slideContainer.cloneNode(true);
+                        tempContainer.appendChild(clonedSlide);
+
+                        // Copy styles from original document
+                        const styles = doc.querySelectorAll('style, link[rel="stylesheet"]');
+                        styles.forEach(style => {
+                            const clonedStyle = style.cloneNode(true);
+                            tempContainer.appendChild(clonedStyle);
+                        });
+
+                        // Wait for fonts and images to load
+                        await new Promise(resolve => setTimeout(resolve, 100));
+
+                        // Convert to canvas with background enabled
+                        const canvas = await html2canvas(clonedSlide, {
+                            scale: 2,
+                            useCORS: true,
+                            allowTaint: true,
+                            backgroundColor: '#ffffff',
+                            logging: false,
+                            width: 1280,
+                            height: 720,
+                            windowWidth: 1280,
+                            windowHeight: 720,
+                            // Enable background rendering
+                            ignoreElements: (element) => {
+                                return false;
+                            },
+                            onclone: (clonedDoc) => {
+                                // Ensure backgrounds are rendered
+                                const clonedContainer = clonedDoc.querySelector('.slide-container');
+                                if (clonedContainer) {
+                                    clonedContainer.style.backgroundColor = '#ffffff';
+                                }
+                            }
+                        });
+
+                        // Remove temporary container
+                        document.body.removeChild(tempContainer);
+
+                        // Convert canvas to image
+                        const imgData = canvas.toDataURL('image/jpeg', 0.98);
+
+                        // Add new page for slides after the first one
+                        if (i > 0) {
+                            pdf.addPage([1280, 720], 'landscape');
                         }
-                        container.appendChild(slideContainer.cloneNode(true));
+
+                        // Add image to PDF
+                        pdf.addImage(imgData, 'JPEG', 0, 0, 1280, 720, '', 'FAST');
                     }
                 }
 
                 // Update progress
-                exportBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i>Generating PDF...';
+                exportBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i>Saving PDF...';
 
-                // Configure PDF options
-                const opt = {
-                    margin: 0,
-                    filename: 'Laravel-AI-Training-Course-Slides.pdf',
-                    image: { type: 'jpeg', quality: 0.98 },
-                    html2canvas: {
-                        scale: 2,
-                        useCORS: true,
-                        logging: false,
-                        width: 1280,
-                        height: 720
-                    },
-                    jsPDF: {
-                        unit: 'px',
-                        format: [1280, 720],
-                        orientation: 'landscape',
-                        compress: true
-                    },
-                    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-                };
-
-                // Generate PDF
-                await html2pdf().set(opt).from(container).save();
+                // Save the PDF
+                pdf.save('Laravel-AI-Training-Course-Slides.pdf');
 
                 // Success message
                 exportBtn.innerHTML = '<i class="fa-solid fa-check mr-2"></i>PDF Downloaded!';
