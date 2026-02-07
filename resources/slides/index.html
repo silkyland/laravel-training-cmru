@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Laravel + AI Training Course - Slides</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans Thai', 'Noto Sans SC', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        .slide-viewer {
+            max-width: 1280px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .slide-frame {
+            width: 100%;
+            height: 720px;
+            border: none;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .slide-selector {
+            padding: 0.5rem 1rem;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #667eea;
+            background: white;
+        }
+
+        .slide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .slide-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .slide-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .slide-card.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="flex items-center justify-between max-w-7xl mx-auto">
+            <div class="flex items-center space-x-4">
+                <div
+                    class="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
+                    <i class="fa-brands fa-laravel text-white text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-black text-gray-800">Laravel + AI Training Course</h1>
+                    <p class="text-sm text-gray-500">Interactive Slide Presentation</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button onclick="toggleView()" class="nav-btn">
+                    <i class="fa-solid fa-th mr-2"></i>
+                    <span id="viewToggleText">Grid View</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide Viewer Mode -->
+    <div id="viewerMode" class="px-4">
+        <div class="slide-viewer">
+            <iframe id="slideFrame" class="slide-frame" src="page1.html"></iframe>
+        </div>
+
+        <!-- Navigation Controls -->
+        <div class="flex items-center justify-center space-x-4 my-6">
+            <button onclick="prevSlide()" id="prevBtn" class="nav-btn">
+                <i class="fa-solid fa-chevron-left mr-2"></i>
+                Previous
+            </button>
+
+            <div class="flex items-center space-x-3">
+                <span class="text-white font-bold">Slide</span>
+                <select id="slideSelector" class="slide-selector" onchange="goToSlide(this.value)">
+                    <!-- Will be populated by JavaScript -->
+                </select>
+                <span class="text-white font-bold">of <span id="totalSlides">50</span></span>
+            </div>
+
+            <button onclick="nextSlide()" id="nextBtn" class="nav-btn">
+                Next
+                <i class="fa-solid fa-chevron-right ml-2"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Grid View Mode -->
+    <div id="gridMode" class="slide-grid" style="display: none;">
+        <!-- Will be populated by JavaScript -->
+    </div>
+
+    <script>
+        const slides = [
+            { num: 1, title: "Course Introduction" },
+            { num: 2, title: "What is Laravel?" },
+            { num: 3, title: "Why Laravel?" },
+            { num: 4, title: "Laravel Ecosystem" },
+            { num: 5, title: "AI in Development" },
+            { num: 6, title: "AI Tools Overview" },
+            { num: 7, title: "Installation Requirements" },
+            { num: 8, title: "Installing Laravel" },
+            { num: 9, title: "Project Structure" },
+            { num: 10, title: "MVC Pattern" },
+            { num: 11, title: "Routing Basics" },
+            { num: 12, title: "Route Parameters" },
+            { num: 13, title: "Named Routes" },
+            { num: 14, title: "Route Groups" },
+            { num: 15, title: "Controllers" },
+            { num: 16, title: "Resource Controllers" },
+            { num: 17, title: "Middleware" },
+            { num: 18, title: "Database Configuration" },
+            { num: 19, title: "Migrations" },
+            { num: 20, title: "Eloquent ORM" },
+            { num: 21, title: "Model Relationships" },
+            { num: 22, title: "Query Builder" },
+            { num: 23, title: "Seeders & Factories" },
+            { num: 24, title: "Blade Templates" },
+            { num: 25, title: "Blade Directives" },
+            { num: 26, title: "Blade Components" },
+            { num: 27, title: "Blade Layouts" },
+            { num: 28, title: "Passing Data to Views" },
+            { num: 29, title: "Blade Layouts" },
+            { num: 30, title: "Frontend Asset Management" },
+            { num: 31, title: "Forms & CSRF" },
+            { num: 32, title: "Validation" },
+            { num: 33, title: "Authentication" },
+            { num: 34, title: "Starter Kits" },
+            { num: 35, title: "Authorization" },
+            { num: 36, title: "Security Threats" },
+            { num: 37, title: "Data Security" },
+            { num: 38, title: "CRUD System" },
+            { num: 39, title: "Reporting System" },
+            { num: 40, title: "Testing & Debugging" },
+            { num: 41, title: "Caching" },
+            { num: 42, title: "Queues & Jobs" },
+            { num: 43, title: "Deployment" },
+            { num: 44, title: "Best Practices" },
+            { num: 45, title: "Workshop Intro" },
+            { num: 46, title: "Workshop Step 1" },
+            { num: 47, title: "Workshop Step 2" },
+            { num: 48, title: "Workshop Step 3" },
+            { num: 49, title: "Resources" },
+            { num: 50, title: "Q&A & Closing" }
+        ];
+
+        let currentSlide = 1;
+        let isGridView = false;
+
+        // Initialize
+        function init() {
+            populateSlideSelector();
+            populateGridView();
+            updateNavButtons();
+        }
+
+        // Populate slide selector dropdown
+        function populateSlideSelector() {
+            const selector = document.getElementById('slideSelector');
+            slides.forEach(slide => {
+                const option = document.createElement('option');
+                option.value = slide.num;
+                option.textContent = `${slide.num}. ${slide.title}`;
+                selector.appendChild(option);
+            });
+        }
+
+        // Populate grid view
+        function populateGridView() {
+            const grid = document.getElementById('gridMode');
+            slides.forEach(slide => {
+                const card = document.createElement('div');
+                card.className = 'slide-card';
+                card.innerHTML = `
+                    <div class="text-3xl font-bold mb-2">${slide.num}</div>
+                    <div class="text-sm font-semibold">${slide.title}</div>
+                `;
+                card.onclick = () => {
+                    goToSlide(slide.num);
+                    if (isGridView) toggleView();
+                };
+                grid.appendChild(card);
+            });
+        }
+
+        // Navigation functions
+        function goToSlide(num) {
+            currentSlide = parseInt(num);
+            document.getElementById('slideFrame').src = `page${currentSlide}.html`;
+            document.getElementById('slideSelector').value = currentSlide;
+            updateNavButtons();
+            updateGridView();
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length) {
+                goToSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                goToSlide(currentSlide - 1);
+            }
+        }
+
+        function updateNavButtons() {
+            document.getElementById('prevBtn').disabled = currentSlide === 1;
+            document.getElementById('nextBtn').disabled = currentSlide === slides.length;
+        }
+
+        function updateGridView() {
+            const cards = document.querySelectorAll('.slide-card');
+            cards.forEach((card, index) => {
+                card.classList.toggle('active', index + 1 === currentSlide);
+            });
+        }
+
+        function toggleView() {
+            isGridView = !isGridView;
+            document.getElementById('viewerMode').style.display = isGridView ? 'none' : 'block';
+            document.getElementById('gridMode').style.display = isGridView ? 'grid' : 'none';
+            document.getElementById('viewToggleText').textContent = isGridView ? 'Slide View' : 'Grid View';
+            if (!isGridView) updateGridView();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (isGridView) return;
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        // Initialize on load
+        init();
+    </script>
+</body>
+
+</html>
