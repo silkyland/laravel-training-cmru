@@ -16,7 +16,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Noto Sans Thai', 'Noto Sans SC', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #e8eaed;
             min-height: 100vh;
         }
 
@@ -120,6 +120,10 @@
                 </div>
             </div>
             <div class="flex items-center space-x-4">
+                <button onclick="exportToPDF()" class="nav-btn" id="exportBtn">
+                    <i class="fa-solid fa-file-pdf mr-2"></i>
+                    Export PDF
+                </button>
                 <button onclick="toggleView()" class="nav-btn">
                     <i class="fa-solid fa-th mr-2"></i>
                     <span id="viewToggleText">Grid View</span>
@@ -293,6 +297,90 @@
             document.getElementById('gridMode').style.display = isGridView ? 'grid' : 'none';
             document.getElementById('viewToggleText').textContent = isGridView ? 'Slide View' : 'Grid View';
             if (!isGridView) updateGridView();
+        }
+
+        // Export to PDF function
+        async function exportToPDF() {
+            const exportBtn = document.getElementById('exportBtn');
+            const originalText = exportBtn.innerHTML;
+
+            // Show loading state
+            exportBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i>Generating PDF...';
+            exportBtn.disabled = true;
+
+            try {
+                // Create a container for all slides
+                const container = document.createElement('div');
+                container.style.width = '1280px';
+
+                // Load all slides
+                for (let i = 0; i < slides.length; i++) {
+                    const slideNum = slides[i].num;
+
+                    // Update progress
+                    exportBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i>Loading slide ${slideNum}/${slides.length}...`;
+
+                    // Fetch slide content
+                    const response = await fetch(`page${slideNum}.html`);
+                    const html = await response.text();
+
+                    // Parse HTML
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+
+                    // Get slide container
+                    const slideContainer = doc.querySelector('.slide-container');
+                    if (slideContainer) {
+                        // Add page break after each slide except the last one
+                        if (i < slides.length - 1) {
+                            slideContainer.style.pageBreakAfter = 'always';
+                        }
+                        container.appendChild(slideContainer.cloneNode(true));
+                    }
+                }
+
+                // Update progress
+                exportBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i>Generating PDF...';
+
+                // Configure PDF options
+                const opt = {
+                    margin: 0,
+                    filename: 'Laravel-AI-Training-Course-Slides.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: {
+                        scale: 2,
+                        useCORS: true,
+                        logging: false,
+                        width: 1280,
+                        height: 720
+                    },
+                    jsPDF: {
+                        unit: 'px',
+                        format: [1280, 720],
+                        orientation: 'landscape',
+                        compress: true
+                    },
+                    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+                };
+
+                // Generate PDF
+                await html2pdf().set(opt).from(container).save();
+
+                // Success message
+                exportBtn.innerHTML = '<i class="fa-solid fa-check mr-2"></i>PDF Downloaded!';
+                setTimeout(() => {
+                    exportBtn.innerHTML = originalText;
+                    exportBtn.disabled = false;
+                }, 2000);
+
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                exportBtn.innerHTML = '<i class="fa-solid fa-exclamation-triangle mr-2"></i>Error!';
+                setTimeout(() => {
+                    exportBtn.innerHTML = originalText;
+                    exportBtn.disabled = false;
+                }, 2000);
+            }
         }
 
         // Keyboard navigation
