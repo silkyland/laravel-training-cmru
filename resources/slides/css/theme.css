@@ -1,4 +1,6 @@
-/* Base styles */
+/* ========================================
+   BASE STYLES
+   ======================================== */
 body {
     margin: 0;
     padding: 0;
@@ -18,7 +20,7 @@ body {
     flex-direction: column;
 }
 
-/* Background elements (Page 29 style) */
+/* Background blobs */
 .blob-bg-1 {
     position: absolute;
     top: -120px;
@@ -42,7 +44,7 @@ body {
     opacity: 0.8;
 }
 
-/* Background elements (Page 30 style) */
+/* Background gradient & pattern */
 .bg-gradient-slide {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
@@ -57,7 +59,9 @@ body {
     z-index: 0;
 }
 
-/* Layout Utilities */
+/* ========================================
+   LAYOUT UTILITIES
+   ======================================== */
 .content-wrapper {
     position: relative;
     z-index: 10;
@@ -71,6 +75,10 @@ body {
     align-items: center;
     padding: 60px 100px;
 }
+
+/* ========================================
+   REUSABLE COMPONENTS
+   ======================================== */
 
 /* Cards */
 .layout-card {
@@ -162,4 +170,455 @@ body {
     border-radius: 12px;
     padding: 16px 20px;
     border-left: 4px solid #764ba2;
+}
+
+/* ========================================
+   SHARED HEADER STYLES
+   ======================================== */
+.slide-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 28px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.99) 0%, rgba(255,255,255,0.96) 100%);
+    border-bottom: 2px solid transparent;
+    border-image: linear-gradient(90deg, #3B82F6 0%, #8B5CF6 50%, #EC4899 100%) 1;
+    z-index: 100;
+    box-sizing: border-box;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: white;
+    background: linear-gradient(135deg, #F05340 0%, #E73429 100%);
+    box-shadow: 0 2px 8px rgba(240, 83, 64, 0.35);
+}
+
+.header-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.header-section {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #9CA3AF;
+    text-transform: uppercase;
+}
+
+.header-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1F2937;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.header-progress {
+    width: 100px;
+    height: 5px;
+    background: #E5E7EB;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #3B82F6 0%, #8B5CF6 100%);
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+.header-page {
+    font-size: 11px;
+    font-weight: 600;
+    color: #6B7280;
+    background: #F3F4F6;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+/* ========================================
+   SHARED FOOTER STYLES
+   ======================================== */
+.slide-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 28px;
+    background: linear-gradient(180deg, rgba(249,250,251,0.96) 0%, rgba(243,244,246,0.99) 100%);
+    border-top: 1px solid rgba(0,0,0,0.06);
+    z-index: 100;
+    box-sizing: border-box;
+}
+
+.footer-left, .footer-center, .footer-right {
+    display: flex;
+    align-items: center;
+}
+
+.footer-left { flex: 1; }
+.footer-center { flex: 1; justify-content: center; }
+.footer-right { flex: 1; justify-content: flex-end; }
+
+.footer-course {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: #9CA3AF;
+    text-transform: uppercase;
+}
+
+.footer-section {
+    font-size: 10px;
+    font-weight: 500;
+    color: #6B7280;
+    background: white;
+    padding: 3px 12px;
+    border-radius: 20px;
+    border: 1px solid #E5E7EB;
+    white-space: nowrap;
+}
+
+.footer-page {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #9CA3AF;
+}
+
+/* Dark mode header/footer for gradient-background slides (e.g. closing) */
+.slide-header--dark {
+    background: rgba(0,0,0,0.2);
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    border-image: none;
+    backdrop-filter: blur(10px);
+}
+.slide-header--dark .header-section { color: rgba(255,255,255,0.7); }
+.slide-header--dark .header-title { color: #fff; }
+.slide-header--dark .header-page { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9); }
+.slide-header--dark .header-progress { background: rgba(255,255,255,0.2); }
+
+.slide-footer--dark {
+    background: rgba(0,0,0,0.2);
+    border-top: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+}
+.slide-footer--dark .footer-course { color: rgba(255,255,255,0.6); }
+.slide-footer--dark .footer-section { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.2); }
+.slide-footer--dark .footer-page { color: rgba(255,255,255,0.6); }
+
+/* ========================================
+   CONTENT FRAME STYLES
+   ======================================== */
+
+/* Base content frame - positioned between header and footer */
+.content-frame {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+/* Default content frame (most slides) */
+.content-frame--default {
+    margin: 64px 24px 42px 24px;
+    padding: 20px 32px 16px 32px;
+    background: rgba(255,255,255,0.85);
+    border-radius: 14px;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow:
+        0 2px 12px rgba(0,0,0,0.03),
+        inset 0 1px 0 rgba(255,255,255,0.9);
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Title page frame (page 1) */
+.content-frame--title {
+    margin: 60px 20px 40px 20px;
+    padding: 24px 32px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Closing page frame (page 50) */
+.content-frame--closing {
+    margin: 60px 24px 40px 24px;
+    padding: 16px 24px;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Content frame accent borders */
+.content-frame.accent {
+    border-left: 4px solid #3B82F6;
+}
+.content-frame.accent-purple {
+    border-left: 4px solid #8B5CF6;
+}
+.content-frame.accent-green {
+    border-left: 4px solid #10B981;
+}
+.content-frame.accent-orange {
+    border-left: 4px solid #F59E0B;
+}
+.content-frame.accent-red {
+    border-left: 4px solid #EF4444;
+}
+
+/* Content frame title */
+.frame-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1F2937;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #E5E7EB;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.frame-title i {
+    color: #3B82F6;
+}
+
+/* Content frame subtitle */
+.frame-subtitle {
+    font-size: 14px;
+    color: #6B7280;
+    margin-top: -12px;
+    margin-bottom: 20px;
+}
+
+/* ========================================
+   THEME COLOR VARIATIONS
+   ======================================== */
+
+/* Blue Theme */
+.theme-blue .header-logo {
+    background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+    box-shadow: 0 3px 10px rgba(59, 130, 246, 0.3);
+}
+.theme-blue .progress-bar {
+    background: linear-gradient(90deg, #3B82F6 0%, #60A5FA 100%);
+}
+.theme-blue .content-frame.accent {
+    border-left-color: #3B82F6;
+}
+
+/* Purple Theme */
+.theme-purple .header-logo {
+    background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);
+    box-shadow: 0 3px 10px rgba(139, 92, 246, 0.3);
+}
+.theme-purple .progress-bar {
+    background: linear-gradient(90deg, #8B5CF6 0%, #A78BFA 100%);
+}
+.theme-purple .content-frame.accent {
+    border-left-color: #8B5CF6;
+}
+
+/* Green Theme */
+.theme-green .header-logo {
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    box-shadow: 0 3px 10px rgba(16, 185, 129, 0.3);
+}
+.theme-green .progress-bar {
+    background: linear-gradient(90deg, #10B981 0%, #34D399 100%);
+}
+.theme-green .content-frame.accent {
+    border-left-color: #10B981;
+}
+
+/* Indigo Theme */
+.theme-indigo .header-logo {
+    background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
+    box-shadow: 0 3px 10px rgba(99, 102, 241, 0.3);
+}
+.theme-indigo .progress-bar {
+    background: linear-gradient(90deg, #6366F1 0%, #818CF8 100%);
+}
+.theme-indigo .content-frame.accent {
+    border-left-color: #6366F1;
+}
+
+/* Orange Theme */
+.theme-orange .header-logo {
+    background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+    box-shadow: 0 3px 10px rgba(245, 158, 11, 0.3);
+}
+.theme-orange .progress-bar {
+    background: linear-gradient(90deg, #F59E0B 0%, #FBBF24 100%);
+}
+.theme-orange .content-frame.accent {
+    border-left-color: #F59E0B;
+}
+
+/* Red Theme */
+.theme-red .header-logo {
+    background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+    box-shadow: 0 3px 10px rgba(239, 68, 68, 0.3);
+}
+.theme-red .progress-bar {
+    background: linear-gradient(90deg, #EF4444 0%, #F87171 100%);
+}
+.theme-red .content-frame.accent {
+    border-left-color: #EF4444;
+}
+
+/* Teal Theme */
+.theme-teal .header-logo {
+    background: linear-gradient(135deg, #14B8A6 0%, #0D9488 100%);
+    box-shadow: 0 3px 10px rgba(20, 184, 166, 0.3);
+}
+.theme-teal .progress-bar {
+    background: linear-gradient(90deg, #14B8A6 0%, #2DD4BF 100%);
+}
+.theme-teal .content-frame.accent {
+    border-left-color: #14B8A6;
+}
+
+/* Pink Theme */
+.theme-pink .header-logo {
+    background: linear-gradient(135deg, #EC4899 0%, #DB2777 100%);
+    box-shadow: 0 3px 10px rgba(236, 72, 153, 0.3);
+}
+.theme-pink .progress-bar {
+    background: linear-gradient(90deg, #EC4899 0%, #F472B6 100%);
+}
+.theme-pink .content-frame.accent {
+    border-left-color: #EC4899;
+}
+
+/* Amber Theme */
+.theme-amber .header-logo {
+    background: linear-gradient(135deg, #F59E0B 0%, #B45309 100%);
+    box-shadow: 0 3px 10px rgba(245, 158, 11, 0.3);
+}
+.theme-amber .progress-bar {
+    background: linear-gradient(90deg, #F59E0B 0%, #FCD34D 100%);
+}
+.theme-amber .content-frame.accent {
+    border-left-color: #F59E0B;
+}
+
+/* Emerald Theme */
+.theme-emerald .header-logo {
+    background: linear-gradient(135deg, #10B981 0%, #047857 100%);
+    box-shadow: 0 3px 10px rgba(16, 185, 129, 0.3);
+}
+.theme-emerald .progress-bar {
+    background: linear-gradient(90deg, #10B981 0%, #34D399 100%);
+}
+.theme-emerald .content-frame.accent {
+    border-left-color: #10B981;
+}
+
+/* Rose Theme */
+.theme-rose .header-logo {
+    background: linear-gradient(135deg, #F43F5E 0%, #E11D48 100%);
+    box-shadow: 0 3px 10px rgba(244, 63, 94, 0.3);
+}
+.theme-rose .progress-bar {
+    background: linear-gradient(90deg, #F43F5E 0%, #FB7185 100%);
+}
+.theme-rose .content-frame.accent {
+    border-left-color: #F43F5E;
+}
+
+/* Cyan Theme */
+.theme-cyan .header-logo {
+    background: linear-gradient(135deg, #06B6D4 0%, #0891B2 100%);
+    box-shadow: 0 3px 10px rgba(6, 182, 212, 0.3);
+}
+.theme-cyan .progress-bar {
+    background: linear-gradient(90deg, #06B6D4 0%, #22D3EE 100%);
+}
+.theme-cyan .content-frame.accent {
+    border-left-color: #06B6D4;
+}
+
+/* Lime Theme */
+.theme-lime .header-logo {
+    background: linear-gradient(135deg, #84CC16 0%, #65A30D 100%);
+    box-shadow: 0 3px 10px rgba(132, 204, 22, 0.3);
+}
+.theme-lime .progress-bar {
+    background: linear-gradient(90deg, #84CC16 0%, #A3E635 100%);
+}
+.theme-lime .content-frame.accent {
+    border-left-color: #84CC16;
+}
+
+/* Sky Theme */
+.theme-sky .header-logo {
+    background: linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%);
+    box-shadow: 0 3px 10px rgba(14, 165, 233, 0.3);
+}
+.theme-sky .progress-bar {
+    background: linear-gradient(90deg, #0EA5E9 0%, #38BDF8 100%);
+}
+.theme-sky .content-frame.accent {
+    border-left-color: #0EA5E9;
+}
+
+/* Violet Theme */
+.theme-violet .header-logo {
+    background: linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%);
+    box-shadow: 0 3px 10px rgba(124, 58, 237, 0.3);
+}
+.theme-violet .progress-bar {
+    background: linear-gradient(90deg, #7C3AED 0%, #A78BFA 100%);
+}
+.theme-violet .content-frame.accent {
+    border-left-color: #7C3AED;
+}
+
+/* Yellow Theme */
+.theme-yellow .header-logo {
+    background: linear-gradient(135deg, #EAB308 0%, #CA8A04 100%);
+    box-shadow: 0 3px 10px rgba(234, 179, 8, 0.3);
+}
+.theme-yellow .progress-bar {
+    background: linear-gradient(90deg, #EAB308 0%, #FACC15 100%);
+}
+.theme-yellow .content-frame.accent {
+    border-left-color: #EAB308;
 }

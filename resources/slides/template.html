@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide Template - Laravel Training</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="css/theme.css">
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans Thai', 'Noto Sans SC', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Additional slide-specific styles can go here */
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <!-- Background decorations -->
+        <div class="blob-bg-1"></div>
+        <div class="blob-bg-2"></div>
+        
+        <!-- Main Content Area - The shared-components.js will wrap this in a frame -->
+        <div class="content-wrapper">
+            
+            <!-- YOUR SLIDE CONTENT GOES HERE -->
+            
+            <!-- Example: Title with icon -->
+            <div class="frame-title">
+                <i class="fa-solid fa-code"></i>
+                <span>หัวข้อหลักของ Slide</span>
+            </div>
+            
+            <!-- Example: Subtitle -->
+            <p class="frame-subtitle">คำอธิบายเพิ่มเติมเกี่ยวกับเนื้อหาใน slide นี้</p>
+            
+            <!-- Example: Content Grid -->
+            <div class="grid grid-cols-2 gap-6 flex-1">
+                
+                <!-- Left Column -->
+                <div class="layout-card">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-blue-500"></i>
+                        หัวข้อย่อย 1
+                    </h3>
+                    <ul class="space-y-3 text-sm text-gray-600">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                            <span>รายการตัวอย่างที่ 1</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                            <span>รายการตัวอย่างที่ 2</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                            <span>รายการตัวอย่างที่ 3</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Right Column -->
+                <div class="layout-card">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-terminal text-purple-500"></i>
+                        โค้ดตัวอย่าง
+                    </h3>
+                    <div class="code-block">
+                        <pre>// Example Laravel Code
+Route::get('/users', function () {
+    return User::all();
+});
+
+// Controller Example
+class UserController extends Controller
+{
+    public function index()
+    {
+        return view('users.index');
+    }
+}</pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <!-- Example: Bottom Section -->
+            <div class="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-100">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-lightbulb text-amber-500 text-xl"></i>
+                    <p class="text-sm text-gray-700">
+                        <strong>Tip:</strong> นี่คือ template สำหรับสร้าง slide ใหม่ โดยมี shared header และ footer อัตโนมัติ
+                    </p>
+                </div>
+            </div>
+            
+        </div>
+        <!-- End Content Wrapper -->
+        
+    </div>
+    
+    <!-- Shared Components Script - Automatically injects header and footer -->
+    <script src="js/shared-components.js"></script>
+</body>
+</html>

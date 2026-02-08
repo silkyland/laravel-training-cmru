@@ -1,288 +1,258 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>IDE Setup - VS Code</title>
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
-<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
-<style>
-body {
-    margin: 0;
-    padding: 0;
-    font-family: "Noto Sans Thai", "Noto Sans SC", sans-serif;
-    background-color: #f3f4f6
-    }
-.slide-container {
-    width: 1280px;
-    height: 720px;
-    position: relative;
-    background-color: #fff;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column
-    }
-.blob-bg-1 {
-    position: absolute;
-    top: -120px;
-    right: -100px;
-    width: 450px;
-    height: 450px;
-    background-color: #F0F9FF;
-    border-radius: 50%;
-    z-index: 0;
-    opacity: 0.8
-    }
-.blob-bg-2 {
-    position: absolute;
-    bottom: -50px;
-    left: -50px;
-    width: 300px;
-    height: 300px;
-    background-color: #ECFDF5;
-    border-radius: 50%;
-    z-index: 0;
-    opacity: 0.8
-    }
-.content-wrapper {
-    position: relative;
-    z-index: 10;
-    padding: 50px 80px;
-    height: 100%;
-    display: flex;
-    flex-direction: column
-    }
-.extension-card {
-    background: white;
-    border-radius: 10px;
-    padding: 12px 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    border: 1px solid #F3F4F6;
-    transition: transform 0.2s, box-shadow 0.2s
-    }
-.extension-card:hover {
-    transform: translatey(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
-    }
-.ext-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    margin-right: 12px;
-    flex-shrink: 0
-    }
-.ai-badge {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 10px;
-    font-weight: 600;
-    margin-left: 8px
-    }
-.setting-item {
-    display: flex;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px dashed #E5E7EB
-    }
-.setting-item:last-child {
-    border-bottom: none
-    }
-.setting-label {
-    color: #374151;
-    font-size: 13px;
-    font-weight: 600;
-    min-width: 140px
-    }
-.setting-value {
-    color: #6B7280;
-    font-size: 12px;
-    font-family: "Courier New", monospace
-    }
-</style>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>IDE Setup - VS Code</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+    
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="css/theme.css">
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans Thai', 'Noto Sans SC', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Page-specific styles */
+        .extension-card {
+            background: white;
+            border-radius: 10px;
+            padding: 12px 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border: 1px solid #F3F4F6;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .extension-card:hover {
+            transform: translatey(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .ext-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        .ai-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+        .setting-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px dashed #E5E7EB;
+        }
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+        .setting-label {
+            color: #374151;
+            font-size: 13px;
+            font-weight: 600;
+            min-width: 140px;
+        }
+        .setting-value {
+            color: #6B7280;
+            font-size: 12px;
+            font-family: "Courier New", monospace;
+        }
+    </style>
 </head>
 <body>
-<div class="slide-container">
-<div class="blob-bg-1"></div>
-<div class="blob-bg-2"></div>
-<div class="content-wrapper">
-<div class="mb-5">
-<div class="flex items-center space-x-3 mb-2">
-<span class="text-sm font-bold tracking-widest text-blue-500 uppercase">ENVIRONMENT SETUP</span>
-<div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
-</div>
-<h1 class="text-4xl font-black text-gray-800">IDE Setup - VS Code</h1>
-<p class="text-gray-500 mt-2 text-lg">ตั้งค่า Visual Studio Code พร้อม Extensions ที่จำเป็น</p>
-</div>
-
-<div class="grid grid-cols-12 gap-5 flex-grow pb-4">
-<div class="col-span-8 grid grid-cols-2 gap-3">
-<div class="extension-card">
-<div class="flex items-center">
-<div class="ext-icon" style="background-color: #DBEAFE;
-color: #2563EB">
-<i class="fa-solid fa-code"></i>
-</div>
-<div class="flex-grow">
-<h3 class="text-sm font-bold text-gray-800">PHP Intelephense</h3>
-<p class="text-xs text-gray-500">PHP intelligence & autocomplete</p>
-</div>
-</div>
-</div>
-
-<div class="extension-card">
-<div class="flex items-center">
-<div class="ext-icon" style="background-color: #FEF3C7;
-color: #D97706">
-<i class="fa-brands fa-laravel"></i>
-</div>
-<div class="flex-grow">
-<h3 class="text-sm font-bold text-gray-800">Laravel Extra</h3>
-<p class="text-xs text-gray-500">Laravel-specific hints</p>
-</div>
-</div>
-</div>
-
-<div class="extension-card">
-<div class="flex items-center">
-<div class="ext-icon" style="background-color: #D1FAE5;
-color: #059669">
-<i class="fa-solid fa-file-code"></i>
-</div>
-<div class="flex-grow">
-<h3 class="text-sm font-bold text-gray-800">Blade Snippets</h3>
-<p class="text-xs text-gray-500">Blade template snippets</p>
-</div>
-</div>
-</div>
-
-<div class="extension-card">
-<div class="flex items-center">
-<div class="ext-icon" style="background-color: #E0E7FF;
-color: #4F46E5">
-<i class="fa-solid fa-wand-magic-sparkles"></i>
-</div>
-<div class="flex-grow">
-<h3 class="text-sm font-bold text-gray-800">Laravel Formatter</h3>
-<p class="text-xs text-gray-500">Format blade files</p>
-</div>
-</div>
-</div>
-
-<div class="extension-card">
-<div class="flex items-center">
-<div class="ext-icon" style="background-color: #F3E8FF;
-color: #7C3AED">
-<i class="fa-brands fa-git-alt"></i>
-</div>
-<div class="flex-grow">
-<h3 class="text-sm font-bold text-gray-800">GitLens</h3>
-<p class="text-xs text-gray-500">Git supercharged</p>
-</div>
-</div>
-</div>
-
-<div class="extension-card">
-<div class="flex items-center">
-<div class="ext-icon" style="background-color: #FEE2E2;
-color: #DC2626">
-<i class="fa-solid fa-bug"></i>
-</div>
-<div class="flex-grow">
-<h3 class="text-sm font-bold text-gray-800">PHP Debug</h3>
-<p class="text-xs text-gray-500">Debugging support</p>
-</div>
-</div>
-</div>
-
-<div class="extension-card border-2 border-purple-200">
-<div class="flex items-center">
-<div class="ext-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-color: white">
-<i class="fa-solid fa-robot"></i>
-</div>
-<div class="flex-grow">
-<h3 class="text-sm font-bold text-gray-800">GitHub Copilot <span class="ai-badge">AI</span></h3>
-<p class="text-xs text-gray-500">AI code completion</p>
-</div>
-</div>
-</div>
-
-<div class="extension-card border-2 border-purple-200">
-<div class="flex items-center">
-<div class="ext-icon" style="background: linear-gradient(135deg, #10B981 0%, #059669 100%);
-color: white">
-<i class="fa-solid fa-brain"></i>
-</div>
-<div class="flex-grow">
-<h3 class="text-sm font-bold text-gray-800">CodeGeeX <span class="ai-badge">AI</span></h3>
-<p class="text-xs text-gray-500">AI programming assistant</p>
-</div>
-</div>
-</div>
-</div>
-
-<div class="col-span-4 flex flex-col gap-4">
-<div class="bg-white rounded-xl p-5 border border-gray-200 h-full">
-<div class="flex items-center mb-4">
-<div class="w-10 h-10 rounded-lg bg-blue-500 flex items-center justify-center mr-3">
-<i class="fa-solid fa-cog text-white"></i>
-</div>
-<h3 class="text-base font-bold text-gray-800">VS Code Settings</h3>
-</div>
-
-<div class="space-y-1">
-<div class="setting-item">
-<span class="setting-label">Auto Save</span>
-<span class="setting-value">onFocusChange</span>
-</div>
-<div class="setting-item">
-<span class="setting-label">PHP Path</span>
-<span class="setting-value">/usr/bin/php</span>
-</div>
-<div class="setting-item">
-<span class="setting-label">Format On Save</span>
-<span class="setting-value">true</span>
-</div>
-<div class="setting-item">
-<span class="setting-label">Tab Size</span>
-<span class="setting-value">4</span>
-</div>
-<div class="setting-item">
-<span class="setting-label">Word Wrap</span>
-<span class="setting-value">on</span>
-</div>
-</div>
-
-<div class="mt-5 pt-4 border-t border-gray-200">
-<div class="flex items-center mb-3">
-<div class="w-8 h-8 rounded-lg bg-green-500 flex items-center justify-center mr-2">
-<i class="fa-solid fa-terminal text-white text-sm"></i>
-</div>
-<h4 class="text-sm font-bold text-gray-800">Terminal</h4>
-</div>
-<p class="text-xs text-gray-600 mb-2">Use integrated terminal for Laravel commands:</p>
-<div class="bg-gray-900 rounded-lg p-3">
-<code class="text-green-400 text-xs">php artisan serve</code><br>
-<code class="text-green-400 text-xs">php artisan migrate</code><br>
-<code class="text-green-400 text-xs">php artisan tinker</code>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-<div class="mt-auto pt-4 flex justify-between items-center text-gray-400 text-xs border-t border-gray-100">
-<p>LARAVEL + AI TRAINING COURSE</p>
-<p>PAGE 10</p>
-</div>
-</div>
-</div>
+    <div class="slide-container">
+        <!-- Background decorations -->
+        <div class="blob-bg-1"></div>
+        <div class="blob-bg-2"></div>
+        
+        <!-- Main Content -->
+        <div class="content-wrapper">
+            
+            <!-- Content Grid -->
+            <div class="grid grid-cols-12 gap-5 flex-grow">
+                <div class="col-span-8 grid grid-cols-2 gap-3">
+                    <div class="extension-card">
+                        <div class="flex items-center">
+                            <div class="ext-icon" style="background-color: #DBEAFE; color: #2563EB">
+                                <i class="fa-solid fa-code"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="text-sm font-bold text-gray-800">PHP Intelephense</h3>
+                                <p class="text-xs text-gray-500">PHP intelligence & autocomplete</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="extension-card">
+                        <div class="flex items-center">
+                            <div class="ext-icon" style="background-color: #FEF3C7; color: #D97706">
+                                <i class="fa-brands fa-laravel"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="text-sm font-bold text-gray-800">Laravel Extra</h3>
+                                <p class="text-xs text-gray-500">Laravel-specific hints</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="extension-card">
+                        <div class="flex items-center">
+                            <div class="ext-icon" style="background-color: #D1FAE5; color: #059669">
+                                <i class="fa-solid fa-file-code"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="text-sm font-bold text-gray-800">Blade Snippets</h3>
+                                <p class="text-xs text-gray-500">Blade template snippets</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="extension-card">
+                        <div class="flex items-center">
+                            <div class="ext-icon" style="background-color: #E0E7FF; color: #4F46E5">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="text-sm font-bold text-gray-800">Laravel Formatter</h3>
+                                <p class="text-xs text-gray-500">Format blade files</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="extension-card">
+                        <div class="flex items-center">
+                            <div class="ext-icon" style="background-color: #F3E8FF; color: #7C3AED">
+                                <i class="fa-brands fa-git-alt"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="text-sm font-bold text-gray-800">GitLens</h3>
+                                <p class="text-xs text-gray-500">Git supercharged</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="extension-card">
+                        <div class="flex items-center">
+                            <div class="ext-icon" style="background-color: #FEE2E2; color: #DC2626">
+                                <i class="fa-solid fa-bug"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="text-sm font-bold text-gray-800">PHP Debug</h3>
+                                <p class="text-xs text-gray-500">Debugging support</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="extension-card border-2 border-purple-200">
+                        <div class="flex items-center">
+                            <div class="ext-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="text-sm font-bold text-gray-800">GitHub Copilot <span class="ai-badge">AI</span></h3>
+                                <p class="text-xs text-gray-500">AI code completion</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="extension-card border-2 border-purple-200">
+                        <div class="flex items-center">
+                            <div class="ext-icon" style="background: linear-gradient(135deg, #10B981 0%, #059669 100%); color: white">
+                                <i class="fa-solid fa-brain"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="text-sm font-bold text-gray-800">CodeGeeX <span class="ai-badge">AI</span></h3>
+                                <p class="text-xs text-gray-500">AI programming assistant</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-span-4 flex flex-col gap-4">
+                    <div class="bg-white rounded-xl p-5 border border-gray-200 h-full">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-blue-500 flex items-center justify-center mr-3">
+                                <i class="fa-solid fa-cog text-white"></i>
+                            </div>
+                            <h3 class="text-base font-bold text-gray-800">VS Code Settings</h3>
+                        </div>
+                        
+                        <div class="space-y-1">
+                            <div class="setting-item">
+                                <span class="setting-label">Auto Save</span>
+                                <span class="setting-value">onFocusChange</span>
+                            </div>
+                            <div class="setting-item">
+                                <span class="setting-label">PHP Path</span>
+                                <span class="setting-value">/usr/bin/php</span>
+                            </div>
+                            <div class="setting-item">
+                                <span class="setting-label">Format On Save</span>
+                                <span class="setting-value">true</span>
+                            </div>
+                            <div class="setting-item">
+                                <span class="setting-label">Tab Size</span>
+                                <span class="setting-value">4</span>
+                            </div>
+                            <div class="setting-item">
+                                <span class="setting-label">Word Wrap</span>
+                                <span class="setting-value">on</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-5 pt-4 border-t border-gray-200">
+                            <div class="flex items-center mb-3">
+                                <div class="w-8 h-8 rounded-lg bg-green-500 flex items-center justify-center mr-2">
+                                    <i class="fa-solid fa-terminal text-white text-sm"></i>
+                                </div>
+                                <h4 class="text-sm font-bold text-gray-800">Terminal</h4>
+                            </div>
+                            <p class="text-xs text-gray-600 mb-2">Use integrated terminal for Laravel commands:</p>
+                            <div class="code-block">
+                                <code class="text-green-400 text-xs">php artisan serve</code><br>
+                                <code class="text-green-400 text-xs">php artisan migrate</code><br>
+                                <code class="text-green-400 text-xs">php artisan tinker</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <!-- End Content Wrapper -->
+        
+    </div>
+    
+    <!-- Shared Components Script - Automatically injects header and footer -->
+    <script src="js/shared-components.js"></script>
 </body>
 </html>
