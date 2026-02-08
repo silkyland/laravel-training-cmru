@@ -354,12 +354,6 @@ body {
 .content-frame--default {
     margin: 64px 24px 42px 24px;
     padding: 20px 32px 16px 32px;
-    background: rgba(255,255,255,0.85);
-    border-radius: 14px;
-    border: 1px solid rgba(0,0,0,0.06);
-    box-shadow:
-        0 2px 12px rgba(0,0,0,0.03),
-        inset 0 1px 0 rgba(255,255,255,0.9);
     flex: 1;
     overflow: hidden;
 }

@@ -1,97 +1,168 @@
 <!DOCTYPE html>
 <html lang="th">
-
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Validation</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"
-        rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
-    <link href="css/theme.css" rel="stylesheet" />
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Validation</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="css/theme.css" rel="stylesheet"/>
+<style>
+.vc { padding:12px 14px; }
+.vi { width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
+.cb { background:#1F2937; color:#10B981; padding:6px 10px; border-radius:6px; font-family:"Courier New",monospace; font-size:10px; line-height:1.5; }
+.rt { display:inline-block; padding:1px 6px; background:#DBEAFE; color:#1E40AF; border-radius:3px; font-size:9px; font-weight:600; margin:1px; }
+</style>
 </head>
-
 <body>
-    <div class="slide-container">
-        <div class="blob-bg-1"></div>
-        <div class="blob-bg-2"></div>
-        <div class="content-wrapper">
-            <div class="mb-5">
-                <div class="flex items-center space-x-3 mb-2">
-                    <span class="text-sm font-bold tracking-widest text-blue-500 uppercase">FORMS & VALIDATION</span>
-                    <div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
-                </div>
-                <h1 class="text-4xl font-black text-gray-800">Validation</h1>
-                <p class="text-gray-500 mt-2 text-lg">Validating Incoming Data</p>
-            </div>
+<div class="slide-container">
+<div class="blob-bg-1"></div>
+<div class="blob-bg-2"></div>
+<div class="content-wrapper">
 
-            <div class="grid grid-cols-2 gap-6 flex-grow pb-4">
-                <div class="layout-card">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 rounded-lg bg-red-500 flex items-center justify-center mr-3">
-                            <i class="fa-solid fa-check-double text-white"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold text-gray-800">Validation Logic</h3>
-                            <p class="text-xs text-gray-500">ตรวจสอบความถูกต้อง</p>
-                        </div>
-                    </div>
-                    <div class="space-y-3">
-                        <p class="text-xs font-bold text-gray-700 mb-1">Controller Validation:</p>
-                        <div class="code-block">
-                            public function store(Request $request) {
-                            $validated = $request->validate([
-                            'title' => 'required|max:255',
-                            'body' => 'required',
-                            ]);
+<div class="mb-3">
+<span class="text-xs font-bold tracking-widest text-red-500 uppercase">FORMS & VALIDATION</span>
+<h1 class="text-3xl font-black text-gray-800">Validation</h1>
+<p class="text-gray-500 mt-1 text-sm">Validating Incoming Data</p>
+</div>
 
-                            // ถ้าไม่ผ่าน จะ redirect กลับอัตโนมัติ
-                            }
-                        </div>
-                    </div>
-                </div>
+<!-- Top row -->
+<div class="grid grid-cols-3 gap-3 mb-3">
 
-                <div class="layout-card">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 rounded-lg bg-purple-500 flex items-center justify-center mr-3">
-                            <i class="fa-solid fa-exclamation-circle text-white"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold text-gray-800">Displaying Errors</h3>
-                            <p class="text-xs text-gray-500">แสดงข้อผิดพลาด</p>
-                        </div>
-                    </div>
-                    <div class="space-y-3">
-                        <div>
-                            <p class="text-xs font-bold text-gray-700 mb-1">Blade Template:</p>
-                            <div class="code-block">
-                                @if ($errors->any())
-                                &lt;div class="alert alert-danger"&gt;
-                                @foreach ($errors->all() as $error)
-                                &lt;li&gt;{{ $error }}&lt;/li&gt;
-                                @endforeach
-                                &lt;/div&gt;
-                                @endif
-                            </div>
-                        </div>
-                        <div>
-                            <p class="text-xs font-bold text-gray-700 mb-1">Individual Field:</p>
-                            <div class="code-block">
-                                @error('title')
-                                &lt;div class="text-red-500"&gt;{{ $message }}&lt;/div&gt;
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- Validation Logic -->
+<div class="vc">
+<div class="flex items-center gap-2 mb-2">
+<div class="vi" style="background:#FEE2E2;color:#DC2626"><i class="fa-solid fa-check-double"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">Controller Validation</h3><p class="text-xs text-gray-400">ตรวจสอบใน Controller</p></div>
+</div>
+<div class="cb">
+public function <span style="color:#FBBF24">store</span>(Request $request) {<br>
+&nbsp;&nbsp;$validated = $request-><span style="color:#FBBF24">validate</span>([<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#A78BFA">'title'</span> => <span style="color:#A78BFA">'required|max:255'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#A78BFA">'body'</span> => <span style="color:#A78BFA">'required'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#A78BFA">'email'</span> => <span style="color:#A78BFA">'required|email|unique:users'</span>,<br>
+&nbsp;&nbsp;]);<br>
+&nbsp;&nbsp;Post::create($validated); <span style="color:#9CA3AF">// auto redirect if fail</span><br>
+}
+</div>
+</div>
 
-        </div>
-    </div>
+<!-- Displaying Errors -->
+<div class="vc">
+<div class="flex items-center gap-2 mb-2">
+<div class="vi" style="background:#F3E8FF;color:#7C3AED"><i class="fa-solid fa-exclamation-circle"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">Displaying Errors</h3><p class="text-xs text-gray-400">แสดงข้อผิดพลาด</p></div>
+</div>
+<p class="text-xs font-bold text-gray-600 mb-1">All Errors:</p>
+<div class="cb mb-2">
+<span style="color:#60A5FA">@if</span> ($errors->any())<br>
+&nbsp;&nbsp;<span style="color:#60A5FA">@foreach</span> ($errors->all() as $error)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;{{ $error }}&lt;/li&gt;<br>
+&nbsp;&nbsp;<span style="color:#60A5FA">@endforeach</span><br>
+<span style="color:#60A5FA">@endif</span>
+</div>
+<p class="text-xs font-bold text-gray-600 mb-1">Per Field:</p>
+<div class="cb">
+<span style="color:#60A5FA">@error</span>(<span style="color:#A78BFA">'title'</span>)<br>
+&nbsp;&nbsp;&lt;span class=<span style="color:#A78BFA">"text-red-500"</span>&gt;{{ $message }}&lt;/span&gt;<br>
+<span style="color:#60A5FA">@enderror</span>
+</div>
+</div>
+
+<!-- Common Rules -->
+<div class="vc">
+<div class="flex items-center gap-2 mb-2">
+<div class="vi" style="background:#DBEAFE;color:#2563EB"><i class="fa-solid fa-list-check"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">Common Rules</h3><p class="text-xs text-gray-400">กฎที่ใช้บ่อย</p></div>
+</div>
+<div class="flex flex-wrap gap-1 mb-2">
+<span class="rt">required</span><span class="rt">email</span><span class="rt">max:255</span><span class="rt">min:8</span><span class="rt">unique:table</span><span class="rt">exists:table</span><span class="rt">confirmed</span><span class="rt">nullable</span><span class="rt">string</span><span class="rt">integer</span><span class="rt">numeric</span><span class="rt">date</span><span class="rt">image</span><span class="rt">mimes:jpg,png</span><span class="rt">in:a,b,c</span><span class="rt">regex:/pattern/</span>
+</div>
+<div class="cb">
+<span style="color:#9CA3AF">// Array syntax</span><br>
+<span style="color:#A78BFA">'password'</span> => [<br>
+&nbsp;&nbsp;<span style="color:#A78BFA">'required'</span>,<br>
+&nbsp;&nbsp;<span style="color:#A78BFA">'min:8'</span>,<br>
+&nbsp;&nbsp;<span style="color:#A78BFA">'confirmed'</span>,<br>
+],
+</div>
+</div>
+
+</div>
+
+<!-- Bottom row -->
+<div class="grid grid-cols-3 gap-3 flex-grow">
+
+<!-- Form Request -->
+<div class="vc">
+<div class="flex items-center gap-2 mb-2">
+<div class="vi" style="background:#D1FAE5;color:#059669"><i class="fa-solid fa-file-shield"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">Form Request</h3><p class="text-xs text-gray-400">แยก Validation ออกจาก Controller</p></div>
+</div>
+<div class="cb mb-2">
+<span style="color:#9CA3AF">// php artisan make:request StorePostRequest</span><br><br>
+class StorePostRequest extends <span style="color:#60A5FA">FormRequest</span><br>
+{<br>
+&nbsp;&nbsp;public function <span style="color:#FBBF24">rules</span>() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#A78BFA">'title'</span> => <span style="color:#A78BFA">'required|max:255'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#A78BFA">'body'</span> => <span style="color:#A78BFA">'required'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;];<br>
+&nbsp;&nbsp;}<br>
+}
+</div>
+</div>
+
+<!-- Custom Messages -->
+<div class="vc">
+<div class="flex items-center gap-2 mb-2">
+<div class="vi" style="background:#FEF3C7;color:#D97706"><i class="fa-solid fa-language"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">Custom Messages</h3><p class="text-xs text-gray-400">ข้อความภาษาไทย</p></div>
+</div>
+<div class="cb mb-2">
+<span style="color:#9CA3AF">// In FormRequest</span><br>
+public function <span style="color:#FBBF24">messages</span>() {<br>
+&nbsp;&nbsp;return [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#A78BFA">'title.required'</span> =><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#A78BFA">'กรุณากรอกชื่อ'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#A78BFA">'email.email'</span> =><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#A78BFA">'รูปแบบอีเมลไม่ถูกต้อง'</span>,<br>
+&nbsp;&nbsp;];<br>
+}
+</div>
+</div>
+
+<!-- Validation Flow -->
+<div class="vc">
+<div class="flex items-center gap-2 mb-2">
+<div class="vi" style="background:#E0E7FF;color:#4F46E5"><i class="fa-solid fa-diagram-project"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">Validation Flow</h3><p class="text-xs text-gray-400">กระบวนการทำงาน</p></div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="bg-blue-50 rounded-md px-3 py-1 text-center border border-blue-200 w-full">
+<p class="text-xs font-bold text-blue-700">1. Request เข้ามา</p>
+</div>
+<i class="fa-solid fa-arrow-down text-blue-300 text-xs"></i>
+<div class="bg-blue-50 rounded-md px-3 py-1 text-center border border-blue-200 w-full">
+<p class="text-xs font-bold text-blue-700">2. validate() ตรวจสอบ</p>
+</div>
+<i class="fa-solid fa-arrow-down text-blue-300 text-xs"></i>
+<div class="bg-red-50 rounded-md px-3 py-1 text-center border border-red-200 w-full">
+<p class="text-xs font-bold text-red-700">3a. Fail → redirect + $errors</p>
+</div>
+<i class="fa-solid fa-arrow-down text-green-300 text-xs"></i>
+<div class="bg-green-50 rounded-md px-3 py-1 text-center border border-green-200 w-full">
+<p class="text-xs font-bold text-green-700">3b. Pass → $validated data</p>
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
     <!-- Shared Components Script - Automatically injects header and footer -->
     <script src="js/shared-components.js"></script>
 </body>
-
 </html>

@@ -9,95 +9,11 @@
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
 <link href="css/theme.css" rel="stylesheet"/>
 <style>
-body {
-    margin: 0;
-    padding: 0;
-    font-family: "Noto Sans Thai", "Noto Sans SC", sans-serif;
-    background-color: #f3f4f6
-    }
-.slide-container {
-    width: 1280px;
-    height: 720px;
-    position: relative;
-    background-color: #fff;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column
-    }
-.blob-bg-1 {
-    position: absolute;
-    top: -120px;
-    right: -100px;
-    width: 450px;
-    height: 450px;
-    background-color: #F0F9FF;
-    border-radius: 50%;
-    z-index: 0;
-    opacity: 0.8
-    }
-.blob-bg-2 {
-    position: absolute;
-    bottom: -50px;
-    left: -50px;
-    width: 300px;
-    height: 300px;
-    background-color: #ECFDF5;
-    border-radius: 50%;
-    z-index: 0;
-    opacity: 0.8
-    }
-.content-wrapper {
-    position: relative;
-    z-index: 10;
-    padding: 50px 80px;
-    height: 100%;
-    display: flex;
-    flex-direction: column
-    }
-.relation-card {
-    background: white;
-    border-radius: 12px;
-    padding: 18px 22px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    border: 1px solid #F3F4F6;
-    height: 100%
-    }
-.code-block {
-    background: #1F2937;
-    color: #10B981;
-    padding: 12px 16px;
-    border-radius: 8px;
-    font-family: "Courier New", monospace;
-    font-size: 12px;
-    line-height: 1.6
-    }
-.method-badge {
-    display: inline-block;
-    padding: 4px 10px;
-    background-color: #DBEAFE;
-    color: #1E40AF;
-    border-radius: 6px;
-    font-size: 11px;
-    font-weight: 600;
-    margin: 3px
-    }
-.relation-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px
-    }
-.example-box {
-    background: #F9FAFB;
-    border-left: 3px solid #10B981;
-    padding: 10px 14px;
-    border-radius: 0 8px 8px 0;
-    font-size: 12px;
-    color: #374151
-    }
+.rc { padding:12px 14px; }
+.ri { width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
+.cb { background:#1F2937; color:#10B981; padding:6px 10px; border-radius:6px; font-family:"Courier New",monospace; font-size:10px; line-height:1.5; }
+.mb { display:inline-block; padding:2px 8px; background:#DBEAFE; color:#1E40AF; border-radius:4px; font-size:10px; font-weight:600; }
+.eb { background:#F9FAFB; border-left:3px solid #10B981; padding:6px 10px; border-radius:0 6px 6px 0; font-size:11px; color:#374151; }
 </style>
 </head>
 <body>
@@ -105,135 +21,97 @@ body {
 <div class="blob-bg-1"></div>
 <div class="blob-bg-2"></div>
 <div class="content-wrapper">
-<div class="mb-5">
-<div class="flex items-center space-x-3 mb-2">
-<span class="text-sm font-bold tracking-widest text-blue-500 uppercase">ELOQUENT RELATIONSHIPS</span>
-<div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
-</div>
-<h1 class="text-4xl font-black text-gray-800">Eloquent Relationships - Part 1</h1>
-<p class="text-gray-500 mt-2 text-lg">One-to-One และ One-to-Many Relationships</p>
+
+<div class="mb-3">
+<span class="text-xs font-bold tracking-widest text-blue-500 uppercase">ELOQUENT RELATIONSHIPS</span>
+<h1 class="text-3xl font-black text-gray-800">Eloquent Relationships - Part 1</h1>
+<p class="text-gray-500 mt-1 text-sm">One-to-One และ One-to-Many Relationships</p>
 </div>
 
-<div class="grid grid-cols-2 gap-5 flex-grow pb-4">
-<div class="relation-card">
-<div class="flex items-center mb-4">
-<div class="relation-icon" style="background-color: #DBEAFE;
-color: #2563EB">
-<i class="fa-solid fa-user"></i>
+<!-- Top row: One-to-One + One-to-Many -->
+<div class="grid grid-cols-2 gap-3 mb-3">
+
+<div class="rc">
+<div class="flex items-center gap-2 mb-2">
+<div class="ri" style="background:#DBEAFE;color:#2563EB"><i class="fa-solid fa-user"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">One-to-One</h3><p class="text-xs text-gray-400">1 ต่อ 1 Relationship</p></div>
 </div>
-<div>
-<h3 class="text-xl font-bold text-gray-800">One-to-One</h3>
-<p class="text-xs text-gray-500 mt-1">1 ต่อ 1 Relationship</p>
-</div>
-</div>
-<div class="flex gap-3 mb-4">
-<span class="method-badge">hasOne()</span>
-<span class="method-badge">belongsTo()</span>
-</div>
-<div class="space-y-3">
-<div>
-<p class="text-xs font-bold text-gray-700 mb-1">User Model:</p>
-<div class="code-block">
-public function profile() {
-    return $this->hasOne(Profile::class);
+<div class="flex gap-2 mb-2"><span class="mb">hasOne()</span><span class="mb">belongsTo()</span></div>
+<p class="text-xs font-bold text-gray-600 mb-1">User Model:</p>
+<div class="cb mb-2">
+<span style="color:#60A5FA">public function</span> <span style="color:#FBBF24">profile</span>() {<br>
+&nbsp;&nbsp;return $this-><span style="color:#FBBF24">hasOne</span>(Profile::class);<br>
 }
 </div>
-</div>
-<div>
-<p class="text-xs font-bold text-gray-700 mb-1">Profile Model:</p>
-<div class="code-block">
-public function user() {
-    return $this->belongsTo(User::class);
+<p class="text-xs font-bold text-gray-600 mb-1">Profile Model:</p>
+<div class="cb mb-2">
+<span style="color:#60A5FA">public function</span> <span style="color:#FBBF24">user</span>() {<br>
+&nbsp;&nbsp;return $this-><span style="color:#FBBF24">belongsTo</span>(User::class);<br>
 }
 </div>
-</div>
-<div class="example-box">
-<strong>Usage:</strong><br>
-$user->profile->phone<br>
-$profile->user->name
-</div>
-</div>
+<div class="eb"><strong>Usage:</strong> $user->profile->phone / $profile->user->name</div>
 </div>
 
-<div class="relation-card">
-<div class="flex items-center mb-4">
-<div class="relation-icon" style="background-color: #D1FAE5;
-color: #059669">
-<i class="fa-solid fa-users"></i>
+<div class="rc">
+<div class="flex items-center gap-2 mb-2">
+<div class="ri" style="background:#D1FAE5;color:#059669"><i class="fa-solid fa-users"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">One-to-Many</h3><p class="text-xs text-gray-400">1 ต่อ หลาย Relationship</p></div>
 </div>
-<div>
-<h3 class="text-xl font-bold text-gray-800">One-to-Many</h3>
-<p class="text-xs text-gray-500 mt-1">1 ต่อ หลาย Relationship</p>
-</div>
-</div>
-<div class="flex gap-3 mb-4">
-<span class="method-badge">hasMany()</span>
-<span class="method-badge">belongsTo()</span>
-</div>
-<div class="space-y-3">
-<div>
-<p class="text-xs font-bold text-gray-700 mb-1">User Model:</p>
-<div class="code-block">
-public function orders() {
-    return $this->hasMany(Order::class);
+<div class="flex gap-2 mb-2"><span class="mb">hasMany()</span><span class="mb">belongsTo()</span></div>
+<p class="text-xs font-bold text-gray-600 mb-1">User Model:</p>
+<div class="cb mb-2">
+<span style="color:#60A5FA">public function</span> <span style="color:#FBBF24">orders</span>() {<br>
+&nbsp;&nbsp;return $this-><span style="color:#FBBF24">hasMany</span>(Order::class);<br>
 }
 </div>
-</div>
-<div>
-<p class="text-xs font-bold text-gray-700 mb-1">Order Model:</p>
-<div class="code-block">
-public function user() {
-    return $this->belongsTo(User::class);
+<p class="text-xs font-bold text-gray-600 mb-1">Order Model:</p>
+<div class="cb mb-2">
+<span style="color:#60A5FA">public function</span> <span style="color:#FBBF24">user</span>() {<br>
+&nbsp;&nbsp;return $this-><span style="color:#FBBF24">belongsTo</span>(User::class);<br>
 }
 </div>
-</div>
-<div class="example-box">
-<strong>Usage:</strong><br>
-$user->orders->each(...)<br>
-$order->user->name
-</div>
-</div>
-</div>
+<div class="eb"><strong>Usage:</strong> $user->orders->each(...) / $order->user->name</div>
 </div>
 
-<div class="grid grid-cols-2 gap-4 mt-4">
-<div class="relation-card">
-<div class="flex items-center mb-3">
-<div class="w-10 h-10 rounded-lg bg-yellow-500 flex items-center justify-center mr-3">
-<i class="fa-solid fa-bolt text-white"></i>
 </div>
-<div>
-<h3 class="text-lg font-bold text-gray-800">Lazy Loading</h3>
-<p class="text-xs text-gray-500">Default Behavior</p>
+
+<!-- Bottom row: Lazy Loading + Eager Loading -->
+<div class="grid grid-cols-2 gap-3 flex-grow">
+
+<div class="rc">
+<div class="flex items-center gap-2 mb-2">
+<div class="ri" style="background:#FEF3C7;color:#D97706"><i class="fa-solid fa-bolt"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">Lazy Loading</h3><p class="text-xs text-gray-400">Default Behavior (N+1 Problem)</p></div>
 </div>
-</div>
-<p class="text-sm text-gray-600 mb-2">โหลดข้อมูลเมื่อเข้าถึงเท่านั้น</p>
-<div class="example-box">
+<p class="text-xs text-gray-600 mb-2">โหลดข้อมูลเมื่อเข้าถึงเท่านั้น — ทำให้เกิด Query ซ้ำ</p>
+<div class="cb mb-2">
 $users = User::all();<br>
-foreach($users as $user) {<br>
-&nbsp;&nbsp;$user->orders; // Query ทุกรอบ<br>
+<span style="color:#60A5FA">foreach</span>($users as $user) {<br>
+&nbsp;&nbsp;$user->orders; <span style="color:#EF4444">// Query ทุกรอบ!</span><br>
 }
+</div>
+<div class="bg-red-50 rounded-md p-2">
+<p class="text-xs text-red-700"><i class="fa-solid fa-triangle-exclamation mr-1"></i> 100 users = 101 queries (N+1)</p>
 </div>
 </div>
 
-<div class="relation-card">
-<div class="flex items-center mb-3">
-<div class="w-10 h-10 rounded-lg bg-purple-500 flex items-center justify-center mr-3">
-<i class="fa-solid fa-rocket text-white"></i>
+<div class="rc">
+<div class="flex items-center gap-2 mb-2">
+<div class="ri" style="background:#F3E8FF;color:#7C3AED"><i class="fa-solid fa-rocket"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">Eager Loading</h3><p class="text-xs text-gray-400">Prevent N+1 Problem</p></div>
 </div>
-<div>
-<h3 class="text-lg font-bold text-gray-800">Eager Loading</h3>
-<p class="text-xs text-gray-500">Prevent N+1 Problem</p>
-</div>
-</div>
-<p class="text-sm text-gray-600 mb-2">โหลด relationships พร้อมกัน</p>
-<div class="example-box">
-$users = User::with('orders')->get();<br>
-foreach($users as $user) {<br>
-&nbsp;&nbsp;$user->orders; // ไม่มี Query เพิ่ม<br>
+<p class="text-xs text-gray-600 mb-2">โหลด relationships พร้อมกัน — ลด Query เหลือ 2 ครั้ง</p>
+<div class="cb mb-2">
+$users = User::<span style="color:#FBBF24">with</span>(<span style="color:#A78BFA">'orders'</span>)->get();<br>
+<span style="color:#60A5FA">foreach</span>($users as $user) {<br>
+&nbsp;&nbsp;$user->orders; <span style="color:#10B981">// ไม่มี Query เพิ่ม</span><br>
 }
 </div>
+<div class="bg-green-50 rounded-md p-2">
+<p class="text-xs text-green-700"><i class="fa-solid fa-check mr-1"></i> 100 users = 2 queries only!</p>
 </div>
+</div>
+
 </div>
 
 </div>

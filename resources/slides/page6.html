@@ -9,95 +9,10 @@
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
 <link href="css/theme.css" rel="stylesheet"/>
 <style>
-body {
-    margin: 0;
-    padding: 0;
-    font-family: "Noto Sans Thai", "Noto Sans SC", sans-serif;
-    background-color: #f3f4f6
-    }
-.slide-container {
-    width: 1280px;
-    height: 720px;
-    position: relative;
-    background-color: #fff;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column
-    }
-.blob-bg-1 {
-    position: absolute;
-    top: -120px;
-    right: -100px;
-    width: 450px;
-    height: 450px;
-    background-color: #F0F9FF;
-    border-radius: 50%;
-    z-index: 0;
-    opacity: 0.8
-    }
-.blob-bg-2 {
-    position: absolute;
-    bottom: -50px;
-    left: -50px;
-    width: 300px;
-    height: 300px;
-    background-color: #ECFDF5;
-    border-radius: 50%;
-    z-index: 0;
-    opacity: 0.8
-    }
-.content-wrapper {
-    position: relative;
-    z-index: 10;
-    padding: 50px 80px;
-    height: 100%;
-    display: flex;
-    flex-direction: column
-    }
-.ai-tool-card {
-    background: white;
-    border-radius: 16px;
-    padding: 20px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-    border: 1px solid #F3F4F6;
-    height: 100%;
-    display: flex;
-    flex-direction: column
-    }
-.tool-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    margin-bottom: 12px
-    }
-.feature-list {
-    list-style: none;
-    padding: 0;
-    margin: 0
-    }
-.feature-list li {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 6px;
-    font-size: 12px;
-    color: #4B5563;
-    line-height: 1.4
-    }
-.feature-list li i {
-    margin-right: 8px;
-    margin-top: 3px;
-    flex-shrink: 0
-    }
-.practice-card {
-    background: white;
-    border-radius: 12px;
-    padding: 16px;
-    border: 1px solid #F3F4F6
-    }
+.tc { padding:12px 14px; }
+.ti { width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
+.fl li { display:flex; align-items:center; margin-bottom:4px; font-size:11px; color:#4B5563; }
+.fl li i { margin-right:6px; flex-shrink:0; font-size:10px; }
 </style>
 </head>
 <body>
@@ -105,168 +20,125 @@ body {
 <div class="blob-bg-1"></div>
 <div class="blob-bg-2"></div>
 <div class="content-wrapper">
-<div class="mb-5">
-<div class="flex items-center space-x-3 mb-2">
-<span class="text-sm font-bold tracking-widest text-blue-500 uppercase">AI TOOLS FOR DEVELOPMENT</span>
-<div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
-</div>
-<h1 class="text-4xl font-black text-gray-800">เครื่องมือ AI สำหรับการพัฒนาโปรแกรม</h1>
-<p class="text-gray-500 mt-2 text-lg">เลือกเครื่องมือที่เหมาะสมและใช้งานอย่างมีประสิทธิภาพ</p>
+
+<div class="mb-3">
+<span class="text-xs font-bold tracking-widest text-blue-500 uppercase">AI TOOLS FOR DEVELOPMENT</span>
+<h1 class="text-3xl font-black text-gray-800">เครื่องมือ AI สำหรับการพัฒนาโปรแกรม</h1>
+<p class="text-gray-500 mt-1 text-sm">เลือกเครื่องมือที่เหมาะสมและใช้งานอย่างมีประสิทธิภาพ</p>
 </div>
 
-<div class="grid grid-cols-12 gap-5 flex-grow pb-4">
-<div class="col-span-7 flex flex-col gap-4">
-<div class="grid grid-cols-3 gap-4">
-<div class="ai-tool-card">
-<div class="tool-icon" style="background-color: #E0E7FF;
-color: #4F46E5">
-<i class="fa-solid fa-robot"></i>
+<!-- Top row: 3 AI tools + Benefits -->
+<div class="grid grid-cols-4 gap-3 mb-3">
+
+<div class="tc">
+<div class="flex items-center gap-2 mb-2">
+<div class="ti" style="background:#E0E7FF;color:#4F46E5"><i class="fa-solid fa-robot"></i></div>
+<h3 class="text-sm font-bold text-gray-800">Claude</h3>
 </div>
-<h3 class="text-lg font-bold text-gray-800 mb-2">Claude</h3>
-<ul class="feature-list">
-<li><i class="fa-solid fa-check-circle text-indigo-500"></i><span>Context window ใหญ่</span></li>
-<li><i class="fa-solid fa-check-circle text-indigo-500"></i><span>Code generation คุณภาพสูง</span></li>
-<li><i class="fa-solid fa-check-circle text-indigo-500"></i><span>ดีสำหรับ complex tasks</span></li>
-<li><i class="fa-solid fa-check-circle text-indigo-500"></i><span>Long conversations</span></li>
+<ul class="fl" style="list-style:none;padding:0;margin:0">
+<li><i class="fa-solid fa-check-circle text-indigo-500"></i>Context window ใหญ่</li>
+<li><i class="fa-solid fa-check-circle text-indigo-500"></i>Code generation คุณภาพสูง</li>
+<li><i class="fa-solid fa-check-circle text-indigo-500"></i>ดีสำหรับ complex tasks</li>
+<li><i class="fa-solid fa-check-circle text-indigo-500"></i>Long conversations</li>
 </ul>
 </div>
 
-<div class="ai-tool-card">
-<div class="tool-icon" style="background-color: #D1FAE5;
-color: #059669">
-<i class="fa-solid fa-comments"></i>
+<div class="tc">
+<div class="flex items-center gap-2 mb-2">
+<div class="ti" style="background:#D1FAE5;color:#059669"><i class="fa-solid fa-comments"></i></div>
+<h3 class="text-sm font-bold text-gray-800">ChatGPT</h3>
 </div>
-<h3 class="text-lg font-bold text-gray-800 mb-2">ChatGPT</h3>
-<ul class="feature-list">
-<li><i class="fa-solid fa-check-circle text-green-500"></i><span>Versatile และ flexible</span></li>
-<li><i class="fa-solid fa-check-circle text-green-500"></i><span>Good at explaining</span></li>
-<li><i class="fa-solid fa-check-circle text-green-500"></i><span>Large knowledge base</span></li>
-<li><i class="fa-solid fa-check-circle text-green-500"></i><span>Easy to use</span></li>
+<ul class="fl" style="list-style:none;padding:0;margin:0">
+<li><i class="fa-solid fa-check-circle text-green-500"></i>Versatile และ flexible</li>
+<li><i class="fa-solid fa-check-circle text-green-500"></i>Good at explaining</li>
+<li><i class="fa-solid fa-check-circle text-green-500"></i>Large knowledge base</li>
+<li><i class="fa-solid fa-check-circle text-green-500"></i>Easy to use</li>
 </ul>
 </div>
 
-<div class="ai-tool-card">
-<div class="tool-icon" style="background-color: #FEF3C7;
-color: #D97706">
-<i class="fa-brands fa-github"></i>
+<div class="tc">
+<div class="flex items-center gap-2 mb-2">
+<div class="ti" style="background:#FEF3C7;color:#D97706"><i class="fa-brands fa-github"></i></div>
+<h3 class="text-sm font-bold text-gray-800">GitHub Copilot</h3>
 </div>
-<h3 class="text-lg font-bold text-gray-800 mb-2">GitHub Copilot</h3>
-<ul class="feature-list">
-<li><i class="fa-solid fa-check-circle text-yellow-500"></i><span>Real-time suggestions</span></li>
-<li><i class="fa-solid fa-check-circle text-yellow-500"></i><span>Integrated in IDE</span></li>
-<li><i class="fa-solid fa-check-circle text-yellow-500"></i><span>Context-aware</span></li>
-<li><i class="fa-solid fa-check-circle text-yellow-500"></i><span>Code completion</span></li>
+<ul class="fl" style="list-style:none;padding:0;margin:0">
+<li><i class="fa-solid fa-check-circle text-yellow-500"></i>Real-time suggestions</li>
+<li><i class="fa-solid fa-check-circle text-yellow-500"></i>Integrated in IDE</li>
+<li><i class="fa-solid fa-check-circle text-yellow-500"></i>Context-aware</li>
+<li><i class="fa-solid fa-check-circle text-yellow-500"></i>Code completion</li>
 </ul>
 </div>
-</div>
 
-<div class="grid grid-cols-2 gap-4">
-<div class="practice-card">
-<div class="flex items-center mb-3">
-<div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center mr-2">
-<i class="fa-solid fa-lightbulb text-blue-500"></i>
-</div>
-<h3 class="text-base font-bold text-gray-800">Best Practices</h3>
+<div class="tc">
+<div class="flex items-center gap-2 mb-2">
+<div class="ti" style="background:#FEE2E2;color:#DC2626"><i class="fa-solid fa-chart-line"></i></div>
+<h3 class="text-sm font-bold text-gray-800">AI Benefits</h3>
 </div>
 <div class="space-y-2">
-<div class="flex items-center text-xs text-gray-700">
-<i class="fa-solid fa-check text-green-500 mr-2"></i>
-<span>Review AI-generated code</span>
+<div class="bg-blue-50 rounded-md p-2 flex items-center gap-2">
+<span class="text-xs font-black text-blue-600">30%</span>
+<span class="text-xs text-gray-700">ลดเวลาเขียนโค้ด</span>
 </div>
-<div class="flex items-center text-xs text-gray-700">
-<i class="fa-solid fa-check text-green-500 mr-2"></i>
-<span>Test thoroughly</span>
+<div class="bg-green-50 rounded-md p-2 flex items-center gap-2">
+<span class="text-xs font-black text-green-600">50%</span>
+<span class="text-xs text-gray-700">เพิ่มประสิทธิภาพ</span>
 </div>
-<div class="flex items-center text-xs text-gray-700">
-<i class="fa-solid fa-check text-green-500 mr-2"></i>
-<span>Understand security implications</span>
-</div>
-<div class="flex items-center text-xs text-gray-700">
-<i class="fa-solid fa-check text-green-500 mr-2"></i>
-<span>Document AI usage</span>
+<div class="bg-purple-50 rounded-md p-2 flex items-center gap-2">
+<span class="text-xs font-black text-purple-600">40%</span>
+<span class="text-xs text-gray-700">ลดข้อผิดพลาด</span>
 </div>
 </div>
 </div>
 
-<div class="practice-card">
-<div class="flex items-center mb-3">
-<div class="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center mr-2">
-<i class="fa-solid fa-puzzle-piece text-purple-500"></i>
 </div>
-<h3 class="text-base font-bold text-gray-800">AI Integration Points</h3>
+
+<!-- Bottom row: Best Practices + Integration Points + Warning -->
+<div class="grid grid-cols-3 gap-3 flex-grow">
+
+<div class="tc">
+<div class="flex items-center gap-2 mb-2">
+<div class="ti" style="background:#DBEAFE;color:#2563EB"><i class="fa-solid fa-lightbulb"></i></div>
+<h3 class="text-sm font-bold text-gray-800">Best Practices</h3>
 </div>
-<div class="flex flex-wrap gap-2">
-<span class="text-xs px-2 py-1 bg-blue-50 text-blue-700 rounded">Boilerplate</span>
-<span class="text-xs px-2 py-1 bg-green-50 text-green-700 rounded">Debug</span>
-<span class="text-xs px-2 py-1 bg-purple-50 text-purple-700 rounded">Tests</span>
-<span class="text-xs px-2 py-1 bg-yellow-50 text-yellow-700 rounded">Optimize</span>
-<span class="text-xs px-2 py-1 bg-pink-50 text-pink-700 rounded">Docs</span>
-</div>
+<div class="space-y-2">
+<div class="flex items-center text-xs text-gray-700"><i class="fa-solid fa-check text-green-500 mr-2 text-xs"></i>Review AI-generated code ทุกครั้ง</div>
+<div class="flex items-center text-xs text-gray-700"><i class="fa-solid fa-check text-green-500 mr-2 text-xs"></i>Test thoroughly ก่อน deploy</div>
+<div class="flex items-center text-xs text-gray-700"><i class="fa-solid fa-check text-green-500 mr-2 text-xs"></i>Understand security implications</div>
+<div class="flex items-center text-xs text-gray-700"><i class="fa-solid fa-check text-green-500 mr-2 text-xs"></i>Document AI usage ในโปรเจค</div>
+<div class="flex items-center text-xs text-gray-700"><i class="fa-solid fa-check text-green-500 mr-2 text-xs"></i>ไม่ใช้ข้อมูลลับกับ AI</div>
 </div>
 </div>
 
-<div class="practice-card">
-<img src="https://sfile.chatglm.cn/images-ppt/c71588471ee9.jpeg" alt="AI Coding" class="w-full h-32 object-cover rounded-lg">
+<div class="tc">
+<div class="flex items-center gap-2 mb-2">
+<div class="ti" style="background:#F3E8FF;color:#7C3AED"><i class="fa-solid fa-puzzle-piece"></i></div>
+<h3 class="text-sm font-bold text-gray-800">AI Integration Points</h3>
+</div>
+<div class="flex flex-wrap gap-2 mb-3">
+<span class="text-xs px-2 py-1 bg-blue-50 text-blue-700 rounded font-medium">Boilerplate</span>
+<span class="text-xs px-2 py-1 bg-green-50 text-green-700 rounded font-medium">Debug</span>
+<span class="text-xs px-2 py-1 bg-purple-50 text-purple-700 rounded font-medium">Tests</span>
+<span class="text-xs px-2 py-1 bg-yellow-50 text-yellow-700 rounded font-medium">Optimize</span>
+<span class="text-xs px-2 py-1 bg-pink-50 text-pink-700 rounded font-medium">Docs</span>
+<span class="text-xs px-2 py-1 bg-red-50 text-red-700 rounded font-medium">Refactor</span>
+<span class="text-xs px-2 py-1 bg-cyan-50 text-cyan-700 rounded font-medium">Migration</span>
+</div>
+<p class="text-xs text-gray-500">ใช้ AI ช่วยในทุกขั้นตอนของ development lifecycle</p>
+</div>
+
+<div class="tc flex flex-col">
+<div class="flex items-center gap-2 mb-2">
+<div class="ti" style="background:#FEF3C7;color:#D97706"><i class="fa-solid fa-triangle-exclamation"></i></div>
+<h3 class="text-sm font-bold text-gray-800">ข้อควรระวัง</h3>
+</div>
+<div class="space-y-2">
+<div class="flex items-start text-xs text-gray-700"><i class="fa-solid fa-xmark text-red-500 mr-2 mt-0.5 text-xs"></i>อย่าเชื่อ AI 100% — ต้อง review เสมอ</div>
+<div class="flex items-start text-xs text-gray-700"><i class="fa-solid fa-xmark text-red-500 mr-2 mt-0.5 text-xs"></i>อย่าใส่ข้อมูลลับ (API keys, passwords)</div>
+<div class="flex items-start text-xs text-gray-700"><i class="fa-solid fa-xmark text-red-500 mr-2 mt-0.5 text-xs"></i>AI อาจสร้าง code ที่มี security holes</div>
+<div class="flex items-start text-xs text-gray-700"><i class="fa-solid fa-xmark text-red-500 mr-2 mt-0.5 text-xs"></i>ไม่ควรใช้แทน unit tests</div>
 </div>
 </div>
 
-<div class="col-span-5 flex flex-col gap-4">
-<div class="ai-tool-card h-full">
-<div class="flex items-center mb-4">
-<div class="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center mr-2">
-<i class="fa-solid fa-chart-line text-red-500"></i>
-</div>
-<h3 class="text-xl font-bold text-gray-800">AI Benefits</h3>
-</div>
-
-<div class="space-y-4">
-<div class="bg-blue-50 rounded-xl p-4">
-<div class="flex items-center mb-2">
-<div class="w-8 h-8 rounded-lg bg-blue-500 flex items-center justify-center mr-3">
-<span class="text-white font-bold text-sm">30%</span>
-</div>
-<div>
-<p class="text-sm font-bold text-gray-800">ลดเวลาเขียนโค้ด</p>
-<p class="text-xs text-gray-500">Speed up development</p>
-</div>
-</div>
-</div>
-
-<div class="bg-green-50 rounded-xl p-4">
-<div class="flex items-center mb-2">
-<div class="w-8 h-8 rounded-lg bg-green-500 flex items-center justify-center mr-3">
-<span class="text-white font-bold text-sm">50%</span>
-</div>
-<div>
-<p class="text-sm font-bold text-gray-800">เพิ่มประสิทธิภาพ</p>
-<p class="text-xs text-gray-500">Boost productivity</p>
-</div>
-</div>
-</div>
-
-<div class="bg-purple-50 rounded-xl p-4">
-<div class="flex items-center mb-2">
-<div class="w-8 h-8 rounded-lg bg-purple-500 flex items-center justify-center mr-3">
-<span class="text-white font-bold text-sm">40%</span>
-</div>
-<div>
-<p class="text-sm font-bold text-gray-800">ลดข้อผิดพลาด</p>
-<p class="text-xs text-gray-500">Reduce bugs</p>
-</div>
-</div>
-</div>
-</div>
-
-<div class="mt-auto pt-4 border-t border-gray-100">
-<div class="bg-yellow-50 rounded-lg p-3 border border-yellow-200">
-<div class="flex items-start">
-<i class="fa-solid fa-triangle-exclamation text-yellow-500 mr-2 mt-0.5"></i>
-<p class="text-xs text-gray-700"><span class="font-bold">คำเตือน:</span> AI เป็นเครื่องมือช่วย ต้อง review และ test ก่อนใช้งานจริงเสมอ</p>
-</div>
-</div>
-</div>
-</div>
-</div>
 </div>
 
 </div>

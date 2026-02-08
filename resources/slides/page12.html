@@ -9,103 +9,11 @@
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
 <link href="css/theme.css" rel="stylesheet"/>
 <style>
-body {
-    margin: 0;
-    padding: 0;
-    font-family: "Noto Sans Thai", "Noto Sans SC", sans-serif;
-    background-color: #f3f4f6
-    }
-.slide-container {
-    width: 1280px;
-    height: 720px;
-    position: relative;
-    background-color: #fff;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column
-    }
-.blob-bg-1 {
-    position: absolute;
-    top: -120px;
-    right: -100px;
-    width: 450px;
-    height: 450px;
-    background-color: #F0F9FF;
-    border-radius: 50%;
-    z-index: 0;
-    opacity: 0.8
-    }
-.blob-bg-2 {
-    position: absolute;
-    bottom: -50px;
-    left: -50px;
-    width: 300px;
-    height: 300px;
-    background-color: #ECFDF5;
-    border-radius: 50%;
-    z-index: 0;
-    opacity: 0.8
-    }
-.content-wrapper {
-    position: relative;
-    z-index: 10;
-    padding: 50px 80px;
-    height: 100%;
-    display: flex;
-    flex-direction: column
-    }
-.mvc-card {
-    background: white;
-    border-radius: 12px;
-    padding: 16px 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    border: 1px solid #F3F4F6;
-    transition: transform 0.2s;
-    height: 100%;
-    display: flex;
-    flex-direction: column
-    }
-.mvc-card:hover {
-    transform: translatey(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
-    }
-.mvc-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    margin-bottom: 12px
-    }
-.lifecycle-step {
-    display: flex;
-    align-items: center;
-    padding: 8px 0;
-    border-bottom: 1px dashed #E5E7EB
-    }
-.lifecycle-step:last-child {
-    border-bottom: none
-    }
-.step-number {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background-color: #3B82F6;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: 700;
-    margin-right: 12px;
-    flex-shrink: 0
-    }
-.step-text {
-    font-size: 12px;
-    color: #374151
-    }
+.mc { padding:12px 14px; }
+.mi { width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
+.ls { display:flex; align-items:center; padding:4px 0; border-bottom:1px dashed #E5E7EB; }
+.ls:last-child { border-bottom:none; }
+.sn { width:20px; height:20px; border-radius:50%; background:#3B82F6; color:white; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; margin-right:8px; flex-shrink:0; }
 </style>
 </head>
 <body>
@@ -113,125 +21,118 @@ body {
 <div class="blob-bg-1"></div>
 <div class="blob-bg-2"></div>
 <div class="content-wrapper">
-<div class="mb-5">
-<div class="flex items-center space-x-3 mb-2">
-<span class="text-sm font-bold tracking-widest text-blue-500 uppercase">LARAVEL ARCHITECTURE</span>
-<div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
-</div>
-<h1 class="text-4xl font-black text-gray-800">MVC Pattern & Request Lifecycle</h1>
-<p class="text-gray-500 mt-2 text-lg">เข้าใจโครงสร้าง MVC และขั้นตอนการทำงานของ Request ใน Laravel</p>
+
+<div class="mb-3">
+<span class="text-xs font-bold tracking-widest text-blue-500 uppercase">LARAVEL ARCHITECTURE</span>
+<h1 class="text-3xl font-black text-gray-800">MVC Pattern & Request Lifecycle</h1>
+<p class="text-gray-500 mt-1 text-sm">เข้าใจโครงสร้าง MVC และขั้นตอนการทำงานของ Request ใน Laravel</p>
 </div>
 
-<div class="grid grid-cols-5 gap-4 flex-grow pb-4">
-<div class="col-span-2 flex flex-col gap-4">
-<div class="mvc-card">
-<div class="mvc-icon" style="background-color: #DBEAFE;
-color: #2563EB">
-<i class="fa-solid fa-database"></i>
+<div class="grid grid-cols-3 gap-3 flex-grow">
+
+<!-- Column 1: MVC Components -->
+<div class="flex flex-col gap-3">
+<div class="mc">
+<div class="flex items-center gap-2 mb-2">
+<div class="mi" style="background:#DBEAFE;color:#2563EB"><i class="fa-solid fa-database"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">Model</h3><p class="text-xs text-gray-400">Business Logic & Data</p></div>
 </div>
-<h3 class="text-lg font-bold text-gray-800 mb-2">Model</h3>
-<p class="text-xs text-gray-500 mb-1">Business Logic & Data</p>
-<ul class="text-xs text-gray-600 space-y-1">
+<ul class="text-xs text-gray-600 space-y-1 ml-1">
 <li>• Database interaction</li>
 <li>• Data validation</li>
 <li>• Business rules</li>
+<li>• Eloquent ORM</li>
 </ul>
 </div>
-
-<div class="mvc-card">
-<div class="mvc-icon" style="background-color: #D1FAE5;
-color: #059669">
-<i class="fa-solid fa-eye"></i>
+<div class="mc">
+<div class="flex items-center gap-2 mb-2">
+<div class="mi" style="background:#D1FAE5;color:#059669"><i class="fa-solid fa-eye"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">View</h3><p class="text-xs text-gray-400">User Interface</p></div>
 </div>
-<h3 class="text-lg font-bold text-gray-800 mb-2">View</h3>
-<p class="text-xs text-gray-500 mb-1">User Interface</p>
-<ul class="text-xs text-gray-600 space-y-1">
+<ul class="text-xs text-gray-600 space-y-1 ml-1">
 <li>• Blade templates</li>
 <li>• Data presentation</li>
 <li>• HTML/CSS/JS</li>
+<li>• Components</li>
+</ul>
+</div>
+<div class="mc">
+<div class="flex items-center gap-2 mb-2">
+<div class="mi" style="background:#FEF3C7;color:#D97706"><i class="fa-solid fa-code"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">Controller</h3><p class="text-xs text-gray-400">Request Handler</p></div>
+</div>
+<ul class="text-xs text-gray-600 space-y-1 ml-1">
+<li>• Handle HTTP requests</li>
+<li>• Coordinate M & V</li>
+<li>• Return responses</li>
+<li>• Middleware integration</li>
 </ul>
 </div>
 </div>
 
-<div class="col-span-3 flex flex-col gap-4">
-<div class="mvc-card">
-<img src="https://sfile.chatglm.cn/images-ppt/375c9e642e72.jpg" alt="MVC Architecture" class="w-full h-32 object-cover rounded-lg mb-3">
-<div class="grid grid-cols-3 gap-3">
-<div class="text-center">
-<div class="w-10 h-10 rounded-lg mx-auto mb-1 flex items-center justify-center" style="background-color: #DBEAFE">
-<i class="fa-solid fa-database text-blue-500"></i>
+<!-- Column 2: MVC Diagram -->
+<div class="flex flex-col gap-3">
+<div class="mc flex-grow">
+<div class="flex items-center gap-2 mb-3">
+<div class="mi" style="background:#E0E7FF;color:#4F46E5"><i class="fa-solid fa-diagram-project"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">MVC Flow</h3><p class="text-xs text-gray-400">การทำงานร่วมกัน</p></div>
 </div>
-<p class="text-xs font-bold text-gray-700">Model</p>
-<p class="text-[10px] text-gray-500">Data</p>
+<div class="flex flex-col items-center gap-2">
+<div class="bg-yellow-50 rounded-lg px-4 py-2 text-center border border-yellow-200 w-full">
+<p class="text-xs font-bold text-yellow-700"><i class="fa-solid fa-globe mr-1"></i> User Request</p>
 </div>
-<div class="text-center">
-<div class="w-10 h-10 rounded-lg mx-auto mb-1 flex items-center justify-center" style="background-color: #D1FAE5">
-<i class="fa-solid fa-eye text-green-500"></i>
+<i class="fa-solid fa-arrow-down text-gray-300 text-xs"></i>
+<div class="bg-yellow-50 rounded-lg px-4 py-2 text-center border border-yellow-200 w-full">
+<p class="text-xs font-bold text-yellow-700"><i class="fa-solid fa-code mr-1"></i> Controller</p>
+<p class="text-xs text-yellow-600">รับ Request → ประมวลผล</p>
 </div>
-<p class="text-xs font-bold text-gray-700">View</p>
-<p class="text-[10px] text-gray-500">UI</p>
+<div class="flex items-center gap-2 w-full">
+<div class="flex-1">
+<i class="fa-solid fa-arrow-down text-blue-300 text-xs block text-center"></i>
+<div class="bg-blue-50 rounded-lg px-3 py-2 text-center border border-blue-200">
+<p class="text-xs font-bold text-blue-700"><i class="fa-solid fa-database mr-1"></i> Model</p>
+<p class="text-xs text-blue-600">ดึง/บันทึกข้อมูล</p>
 </div>
-<div class="text-center">
-<div class="w-10 h-10 rounded-lg mx-auto mb-1 flex items-center justify-center" style="background-color: #FEF3C7">
-<i class="fa-solid fa-code text-yellow-500"></i>
 </div>
-<p class="text-xs font-bold text-gray-700">Controller</p>
-<p class="text-[10px] text-gray-500">Logic</p>
+<div class="flex-1">
+<i class="fa-solid fa-arrow-down text-green-300 text-xs block text-center"></i>
+<div class="bg-green-50 rounded-lg px-3 py-2 text-center border border-green-200">
+<p class="text-xs font-bold text-green-700"><i class="fa-solid fa-eye mr-1"></i> View</p>
+<p class="text-xs text-green-600">แสดงผลลัพธ์</p>
 </div>
+</div>
+</div>
+<i class="fa-solid fa-arrow-down text-gray-300 text-xs"></i>
+<div class="bg-purple-50 rounded-lg px-4 py-2 text-center border border-purple-200 w-full">
+<p class="text-xs font-bold text-purple-700"><i class="fa-solid fa-reply mr-1"></i> Response</p>
+</div>
+</div>
+</div>
+<div class="mc">
+<p class="text-xs text-gray-500"><i class="fa-solid fa-lightbulb text-yellow-500 mr-1"></i> <strong>Key:</strong> Controller เป็นตัวกลางเชื่อม Model กับ View ไม่ควรมี business logic</p>
 </div>
 </div>
 
-<div class="mvc-card flex-grow">
-<div class="flex items-center mb-3">
-<div class="w-8 h-8 rounded-lg bg-purple-500 flex items-center justify-center mr-2">
-<i class="fa-solid fa-route text-white"></i>
+<!-- Column 3: Request Lifecycle -->
+<div class="mc">
+<div class="flex items-center gap-2 mb-3">
+<div class="mi" style="background:#F3E8FF;color:#7C3AED"><i class="fa-solid fa-route"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">Request Lifecycle</h3><p class="text-xs text-gray-400">ขั้นตอนการทำงาน</p></div>
 </div>
-<h3 class="text-base font-bold text-gray-800">Request Lifecycle</h3>
-</div>
-<div class="space-y-0">
-<div class="lifecycle-step">
-<div class="step-number">1</div>
-<div class="step-text">Request enters application</div>
-</div>
-<div class="lifecycle-step">
-<div class="step-number">2</div>
-<div class="step-text">public/index.php entry point</div>
-</div>
-<div class="lifecycle-step">
-<div class="step-number">3</div>
-<div class="step-text">Bootstrap app & load config</div>
-</div>
-<div class="lifecycle-step">
-<div class="step-number">4</div>
-<div class="step-text">HTTP Kernel handles request</div>
-</div>
-<div class="lifecycle-step">
-<div class="step-number">5</div>
-<div class="step-text">Middleware processes request</div>
-</div>
-<div class="lifecycle-step">
-<div class="step-number">6</div>
-<div class="step-text">Router matches route</div>
-</div>
-<div class="lifecycle-step">
-<div class="step-number">7</div>
-<div class="step-text">Controller executes logic</div>
-</div>
-<div class="lifecycle-step">
-<div class="step-number">8</div>
-<div class="step-text">Model interacts with DB</div>
-</div>
-<div class="lifecycle-step">
-<div class="step-number">9</div>
-<div class="step-text">View renders response</div>
-</div>
-<div class="lifecycle-step">
-<div class="step-number">10</div>
-<div class="step-text">Response sent to client</div>
+<div>
+<div class="ls"><div class="sn">1</div><span class="text-xs text-gray-700">Request enters application</span></div>
+<div class="ls"><div class="sn">2</div><span class="text-xs text-gray-700">public/index.php entry point</span></div>
+<div class="ls"><div class="sn">3</div><span class="text-xs text-gray-700">Bootstrap app & load config</span></div>
+<div class="ls"><div class="sn">4</div><span class="text-xs text-gray-700">HTTP Kernel handles request</span></div>
+<div class="ls"><div class="sn" style="background:#F59E0B">5</div><span class="text-xs text-gray-700">Middleware processes request</span></div>
+<div class="ls"><div class="sn" style="background:#F59E0B">6</div><span class="text-xs text-gray-700">Router matches route</span></div>
+<div class="ls"><div class="sn" style="background:#10B981">7</div><span class="text-xs text-gray-700">Controller executes logic</span></div>
+<div class="ls"><div class="sn" style="background:#10B981">8</div><span class="text-xs text-gray-700">Model interacts with DB</span></div>
+<div class="ls"><div class="sn" style="background:#8B5CF6">9</div><span class="text-xs text-gray-700">View renders response</span></div>
+<div class="ls"><div class="sn" style="background:#8B5CF6">10</div><span class="text-xs text-gray-700">Response sent to client</span></div>
 </div>
 </div>
-</div>
-</div>
+
 </div>
 
 </div>

@@ -9,7 +9,7 @@
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
 <link href="css/theme.css" rel="stylesheet"/>
 <style>
-.fc { background:white; border-radius:10px; padding:12px 14px; border:1px solid #F3F4F6; box-shadow:0 1px 3px rgba(0,0,0,0.04); }
+.fc { padding:12px 14px; }
 .fi { width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
 .cb { background:#1F2937; color:#10B981; padding:6px 10px; border-radius:6px; font-family:"Courier New",monospace; font-size:10px; line-height:1.5; }
 </style>
@@ -55,20 +55,18 @@
 <div><h3 class="text-sm font-bold text-gray-800">Method Spoofing</h3><p class="text-xs text-gray-400">PUT, PATCH, DELETE</p></div>
 </div>
 <p class="text-xs text-gray-600 mb-2">HTML Form รองรับแค่ GET/POST จึงต้องใช้ @method ช่วย</p>
-<p class="text-xs font-bold text-gray-600 mb-1">PUT (Update):</p>
 <div class="cb mb-2">
+<span style="color:#9CA3AF">// PUT Update</span><br>
 &lt;form method=<span style="color:#A78BFA">"POST"</span> action=<span style="color:#A78BFA">"/post/1"</span>&gt;<br>
 &nbsp;&nbsp;<span style="color:#60A5FA">@csrf</span><br>
 &nbsp;&nbsp;<span style="color:#60A5FA">@method</span>(<span style="color:#A78BFA">'PUT'</span>)<br>
-&nbsp;&nbsp;...<br>
 &lt;/form&gt;
 </div>
-<p class="text-xs font-bold text-gray-600 mb-1">DELETE:</p>
 <div class="cb">
+<span style="color:#9CA3AF">// DELETE</span><br>
 &lt;form method=<span style="color:#A78BFA">"POST"</span> action=<span style="color:#A78BFA">"/post/1"</span>&gt;<br>
 &nbsp;&nbsp;<span style="color:#60A5FA">@csrf</span><br>
 &nbsp;&nbsp;<span style="color:#60A5FA">@method</span>(<span style="color:#A78BFA">'DELETE'</span>)<br>
-&nbsp;&nbsp;&lt;button&gt;Delete&lt;/button&gt;<br>
 &lt;/form&gt;
 </div>
 </div>
@@ -84,9 +82,7 @@
 &lt;input type=<span style="color:#A78BFA">"text"</span> name=<span style="color:#A78BFA">"title"</span><br>
 &nbsp;&nbsp;value=<span style="color:#A78BFA">"{{ old('title') }}"</span> /&gt;<br><br>
 <span style="color:#9CA3AF">&lt;!-- Textarea --&gt;</span><br>
-&lt;textarea name=<span style="color:#A78BFA">"body"</span>&gt;<br>
-&nbsp;&nbsp;{{ old(<span style="color:#A78BFA">'body'</span>) }}<br>
-&lt;/textarea&gt;<br><br>
+&lt;textarea name=<span style="color:#A78BFA">"body"</span>&gt;{{ old(<span style="color:#A78BFA">'body'</span>) }}&lt;/textarea&gt;<br><br>
 <span style="color:#9CA3AF">&lt;!-- Select --&gt;</span><br>
 &lt;select name=<span style="color:#A78BFA">"category"</span>&gt;<br>
 &nbsp;&nbsp;<span style="color:#60A5FA">@foreach</span>($cats as $cat)<br>

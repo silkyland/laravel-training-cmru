@@ -9,97 +9,9 @@
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
 <link href="css/theme.css" rel="stylesheet"/>
 <style>
-body {
-    margin: 0;
-    padding: 0;
-    font-family: "Noto Sans Thai", "Noto Sans SC", sans-serif;
-    background-color: #f3f4f6
-    }
-.slide-container {
-    width: 1280px;
-    height: 720px;
-    position: relative;
-    background-color: #fff;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column
-    }
-.blob-bg-1 {
-    position: absolute;
-    top: -120px;
-    right: -100px;
-    width: 450px;
-    height: 450px;
-    background-color: #F0F9FF;
-    border-radius: 50%;
-    z-index: 0;
-    opacity: 0.8
-    }
-.blob-bg-2 {
-    position: absolute;
-    bottom: -50px;
-    left: -50px;
-    width: 300px;
-    height: 300px;
-    background-color: #ECFDF5;
-    border-radius: 50%;
-    z-index: 0;
-    opacity: 0.8
-    }
-.content-wrapper {
-    position: relative;
-    z-index: 10;
-    padding: 50px 80px;
-    height: 100%;
-    display: flex;
-    flex-direction: column
-    }
-.am-card {
-    background: white;
-    border-radius: 12px;
-    padding: 18px 22px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    border: 1px solid #F3F4F6;
-    height: 100%
-    }
-.code-block {
-    background: #1F2937;
-    color: #10B981;
-    padding: 12px 16px;
-    border-radius: 8px;
-    font-family: "Courier New", monospace;
-    font-size: 11px;
-    line-height: 1.6
-    }
-.type-badge {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    margin: 3px
-    }
-.accessor-badge { background-color: #DBEAFE;
-color: #1E40AF }
-.mutator-badge { background-color: #FEE2E2;
-color: #DC2626 }
-.feature-item {
-    display: flex;
-    align-items: center;
-    padding: 8px 0
-    }
-.feature-icon {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background-color: #D1FAE5;
-    color: #059669;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 12px;
-    flex-shrink: 0
-    }
+.ac { padding:12px 14px; }
+.ai { width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
+.cb { background:#1F2937; color:#10B981; padding:6px 10px; border-radius:6px; font-family:"Courier New",monospace; font-size:10px; line-height:1.5; }
 </style>
 </head>
 <body>
@@ -107,158 +19,114 @@ color: #DC2626 }
 <div class="blob-bg-1"></div>
 <div class="blob-bg-2"></div>
 <div class="content-wrapper">
-<div class="mb-5">
-<div class="flex items-center space-x-3 mb-2">
-<span class="text-sm font-bold tracking-widest text-blue-500 uppercase">ELOQUENT ACCESSORS & MUTATORS</span>
-<div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
-</div>
-<h1 class="text-4xl font-black text-gray-800">Eloquent Accessors & Mutators</h1>
-<p class="text-gray-500 mt-2 text-lg">Getter และ Setter Methods สำหรับ Manipulate ข้อมูล</p>
+
+<div class="mb-3">
+<span class="text-xs font-bold tracking-widest text-blue-500 uppercase">ELOQUENT</span>
+<h1 class="text-3xl font-black text-gray-800">Accessors & Mutators</h1>
+<p class="text-gray-500 mt-1 text-sm">Getter และ Setter Methods สำหรับ Manipulate ข้อมูล</p>
 </div>
 
-<div class="grid grid-cols-2 gap-5 flex-grow pb-4">
-<div class="am-card">
-<div class="flex items-center mb-4">
-<div class="w-12 h-12 rounded-xl bg-blue-500 flex items-center justify-center mr-3">
-<i class="fa-solid fa-eye text-white text-xl"></i>
+<!-- Top row: Accessors + Mutators + Laravel 11 -->
+<div class="grid grid-cols-3 gap-3 mb-3">
+
+<div class="ac">
+<div class="flex items-center gap-2 mb-2">
+<div class="ai" style="background:#DBEAFE;color:#2563EB"><i class="fa-solid fa-eye"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">Accessors</h3><p class="text-xs text-gray-400">Getter Methods</p></div>
 </div>
-<div>
-<h3 class="text-xl font-bold text-gray-800">Accessors</h3>
-<p class="text-xs text-gray-500 mt-1">Getter Methods</p>
+<p class="text-xs font-bold text-gray-600 mb-1">Convention:</p>
+<div class="cb mb-2">
+get{Attribute}Attribute<br>
+<span style="color:#9CA3AF">// getFullNameAttribute</span>
 </div>
-</div>
-<div class="mb-3">
-<span class="type-badge accessor-badge">Accessor</span>
-</div>
-<div class="space-y-3">
-<div>
-<p class="text-xs font-bold text-gray-700 mb-1">Naming Convention:</p>
-<div class="code-block">
-get{Attribute}Attribute
-<span class="text-gray-400">// Example: getFullNameAttribute</span>
-</div>
-</div>
-<div>
-<p class="text-xs font-bold text-gray-700 mb-1">Example Implementation:</p>
-<div class="code-block">
-public function getFullNameAttribute() {
-    return $this->first_name . ' ' .
-        $this->last_name;
+<p class="text-xs font-bold text-gray-600 mb-1">Example:</p>
+<div class="cb mb-2">
+<span style="color:#60A5FA">public function</span> <span style="color:#FBBF24">getFullNameAttribute</span>() {<br>
+&nbsp;&nbsp;return $this->first_name . ' ' .<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->last_name;<br>
 }
 </div>
-</div>
-<div class="bg-blue-50 rounded-lg p-3">
-<p class="text-xs text-gray-600"><strong>Usage:</strong></p>
-<p class="text-sm font-mono text-gray-800 mt-1">$user->full_name</p>
-</div>
+<div class="bg-blue-50 rounded-md p-2">
+<p class="text-xs text-gray-600"><strong>Usage:</strong> <code class="text-xs">$user->full_name</code></p>
 </div>
 </div>
 
-<div class="am-card">
-<div class="flex items-center mb-4">
-<div class="w-12 h-12 rounded-xl bg-red-500 flex items-center justify-center mr-3">
-<i class="fa-solid fa-edit text-white text-xl"></i>
+<div class="ac">
+<div class="flex items-center gap-2 mb-2">
+<div class="ai" style="background:#FEE2E2;color:#DC2626"><i class="fa-solid fa-edit"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">Mutators</h3><p class="text-xs text-gray-400">Setter Methods</p></div>
 </div>
-<div>
-<h3 class="text-xl font-bold text-gray-800">Mutators</h3>
-<p class="text-xs text-gray-500 mt-1">Setter Methods</p>
+<p class="text-xs font-bold text-gray-600 mb-1">Convention:</p>
+<div class="cb mb-2">
+set{Attribute}Attribute<br>
+<span style="color:#9CA3AF">// setFirstNameAttribute</span>
 </div>
-</div>
-<div class="mb-3">
-<span class="type-badge mutator-badge">Mutator</span>
-</div>
-<div class="space-y-3">
-<div>
-<p class="text-xs font-bold text-gray-700 mb-1">Naming Convention:</p>
-<div class="code-block">
-set{Attribute}NameAttribute
-<span class="text-gray-400">// Example: setFirstNameAttribute</span>
-</div>
-</div>
-<div>
-<p class="text-xs font-bold text-gray-700 mb-1">Example Implementation:</p>
-<div class="code-block">
-public function setFirstNameAttribute($value) {
-    $this->attributes['first_name'] =
-        ucfirst($value);
+<p class="text-xs font-bold text-gray-600 mb-1">Example:</p>
+<div class="cb mb-2">
+<span style="color:#60A5FA">public function</span> <span style="color:#FBBF24">setFirstNameAttribute</span>($v) {<br>
+&nbsp;&nbsp;$this->attributes[<span style="color:#A78BFA">'first_name'</span>]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;= ucfirst($v);<br>
 }
 </div>
-</div>
-<div class="bg-red-50 rounded-lg p-3">
-<p class="text-xs text-gray-600"><strong>Usage:</strong></p>
-<p class="text-sm font-mono text-gray-800 mt-1">$user->first_name = 'john';</p>
-</div>
-</div>
+<div class="bg-red-50 rounded-md p-2">
+<p class="text-xs text-gray-600"><strong>Usage:</strong> <code class="text-xs">$user->first_name = 'john';</code></p>
 </div>
 </div>
 
-<div class="grid grid-cols-2 gap-5">
-<div class="am-card">
-<div class="flex items-center mb-3">
-<div class="w-10 h-10 rounded-lg bg-green-500 flex items-center justify-center mr-3">
-<i class="fa-solid fa-star text-white"></i>
+<div class="ac">
+<div class="flex items-center gap-2 mb-2">
+<div class="ai" style="background:#D1FAE5;color:#059669"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">Laravel 11+ Syntax</h3><p class="text-xs text-gray-400">Attribute Class (ใหม่)</p></div>
 </div>
-<h3 class="text-lg font-bold text-gray-800">Key Benefits</h3>
+<p class="text-xs font-bold text-gray-600 mb-1">New Way:</p>
+<div class="cb mb-2">
+<span style="color:#60A5FA">use</span> Illuminate\Database\Eloquent\<br>
+&nbsp;&nbsp;Casts\<span style="color:#FBBF24">Attribute</span>;<br><br>
+<span style="color:#60A5FA">protected function</span> <span style="color:#FBBF24">firstName</span>(): Attribute {<br>
+&nbsp;&nbsp;return Attribute::<span style="color:#FBBF24">make</span>(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;get: fn($v) => ucfirst($v),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;set: fn($v) => strtolower($v),<br>
+&nbsp;&nbsp;);<br>
+}
 </div>
-<div class="space-y-2">
-<div class="feature-item">
-<div class="feature-icon">
-<i class="fa-solid fa-check text-sm"></i>
-</div>
-<p class="text-sm text-gray-700">Format data ก่อนแสดง</p>
-</div>
-<div class="feature-item">
-<div class="feature-icon">
-<i class="fa-solid fa-check text-sm"></i>
-</div>
-<p class="text-sm text-gray-700">Validate และ transform ข้อมูลก่อนบันทึก</p>
-</div>
-<div class="feature-item">
-<div class="feature-icon">
-<i class="fa-solid fa-check text-sm"></i>
-</div>
-<p class="text-sm text-gray-700">Encapsulate logic ภายใน model</p>
-</div>
-<div class="feature-item">
-<div class="feature-icon">
-<i class="fa-solid fa-check text-sm"></i>
-</div>
-<p class="text-sm text-gray-700">Auto-accessible ใน views</p>
-</div>
+<div class="bg-green-50 rounded-md p-2">
+<p class="text-xs text-gray-600"><i class="fa-solid fa-check text-green-500 mr-1"></i> รวม get/set ไว้ที่เดียว</p>
 </div>
 </div>
 
-<div class="am-card">
-<div class="flex items-center mb-3">
-<div class="w-10 h-10 rounded-lg bg-purple-500 flex items-center justify-center mr-3">
-<i class="fa-solid fa-robot text-white"></i>
 </div>
-<h3 class="text-lg font-bold text-gray-800">AI Integration</h3>
+
+<!-- Bottom row: Benefits + AI Integration -->
+<div class="grid grid-cols-2 gap-3 flex-grow">
+
+<div class="ac">
+<div class="flex items-center gap-2 mb-2">
+<div class="ai" style="background:#FEF3C7;color:#D97706"><i class="fa-solid fa-star"></i></div>
+<h3 class="text-sm font-bold text-gray-800">Key Benefits</h3>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500 text-xs"></i><span class="text-xs text-gray-700">Format data ก่อนแสดง</span></div>
+<div class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500 text-xs"></i><span class="text-xs text-gray-700">Validate ก่อนบันทึก</span></div>
+<div class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500 text-xs"></i><span class="text-xs text-gray-700">Encapsulate logic ใน model</span></div>
+<div class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500 text-xs"></i><span class="text-xs text-gray-700">Auto-accessible ใน views</span></div>
+<div class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500 text-xs"></i><span class="text-xs text-gray-700">Type-safe data handling</span></div>
+<div class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500 text-xs"></i><span class="text-xs text-gray-700">Clean API responses</span></div>
+</div>
+</div>
+
+<div class="ac">
+<div class="flex items-center gap-2 mb-2">
+<div class="ai" style="background:#F3E8FF;color:#7C3AED"><i class="fa-solid fa-robot"></i></div>
+<h3 class="text-sm font-bold text-gray-800">AI Integration Tips</h3>
 </div>
 <div class="space-y-2">
-<div class="feature-item">
-<div class="feature-icon" style="background-color: #F3E8FF;
-color: #7C3AED">
-<i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
-</div>
-<p class="text-sm text-gray-700">Generate accessors for calculated fields</p>
-</div>
-<div class="feature-item">
-<div class="feature-icon" style="background-color: #F3E8FF;
-color: #7C3AED">
-<i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
-</div>
-<p class="text-sm text-gray-700">Create mutators for data validation</p>
-</div>
-<div class="feature-item">
-<div class="feature-icon" style="background-color: #F3E8FF;
-color: #7C3AED">
-<i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
-</div>
-<p class="text-sm text-gray-700">Suggest casting optimizations</p>
+<div class="flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles text-purple-500 text-xs"></i><span class="text-xs text-gray-700">Generate accessors for calculated fields</span></div>
+<div class="flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles text-purple-500 text-xs"></i><span class="text-xs text-gray-700">Create mutators for data validation</span></div>
+<div class="flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles text-purple-500 text-xs"></i><span class="text-xs text-gray-700">Suggest casting optimizations</span></div>
+<div class="flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles text-purple-500 text-xs"></i><span class="text-xs text-gray-700">Convert legacy to Attribute class</span></div>
 </div>
 </div>
-</div>
+
 </div>
 
 </div>
