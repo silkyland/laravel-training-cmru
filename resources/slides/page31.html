@@ -1,85 +1,172 @@
 <!DOCTYPE html>
 <html lang="th">
-
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Forms & CSRF protection</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"
-        rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
-    <link href="css/theme.css" rel="stylesheet" />
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Forms & CSRF protection</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="css/theme.css" rel="stylesheet"/>
+<style>
+.fc { background:white; border-radius:10px; padding:12px 14px; border:1px solid #F3F4F6; box-shadow:0 1px 3px rgba(0,0,0,0.04); }
+.fi { width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
+.cb { background:#1F2937; color:#10B981; padding:6px 10px; border-radius:6px; font-family:"Courier New",monospace; font-size:10px; line-height:1.5; }
+</style>
 </head>
-
 <body>
-    <div class="slide-container">
-        <div class="blob-bg-1"></div>
-        <div class="blob-bg-2"></div>
-        <div class="content-wrapper">
-            <div class="mb-5">
-                <div class="flex items-center space-x-3 mb-2">
-                    <span class="text-sm font-bold tracking-widest text-blue-500 uppercase">FORMS & VALIDATION</span>
-                    <div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
-                </div>
-                <h1 class="text-4xl font-black text-gray-800">Working with Forms</h1>
-                <p class="text-gray-500 mt-2 text-lg">Secure Data Submission & Handling</p>
-            </div>
+<div class="slide-container">
+<div class="blob-bg-1"></div>
+<div class="blob-bg-2"></div>
+<div class="content-wrapper">
 
-            <div class="grid grid-cols-2 gap-6 flex-grow pb-4">
-                <div class="layout-card">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 rounded-lg bg-green-500 flex items-center justify-center mr-3">
-                            <i class="fa-solid fa-shield-halved text-white"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold text-gray-800">CSRF Protection</h3>
-                            <p class="text-xs text-gray-500">ความปลอดภัยของฟอร์ม</p>
-                        </div>
-                    </div>
-                    <div class="space-y-3">
-                        <p class="text-sm text-gray-600">
-                            Laravel ปกป้องเว็บจาก Cross-Site Request Forgery (CSRF) โดยอัตโนมัติ ทุกฟอร์มที่ส่ง method
-                            POST, PUT, DELETE ต้องมี CSRF Token
-                        </p>
-                        <div class="bg-yellow-50 p-3 rounded border border-yellow-200 text-xs text-yellow-800">
-                            <strong>Required:</strong> ใช้ @csrf ในทุกฟอร์ม
-                        </div>
-                    </div>
-                </div>
+<div class="mb-3">
+<span class="text-xs font-bold tracking-widest text-red-500 uppercase">FORMS & VALIDATION</span>
+<h1 class="text-3xl font-black text-gray-800">Working with Forms</h1>
+<p class="text-gray-500 mt-1 text-sm">Secure Data Submission & Handling</p>
+</div>
 
-                <div class="layout-card">
-                    <div class="space-y-4">
-                        <div>
-                            <p class="text-xs font-bold text-gray-700 mb-1">Standard Form:</p>
-                            <div class="code-block">
-                                &lt;form method="POST" action="/profile"&gt;
-                                @csrf
-                                ...
-                                &lt;/form&gt;
-                            </div>
-                        </div>
-                        <div>
-                            <p class="text-xs font-bold text-gray-700 mb-1">Spoofing Methods (PUT, DELETE):</p>
-                            <div class="code-block">
-                                &lt;form method="POST" action="/post/1"&gt;
-                                @csrf
-                                @method('DELETE')
-                                &lt;button&gt;Delete&lt;/button&gt;
-                                &lt;/form&gt;
-                            </div>
-                            <p class="text-[10px] text-gray-500 mt-1">HTML Form รองรับแค่ GET/POST จึงต้องใช้ @method
-                                ช่วย</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- Top row -->
+<div class="grid grid-cols-3 gap-3 mb-3">
 
-        </div>
-    </div>
+<!-- CSRF Protection -->
+<div class="fc">
+<div class="flex items-center gap-2 mb-2">
+<div class="fi" style="background:#D1FAE5;color:#059669"><i class="fa-solid fa-shield-halved"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">CSRF Protection</h3><p class="text-xs text-gray-400">ความปลอดภัยของฟอร์ม</p></div>
+</div>
+<p class="text-xs text-gray-600 mb-2">Laravel ปกป้องจาก Cross-Site Request Forgery โดยอัตโนมัติ ทุก POST/PUT/DELETE ต้องมี Token</p>
+<div class="bg-yellow-50 p-2 rounded border border-yellow-200 text-xs text-yellow-800 mb-2">
+<strong>Required:</strong> ใช้ <code>@csrf</code> ในทุกฟอร์ม
+</div>
+<div class="cb">
+&lt;form method=<span style="color:#A78BFA">"POST"</span> action=<span style="color:#A78BFA">"/profile"</span>&gt;<br>
+&nbsp;&nbsp;<span style="color:#60A5FA">@csrf</span><br>
+&nbsp;&nbsp;&lt;input name=<span style="color:#A78BFA">"name"</span> /&gt;<br>
+&nbsp;&nbsp;&lt;button&gt;Save&lt;/button&gt;<br>
+&lt;/form&gt;
+</div>
+</div>
+
+<!-- Method Spoofing -->
+<div class="fc">
+<div class="flex items-center gap-2 mb-2">
+<div class="fi" style="background:#DBEAFE;color:#2563EB"><i class="fa-solid fa-exchange-alt"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">Method Spoofing</h3><p class="text-xs text-gray-400">PUT, PATCH, DELETE</p></div>
+</div>
+<p class="text-xs text-gray-600 mb-2">HTML Form รองรับแค่ GET/POST จึงต้องใช้ @method ช่วย</p>
+<p class="text-xs font-bold text-gray-600 mb-1">PUT (Update):</p>
+<div class="cb mb-2">
+&lt;form method=<span style="color:#A78BFA">"POST"</span> action=<span style="color:#A78BFA">"/post/1"</span>&gt;<br>
+&nbsp;&nbsp;<span style="color:#60A5FA">@csrf</span><br>
+&nbsp;&nbsp;<span style="color:#60A5FA">@method</span>(<span style="color:#A78BFA">'PUT'</span>)<br>
+&nbsp;&nbsp;...<br>
+&lt;/form&gt;
+</div>
+<p class="text-xs font-bold text-gray-600 mb-1">DELETE:</p>
+<div class="cb">
+&lt;form method=<span style="color:#A78BFA">"POST"</span> action=<span style="color:#A78BFA">"/post/1"</span>&gt;<br>
+&nbsp;&nbsp;<span style="color:#60A5FA">@csrf</span><br>
+&nbsp;&nbsp;<span style="color:#60A5FA">@method</span>(<span style="color:#A78BFA">'DELETE'</span>)<br>
+&nbsp;&nbsp;&lt;button&gt;Delete&lt;/button&gt;<br>
+&lt;/form&gt;
+</div>
+</div>
+
+<!-- Form Elements -->
+<div class="fc">
+<div class="flex items-center gap-2 mb-2">
+<div class="fi" style="background:#F3E8FF;color:#7C3AED"><i class="fa-solid fa-list-check"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">Form Elements</h3><p class="text-xs text-gray-400">Input Types ที่ใช้บ่อย</p></div>
+</div>
+<div class="cb">
+<span style="color:#9CA3AF">&lt;!-- Text Input --&gt;</span><br>
+&lt;input type=<span style="color:#A78BFA">"text"</span> name=<span style="color:#A78BFA">"title"</span><br>
+&nbsp;&nbsp;value=<span style="color:#A78BFA">"{{ old('title') }}"</span> /&gt;<br><br>
+<span style="color:#9CA3AF">&lt;!-- Textarea --&gt;</span><br>
+&lt;textarea name=<span style="color:#A78BFA">"body"</span>&gt;<br>
+&nbsp;&nbsp;{{ old(<span style="color:#A78BFA">'body'</span>) }}<br>
+&lt;/textarea&gt;<br><br>
+<span style="color:#9CA3AF">&lt;!-- Select --&gt;</span><br>
+&lt;select name=<span style="color:#A78BFA">"category"</span>&gt;<br>
+&nbsp;&nbsp;<span style="color:#60A5FA">@foreach</span>($cats as $cat)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;{{ $cat }}&lt;/option&gt;<br>
+&nbsp;&nbsp;<span style="color:#60A5FA">@endforeach</span><br>
+&lt;/select&gt;
+</div>
+</div>
+
+</div>
+
+<!-- Bottom row -->
+<div class="grid grid-cols-3 gap-3 flex-grow">
+
+<!-- Old Input -->
+<div class="fc">
+<div class="flex items-center gap-2 mb-2">
+<div class="fi" style="background:#FEF3C7;color:#D97706"><i class="fa-solid fa-rotate-left"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">Old Input</h3><p class="text-xs text-gray-400">เก็บค่าเดิมเมื่อ validation fail</p></div>
+</div>
+<div class="cb mb-2">
+<span style="color:#9CA3AF">// In Blade</span><br>
+&lt;input value=<span style="color:#A78BFA">"{{ old('name') }}"</span> /&gt;
+</div>
+<div class="cb">
+<span style="color:#9CA3AF">// With default</span><br>
+&lt;input value=<span style="color:#A78BFA">"{{ old('name', $user->name) }}"</span> /&gt;
+</div>
+</div>
+
+<!-- File Upload -->
+<div class="fc">
+<div class="flex items-center gap-2 mb-2">
+<div class="fi" style="background:#FEE2E2;color:#DC2626"><i class="fa-solid fa-upload"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">File Upload</h3><p class="text-xs text-gray-400">อัพโหลดไฟล์</p></div>
+</div>
+<div class="cb mb-2">
+&lt;form method=<span style="color:#A78BFA">"POST"</span><br>
+&nbsp;&nbsp;enctype=<span style="color:#A78BFA">"multipart/form-data"</span>&gt;<br>
+&nbsp;&nbsp;<span style="color:#60A5FA">@csrf</span><br>
+&nbsp;&nbsp;&lt;input type=<span style="color:#A78BFA">"file"</span> name=<span style="color:#A78BFA">"photo"</span> /&gt;<br>
+&lt;/form&gt;
+</div>
+<div class="cb">
+<span style="color:#9CA3AF">// In Controller</span><br>
+$path = $request->file(<span style="color:#A78BFA">'photo'</span>)<br>
+&nbsp;&nbsp;-><span style="color:#FBBF24">store</span>(<span style="color:#A78BFA">'photos'</span>);
+</div>
+</div>
+
+<!-- CSRF Flow -->
+<div class="fc">
+<div class="flex items-center gap-2 mb-2">
+<div class="fi" style="background:#E0E7FF;color:#4F46E5"><i class="fa-solid fa-diagram-project"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">CSRF Flow</h3><p class="text-xs text-gray-400">กระบวนการทำงาน</p></div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="bg-blue-50 rounded-md px-3 py-1 text-center border border-blue-200 w-full">
+<p class="text-xs font-bold text-blue-700">1. Server สร้าง Token</p>
+</div>
+<i class="fa-solid fa-arrow-down text-blue-300 text-xs"></i>
+<div class="bg-blue-50 rounded-md px-3 py-1 text-center border border-blue-200 w-full">
+<p class="text-xs font-bold text-blue-700">2. @csrf ใส่ hidden field</p>
+</div>
+<i class="fa-solid fa-arrow-down text-blue-300 text-xs"></i>
+<div class="bg-blue-50 rounded-md px-3 py-1 text-center border border-blue-200 w-full">
+<p class="text-xs font-bold text-blue-700">3. Form submit พร้อม Token</p>
+</div>
+<i class="fa-solid fa-arrow-down text-blue-300 text-xs"></i>
+<div class="bg-green-50 rounded-md px-3 py-1 text-center border border-green-200 w-full">
+<p class="text-xs font-bold text-green-700">4. Middleware ตรวจสอบ Token</p>
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
     <!-- Shared Components Script - Automatically injects header and footer -->
     <script src="js/shared-components.js"></script>
 </body>
-
 </html>

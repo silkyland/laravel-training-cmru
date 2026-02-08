@@ -9,105 +9,34 @@
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
 <link href="css/theme.css" rel="stylesheet"/>
 <style>
-body {
-    margin: 0;
-    padding: 0;
-    font-family: "Noto Sans Thai", "Noto Sans SC", sans-serif;
-    background-color: #f3f4f6
-    }
-.slide-container {
-    width: 1280px;
-    height: 720px;
-    position: relative;
-    background-color: #fff;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column
-    }
-.blob-bg-1 {
-    position: absolute;
-    top: -120px;
-    right: -100px;
-    width: 450px;
-    height: 450px;
-    background-color: #F0F9FF;
-    border-radius: 50%;
-    z-index:0;
-    opacity: 0.8
-    }
-.blob-bg-2 {
-    position: absolute;
-    bottom: -50px;
-    left: -50px;
-    width: 300px;
-    height: 300px;
-    background-color: #ECFDF5;
-    border-radius: 50%;
-    z-index: 0;
-    opacity: 0.8
-    }
-.content-wrapper {
-    position: relative;
-    z-index: 10;
-    padding: 50px 80px;
-    height: 100%;
-    display: flex;
-    flex-direction: column
-    }
-.facade-card {
-    background: white;
-    border-radius: 10px;
-    padding: 12px 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    border: 1px solid #F3F4F6;
-    transition: transform 0.2s, box-shadow 0.2s
-    }
-.facade-card:hover {
-    transform: translatey(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
-    }
-.facade-icon {
-    width: 40px;
-    height: 40px;
+.facade-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
     border-radius: 8px;
+    border: 1px solid #F3F4F6;
+    background: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.facade-pill .fp-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
-    margin-right: 12px;
-    flex-shrink: 0
-    }
+    font-size: 13px;
+    flex-shrink: 0;
+}
 .code-compare {
     background: #1F2937;
     border-radius: 10px;
-    padding: 16px 20px;
+    padding: 14px 18px;
     font-family: "Courier New", monospace;
-    font-size: 13px;
-    line-height: 1.8
-    }
-.code-facade {
-    color: #10B981
-    }
-.code-container {
-    color: #FBBF24
-    }
-.benefit-item {
-    display: flex;
-    align-items: center;
-    padding: 8px 0
-    }
-.benefit-icon {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background-color: #D1FAE5;
-    color: #059669;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 12px;
-    flex-shrink: 0
-    }
+    font-size: 12px;
+    line-height: 1.7;
+}
 </style>
 </head>
 <body>
@@ -115,199 +44,185 @@ body {
 <div class="blob-bg-1"></div>
 <div class="blob-bg-2"></div>
 <div class="content-wrapper">
-<div class="mb-5">
-<div class="flex items-center space-x-3 mb-2">
-<span class="text-sm font-bold tracking-widest text-blue-500 uppercase">LARAVEL ARCHITECTURE</span>
-<div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
+
+<!-- Title -->
+<div class="mb-4">
+<div class="flex items-center space-x-3 mb-1">
+<span class="text-xs font-bold tracking-widest text-blue-500 uppercase">LARAVEL ARCHITECTURE</span>
 </div>
-<h1 class="text-4xl font-black text-gray-800">Facades in Laravel</h1>
-<p class="text-gray-500 mt-2 text-lg">Static Interface สำหรับการเข้าถึง Services ใน Service Container</p>
+<h1 class="text-3xl font-black text-gray-800">Facades in Laravel</h1>
+<p class="text-gray-500 mt-1 text-sm">Static Interface สำหรับการเข้าถึง Services ใน Service Container</p>
 </div>
 
-<div class="grid grid-cols-12 gap-4 flex-grow pb-4">
-<div class="col-span-5">
+<!-- Main 3-column grid -->
+<div class="grid grid-cols-12 gap-4 flex-grow">
+
+<!-- Col 1: Common Facades -->
+<div class="col-span-4">
 <div class="bg-white rounded-xl p-4 border border-gray-200 h-full">
 <div class="flex items-center mb-3">
-<div class="w-10 h-10 rounded-lg bg-blue-500 flex items-center justify-center mr-2">
-<i class="fa-solid fa-layer-group text-white"></i>
+<div class="w-8 h-8 rounded-lg bg-blue-500 flex items-center justify-center mr-2">
+<i class="fa-solid fa-layer-group text-white text-sm"></i>
 </div>
-<h3 class="text-lg font-bold text-gray-800">Common Facades</h3>
+<h3 class="text-base font-bold text-gray-800">Common Facades</h3>
 </div>
-<div class="grid grid-cols-2 gap-3">
-<div class="facade-card">
-<div class="flex items-center">
-<div class="facade-icon" style="background-color: #DBEAFE;
-color: #2563EB">
-<i class="fa-solid fa-route"></i>
+<div class="grid grid-cols-1 gap-2">
+<div class="facade-pill">
+<div class="fp-icon" style="background:#DBEAFE;color:#2563EB"><i class="fa-solid fa-route"></i></div>
+<div><div class="text-xs font-bold text-gray-800">Route</div><div class="text-xs text-gray-400">Routing</div></div>
 </div>
-<div>
-<div class="text-sm font-bold text-gray-800">Route</div>
-<div class="text-xs text-gray-500">Routing</div>
+<div class="facade-pill">
+<div class="fp-icon" style="background:#D1FAE5;color:#059669"><i class="fa-solid fa-eye"></i></div>
+<div><div class="text-xs font-bold text-gray-800">View</div><div class="text-xs text-gray-400">Views</div></div>
 </div>
+<div class="facade-pill">
+<div class="fp-icon" style="background:#FEF3C7;color:#D97706"><i class="fa-solid fa-database"></i></div>
+<div><div class="text-xs font-bold text-gray-800">DB</div><div class="text-xs text-gray-400">Database</div></div>
 </div>
+<div class="facade-pill">
+<div class="fp-icon" style="background:#E0E7FF;color:#4F46E5"><i class="fa-solid fa-bolt"></i></div>
+<div><div class="text-xs font-bold text-gray-800">Cache</div><div class="text-xs text-gray-400">Caching</div></div>
 </div>
-<div class="facade-card">
-<div class="flex items-center">
-<div class="facade-icon" style="background-color: #D1FAE5;
-color: #059669">
-<i class="fa-solid fa-eye"></i>
+<div class="facade-pill">
+<div class="fp-icon" style="background:#F3E8FF;color:#7C3AED"><i class="fa-solid fa-cog"></i></div>
+<div><div class="text-xs font-bold text-gray-800">Config</div><div class="text-xs text-gray-400">Configuration</div></div>
 </div>
-<div>
-<div class="text-sm font-bold text-gray-800">View</div>
-<div class="text-xs text-gray-500">Views</div>
+<div class="facade-pill">
+<div class="fp-icon" style="background:#FEE2E2;color:#DC2626"><i class="fa-solid fa-file-alt"></i></div>
+<div><div class="text-xs font-bold text-gray-800">Log</div><div class="text-xs text-gray-400">Logging</div></div>
 </div>
+<div class="facade-pill">
+<div class="fp-icon" style="background:#FDF2F8;color:#DB2777"><i class="fa-solid fa-user-shield"></i></div>
+<div><div class="text-xs font-bold text-gray-800">Auth</div><div class="text-xs text-gray-400">Authentication</div></div>
 </div>
-</div>
-<div class="facade-card">
-<div class="flex items-center">
-<div class="facade-icon" style="background-color: #FEF3C7;
-color: #D97706">
-<i class="fa-solid fa-database"></i>
-</div>
-<div>
-<div class="text-sm font-bold text-gray-800">DB</div>
-<div class="text-xs text-gray-500">Database</div>
-</div>
-</div>
-</div>
-<div class="facade-card">
-<div class="flex items-center">
-<div class="facade-icon" style="background-color: #E0E7FF;
-color: #4F46E5">
-<i class="fa-solid fa-bolt"></i>
-</div>
-<div>
-<div class="text-sm font-bold text-gray-800">Cache</div>
-<div class="text-xs text-gray-500">Caching</div>
-</div>
-</div>
-</div>
-<div class="facade-card">
-<div class="flex items-center">
-<div class="facade-icon" style="background-color: #F3E8FF;
-color: #7C3AED">
-<i class="fa-solid fa-cog"></i>
-</div>
-<div>
-<div class="text-sm font-bold text-gray-800">Config</div>
-<div class="text-xs text-gray-500">Configuration</div>
-</div>
-</div>
-</div>
-<div class="facade-card">
-<div class="flex items-center">
-<div class="facade-icon" style="background-color: #FEE2E2;
-color: #DC2626">
-<i class="fa-solid fa-file-alt"></i>
-</div>
-<div>
-<div class="text-sm font-bold text-gray-800">Log</div>
-<div class="text-xs text-gray-500">Logging</div>
-</div>
-</div>
-</div>
-<div class="facade-card">
-<div class="flex items-center">
-<div class="facade-icon" style="background-color: #FDF2F8;
-color: #DB2777">
-<i class="fa-solid fa-user-shield"></i>
-</div>
-<div>
-<div class="text-sm font-bold text-gray-800">Auth</div>
-<div class="text-xs text-gray-500">Authentication</div>
-</div>
-</div>
-</div>
-<div class="facade-card">
-<div class="flex items-center">
-<div class="facade-icon" style="background-color: #F0F9FF;
-color: #0284C7">
-<i class="fa-solid fa-envelope"></i>
-</div>
-<div>
-<div class="text-sm font-bold text-gray-800">Request</div>
-<div class="text-xs text-gray-500">HTTP Request</div>
-</div>
+<div class="facade-pill">
+<div class="fp-icon" style="background:#F0F9FF;color:#0284C7"><i class="fa-solid fa-envelope"></i></div>
+<div><div class="text-xs font-bold text-gray-800">Request</div><div class="text-xs text-gray-400">HTTP Request</div></div>
 </div>
 </div>
 </div>
 </div>
 
-<div class="col-span-7 flex flex-col gap-4">
+<!-- Col 2: How Facades Work -->
+<div class="col-span-4 flex flex-col gap-3">
 <div class="bg-white rounded-xl p-4 border border-gray-200">
 <div class="flex items-center mb-3">
-<div class="w-10 h-10 rounded-lg bg-green-500 flex items-center justify-center mr-2">
-<i class="fa-solid fa-code text-white"></i>
+<div class="w-8 h-8 rounded-lg bg-green-500 flex items-center justify-center mr-2">
+<i class="fa-solid fa-code text-white text-sm"></i>
 </div>
-<h3 class="text-lg font-bold text-gray-800">How Facades Work</h3>
+<h3 class="text-base font-bold text-gray-800">How Facades Work</h3>
 </div>
 <div class="code-compare">
 <div class="mb-3">
-<span class="text-gray-400 text-xs">// Facade Syntax (Static Interface)</span><br>
-<span class="code-facade">DB::</span>table(<span class="text-green-300">'users'</span>)->get();
+<span class="text-gray-400 text-xs">// Facade Syntax (Static)</span><br>
+<span style="color:#10B981">DB::</span>table(<span class="text-green-300">'users'</span>)->get();
 </div>
 <div>
-<span class="text-gray-400 text-xs">// Behind the Scenes (Service Container)</span><br>
-<span class="code-container">$app[</span><span class="text-green-300">'db'</span><span class="code-container">]-></span>table(<span class="text-green-300">'users'</span>)->get();
+<span class="text-gray-400 text-xs">// Behind the Scenes</span><br>
+<span style="color:#FBBF24">$app[</span><span class="text-green-300">'db'</span><span style="color:#FBBF24">]-></span>table(<span class="text-green-300">'users'</span>)->get();
 </div>
 </div>
 </div>
 
-<div class="grid grid-cols-2 gap-4">
+<!-- Flow diagram -->
+<div class="bg-blue-50 rounded-xl p-4 border border-blue-100 flex-grow">
+<div class="flex items-center mb-3">
+<div class="w-8 h-8 rounded-lg bg-blue-500 flex items-center justify-center mr-2">
+<i class="fa-solid fa-diagram-project text-white text-sm"></i>
+</div>
+<h3 class="text-base font-bold text-gray-800">Facade Flow</h3>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="bg-white rounded-lg px-4 py-2 text-center border border-blue-200 w-full">
+<p class="text-xs font-bold text-blue-700">1. Static Call</p>
+<p class="text-xs text-gray-500">DB::table('users')</p>
+</div>
+<i class="fa-solid fa-arrow-down text-blue-400 text-sm"></i>
+<div class="bg-white rounded-lg px-4 py-2 text-center border border-blue-200 w-full">
+<p class="text-xs font-bold text-blue-700">2. __callStatic()</p>
+<p class="text-xs text-gray-500">Resolve from Container</p>
+</div>
+<i class="fa-solid fa-arrow-down text-blue-400 text-sm"></i>
+<div class="bg-white rounded-lg px-4 py-2 text-center border border-blue-200 w-full">
+<p class="text-xs font-bold text-blue-700">3. Service Instance</p>
+<p class="text-xs text-gray-500">$app['db']->table()</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Col 3: Definition + Benefits -->
+<div class="col-span-4 flex flex-col gap-3">
 <div class="bg-white rounded-xl p-4 border border-gray-200">
 <div class="flex items-center mb-3">
-<div class="w-10 h-10 rounded-lg bg-purple-500 flex items-center justify-center mr-2">
-<i class="fa-solid fa-book-open text-white"></i>
+<div class="w-8 h-8 rounded-lg bg-purple-500 flex items-center justify-center mr-2">
+<i class="fa-solid fa-book-open text-white text-sm"></i>
 </div>
-<h3 class="text-lg font-bold text-gray-800">Definition</h3>
+<h3 class="text-base font-bold text-gray-800">Definition</h3>
 </div>
 <ul class="text-sm text-gray-700 space-y-2">
 <li class="flex items-start">
-<i class="fa-solid fa-check-circle text-purple-500 mr-2 mt-1"></i>
-<span>Static interface สำหรับ services</span>
+<i class="fa-solid fa-check-circle text-purple-500 mr-2 mt-0.5 text-sm"></i>
+<span class="text-xs">Static interface สำหรับ services ใน Container</span>
 </li>
 <li class="flex items-start">
-<i class="fa-solid fa-check-circle text-purple-500 mr-2 mt-1"></i>
-<span>เข้าถึง service container</span>
+<i class="fa-solid fa-check-circle text-purple-500 mr-2 mt-0.5 text-sm"></i>
+<span class="text-xs">เข้าถึง service container ได้ง่าย</span>
 </li>
 <li class="flex items-start">
-<i class="fa-solid fa-check-circle text-purple-500 mr-2 mt-1"></i>
-<span>ทำให้ code กระชับ</span>
+<i class="fa-solid fa-check-circle text-purple-500 mr-2 mt-0.5 text-sm"></i>
+<span class="text-xs">ทำให้ code กระชับ อ่านง่าย</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check-circle text-purple-500 mr-2 mt-0.5 text-sm"></i>
+<span class="text-xs">ยังคง testable ด้วย Mockery</span>
 </li>
 </ul>
 </div>
 
-<div class="bg-white rounded-xl p-4 border border-gray-200">
+<div class="bg-white rounded-xl p-4 border border-gray-200 flex-grow">
 <div class="flex items-center mb-3">
-<div class="w-10 h-10 rounded-lg bg-orange-500 flex items-center justify-center mr-2">
-<i class="fa-solid fa-star text-white"></i>
+<div class="w-8 h-8 rounded-lg bg-orange-500 flex items-center justify-center mr-2">
+<i class="fa-solid fa-star text-white text-sm"></i>
 </div>
-<h3 class="text-lg font-bold text-gray-800">Benefits</h3>
+<h3 class="text-base font-bold text-gray-800">Benefits</h3>
 </div>
 <div class="space-y-2">
-<div class="benefit-item">
-<div class="benefit-icon">
-<i class="fa-solid fa-bolt text-sm"></i>
+<div class="flex items-center">
+<div class="w-7 h-7 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-2 flex-shrink-0">
+<i class="fa-solid fa-bolt text-xs"></i>
 </div>
-<span class="text-sm text-gray-700">สะดวกในการใช้งาน</span>
+<span class="text-xs text-gray-700">สะดวกในการใช้งาน</span>
 </div>
-<div class="benefit-item">
-<div class="benefit-icon">
-<i class="fa-solid fa-compress-alt text-sm"></i>
+<div class="flex items-center">
+<div class="w-7 h-7 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-2 flex-shrink-0">
+<i class="fa-solid fa-compress-alt text-xs"></i>
 </div>
-<span class="text-sm text-gray-700">Code กระชับ</span>
+<span class="text-xs text-gray-700">Code กระชับ สั้น</span>
 </div>
-<div class="benefit-item">
-<div class="benefit-icon">
-<i class="fa-solid fa-plug text-sm"></i>
+<div class="flex items-center">
+<div class="w-7 h-7 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-2 flex-shrink-0">
+<i class="fa-solid fa-plug text-xs"></i>
 </div>
-<span class="text-sm text-gray-700">เข้าถึง services ง่าย</span>
+<span class="text-xs text-gray-700">เข้าถึง services ง่าย</span>
+</div>
+<div class="flex items-center">
+<div class="w-7 h-7 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-2 flex-shrink-0">
+<i class="fa-solid fa-vial text-xs"></i>
+</div>
+<span class="text-xs text-gray-700">รองรับ Unit Testing</span>
 </div>
 </div>
 </div>
+
+<div class="bg-yellow-50 rounded-xl p-3 border border-yellow-200">
+<div class="flex items-start">
+<i class="fa-solid fa-lightbulb text-yellow-500 mr-2 mt-0.5"></i>
+<p class="text-xs text-gray-700"><span class="font-bold">Tip:</span> ใช้ Facade เมื่อต้องการ syntax สั้น แต่ใช้ DI (Dependency Injection) เมื่อต้องการ testability สูง</p>
 </div>
 </div>
 </div>
+
 </div>
 
 </div>

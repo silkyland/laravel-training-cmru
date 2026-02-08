@@ -9,77 +9,10 @@
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
 <link href="css/theme.css" rel="stylesheet"/>
 <style>
-body {
-    margin: 0;
-    padding: 0;
-    font-family: "Noto Sans Thai", "Noto Sans SC", sans-serif;
-    background-color: #f3f4f6
-    }
-.slide-container {
-    width: 1280px;
-    height: 720px;
-    position: relative;
-    background-color: #fff;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column
-    }
-.blob-bg-1 {
-    position: absolute;
-    top: -120px;
-    right: -100px;
-    width: 450px;
-    height: 450px;
-    background-color: #F0F9FF;
-    border-radius: 50%;
-    z-index: 0;
-    opacity: 0.8
-    }
-.blob-bg-2 {
-    position: absolute;
-    bottom: -50px;
-    left: -50px;
-    width: 300px;
-    height: 300px;
-    background-color: #ECFDF5;
-    border-radius: 50%;
-    z-index: 0;
-    opacity: 0.8
-    }
-.content-wrapper {
-    position: relative;
-    z-index: 10;
-    padding: 50px 80px;
-    height: 100%;
-    display: flex;
-    flex-direction: column
-    }
-.casting-card {
-    background: white;
-    border-radius: 12px;
-    padding: 16px 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    border: 1px solid #F3F4F6
-    }
-.code-block {
-    background: #1F2937;
-    color: #10B981;
-    padding: 10px 14px;
-    border-radius: 8px;
-    font-family: "Courier New", monospace;
-    font-size: 11px;
-    line-height: 1.6
-    }
-.cast-type {
-    display: inline-block;
-    padding: 4px 10px;
-    background-color: #DBEAFE;
-    color: #1E40AF;
-    border-radius: 5px;
-    font-size: 11px;
-    font-weight: 600;
-    margin: 3px
-    }
+.cc { background:white; border-radius:10px; padding:12px 14px; border:1px solid #F3F4F6; box-shadow:0 1px 3px rgba(0,0,0,0.04); }
+.ci { width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
+.cb { background:#1F2937; color:#10B981; padding:6px 10px; border-radius:6px; font-family:"Courier New",monospace; font-size:10px; line-height:1.5; }
+.ct { display:inline-block; padding:2px 7px; background:#DBEAFE; color:#1E40AF; border-radius:4px; font-size:9px; font-weight:600; margin:2px; }
 </style>
 </head>
 <body>
@@ -87,170 +20,136 @@ body {
 <div class="blob-bg-1"></div>
 <div class="blob-bg-2"></div>
 <div class="content-wrapper">
-<div class="mb-5">
-<div class="flex items-center space-x-3 mb-2">
-<span class="text-sm font-bold tracking-widest text-blue-500 uppercase">ELOQUENT ATTRIBUTE CASTING</span>
-<div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
-</div>
-<h1 class="text-4xl font-black text-gray-800">Eloquent Attribute Casting</h1>
-<p class="text-gray-500 mt-2 text-lg">การแปลง Data Types ของ Attributes อัตโนมัติ</p>
+
+<div class="mb-3">
+<span class="text-xs font-bold tracking-widest text-purple-500 uppercase">ELOQUENT</span>
+<h1 class="text-3xl font-black text-gray-800">Attribute Casting</h1>
+<p class="text-gray-500 mt-1 text-sm">การแปลง Data Types ของ Attributes อัตโนมัติ</p>
 </div>
 
-<div class="grid grid-cols-12 gap-5 flex-grow pb-4">
-<div class="col-span-4">
-<div class="casting-card h-full">
-<div class="flex items-center mb-4">
-<div class="w-10 h-10 rounded-lg bg-blue-500 flex items-center justify-center mr-3">
-<i class="fa-solid fa-wand-magic-sparkles text-white"></i>
+<div class="grid grid-cols-3 gap-3 mb-3">
+<!-- Common Casts + Defining -->
+<div class="cc">
+<div class="flex items-center gap-2 mb-2">
+<div class="ci" style="background:#DBEAFE;color:#2563EB"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">Common Casts</h3><p class="text-xs text-gray-400">ประเภทที่รองรับ</p></div>
 </div>
-<div>
-<h3 class="text-lg font-bold text-gray-800">Common Casts</h3>
-<p class="text-xs text-gray-500">ประเภทที่รองรับ</p>
+<div class="flex flex-wrap gap-1 mb-2">
+<span class="ct">array</span><span class="ct">boolean</span><span class="ct">collection</span><span class="ct">date</span><span class="ct">datetime</span><span class="ct">decimal</span><span class="ct">float</span><span class="ct">integer</span><span class="ct">json</span><span class="ct">object</span><span class="ct">string</span><span class="ct">timestamp</span>
 </div>
-</div>
-<div class="flex flex-wrap gap-2">
-<span class="cast-type">array</span>
-<span class="cast-type">boolean</span>
-<span class="cast-type">collection</span>
-<span class="cast-type">date</span>
-<span class="cast-type">datetime</span>
-<span class="cast-type">decimal</span>
-<span class="cast-type">double</span>
-<span class="cast-type">float</span>
-<span class="cast-type">integer</span>
-<span class="cast-type">json</span>
-<span class="cast-type">object</span>
-<span class="cast-type">real</span>
-<span class="cast-type">string</span>
-<span class="cast-type">timestamp</span>
-</div>
-<div class="mt-6">
-<div class="flex items-center mb-3">
-<div class="w-8 h-8 rounded-lg bg-green-500 flex items-center justify-center mr-2">
-<i class="fa-solid fa-code text-white text-sm"></i>
-</div>
-<h4 class="text-base font-bold text-gray-800">Defining Casts</h4>
-</div>
-<div class="code-block">
-protected $casts = [
-    'is_admin' => 'boolean',
-    'price' => 'decimal:2',
-    'options' => 'json',
+<div class="cb">
+protected $casts = [<br>
+&nbsp;&nbsp;<span style="color:#A78BFA">'is_admin'</span> => <span style="color:#A78BFA">'boolean'</span>,<br>
+&nbsp;&nbsp;<span style="color:#A78BFA">'price'</span> => <span style="color:#A78BFA">'decimal:2'</span>,<br>
+&nbsp;&nbsp;<span style="color:#A78BFA">'options'</span> => <span style="color:#A78BFA">'json'</span>,<br>
 ];
 </div>
 </div>
-</div>
-</div>
 
-<div class="col-span-4">
-<div class="casting-card h-full">
-<div class="flex items-center mb-4">
-<div class="w-10 h-10 rounded-lg bg-purple-500 flex items-center justify-center mr-3">
-<i class="fa-solid fa-calendar text-white"></i>
+<!-- Date Casting -->
+<div class="cc">
+<div class="flex items-center gap-2 mb-2">
+<div class="ci" style="background:#F3E8FF;color:#7C3AED"><i class="fa-solid fa-calendar"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">Date Casting</h3><p class="text-xs text-gray-400">จัดการวันที่</p></div>
 </div>
-<div>
-<h3 class="text-lg font-bold text-gray-800">Date Casting</h3>
-<p class="text-xs text-gray-500">จัดการวันที่</p>
-</div>
-</div>
-<div class="space-y-4">
-<div>
-<p class="text-xs font-bold text-gray-700 mb-2">Date Attributes:</p>
-<div class="code-block">
-protected $dates = [
-    'created_at',
-    'deleted_at'
+<p class="text-xs font-bold text-gray-600 mb-1">Date Attributes:</p>
+<div class="cb mb-2">
+protected $dates = [<br>
+&nbsp;&nbsp;<span style="color:#A78BFA">'created_at'</span>, <span style="color:#A78BFA">'deleted_at'</span><br>
 ];
 </div>
+<p class="text-xs font-bold text-gray-600 mb-1">Date Format:</p>
+<div class="cb mb-2">
+protected $dateFormat = <span style="color:#A78BFA">'d/m/Y H:i'</span>;
 </div>
-<div>
-<p class="text-xs font-bold text-gray-700 mb-2">Date Format:</p>
-<div class="code-block">
-protected $dateFormat = 'd/m/Y H:i';
+<div class="bg-purple-50 rounded-md p-2">
+<p class="text-xs text-gray-600"><strong>ผลลัพธ์:</strong> $user->created_at->format('d/m/Y')</p>
 </div>
 </div>
-<div class="bg-purple-50 rounded-lg p-3">
-<p class="text-xs text-gray-600"><strong>ผลลัพธ์:</strong></p>
-<p class="text-sm text-gray-800 mt-1">$user->created_at->format('d/m/Y')</p>
+
+<!-- Array & JSON -->
+<div class="cc">
+<div class="flex items-center gap-2 mb-2">
+<div class="ci" style="background:#FEF3C7;color:#D97706"><i class="fa-solid fa-layer-group"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">Array & JSON</h3><p class="text-xs text-gray-400">จัดการข้อมูลโครงสร้าง</p></div>
 </div>
+<p class="text-xs font-bold text-gray-600 mb-1">Array Casting:</p>
+<div class="cb mb-1"><span style="color:#A78BFA">'options'</span> => <span style="color:#A78BFA">'array'</span></div>
+<p class="text-xs text-gray-400 mb-2">เก็บเป็น PHP array</p>
+<p class="text-xs font-bold text-gray-600 mb-1">JSON Casting:</p>
+<div class="cb mb-1"><span style="color:#A78BFA">'options'</span> => <span style="color:#A78BFA">'json'</span></div>
+<p class="text-xs text-gray-400 mb-2">เก็บเป็น JSON string</p>
+<div class="bg-orange-50 rounded-md p-2">
+<p class="text-xs text-gray-600"><strong>Usage:</strong> $user->options = ['key' => 'value'];</p>
 </div>
 </div>
 </div>
 
-<div class="col-span-4">
-<div class="casting-card h-full">
-<div class="flex items-center mb-4">
-<div class="w-10 h-10 rounded-lg bg-orange-500 flex items-center justify-center mr-3">
-<i class="fa-solid fa-layer-group text-white"></i>
+<!-- Bottom row -->
+<div class="grid grid-cols-3 gap-3 flex-grow">
+<!-- Custom Casts -->
+<div class="cc">
+<div class="flex items-center gap-2 mb-2">
+<div class="ci" style="background:#D1FAE5;color:#059669"><i class="fa-solid fa-cog"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">Custom Casts</h3><p class="text-xs text-gray-400">สร้าง Cast Class</p></div>
 </div>
-<div>
-<h3 class="text-lg font-bold text-gray-800">Array & JSON</h3>
-<p class="text-xs text-gray-500">จัดการข้อมูลโครงสร้าง</p>
-</div>
-</div>
-<div class="space-y-4">
-<div>
-<p class="text-xs font-bold text-gray-700 mb-2">Array Casting:</p>
-<div class="code-block">
-'options' => 'array'
-</div>
-<p class="text-xs text-gray-500 mt-1">เก็บเป็น PHP array</p>
-</div>
-<div>
-<p class="text-xs font-bold text-gray-700 mb-2">JSON Casting:</p>
-<div class="code-block">
-'options' => 'json'
-</div>
-<p class="text-xs text-gray-500 mt-1">เก็บเป็น JSON string</p>
-</div>
-<div class="bg-orange-50 rounded-lg p-3">
-<p class="text-xs text-gray-600"><strong>Usage:</strong></p>
-<p class="text-sm text-gray-800 mt-1">$user->options = ['key' => 'value'];</p>
-</div>
-</div>
-</div>
-</div>
-
-<div class="grid grid-cols-2 gap-5">
-<div class="casting-card">
-<div class="flex items-center mb-3">
-<div class="w-8 h-8 rounded-lg bg-green-500 flex items-center justify-center mr-2">
-<i class="fa-solid fa-cog text-white text-sm"></i>
-</div>
-<h3 class="text-base font-bold text-gray-800">Custom Casts</h3>
-</div>
-<p class="text-sm text-gray-600 mb-2">สร้าง class ที่ implements CastsAttributes interface</p>
-<div class="code-block">
-class JsonCast implements CastsAttributes {
-    public function get($model, $key, $value, $attributes) {
-        return json_decode($value, true);
-    }
+<div class="cb">
+<span style="color:#9CA3AF">// php artisan make:cast Json</span><br>
+class JsonCast implements <span style="color:#60A5FA">CastsAttributes</span><br>
+{<br>
+&nbsp;&nbsp;public function <span style="color:#FBBF24">get</span>($model, $key, $value, $attr) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return json_decode($value, true);<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;public function <span style="color:#FBBF24">set</span>($model, $key, $value, $attr) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return json_encode($value);<br>
+&nbsp;&nbsp;}<br>
 }
 </div>
 </div>
 
-<div class="casting-card">
-<div class="flex items-center mb-3">
-<div class="w-8 h-8 rounded-lg bg-red-500 flex items-center justify-center mr-2">
-<i class="fa-solid fa-shield-halved text-white text-sm"></i>
+<!-- Enum Casts -->
+<div class="cc">
+<div class="flex items-center gap-2 mb-2">
+<div class="ci" style="background:#E0E7FF;color:#4F46E5"><i class="fa-solid fa-list"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">Enum Casts</h3><p class="text-xs text-gray-400">PHP 8.1+ Enum</p></div>
 </div>
-<h3 class="text-base font-bold text-gray-800">Security Benefits</h3>
+<div class="cb mb-2">
+<span style="color:#9CA3AF">// Define Enum</span><br>
+enum UserStatus: <span style="color:#60A5FA">string</span> {<br>
+&nbsp;&nbsp;case Active = <span style="color:#A78BFA">'active'</span>;<br>
+&nbsp;&nbsp;case Inactive = <span style="color:#A78BFA">'inactive'</span>;<br>
+}
 </div>
-<p class="text-sm text-gray-600 mb-2">Casting ช่วยป้องกันข้อมูลไม่ถูกเปลี่ยนอย่างไม่ถูกต้อง</p>
+<div class="cb">
+<span style="color:#9CA3AF">// In Model</span><br>
+protected $casts = [<br>
+&nbsp;&nbsp;<span style="color:#A78BFA">'status'</span> => UserStatus::class,<br>
+];
+</div>
+</div>
+
+<!-- Security Benefits -->
+<div class="cc">
+<div class="flex items-center gap-2 mb-2">
+<div class="ci" style="background:#FEE2E2;color:#DC2626"><i class="fa-solid fa-shield-halved"></i></div>
+<div><h3 class="text-sm font-bold text-gray-800">Benefits</h3><p class="text-xs text-gray-400">ข้อดีของ Casting</p></div>
+</div>
 <div class="space-y-2">
-<div class="flex items-start text-sm text-gray-700">
-<i class="fa-solid fa-check text-green-500 mr-2 mt-1"></i>
-<span>Automatic type conversion</span>
+<div class="flex items-center text-xs text-gray-700">
+<i class="fa-solid fa-check text-green-500 mr-2"></i><span>Automatic type conversion</span>
 </div>
-<div class="flex items-start text-sm text-gray-700">
-<i class="fa-solid fa-check text-green-500 mr-2 mt-1"></i>
-<span>Prevents invalid data types</span>
+<div class="flex items-center text-xs text-gray-700">
+<i class="fa-solid fa-check text-green-500 mr-2"></i><span>Prevents invalid data types</span>
 </div>
-<div class="flex items-start text-sm text-gray-700">
-<i class="fa-solid fa-check text-green-500 mr-2 mt-1"></i>
-<span>Consistent data format</span>
+<div class="flex items-center text-xs text-gray-700">
+<i class="fa-solid fa-check text-green-500 mr-2"></i><span>Consistent data format</span>
+</div>
+<div class="flex items-center text-xs text-gray-700">
+<i class="fa-solid fa-check text-green-500 mr-2"></i><span>Better IDE support</span>
 </div>
 </div>
+<div class="mt-2 bg-yellow-50 rounded-md p-2 border border-yellow-100">
+<p class="text-xs text-gray-600"><i class="fa-solid fa-lightbulb text-yellow-500 mr-1"></i><strong>Tip:</strong> ใช้ casting เสมอเพื่อ type safety</p>
 </div>
 </div>
 </div>

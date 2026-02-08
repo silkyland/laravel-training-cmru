@@ -9,90 +9,51 @@
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
 <link href="css/theme.css" rel="stylesheet"/>
 <style>
-body {
-    margin: 0;
-    padding: 0;
-    font-family: "Noto Sans Thai", "Noto Sans SC", sans-serif;
-    background-color: #f3f4f6
-    }
-.slide-container {
-    width: 1280px;
-    height: 720px;
-    position: relative;
-    background-color: #fff;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column
-    }
-.blob-bg-1 {
-    position: absolute;
-    top: -120px;
-    right: -100px;
-    width: 450px;
-    height: 450px;
-    background-color: #F0F9FF;
-    border-radius: 50%;
-    z-index: 0;
-    opacity: 0.8
-    }
-.blob-bg-2 {
-    position: absolute;
-    bottom: -50px;
-    left: -50px;
-    width: 300px;
-    height: 300px;
-    background-color: #ECFDF5;
-    border-radius: 50%;
-    z-index: 0;
-    opacity: 0.8
-    }
-.content-wrapper {
-    position: relative;
-    z-index: 10;
-    padding: 50px 80px;
-    height: 100%;
-    display: flex;
-    flex-direction: column
-    }
-.practice-card {
+.bp-card {
     background: white;
-    border-radius: 12px;
-    padding: 16px 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    padding: 12px 14px;
     border: 1px solid #F3F4F6;
-    transition: transform 0.2s, box-shadow 0.2s
-    }
-.practice-card:hover {
-    transform: translatey(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
-    }
-.icon-circle {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.bp-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
-    margin-bottom: 12px
-    }
-.example-box {
+    font-size: 14px;
+    flex-shrink: 0;
+}
+.ex-box {
     background: #F9FAFB;
     border-left: 3px solid #10B981;
-    padding: 10px 14px;
-    border-radius: 0 8px 8px 0;
+    padding: 6px 10px;
+    border-radius: 0 6px 6px 0;
     font-family: "Courier New", monospace;
-    font-size: 11px;
-    color: #374151
-    }
-.badge {
-    display: inline-block;
-    padding: 3px 8px;
-    border-radius: 4px;
     font-size: 10px;
-    font-weight: 600;
-    margin: 2px
-    }
+    line-height: 1.5;
+    color: #374151;
+}
+.badge-good {
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 9px;
+    font-weight: 700;
+    background: #DBEAFE;
+    color: #1E40AF;
+}
+.badge-bad {
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 9px;
+    font-weight: 700;
+    background: #FEE2E2;
+    color: #DC2626;
+}
 </style>
 </head>
 <body>
@@ -100,152 +61,163 @@ body {
 <div class="blob-bg-1"></div>
 <div class="blob-bg-2"></div>
 <div class="content-wrapper">
-<div class="mb-5">
-<div class="flex items-center space-x-3 mb-2">
-<span class="text-sm font-bold tracking-widest text-blue-500 uppercase">CONTROLLERS</span>
-<div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
+
+<!-- Title -->
+<div class="mb-3">
+<div class="flex items-center space-x-3 mb-1">
+<span class="text-xs font-bold tracking-widest text-green-600 uppercase">CONTROLLERS</span>
 </div>
-<h1 class="text-4xl font-black text-gray-800">Controller Best Practices</h1>
-<p class="text-gray-500 mt-2 text-lg">หลักการเขียน Controller ที่ดีและมีประสิทธิภาพ</p>
+<h1 class="text-3xl font-black text-gray-800">Controller Best Practices</h1>
+<p class="text-gray-500 mt-1 text-sm">หลักการเขียน Controller ที่ดีและมีประสิทธิภาพ</p>
 </div>
 
-<div class="grid grid-cols-3 gap-4 flex-grow pb-4">
-<div class="flex flex-col gap-4">
-<div class="practice-card flex-grow">
-<div class="icon-circle" style="background-color: #DBEAFE;
-color: #2563EB">
-<i class="fa-solid fa-cube"></i>
-</div>
-<h3 class="text-lg font-bold text-gray-800 mb-2">Single Responsibility</h3>
-<p class="text-xs text-gray-500 mb-3">Controller มีหน้าที่เดียว</p>
-<div class="example-box">
-<span class="badge" style="background-color: #DBEAFE;
-color: #1E40AF">ดี</span> รับ request และ return response<br>
-<span class="badge" style="background-color: #FEE2E2;
-color: #DC2626">ไม่ดี</span> มี business logic มากเกินไป
-</div>
-</div>
+<!-- 3x3 Grid -->
+<div class="grid grid-cols-3 gap-3 flex-grow">
 
-<div class="practice-card">
-<div class="icon-circle" style="background-color: #D1FAE5;
-color: #059669">
-<i class="fa-solid fa-feather"></i>
+<!-- Row 1 -->
+<div class="bp-card">
+<div class="flex items-center gap-2 mb-2">
+<div class="bp-icon" style="background:#DBEAFE;color:#2563EB"><i class="fa-solid fa-cube"></i></div>
+<div>
+<h3 class="text-sm font-bold text-gray-800">Single Responsibility</h3>
+<p class="text-xs text-gray-400">Controller มีหน้าที่เดียว</p>
 </div>
-<h3 class="text-lg font-bold text-gray-800 mb-2">Thin Controllers</h3>
-<p class="text-xs text-gray-500 mb-3">Logic อยู่ใน Models/Services</p>
-<div class="example-box">
-Logic ควรอยู่ใน:<br>
-• Models<br>
-• Services<br>
-• Repositories
 </div>
+<div class="ex-box">
+<span class="badge-good">ดี</span> รับ request → return response<br>
+<span class="badge-bad">ไม่ดี</span> มี business logic มากเกินไป
 </div>
 </div>
 
-<div class="practice-card">
-<div class="icon-circle" style="background-color: #FEF3C7;
-color: #D97706">
-<i class="fa-solid fa-code-branch"></i>
-</div>
-<h3 class="text-lg font-bold text-gray-800 mb-2">Dependency Injection</h3>
-<p class="text-xs text-gray-500 mb-3">Inject ผ่าน Constructor</p>
-<div class="example-box">
-public function __construct(UserService $userService)<br>
-{<br>
-&nbsp;&nbsp;$this->userService = $userService;<br>
-}
+<div class="bp-card">
+<div class="flex items-center gap-2 mb-2">
+<div class="bp-icon" style="background:#E0E7FF;color:#4F46E5"><i class="fa-solid fa-shield-halved"></i></div>
+<div>
+<h3 class="text-sm font-bold text-gray-800">Request Validation</h3>
+<p class="text-xs text-gray-400">Validate ก่อน process</p>
 </div>
 </div>
-</div>
-
-<div class="flex flex-col gap-4">
-<div class="practice-card">
-<div class="icon-circle" style="background-color: #E0E7FF;
-color: #4F46E5">
-<i class="fa-solid fa-shield-check"></i>
-</div>
-<h3 class="text-lg font-bold text-gray-800 mb-2">Request Validation</h3>
-<p class="text-xs text-gray-500 mb-3">Validate ก่อน process</p>
-<div class="example-box">
-public function store(StoreUserRequest $request)<br>
+<div class="ex-box">
+public function store(<span style="color:#2563EB">StoreUserRequest</span> $request)<br>
 {<br>
 &nbsp;&nbsp;// $request->validated() พร้อมใช้<br>
 }
 </div>
 </div>
 
-<div class="practice-card">
-<div class="icon-circle" style="background-color: #F3E8FF;
-color: #7C3AED">
-<i class="fa-solid fa-reply"></i>
+<div class="bp-card">
+<div class="flex items-center gap-2 mb-2">
+<div class="bp-icon" style="background:#FDF2F8;color:#DB2777"><i class="fa-solid fa-ruler"></i></div>
+<div>
+<h3 class="text-sm font-bold text-gray-800">Keep Methods Short</h3>
+<p class="text-xs text-gray-400">ไม่เกิน 20 บรรทัด</p>
 </div>
-<h3 class="text-lg font-bold text-gray-800 mb-2">Return Responses</h3>
-<p class="text-xs text-gray-500 mb-3">ใช้ Response Helpers</p>
-<div class="example-box">
-return response()->json($data);<br>
-return redirect()->route('users');<br>
-return back()->with('success', 'Saved');
+</div>
+<div class="ex-box">
+• แต่ละ method ทำงานเดียว<br>
+• แยก logic ออกไป Services<br>
+• ใช้ Service Classes
 </div>
 </div>
 
-<div class="practice-card">
-<div class="icon-circle" style="background-color: #FEE2E2;
-color: #DC2626">
-<i class="fa-solid fa-database"></i>
+<!-- Row 2 -->
+<div class="bp-card">
+<div class="flex items-center gap-2 mb-2">
+<div class="bp-icon" style="background:#D1FAE5;color:#059669"><i class="fa-solid fa-feather"></i></div>
+<div>
+<h3 class="text-sm font-bold text-gray-800">Thin Controllers</h3>
+<p class="text-xs text-gray-400">Logic อยู่ใน Models/Services</p>
 </div>
-<h3 class="text-lg font-bold text-gray-800 mb-2">Route Model Binding</h3>
-<p class="text-xs text-gray-500 mb-3">Auto-resolve Models</p>
-<div class="example-box">
-public function show(User $user)<br>
+</div>
+<div class="ex-box">
+Logic ควรอยู่ใน:<br>
+• <strong>Models</strong> - data logic<br>
+• <strong>Services</strong> - business logic<br>
+• <strong>Repositories</strong> - query logic
+</div>
+</div>
+
+<div class="bp-card">
+<div class="flex items-center gap-2 mb-2">
+<div class="bp-icon" style="background:#F3E8FF;color:#7C3AED"><i class="fa-solid fa-reply"></i></div>
+<div>
+<h3 class="text-sm font-bold text-gray-800">Return Responses</h3>
+<p class="text-xs text-gray-400">ใช้ Response Helpers</p>
+</div>
+</div>
+<div class="ex-box">
+return response()-><span style="color:#059669">json</span>($data);<br>
+return redirect()-><span style="color:#059669">route</span>('users');<br>
+return back()-><span style="color:#059669">with</span>('success', 'OK');
+</div>
+</div>
+
+<div class="bp-card">
+<div class="flex items-center gap-2 mb-2">
+<div class="bp-icon" style="background:#F0F9FF;color:#0284C7"><i class="fa-solid fa-shield-halved"></i></div>
+<div>
+<h3 class="text-sm font-bold text-gray-800">Authorization</h3>
+<p class="text-xs text-gray-400">ตรวจสอบสิทธิ์</p>
+</div>
+</div>
+<div class="ex-box">
+$this-><span style="color:#2563EB">authorize</span>('update', $user);<br>
+// หรือใช้ Gates / Policies<br>
+// @can('update', $post) ... @endcan
+</div>
+</div>
+
+<!-- Row 3 -->
+<div class="bp-card">
+<div class="flex items-center gap-2 mb-2">
+<div class="bp-icon" style="background:#FEF3C7;color:#D97706"><i class="fa-solid fa-code-branch"></i></div>
+<div>
+<h3 class="text-sm font-bold text-gray-800">Dependency Injection</h3>
+<p class="text-xs text-gray-400">Inject ผ่าน Constructor</p>
+</div>
+</div>
+<div class="ex-box">
+public function __construct(<br>
+&nbsp;&nbsp;<span style="color:#2563EB">UserService</span> $userService<br>
+) {<br>
+&nbsp;&nbsp;$this->userService = $userService;<br>
+}
+</div>
+</div>
+
+<div class="bp-card">
+<div class="flex items-center gap-2 mb-2">
+<div class="bp-icon" style="background:#FEE2E2;color:#DC2626"><i class="fa-solid fa-database"></i></div>
+<div>
+<h3 class="text-sm font-bold text-gray-800">Route Model Binding</h3>
+<p class="text-xs text-gray-400">Auto-resolve Models</p>
+</div>
+</div>
+<div class="ex-box">
+public function show(<span style="color:#2563EB">User</span> $user)<br>
 {<br>
 &nbsp;&nbsp;return view('users.show', compact('user'));<br>
 }<br>
-// Auto-resolves User::find($id)
-</div>
-</div>
-</div>
-
-<div class="flex flex-col gap-4">
-<div class="practice-card">
-<div class="icon-circle" style="background-color: #FDF2F8;
-color: #DB2777">
-<i class="fa-solid fa-ruler-short"></i>
-</div>
-<h3 class="text-lg font-bold text-gray-800 mb-2">Keep Methods Short</h3>
-<p class="text-xs text-gray-500 mb-3">ไม่เกิน 20 บรรทัด</p>
-<div class="example-box">
-• แต่ละ method ทำงานเดียว<br>
-• แยก logic ออกไป Services<br>
-• ใช้ Service Classes สำหรับ complex logic
+<span style="color:#6B7280">// Auto: User::findOrFail($id)</span>
 </div>
 </div>
 
-<div class="practice-card">
-<div class="icon-circle" style="background-color: #F0F9FF;
-color: #0284C7">
-<i class="fa-solid fa-shield-halved"></i>
-</div>
-<h3 class="text-lg font-bold text-gray-800 mb-2">Authorization</h3>
-<p class="text-xs text-gray-500 mb-3">ตรวจสอบสิทธิ์</p>
-<div class="example-box">
-$this->authorize('update', $user);<br>
-// หรือใช้ Gates/Policies
+<div class="bp-card">
+<div class="flex items-center gap-2 mb-2">
+<div class="bp-icon" style="background:#ECFDF5;color:#059669"><i class="fa-solid fa-robot"></i></div>
+<div>
+<h3 class="text-sm font-bold text-gray-800">AI Integration</h3>
+<p class="text-xs text-gray-400">ใช้ AI ช่วย generate</p>
 </div>
 </div>
-
-<div class="practice-card">
-<div class="icon-circle" style="background-color: #ECFDF5;
-color: #059669">
-<i class="fa-solid fa-robot"></i>
-</div>
-<h3 class="text-lg font-bold text-gray-800 mb-2">AI Integration</h3>
-<p class="text-xs text-gray-500 mb-3">ใช้ AI ช่วย generate</p>
-<div class="example-box">
+<div class="ex-box">
 • Generate Controller methods<br>
 • Create validation rules<br>
-• Write test cases
+• Write test cases<br>
+• Suggest refactoring
 </div>
 </div>
+
 </div>
 
 </div>
