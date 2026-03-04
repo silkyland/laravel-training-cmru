@@ -1,162 +1,203 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="th">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>หลักสูตร Laravel + AI</title>
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
-<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
-<link href="css/theme.css" rel="stylesheet"/>
-<style>
-body {
-margin: 0;
-padding: 0;
-font-family: 'Noto Sans Thai', 'Noto Sans SC', sans-serif;
-overflow: hidden;
-background-color: #f3f4f6;
-}
-.slide-container {
-width: 1280px;
-height: 720px;
-position: relative;
-background-color: #ffffff;
-overflow: hidden;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-}
-.shape-blob-1 {
-position: absolute;
-top: -150px;
-right: -100px;
-width: 600px;
-height: 600px;
-background-color: #E0F2FE;
-border-radius: 50%;
-z-index: 0;
-}
-.shape-blob-2 {
-position: absolute;
-bottom: -100px;
-left: -100px;
-width: 500px;
-height: 500px;
-background-color: #ECFDF5;
-border-radius: 50%;
-z-index: 0;
-}
-.shape-accent-1 {
-position: absolute;
-top: 100px;
-right: 150px;
-width: 80px;
-height: 80px;
-background-color: #6EE7B7;
-border-radius: 50%;
-opacity: 0.6;
-z-index: 1;
-}
-.shape-accent-2 {
-position: absolute;
-bottom: 120px;
-left: 150px;
-width: 40px;
-height: 40px;
-background-color: #93C5FD;
-border-radius: 50%;
-opacity: 0.8;
-z-index: 1;
-}
-.content-wrapper {
-z-index: 10;
-text-align: center;
-max-width: 900px;
-padding: 40px;
-}
-.title-line {
-height: 6px;
-width: 120px;
-background-color: #3B82F6;
-margin: 20px auto;
-border-radius: 3px;
-}
-.glass-card { padding: 0; }
-</style>
-</head>
-<body>
-<div class="slide-container">
-<div class="shape-blob-1"></div>
-<div class="shape-blob-2"></div>
-<div class="shape-accent-1"></div>
-<div class="shape-accent-2"></div>
-<div class="content-wrapper glass-card p-12 w-full mx-auto">
-<div class="mb-4">
-<p class="text-gray-500 font-medium tracking-widest uppercase text-sm">PROFESSIONAL TRAINING COURSE</p>
-</div>
-<h1 class="text-5xl font-black text-gray-800 mb-4 leading-tight">
-หลักสูตรการประยุกต์ใช้ AI เพื่อการพัฒนา<br/>ระบบสารสนเทศและฐานข้อมูลองค์กร<br/>อย่างปลอดภัยและมีประสิทธิภาพ
-</h1>
-<div class="title-line"></div>
-<h2 class="text-2xl text-gray-600 font-light mb-12">
-Laravel Framework + Artificial Intelligence Development
-</h2>
-<div class="grid grid-cols-2 gap-8 text-left max-w-2xl mx-auto border-t border-gray-100 pt-8">
-<div class="flex items-start space-x-4">
-<div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-500 flex-shrink-0">
-<i class="fa-solid fa-user-tie"></i>
-</div>
-<div>
-<p class="text-xs text-gray-400 font-bold uppercase mb-1">วิทยากร / INSTRUCTOR</p>
-<p class="text-lg font-bold text-gray-800">นายบัณฑิต นันทะเทศ</p>
-<p class="text-sm text-gray-500">Senior PHP Developer<br/>Data Horizon Co., Ltd.</p>
-</div>
-</div>
-<div class="flex items-start space-x-4">
-<div class="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center text-green-500 flex-shrink-0">
-<i class="fa-solid fa-calendar-days"></i>
-</div>
-<div>
-<p class="text-xs text-gray-400 font-bold uppercase mb-1">กำหนดการ / SCHEDULE</p>
-<p class="text-lg font-bold text-gray-800">14-15 มีนาคม 2568</p>
-<p class="text-sm text-gray-500">12 ชั่วโมง (2 วัน)</p>
-</div>
-</div>
-</div>
-<div class="grid grid-cols-2 gap-8 text-left max-w-2xl mx-auto mt-6">
-<div class="flex items-start space-x-4">
-<div class="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center text-purple-500 flex-shrink-0">
-<i class="fa-solid fa-location-dot"></i>
-</div>
-<div>
-<p class="text-xs text-gray-400 font-bold uppercase mb-1">สถานที่ / LOCATION</p>
-<p class="text-base font-bold text-gray-800">ห้อง INC 21</p>
-<p class="text-sm text-gray-500">สำนักดิจิทัลเพื่อการศึกษา<br/>มหาวิทยาลัยราชภัฏเชียงใหม่</p>
-</div>
-</div>
-<div class="flex items-start space-x-4">
-<div class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-500 flex-shrink-0">
-<i class="fa-solid fa-users"></i>
-</div>
-<div>
-<p class="text-xs text-gray-400 font-bold uppercase mb-1">ผู้เข้าอบรม / PARTICIPANTS</p>
-<p class="text-lg font-bold text-gray-800">50 คน</p>
-<p class="text-sm text-gray-500">อบรมออนไซต์</p>
-</div>
-</div>
-</div>
-</div>
-<div class="absolute bottom-12 w-full text-center z-20">
-<div class="inline-flex items-center space-x-2 bg-white px-6 py-2 rounded-full shadow-sm border border-gray-100">
-<span class="w-2 h-2 rounded-full bg-blue-500"></span>
-<p class="text-gray-500 font-medium text-sm">พัฒนาระบบอย่างปลอดภัย · ใช้ AI ช่วยพัฒนา · สร้างต้นแบบครบวงจร</p>
-<span class="text-gray-300 mx-2">|</span>
-<p class="text-gray-400 text-sm">Powered by Laravel Framework & AI</p>
-</div>
-</div>
-</div>
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>หลักสูตร Laravel + AI</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link href="css/theme.css" rel="stylesheet" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Noto Sans Thai", "Noto Sans SC", sans-serif;
+        overflow: hidden;
+        background-color: #f3f4f6;
+      }
+      .slide-container {
+        width: 1280px;
+        height: 720px;
+        position: relative;
+        background-color: #ffffff;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .shape-blob-1 {
+        position: absolute;
+        top: -150px;
+        right: -100px;
+        width: 600px;
+        height: 600px;
+        background-color: #e0f2fe;
+        border-radius: 50%;
+        z-index: 0;
+      }
+      .shape-blob-2 {
+        position: absolute;
+        bottom: -100px;
+        left: -100px;
+        width: 500px;
+        height: 500px;
+        background-color: #ecfdf5;
+        border-radius: 50%;
+        z-index: 0;
+      }
+      .shape-accent-1 {
+        position: absolute;
+        top: 100px;
+        right: 150px;
+        width: 80px;
+        height: 80px;
+        background-color: #6ee7b7;
+        border-radius: 50%;
+        opacity: 0.6;
+        z-index: 1;
+      }
+      .shape-accent-2 {
+        position: absolute;
+        bottom: 120px;
+        left: 150px;
+        width: 40px;
+        height: 40px;
+        background-color: #93c5fd;
+        border-radius: 50%;
+        opacity: 0.8;
+        z-index: 1;
+      }
+      .content-wrapper {
+        z-index: 10;
+        text-align: center;
+        max-width: 900px;
+        padding: 40px;
+      }
+      .title-line {
+        height: 6px;
+        width: 120px;
+        background-color: #3b82f6;
+        margin: 20px auto;
+        border-radius: 3px;
+      }
+      .glass-card {
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container">
+      <div class="shape-blob-1"></div>
+      <div class="shape-blob-2"></div>
+      <div class="shape-accent-1"></div>
+      <div class="shape-accent-2"></div>
+      <div class="content-wrapper glass-card p-12 w-full mx-auto">
+        <div class="mb-4">
+          <p
+            class="text-gray-500 font-medium tracking-widest uppercase text-sm"
+          >
+            PROFESSIONAL TRAINING COURSE
+          </p>
+        </div>
+        <h1 class="text-5xl font-black text-gray-800 mb-4 leading-tight">
+          หลักสูตรการประยุกต์ใช้ AI เพื่อการพัฒนา<br />ระบบสารสนเทศและฐานข้อมูลองค์กร<br />อย่างปลอดภัยและมีประสิทธิภาพ
+        </h1>
+        <div class="title-line"></div>
+        <h2 class="text-2xl text-gray-600 font-light mb-12">
+          Laravel Framework + Artificial Intelligence Development
+        </h2>
+        <div
+          class="grid grid-cols-2 gap-8 text-left max-w-2xl mx-auto border-t border-gray-100 pt-8"
+        >
+          <div class="flex items-start space-x-4">
+            <div
+              class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-500 flex-shrink-0"
+            >
+              <i class="fa-solid fa-user-tie"></i>
+            </div>
+            <div>
+              <p class="text-xs text-gray-400 font-bold uppercase mb-1">
+                วิทยากร / INSTRUCTOR
+              </p>
+              <p class="text-lg font-bold text-gray-800">นายบัณฑิต นันทะเทศ</p>
+              <p class="text-sm text-gray-500">
+                Senior PHP Developer<br />Data Horizon Co., Ltd.
+              </p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div
+              class="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center text-green-500 flex-shrink-0"
+            >
+              <i class="fa-solid fa-calendar-days"></i>
+            </div>
+            <div>
+              <p class="text-xs text-gray-400 font-bold uppercase mb-1">
+                กำหนดการ / SCHEDULE
+              </p>
+              <p class="text-lg font-bold text-gray-800">14-15 มีนาคม 2569</p>
+              <p class="text-sm text-gray-500">12 ชั่วโมง (2 วัน)</p>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-8 text-left max-w-2xl mx-auto mt-6">
+          <div class="flex items-start space-x-4">
+            <div
+              class="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center text-purple-500 flex-shrink-0"
+            >
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <div>
+              <p class="text-xs text-gray-400 font-bold uppercase mb-1">
+                สถานที่ / LOCATION
+              </p>
+              <p class="text-base font-bold text-gray-800">ห้อง INC 21</p>
+              <p class="text-sm text-gray-500">
+                สำนักดิจิทัลเพื่อการศึกษา<br />มหาวิทยาลัยราชภัฏเชียงใหม่
+              </p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div
+              class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-500 flex-shrink-0"
+            >
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <div>
+              <p class="text-xs text-gray-400 font-bold uppercase mb-1">
+                ผู้เข้าอบรม / PARTICIPANTS
+              </p>
+              <p class="text-lg font-bold text-gray-800">50 คน</p>
+              <p class="text-sm text-gray-500">อบรมออนไซต์</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="absolute bottom-12 w-full text-center z-20">
+        <div
+          class="inline-flex items-center space-x-2 bg-white px-6 py-2 rounded-full shadow-sm border border-gray-100"
+        >
+          <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+          <p class="text-gray-500 font-medium text-sm">
+            พัฒนาระบบอย่างปลอดภัย · ใช้ AI ช่วยพัฒนา · สร้างต้นแบบครบวงจร
+          </p>
+          <span class="text-gray-300 mx-2">|</span>
+          <p class="text-gray-400 text-sm">Powered by Laravel Framework & AI</p>
+        </div>
+      </div>
+    </div>
     <!-- Shared Components Script - Automatically injects header and footer -->
     <script src="js/shared-components.js"></script>
-</body>
+  </body>
 </html>

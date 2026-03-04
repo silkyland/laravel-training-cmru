@@ -1,272 +1,412 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="th">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Course Overview</title>
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
-<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
-<link href="css/theme.css" rel="stylesheet"/>
-<style>
-body {
-    margin: 0;
-    padding: 0;
-    font-family: "Noto Sans Thai", "Noto Sans SC", sans-serif;
-    background-color: #f3f4f6
-    }
-.slide-container {
-    width: 1280px;
-    height: 720px;
-    position: relative;
-    background-color: #fff;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column
-    }
-.blob-bg-1 {
-    position: absolute;
-    top: -120px;
-    right: -100px;
-    width: 450px;
-    height: 450px;
-    background-color: #F0F9FF;
-    border-radius: 50%;
-    z-index: 0;
-    opacity: 0.8
-    }
-.blob-bg-2 {
-    position: absolute;
-    bottom: -50px;
-    left: -50px;
-    width: 300px;
-    height: 300px;
-    background-color: #ECFDF5;
-    border-radius: 50%;
-    z-index: 0;
-    opacity: 0.8
-    }
-.content-wrapper {
-    position: relative;
-    z-index: 10;
-    padding: 50px 80px;
-    height: 100%;
-    display: flex;
-    flex-direction: column
-    }
-.info-card {
-    padding: 20px
-}
-.day-card {
-    overflow: hidden
-}
-.day-header {
-    padding: 16px 20px;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between
-    }
-.session-item {
-    display: flex;
-    align-items: center;
-    padding: 12px 20px;
-    border-bottom: 1px solid #F3F4F6;
-    transition: background-color 0.2s
-    }
-.session-item:last-child {
-    border-bottom: none
-    }
-.session-item:hover {
-    background-color: #F9FAFB
-    }
-.time-badge {
-    background-color: #F3F4F6;
-    color: #6B7280;
-    padding: 4px 12px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    margin-right: 12px;
-    min-width: 70px
-    }
-</style>
-</head>
-<body>
-<div class="slide-container">
-<div class="blob-bg-1"></div>
-<div class="blob-bg-2"></div>
-<div class="content-wrapper">
-<div class="mb-5">
-<div class="flex items-center space-x-3 mb-2">
-<span class="text-sm font-bold tracking-widest text-blue-500 uppercase">COURSE OVERVIEW</span>
-<div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
-</div>
-<h1 class="text-4xl font-black text-gray-800">ภาพรวมหลักสูตร</h1>
-<p class="text-gray-500 mt-2 text-lg">โครงสร้างและกำหนดการอบรม 2 วัน</p>
-</div>
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Course Overview</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link href="css/theme.css" rel="stylesheet" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Noto Sans Thai", "Noto Sans SC", sans-serif;
+        background-color: #f3f4f6;
+      }
+      .slide-container {
+        width: 1280px;
+        height: 720px;
+        position: relative;
+        background-color: #fff;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .blob-bg-1 {
+        position: absolute;
+        top: -120px;
+        right: -100px;
+        width: 450px;
+        height: 450px;
+        background-color: #f0f9ff;
+        border-radius: 50%;
+        z-index: 0;
+        opacity: 0.8;
+      }
+      .blob-bg-2 {
+        position: absolute;
+        bottom: -50px;
+        left: -50px;
+        width: 300px;
+        height: 300px;
+        background-color: #ecfdf5;
+        border-radius: 50%;
+        z-index: 0;
+        opacity: 0.8;
+      }
+      .content-wrapper {
+        position: relative;
+        z-index: 10;
+        padding: 50px 80px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      .info-card {
+        padding: 20px;
+      }
+      .day-card {
+        overflow: hidden;
+      }
+      .day-header {
+        padding: 16px 20px;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .session-item {
+        display: flex;
+        align-items: center;
+        padding: 9px 20px;
+        border-bottom: 1px solid #f3f4f6;
+        transition: background-color 0.2s;
+      }
+      .session-item:last-child {
+        border-bottom: none;
+      }
+      .session-item:hover {
+        background-color: #f9fafb;
+      }
+      .time-badge {
+        background-color: #f3f4f6;
+        color: #6b7280;
+        padding: 4px 12px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-right: 12px;
+        min-width: 70px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container">
+      <div class="blob-bg-1"></div>
+      <div class="blob-bg-2"></div>
+      <div class="content-wrapper">
+        <div class="mb-5">
+          <div class="flex items-center space-x-3 mb-2">
+            <span
+              class="text-sm font-bold tracking-widest text-blue-500 uppercase"
+              >COURSE OVERVIEW</span
+            >
+            <div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
+          </div>
+          <h1 class="text-4xl font-black text-gray-800">ภาพรวมหลักสูตร</h1>
+          <p class="text-gray-500 mt-2 text-lg">
+            โครงสร้างและกำหนดการอบรม 2 วัน
+          </p>
+        </div>
 
-<div class="grid grid-cols-12 gap-5 flex-grow pb-4">
-<div class="col-span-3 flex flex-col gap-4">
-<div class="info-card">
-<div class="flex items-center mb-3">
-<div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center mr-2">
-<i class="fa-solid fa-clock text-blue-500"></i>
-</div>
-<h3 class="text-base font-bold text-gray-800">ระยะเวลา</h3>
-</div>
-<p class="text-3xl font-black text-blue-600 mb-1">12 ชม.</p>
-<p class="text-sm text-gray-500">2 วัน (09:00-16:00)</p>
-</div>
+        <div class="grid grid-cols-12 gap-5 flex-grow pb-4">
+          <div class="col-span-3 flex flex-col gap-4">
+            <div class="info-card">
+              <div class="flex items-center mb-3">
+                <div
+                  class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center mr-2"
+                >
+                  <i class="fa-solid fa-clock text-blue-500"></i>
+                </div>
+                <h3 class="text-base font-bold text-gray-800">ระยะเวลา</h3>
+              </div>
+              <p class="text-3xl font-black text-blue-600 mb-1">12 ชม.</p>
+              <p class="text-sm text-gray-500">2 วัน (09:00-16:30)</p>
+            </div>
 
-<div class="info-card">
-<div class="flex items-center mb-3">
-<div class="w-8 h-8 rounded-lg bg-green-50 flex items-center justify-center mr-2">
-<i class="fa-solid fa-video text-green-500"></i>
-</div>
-<h3 class="text-base font-bold text-gray-800">รูปแบบ</h3>
-</div>
-<p class="text-sm text-gray-700 leading-relaxed">อบรมออนไซต์ + ฝึกปฏิบัติ + โปรเจกต์จริง</p>
-</div>
+            <div class="info-card">
+              <div class="flex items-center mb-3">
+                <div
+                  class="w-8 h-8 rounded-lg bg-green-50 flex items-center justify-center mr-2"
+                >
+                  <i class="fa-solid fa-video text-green-500"></i>
+                </div>
+                <h3 class="text-base font-bold text-gray-800">รูปแบบ</h3>
+              </div>
+              <p class="text-sm text-gray-700 leading-relaxed">
+                อบรมออนไซต์ + ฝึกปฏิบัติ + โปรเจกต์จริง
+              </p>
+            </div>
 
-<div class="info-card flex-grow">
-<div class="flex items-center mb-3">
-<div class="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center mr-2">
-<i class="fa-solid fa-bullseye text-purple-500"></i>
-</div>
-<h3 class="text-base font-bold text-gray-800">วัตถุประสงค์</h3>
-</div>
-<div class="space-y-2">
-<div class="flex items-start">
-<i class="fa-solid fa-check text-green-500 mr-2 mt-1 text-xs"></i>
-<p class="text-xs text-gray-700">เข้าใจ Laravel อย่างลึกซึ้ง</p>
-</div>
-<div class="flex items-start">
-<i class="fa-solid fa-check text-green-500 mr-2 mt-1 text-xs"></i>
-<p class="text-xs text-gray-700">ใช้ AI ช่วยพัฒนา</p>
-</div>
-<div class="flex items-start">
-<i class="fa-solid fa-check text-green-500 mr-2 mt-1 text-xs"></i>
-<p class="text-xs text-gray-700">เขียนโค้ดปลอดภัย</p>
-</div>
-<div class="flex items-start">
-<i class="fa-solid fa-check text-green-500 mr-2 mt-1 text-xs"></i>
-<p class="text-xs text-gray-700">สร้าง CRUD ครบวงจร</p>
-</div>
-</div>
-</div>
-</div>
+            <div class="info-card flex-grow">
+              <div class="flex items-center mb-3">
+                <div
+                  class="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center mr-2"
+                >
+                  <i class="fa-solid fa-bullseye text-purple-500"></i>
+                </div>
+                <h3 class="text-base font-bold text-gray-800">วัตถุประสงค์</h3>
+              </div>
+              <div class="space-y-2">
+                <div class="flex items-start">
+                  <i
+                    class="fa-solid fa-check text-green-500 mr-2 mt-1 text-xs"
+                  ></i>
+                  <p class="text-xs text-gray-700">
+                    เข้าใจ Laravel อย่างลึกซึ้ง
+                  </p>
+                </div>
+                <div class="flex items-start">
+                  <i
+                    class="fa-solid fa-check text-green-500 mr-2 mt-1 text-xs"
+                  ></i>
+                  <p class="text-xs text-gray-700">ใช้ AI ช่วยพัฒนา</p>
+                </div>
+                <div class="flex items-start">
+                  <i
+                    class="fa-solid fa-check text-green-500 mr-2 mt-1 text-xs"
+                  ></i>
+                  <p class="text-xs text-gray-700">เขียนโค้ดปลอดภัย</p>
+                </div>
+                <div class="flex items-start">
+                  <i
+                    class="fa-solid fa-check text-green-500 mr-2 mt-1 text-xs"
+                  ></i>
+                  <p class="text-xs text-gray-700">สร้าง CRUD ครบวงจร</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-<div class="col-span-9 grid grid-cols-2 gap-5">
-<div class="day-card">
-<div class="day-header" style="background-color: #3B82F6">
-<div class="flex items-center">
-<div class="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center mr-3">
-<span class="text-white font-bold text-xl">1</span>
-</div>
-<div>
-<h3 class="text-lg font-bold text-white">วันที่ 1</h3>
-<p class="text-blue-100 text-xs">รากฐาน Laravel</p>
-</div>
-</div>
-<i class="fa-solid fa-layer-group text-white/50 text-3xl"></i>
-</div>
-<div>
-<div class="session-item">
-<span class="time-badge">09:00-12:00</span>
-<div class="flex-grow">
-<p class="text-sm font-bold text-gray-800">Morning Session</p>
-<div class="flex flex-wrap gap-1 mt-1">
-<span class="text-xs px-2 py-0.5 bg-blue-50 text-blue-700 rounded">Introduction</span>
-<span class="text-xs px-2 py-0.5 bg-blue-50 text-blue-700 rounded">Setup</span>
-<span class="text-xs px-2 py-0.5 bg-blue-50 text-blue-700 rounded">Laravel 101</span>
-<span class="text-xs px-2 py-0.5 bg-blue-50 text-blue-700 rounded">Routing</span>
-</div>
-</div>
-</div>
-<div class="session-item">
-<span class="time-badge">13:00-16:00</span>
-<div class="flex-grow">
-<p class="text-sm font-bold text-gray-800">Afternoon Session</p>
-<div class="flex flex-wrap gap-1 mt-1">
-<span class="text-xs px-2 py-0.5 bg-green-50 text-green-700 rounded">Controllers</span>
-<span class="text-xs px-2 py-0.5 bg-green-50 text-green-700 rounded">Models</span>
-<span class="text-xs px-2 py-0.5 bg-green-50 text-green-700 rounded">Views</span>
-</div>
-</div>
-</div>
-</div>
-</div>
+          <div class="col-span-9 grid grid-cols-2 gap-5">
+            <div class="day-card">
+              <div class="day-header" style="background-color: #3b82f6">
+                <div class="flex items-center">
+                  <div
+                    class="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center mr-3"
+                  >
+                    <span class="text-white font-bold text-xl">1</span>
+                  </div>
+                  <div>
+                    <h3 class="text-lg font-bold text-white">วันที่ 1</h3>
+                    <p class="text-blue-100 text-xs">รากฐาน Laravel</p>
+                  </div>
+                </div>
+                <i class="fa-solid fa-layer-group text-white/50 text-3xl"></i>
+              </div>
+              <div>
+                <div class="session-item">
+                  <span class="time-badge">09:00-12:00</span>
+                  <div class="flex-grow">
+                    <p class="text-sm font-bold text-gray-800">ช่วงเช้า</p>
+                    <div class="flex flex-wrap gap-1 mt-1">
+                      <span
+                        class="text-xs px-2 py-0.5 bg-blue-50 text-blue-700 rounded"
+                        >Intro &amp; AI Tools</span
+                      >
+                      <span
+                        class="text-xs px-2 py-0.5 bg-blue-50 text-blue-700 rounded"
+                        >Environment Setup</span
+                      >
+                      <span
+                        class="text-xs px-2 py-0.5 bg-blue-50 text-blue-700 rounded"
+                        >Architecture</span
+                      >
+                      <span
+                        class="text-xs px-2 py-0.5 bg-blue-50 text-blue-700 rounded"
+                        >Routing</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="session-item">
+                  <span class="time-badge">13:00-16:00</span>
+                  <div class="flex-grow">
+                    <p class="text-sm font-bold text-gray-800">ช่วงบ่าย</p>
+                    <div class="flex flex-wrap gap-1 mt-1">
+                      <span
+                        class="text-xs px-2 py-0.5 bg-green-50 text-green-700 rounded"
+                        >Controllers</span
+                      >
+                      <span
+                        class="text-xs px-2 py-0.5 bg-green-50 text-green-700 rounded"
+                        >Eloquent ORM</span
+                      >
+                      <span
+                        class="text-xs px-2 py-0.5 bg-green-50 text-green-700 rounded"
+                        >Blade Views</span
+                      >
+                      <span
+                        class="text-xs px-2 py-0.5 bg-green-50 text-green-700 rounded"
+                        >Forms &amp; Validation</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="session-item">
+                  <span
+                    class="time-badge"
+                    style="background-color: #fef3c7; color: #92400e"
+                    >16:00-16:30</span
+                  >
+                  <div class="flex-grow">
+                    <p class="text-sm font-bold text-gray-600">
+                      สรุป &amp; ถาม-ตอบ
+                    </p>
+                    <div class="flex flex-wrap gap-1 mt-1">
+                      <span
+                        class="text-xs px-2 py-0.5 bg-yellow-50 text-yellow-700 rounded"
+                        >Day 1 Recap</span
+                      >
+                      <span
+                        class="text-xs px-2 py-0.5 bg-yellow-50 text-yellow-700 rounded"
+                        >Q&amp;A</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-<div class="day-card">
-<div class="day-header" style="background-color: #10B981">
-<div class="flex items-center">
-<div class="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center mr-3">
-<span class="text-white font-bold text-xl">2</span>
-</div>
-<div>
-<h3 class="text-lg font-bold text-white">วันที่ 2</h3>
-<p class="text-green-100 text-xs">ประยุกต์ใช้งาน & โปรเจกต์</p>
-</div>
-</div>
-<i class="fa-solid fa-rocket text-white/50 text-3xl"></i>
-</div>
-<div>
-<div class="session-item">
-<span class="time-badge">09:00-12:00</span>
-<div class="flex-grow">
-<p class="text-sm font-bold text-gray-800">Morning Session</p>
-<div class="flex flex-wrap gap-1 mt-1">
-<span class="text-xs px-2 py-0.5 bg-blue-50 text-blue-700 rounded">Auth</span>
-<span class="text-xs px-2 py-0.5 bg-blue-50 text-blue-700 rounded">Security</span>
-<span class="text-xs px-2 py-0.5 bg-blue-50 text-blue-700 rounded">CRUD</span>
-</div>
-</div>
-</div>
-<div class="session-item">
-<span class="time-badge">13:00-16:00</span>
-<div class="flex-grow">
-<p class="text-sm font-bold text-gray-800">Afternoon Session</p>
-<div class="flex flex-wrap gap-1 mt-1">
-<span class="text-xs px-2 py-0.5 bg-green-50 text-green-700 rounded">Reports</span>
-<span class="text-xs px-2 py-0.5 bg-green-50 text-green-700 rounded">Workshop</span>
-<span class="text-xs px-2 py-0.5 bg-green-50 text-green-700 rounded">Project</span>
-</div>
-</div>
-</div>
-</div>
-</div>
+            <div class="day-card">
+              <div class="day-header" style="background-color: #10b981">
+                <div class="flex items-center">
+                  <div
+                    class="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center mr-3"
+                  >
+                    <span class="text-white font-bold text-xl">2</span>
+                  </div>
+                  <div>
+                    <h3 class="text-lg font-bold text-white">วันที่ 2</h3>
+                    <p class="text-green-100 text-xs">
+                      ประยุกต์ใช้งาน & โปรเจกต์
+                    </p>
+                  </div>
+                </div>
+                <i class="fa-solid fa-rocket text-white/50 text-3xl"></i>
+              </div>
+              <div>
+                <div class="session-item">
+                  <span class="time-badge">09:00-12:00</span>
+                  <div class="flex-grow">
+                    <p class="text-sm font-bold text-gray-800">ช่วงเช้า</p>
+                    <div class="flex flex-wrap gap-1 mt-1">
+                      <span
+                        class="text-xs px-2 py-0.5 bg-blue-50 text-blue-700 rounded"
+                        >Authentication</span
+                      >
+                      <span
+                        class="text-xs px-2 py-0.5 bg-blue-50 text-blue-700 rounded"
+                        >Authorization</span
+                      >
+                      <span
+                        class="text-xs px-2 py-0.5 bg-blue-50 text-blue-700 rounded"
+                        >Security</span
+                      >
+                      <span
+                        class="text-xs px-2 py-0.5 bg-blue-50 text-blue-700 rounded"
+                        >CRUD Pattern</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="session-item">
+                  <span class="time-badge">13:00-16:00</span>
+                  <div class="flex-grow">
+                    <p class="text-sm font-bold text-gray-800">ช่วงบ่าย</p>
+                    <div class="flex flex-wrap gap-1 mt-1">
+                      <span
+                        class="text-xs px-2 py-0.5 bg-green-50 text-green-700 rounded"
+                        >Reporting</span
+                      >
+                      <span
+                        class="text-xs px-2 py-0.5 bg-green-50 text-green-700 rounded"
+                        >Deployment</span
+                      >
+                      <span
+                        class="text-xs px-2 py-0.5 bg-green-50 text-green-700 rounded"
+                        >Workshop</span
+                      >
+                      <span
+                        class="text-xs px-2 py-0.5 bg-green-50 text-green-700 rounded"
+                        >Mini-Project</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="session-item">
+                  <span
+                    class="time-badge"
+                    style="background-color: #d1fae5; color: #065f46"
+                    >16:00-16:30</span
+                  >
+                  <div class="flex-grow">
+                    <p class="text-sm font-bold text-gray-600">
+                      สรุปหลักสูตร &amp; Next Steps
+                    </p>
+                    <div class="flex flex-wrap gap-1 mt-1">
+                      <span
+                        class="text-xs px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded"
+                        >Conclusion</span
+                      >
+                      <span
+                        class="text-xs px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded"
+                        >Q&amp;A</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-<div class="col-span-2 bg-gradient-to-r from-blue-50 to-green-50 rounded-2xl p-5 border border-blue-100">
-<div class="flex items-start space-x-4">
-<div class="w-12 h-12 rounded-xl bg-blue-500 flex items-center justify-center flex-shrink-0">
-<i class="fa-solid fa-graduation-cap text-white text-xl"></i>
-</div>
-<div class="flex-grow">
-<h4 class="text-base font-bold text-gray-800 mb-2">ผลลัพธ์ที่คาดหวัง</h4>
-<div class="grid grid-cols-3 gap-3">
-<div class="text-center">
-<p class="text-2xl font-black text-blue-600">50%</p>
-<p class="text-xs text-gray-600 mt-1">ลดระยะเวลาด้วย AI</p>
-</div>
-<div class="text-center border-l border-gray-200">
-<p class="text-2xl font-black text-green-600">1</p>
-<p class="text-xs text-gray-600 mt-1">Prototype/คน</p>
-</div>
-<div class="text-center border-l border-gray-200">
-<p class="text-2xl font-black text-purple-600">100%</p>
-<p class="text-xs text-gray-600 mt-1">ปลอดภัย</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-</div>
-</div>
+            <div
+              class="col-span-2 bg-gradient-to-r from-blue-50 to-green-50 rounded-2xl p-5 border border-blue-100"
+            >
+              <div class="flex items-start space-x-4">
+                <div
+                  class="w-12 h-12 rounded-xl bg-blue-500 flex items-center justify-center flex-shrink-0"
+                >
+                  <i class="fa-solid fa-graduation-cap text-white text-xl"></i>
+                </div>
+                <div class="flex-grow">
+                  <h4 class="text-base font-bold text-gray-800 mb-2">
+                    ผลลัพธ์ที่คาดหวัง
+                  </h4>
+                  <div class="grid grid-cols-3 gap-3">
+                    <div class="text-center">
+                      <p class="text-2xl font-black text-blue-600">50%</p>
+                      <p class="text-xs text-gray-600 mt-1">
+                        ลดระยะเวลาด้วย AI
+                      </p>
+                    </div>
+                    <div class="text-center border-l border-gray-200">
+                      <p class="text-2xl font-black text-green-600">1</p>
+                      <p class="text-xs text-gray-600 mt-1">Prototype/คน</p>
+                    </div>
+                    <div class="text-center border-l border-gray-200">
+                      <p class="text-2xl font-black text-purple-600">100%</p>
+                      <p class="text-xs text-gray-600 mt-1">ปลอดภัย</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Shared Components Script - Automatically injects header and footer -->
     <script src="js/shared-components.js"></script>
-</body>
+  </body>
 </html>

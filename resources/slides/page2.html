@@ -1,175 +1,238 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="th">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>ประวัติวิทยากร</title>
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
-<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
-<link href="css/theme.css" rel="stylesheet"/>
-<style>
-body { margin: 0; padding: 0; font-family: 'Noto Sans Thai', 'Noto Sans SC', sans-serif; overflow: hidden; background-color: #f3f4f6; }
-.slide-container { width: 1280px; height: 720px; position: relative; background-color: #ffffff; overflow: hidden; display: flex; flex-direction: column; }
-.blob-bg-1 {
-position: absolute;
-top: -120px;
-right: -100px;
-width: 450px;
-height: 450px;
-background-color: #F0F9FF;
-border-radius: 50%;
-z-index: 0;
-opacity: 0.8;
-}
-.blob-bg-2 {
-position: absolute;
-bottom: -50px;
-left: -50px;
-width: 300px;
-height: 300px;
-background-color: #ECFDF5;
-border-radius: 50%;
-z-index: 0;
-opacity: 0.8;
-}
-.content-wrapper {
-position: relative;
-z-index: 10;
-padding: 50px 80px;
-height: 100%;
-display: flex;
-flex-direction: column;
-}
-.profile-card {
-padding: 32px;
-height: 100%;
-display: flex;
-flex-direction: column
-}
-.avatar-circle {
-width: 120px;
-height: 120px;
-border-radius: 50%;
-background: linear-gradient(135deg, #3B82F6 0%, #10B981 100%);
-display: flex;
-align-items: center;
-justify-content: center;
-margin: 0 auto 24px;
-box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
-}
-.stat-box {
-background: #F9FAFB;
-border-radius: 12px;
-padding: 16px;
-text-align: center;
-border: 1px solid #E5E7EB;
-}
-.stat-number {
-font-size: 32px;
-font-weight: 900;
-color: #3B82F6;
-line-height: 1;
-}
-.skill-tag {
-display: inline-flex;
-align-items: center;
-padding: 8px 16px;
-background-color: #EFF6FF;
-color: #1E40AF;
-border-radius: 8px;
-font-size: 13px;
-font-weight: 600;
-margin: 4px;
-}
-</style>
-</head>
-<body>
-<div class="slide-container">
-<div class="blob-bg-1"></div>
-<div class="blob-bg-2"></div>
-<div class="content-wrapper">
-<div class="mb-6">
-<div class="flex items-center space-x-3 mb-2">
-<span class="text-sm font-bold tracking-widest text-blue-500 uppercase">INSTRUCTOR PROFILE</span>
-<div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
-</div>
-<h1 class="text-4xl font-black text-gray-800">ประวัติวิทยากร</h1>
-</div>
-<div class="grid grid-cols-12 gap-8 flex-grow pb-4">
-<div class="col-span-4 flex flex-col">
-<div class="profile-card h-full flex flex-col items-center">
-<div class="avatar-circle">
-<i class="fa-solid fa-user-tie text-white text-5xl"></i>
-</div>
-<h2 class="text-2xl font-bold text-gray-800 text-center mb-1">นายบัณฑิต นันทะเทศ</h2>
-<p class="text-blue-500 font-semibold text-center mb-4">Senior PHP Developer</p>
-<div class="w-full border-t border-gray-100 my-4"></div>
-<div class="text-center mb-4">
-<p class="text-gray-500 text-sm">Data Horizon Co., Ltd.</p>
-</div>
-<div class="flex items-center justify-center space-x-2 text-gray-400 text-sm">
-<i class="fa-solid fa-calendar"></i>
-<span>10+ ปีประสบการณ์</span>
-</div>
-</div>
-</div>
-<div class="col-span-8 flex flex-col gap-4">
-<div class="grid grid-cols-3 gap-4">
-<div class="stat-box">
-<div class="stat-number">100+</div>
-<p class="text-xs text-gray-500 mt-1">Enterprise Projects</p>
-</div>
-<div class="stat-box">
-<div class="stat-number">10+</div>
-<p class="text-xs text-gray-500 mt-1">Years Experience</p>
-</div>
-<div class="stat-box">
-<div class="stat-number">500+</div>
-<p class="text-xs text-gray-500 mt-1">Students Trained</p>
-</div>
-</div>
-<div class="bg-white rounded-2xl p-6 border border-gray-100 flex-grow">
-<h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
-<i class="fa-solid fa-trophy text-yellow-500 mr-2"></i>
-ความเชี่ยวชาญพิเศษ
-</h3>
-<div class="flex flex-wrap">
-<span class="skill-tag"><i class="fa-brands fa-laravel mr-1"></i>Laravel</span>
-<span class="skill-tag"><i class="fa-brands fa-vuejs mr-1"></i>Vue.js</span>
-<span class="skill-tag"><i class="fa-solid fa-database mr-1"></i>PostgreSQL</span>
-<span class="skill-tag"><i class="fa-solid fa-sitemap mr-1"></i>System Architecture</span>
-<span class="skill-tag"><i class="fa-solid fa-robot mr-1"></i>AI Integration</span>
-<span class="skill-tag"><i class="fa-solid fa-shield-halved mr-1"></i>Security</span>
-<span class="skill-tag"><i class="fa-solid fa-code mr-1"></i>REST API</span>
-<span class="skill-tag"><i class="fa-solid fa-cloud mr-1"></i>Cloud Deployment</span>
-</div>
-</div>
-<div class="bg-gradient-to-r from-blue-50 to-green-50 rounded-2xl p-5 border border-blue-100">
-<div class="flex items-start space-x-3">
-<div class="w-10 h-10 rounded-lg bg-blue-500 flex items-center justify-center flex-shrink-0">
-<i class="fa-solid fa-microphone-lines text-white"></i>
-</div>
-<div>
-<p class="font-bold text-gray-800 text-sm mb-1">Speaker</p>
-<p class="text-xs text-gray-600">LaravelConf Thailand 2024, PHP Conference Asia</p>
-</div>
-</div>
-<div class="flex items-start space-x-3 mt-3">
-<div class="w-10 h-10 rounded-lg bg-green-500 flex items-center justify-center flex-shrink-0">
-<i class="fa-solid fa-book text-white"></i>
-</div>
-<div>
-<p class="font-bold text-gray-800 text-sm mb-1">Author</p>
-<p class="text-xs text-gray-600">"Modern Laravel Development" 2023</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>ประวัติวิทยากร</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link href="css/theme.css" rel="stylesheet" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Noto Sans Thai", "Noto Sans SC", sans-serif;
+        overflow: hidden;
+        background-color: #f3f4f6;
+      }
+      .slide-container {
+        width: 1280px;
+        height: 720px;
+        position: relative;
+        background-color: #ffffff;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .blob-bg-1 {
+        position: absolute;
+        top: -120px;
+        right: -100px;
+        width: 450px;
+        height: 450px;
+        background-color: #f0f9ff;
+        border-radius: 50%;
+        z-index: 0;
+        opacity: 0.8;
+      }
+      .blob-bg-2 {
+        position: absolute;
+        bottom: -50px;
+        left: -50px;
+        width: 300px;
+        height: 300px;
+        background-color: #ecfdf5;
+        border-radius: 50%;
+        z-index: 0;
+        opacity: 0.8;
+      }
+      .content-wrapper {
+        position: relative;
+        z-index: 10;
+        padding: 50px 80px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      .profile-card {
+        padding: 32px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      .avatar-circle {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 24px;
+        box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+      }
+      .stat-box {
+        background: #f9fafb;
+        border-radius: 12px;
+        padding: 16px;
+        text-align: center;
+        border: 1px solid #e5e7eb;
+      }
+      .stat-number {
+        font-size: 32px;
+        font-weight: 900;
+        color: #3b82f6;
+        line-height: 1;
+      }
+      .skill-tag {
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 16px;
+        background-color: #eff6ff;
+        color: #1e40af;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        margin: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container">
+      <div class="blob-bg-1"></div>
+      <div class="blob-bg-2"></div>
+      <div class="content-wrapper">
+        <div class="mb-6">
+          <div class="flex items-center space-x-3 mb-2">
+            <span
+              class="text-sm font-bold tracking-widest text-blue-500 uppercase"
+              >INSTRUCTOR PROFILE</span
+            >
+            <div class="h-px bg-blue-100 flex-grow max-w-[100px]"></div>
+          </div>
+          <h1 class="text-4xl font-black text-gray-800">ประวัติวิทยากร</h1>
+        </div>
+        <div class="grid grid-cols-12 gap-8 flex-grow pb-4">
+          <div class="col-span-4 flex flex-col">
+            <div class="profile-card h-full flex flex-col items-center">
+              <div class="avatar-circle">
+                <i class="fa-solid fa-user-tie text-white text-5xl"></i>
+              </div>
+              <h2 class="text-2xl font-bold text-gray-800 text-center mb-1">
+                นายบัณฑิต นันทะเทศ
+              </h2>
+              <p class="text-blue-500 font-semibold text-center mb-4">
+                Senior PHP Developer
+              </p>
+              <div class="w-full border-t border-gray-100 my-4"></div>
+              <div class="text-center mb-4">
+                <p class="text-gray-500 text-sm">Data Horizon Co., Ltd.</p>
+              </div>
+              <div
+                class="flex items-center justify-center space-x-2 text-gray-400 text-sm"
+              >
+                <i class="fa-solid fa-calendar"></i>
+                <span>10+ ปีประสบการณ์</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-8 flex flex-col gap-4">
+            <div class="grid grid-cols-3 gap-4">
+              <div class="stat-box">
+                <div class="stat-number">100+</div>
+                <p class="text-xs text-gray-500 mt-1">Enterprise Projects</p>
+              </div>
+              <div class="stat-box">
+                <div class="stat-number">10+</div>
+                <p class="text-xs text-gray-500 mt-1">Years Experience</p>
+              </div>
+              <div class="stat-box">
+                <div class="stat-number">500+</div>
+                <p class="text-xs text-gray-500 mt-1">Students Trained</p>
+              </div>
+            </div>
+            <div
+              class="bg-white rounded-2xl p-6 border border-gray-100 flex-grow"
+            >
+              <h3
+                class="text-lg font-bold text-gray-800 mb-4 flex items-center"
+              >
+                <i class="fa-solid fa-trophy text-yellow-500 mr-2"></i>
+                ความเชี่ยวชาญพิเศษ
+              </h3>
+              <div class="flex flex-wrap">
+                <span class="skill-tag"
+                  ><i class="fa-brands fa-laravel mr-1"></i>Laravel</span
+                >
+                <span class="skill-tag"
+                  ><i class="fa-brands fa-vuejs mr-1"></i>Vue.js</span
+                >
+                <span class="skill-tag"
+                  ><i class="fa-solid fa-database mr-1"></i>PostgreSQL</span
+                >
+                <span class="skill-tag"
+                  ><i class="fa-solid fa-sitemap mr-1"></i>System
+                  Architecture</span
+                >
+                <span class="skill-tag"
+                  ><i class="fa-solid fa-robot mr-1"></i>AI Integration</span
+                >
+                <span class="skill-tag"
+                  ><i class="fa-solid fa-shield-halved mr-1"></i>Security</span
+                >
+                <span class="skill-tag"
+                  ><i class="fa-solid fa-code mr-1"></i>REST API</span
+                >
+                <span class="skill-tag"
+                  ><i class="fa-solid fa-cloud mr-1"></i>Cloud Deployment</span
+                >
+              </div>
+            </div>
+            <div
+              class="bg-gradient-to-r from-blue-50 to-green-50 rounded-2xl p-5 border border-blue-100"
+            >
+              <div class="flex items-start space-x-3">
+                <div
+                  class="w-10 h-10 rounded-lg bg-blue-500 flex items-center justify-center flex-shrink-0"
+                >
+                  <i class="fa-solid fa-microphone-lines text-white"></i>
+                </div>
+                <div>
+                  <p class="font-bold text-gray-800 text-sm mb-1">Speaker</p>
+                  <p class="text-xs text-gray-600">
+                    LaravelConf Thailand 2024, PHP Conference Asia
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start space-x-3 mt-3">
+                <div
+                  class="w-10 h-10 rounded-lg bg-green-500 flex items-center justify-center flex-shrink-0"
+                >
+                  <i class="fa-solid fa-book text-white"></i>
+                </div>
+                <div>
+                  <p class="font-bold text-gray-800 text-sm mb-1">Author</p>
+                  <p class="text-xs text-gray-600">
+                    "Modern Laravel Development" 2023
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Shared Components Script - Automatically injects header and footer -->
     <script src="js/shared-components.js"></script>
-</body>
+  </body>
 </html>
