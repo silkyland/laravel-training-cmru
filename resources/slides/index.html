@@ -1,776 +1,877 @@
 <!doctype html>
 <html lang="th">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Laravel + AI Training Course - CMRU</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        --c-primary: #065a82;
-        --c-teal: #028090;
-        --c-accent: #02c39a;
-        --c-day1: #1d4ed8;
-        --c-day2: #7c3aed;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: "Noto Sans Thai", sans-serif;
-        background: #111827;
-        min-height: 100vh;
-      }
 
-      /* Header */
-      .header {
-        background: rgba(17, 24, 39, 0.97);
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid #374151;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        padding: 0.75rem 1.5rem;
-      }
-      .header-logo {
-        width: 44px;
-        height: 44px;
-        background: linear-gradient(135deg, var(--c-teal), var(--c-accent));
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Laravel + AI Training Course - CMRU</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;900&display=swap"
+    rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    :root {
+      --c-primary: #065a82;
+      --c-teal: #028090;
+      --c-accent: #02c39a;
+      --c-day1: #1d4ed8;
+      --c-day2: #7c3aed;
+    }
 
-      /* Day Filter Tabs */
-      .day-tabs {
-        display: flex;
-        gap: 6px;
-      }
-      .day-tab {
-        padding: 0.4rem 1rem;
-        border-radius: 20px;
-        font-size: 0.8rem;
-        font-weight: 700;
-        cursor: pointer;
-        border: 2px solid transparent;
-        transition: all 0.2s;
-      }
-      .day-tab.all {
-        background: #374151;
-        color: #e5e7eb;
-        border-color: #4b5563;
-      }
-      .day-tab.day1 {
-        background: rgba(29, 78, 216, 0.15);
-        color: #93c5fd;
-        border-color: #1d4ed8;
-      }
-      .day-tab.day2 {
-        background: rgba(124, 58, 237, 0.15);
-        color: #c4b5fd;
-        border-color: #7c3aed;
-      }
-      .day-tab.active.all {
-        background: #4b5563;
-        border-color: #9ca3af;
-      }
-      .day-tab.active.day1 {
-        background: var(--c-day1);
-        color: white;
-      }
-      .day-tab.active.day2 {
-        background: var(--c-day2);
-        color: white;
-      }
+    * {
+      box-sizing: border-box;
+    }
 
-      /* Slide Viewer */
-      .slide-viewer {
-        max-width: 1300px;
-        margin: 0 auto;
-        background: #000;
-        border-radius: 12px;
-        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
-        overflow: hidden;
-        border: 1px solid #374151;
-      }
-      .slide-frame {
-        width: 100%;
-        height: 720px;
-        border: none;
-        display: block;
-      }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Noto Sans Thai", sans-serif;
+      background: #111827;
+      min-height: 100vh;
+    }
 
-      /* Day Badge overlay */
-      .frame-wrap {
-        position: relative;
-        max-width: 1300px;
-        margin: 0.4rem auto;
-      }
-      .slide-day-badge {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 10;
-        padding: 4px 14px;
-        border-radius: 0 0 8px 0;
-        font-size: 0.7rem;
-        font-weight: 800;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-      }
-      .badge-day1 {
-        background: var(--c-day1);
-        color: white;
-      }
-      .badge-day2 {
-        background: var(--c-day2);
-        color: white;
-      }
+    /* Header */
+    .header {
+      background: rgba(17, 24, 39, 0.97);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #374151;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 0.75rem 1.5rem;
+    }
 
-      /* Navigation */
-      .nav-section {
-        max-width: 1300px;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0.75rem 0.5rem;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-      }
-      .nav-btn {
-        background: #374151;
-        color: white;
-        border: 1px solid #4b5563;
-        padding: 0.6rem 1.2rem;
-        border-radius: 8px;
-        font-weight: 700;
-        font-size: 0.85rem;
-        cursor: pointer;
-        transition: all 0.2s;
-        font-family: "Noto Sans Thai", sans-serif;
-      }
-      .nav-btn:hover:not(:disabled) {
-        background: #4b5563;
-        transform: translateY(-1px);
-      }
-      .nav-btn:disabled {
-        opacity: 0.4;
-        cursor: not-allowed;
-      }
-      .nav-btn.primary {
-        background: linear-gradient(135deg, var(--c-teal), var(--c-accent));
-        border: none;
-      }
-      .nav-btn.primary:hover:not(:disabled) {
-        opacity: 0.9;
-      }
+    .header-logo {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--c-teal), var(--c-accent));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-      .slide-info {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        color: #e5e7eb;
-        font-weight: 600;
-        font-size: 0.85rem;
-      }
-      .slide-selector {
-        padding: 0.45rem 0.75rem;
-        background: #1f2937;
-        color: #e5e7eb;
-        border: 1px solid #374151;
-        border-radius: 8px;
-        font-weight: 600;
-        font-size: 0.8rem;
-        font-family: "Noto Sans Thai", sans-serif;
-        max-width: 280px;
-      }
+    /* Day Filter Tabs */
+    .day-tabs {
+      display: flex;
+      gap: 6px;
+    }
 
-      /* Progress bar */
-      .progress-bar-wrap {
-        max-width: 1300px;
-        margin: 0.75rem auto 0;
-        padding: 0 0.5rem;
-      }
-      .progress-bar-track {
-        height: 4px;
-        background: #1f2937;
-        border-radius: 4px;
-        overflow: hidden;
-      }
-      .progress-bar-fill {
-        height: 100%;
-        background: linear-gradient(90deg, var(--c-teal), var(--c-accent));
-        border-radius: 4px;
-        transition: width 0.3s ease;
-      }
+    .day-tab {
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+    }
 
-      /* Slide meta */
-      .slide-meta {
-        max-width: 1300px;
-        margin: 0.3rem auto;
-        padding: 0 0.5rem;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-      .slide-title-label {
-        color: #d1d5db;
-        font-size: 0.82rem;
-        font-weight: 600;
-      }
-      .day-pill {
-        padding: 2px 10px;
-        border-radius: 10px;
-        font-size: 0.7rem;
-        font-weight: 800;
-        text-transform: uppercase;
-      }
-      .pill-day1 {
-        background: rgba(29, 78, 216, 0.25);
-        color: #93c5fd;
-      }
-      .pill-day2 {
-        background: rgba(124, 58, 237, 0.25);
-        color: #c4b5fd;
-      }
-      .pill-intro {
-        background: rgba(2, 192, 154, 0.2);
-        color: #6ee7b7;
-      }
+    .day-tab.all {
+      background: #374151;
+      color: #e5e7eb;
+      border-color: #4b5563;
+    }
 
-      /* Keyboard hint */
-      .kbd-hint {
-        text-align: center;
-        color: #4b5563;
-        font-size: 0.72rem;
-        padding: 0.4rem;
-      }
-      .kbd {
-        background: #374151;
-        color: #9ca3af;
-        padding: 1px 5px;
-        border-radius: 4px;
-        font-family: monospace;
-      }
+    .day-tab.day1 {
+      background: rgba(29, 78, 216, 0.15);
+      color: #93c5fd;
+      border-color: #1d4ed8;
+    }
 
-      /* Grid */
-      .slide-grid {
-        max-width: 1400px;
-        margin: 1rem auto;
-        padding: 0 1rem 2rem;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-        gap: 0.85rem;
-      }
-      .slide-card {
-        background: #1f2937;
-        border: 1px solid #374151;
-        border-radius: 10px;
-        padding: 1rem;
-        cursor: pointer;
-        transition: all 0.25s;
-        position: relative;
-        overflow: hidden;
-      }
-      .slide-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-        border-color: #4b5563;
-      }
-      .slide-card.active {
-        border-color: var(--c-accent);
-        box-shadow: 0 0 0 2px var(--c-accent);
-      }
-      .card-num {
-        font-size: 1.5rem;
-        font-weight: 900;
-        color: #6b7280;
-        margin-bottom: 4px;
-      }
-      .card-title {
-        font-size: 0.75rem;
-        font-weight: 600;
-        color: #d1d5db;
-        line-height: 1.35;
-      }
-      .card-day-stripe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-      }
-      .stripe-intro {
-        background: var(--c-accent);
-      }
-      .stripe-day1 {
-        background: var(--c-day1);
-      }
-      .stripe-day2 {
-        background: var(--c-day2);
-      }
-      .card-adv {
-        margin-top: 6px;
-        font-size: 0.62rem;
-        color: #6b7280;
-      }
+    .day-tab.day2 {
+      background: rgba(124, 58, 237, 0.15);
+      color: #c4b5fd;
+      border-color: #7c3aed;
+    }
 
-      /* Grid section header */
-      .grid-section-header {
-        grid-column: 1/-1;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 0.5rem 0;
-        border-bottom: 1px solid #374151;
-        margin-bottom: 0.25rem;
-      }
-      .section-badge {
-        padding: 4px 14px;
-        border-radius: 8px;
-        font-weight: 800;
-        font-size: 0.8rem;
-        text-transform: uppercase;
-      }
-      .section-badge.intro {
-        background: rgba(2, 192, 154, 0.2);
-        color: var(--c-accent);
-      }
-      .section-badge.day1 {
-        background: rgba(29, 78, 216, 0.2);
-        color: #93c5fd;
-      }
-      .section-badge.day2 {
-        background: rgba(124, 58, 237, 0.2);
-        color: #c4b5fd;
-      }
-      .section-label {
-        color: #6b7280;
-        font-size: 0.78rem;
-      }
-    </style>
-  </head>
+    .day-tab.active.all {
+      background: #4b5563;
+      border-color: #9ca3af;
+    }
 
-  <body>
-    <!-- ═══ HEADER ═══ -->
-    <div class="header">
-      <div
-        class="flex items-center justify-between max-w-screen-xl mx-auto flex-wrap gap-3"
-      >
-        <div class="flex items-center gap-3">
-          <div class="header-logo">
-            <i class="fa-brands fa-laravel text-white text-xl"></i>
+    .day-tab.active.day1 {
+      background: var(--c-day1);
+      color: white;
+    }
+
+    .day-tab.active.day2 {
+      background: var(--c-day2);
+      color: white;
+    }
+
+    /* Slide Viewer */
+    .slide-viewer {
+      max-width: 1300px;
+      margin: 0 auto;
+      background: #000;
+      border-radius: 12px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+      border: 1px solid #374151;
+    }
+
+    .slide-frame {
+      width: 100%;
+      height: 720px;
+      border: none;
+      display: block;
+    }
+
+    /* Day Badge overlay */
+    .frame-wrap {
+      position: relative;
+      max-width: 1300px;
+      margin: 0.4rem auto;
+    }
+
+    .slide-day-badge {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      padding: 4px 14px;
+      border-radius: 0 0 8px 0;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .badge-day1 {
+      background: var(--c-day1);
+      color: white;
+    }
+
+    .badge-day2 {
+      background: var(--c-day2);
+      color: white;
+    }
+
+    /* Navigation */
+    .nav-section {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 0.5rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .nav-btn {
+      background: #374151;
+      color: white;
+      border: 1px solid #4b5563;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: "Noto Sans Thai", sans-serif;
+    }
+
+    .nav-btn:hover:not(:disabled) {
+      background: #4b5563;
+      transform: translateY(-1px);
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .nav-btn.primary {
+      background: linear-gradient(135deg, var(--c-teal), var(--c-accent));
+      border: none;
+    }
+
+    .nav-btn.primary:hover:not(:disabled) {
+      opacity: 0.9;
+    }
+
+    .slide-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #e5e7eb;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+
+    .slide-selector {
+      padding: 0.45rem 0.75rem;
+      background: #1f2937;
+      color: #e5e7eb;
+      border: 1px solid #374151;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      font-family: "Noto Sans Thai", sans-serif;
+      max-width: 280px;
+    }
+
+    /* Progress bar */
+    .progress-bar-wrap {
+      max-width: 1300px;
+      margin: 0.75rem auto 0;
+      padding: 0 0.5rem;
+    }
+
+    .progress-bar-track {
+      height: 4px;
+      background: #1f2937;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--c-teal), var(--c-accent));
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+
+    /* Slide meta */
+    .slide-meta {
+      max-width: 1300px;
+      margin: 0.3rem auto;
+      padding: 0 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .slide-title-label {
+      color: #d1d5db;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .day-pill {
+      padding: 2px 10px;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .pill-day1 {
+      background: rgba(29, 78, 216, 0.25);
+      color: #93c5fd;
+    }
+
+    .pill-day2 {
+      background: rgba(124, 58, 237, 0.25);
+      color: #c4b5fd;
+    }
+
+    .pill-intro {
+      background: rgba(2, 192, 154, 0.2);
+      color: #6ee7b7;
+    }
+
+    /* Keyboard hint */
+    .kbd-hint {
+      text-align: center;
+      color: #4b5563;
+      font-size: 0.72rem;
+      padding: 0.4rem;
+    }
+
+    .kbd {
+      background: #374151;
+      color: #9ca3af;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+
+    /* Grid */
+    .slide-grid {
+      max-width: 1400px;
+      margin: 1rem auto;
+      padding: 0 1rem 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 0.85rem;
+    }
+
+    .slide-card {
+      background: #1f2937;
+      border: 1px solid #374151;
+      border-radius: 10px;
+      padding: 1rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      border-color: #4b5563;
+    }
+
+    .slide-card.active {
+      border-color: var(--c-accent);
+      box-shadow: 0 0 0 2px var(--c-accent);
+    }
+
+    .card-num {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #6b7280;
+      margin-bottom: 4px;
+    }
+
+    .card-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #d1d5db;
+      line-height: 1.35;
+    }
+
+    .card-day-stripe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+    }
+
+    .stripe-intro {
+      background: var(--c-accent);
+    }
+
+    .stripe-day1 {
+      background: var(--c-day1);
+    }
+
+    .stripe-day2 {
+      background: var(--c-day2);
+    }
+
+    .card-adv {
+      margin-top: 6px;
+      font-size: 0.62rem;
+      color: #6b7280;
+    }
+
+    /* Grid section header */
+    .grid-section-header {
+      grid-column: 1/-1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #374151;
+      margin-bottom: 0.25rem;
+    }
+
+    .section-badge {
+      padding: 4px 14px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+
+    .section-badge.intro {
+      background: rgba(2, 192, 154, 0.2);
+      color: var(--c-accent);
+    }
+
+    .section-badge.day1 {
+      background: rgba(29, 78, 216, 0.2);
+      color: #93c5fd;
+    }
+
+    .section-badge.day2 {
+      background: rgba(124, 58, 237, 0.2);
+      color: #c4b5fd;
+    }
+
+    .section-label {
+      color: #6b7280;
+      font-size: 0.78rem;
+    }
+
+    /* Fullscreen Mode */
+    body.is-fullscreen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: #000;
+    }
+
+    body.is-fullscreen .header,
+    body.is-fullscreen .progress-bar-wrap,
+    body.is-fullscreen .slide-meta,
+    body.is-fullscreen .nav-section,
+    body.is-fullscreen .kbd-hint,
+    body.is-fullscreen .slide-day-badge {
+      display: none !important;
+    }
+
+    body.is-fullscreen #viewerMode {
+      padding: 0 !important;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    body.is-fullscreen .frame-wrap {
+      margin: 0 !important;
+      max-width: 100% !important;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    body.is-fullscreen .slide-viewer {
+      width: 100% !important;
+      max-width: 1300px !important;
+      /* Keep a max-width to avoid stretching too wide on ultrawide monitors */
+      border-radius: 0 !important;
+      border: none !important;
+      box-shadow: none !important;
+      aspect-ratio: 16 / 9;
+      /* Enforce 16:9 ratio */
+    }
+
+    body.is-fullscreen .slide-frame {
+      width: 100% !important;
+      height: 100% !important;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ═══ HEADER ═══ -->
+  <div class="header">
+    <div class="flex items-center justify-between max-w-screen-xl mx-auto flex-wrap gap-3">
+      <div class="flex items-center gap-3">
+        <div class="header-logo">
+          <i class="fa-brands fa-laravel text-white text-xl"></i>
+        </div>
+        <div>
+          <div class="text-white font-black text-base">
+            Laravel + AI Training
           </div>
-          <div>
-            <div class="text-white font-black text-base">
-              Laravel + AI Training
-            </div>
-            <div class="text-gray-400 text-xs">
-              สำนักดิจิทัลเพื่อการศึกษา มหาวิทยาลัยราชภัฏเชียงใหม่ &nbsp;|&nbsp;
-              14–15 มีนาคม 2569
-            </div>
+          <div class="text-gray-400 text-xs">
+            สำนักดิจิทัลเพื่อการศึกษา มหาวิทยาลัยราชภัฏเชียงใหม่ &nbsp;|&nbsp;
+            14–15 มีนาคม 2569
           </div>
         </div>
+      </div>
 
-        <div class="flex items-center gap-3 flex-wrap">
-          <div class="day-tabs">
-            <button class="day-tab all active" onclick="filterDay('all', this)">
-              <i class="fa-solid fa-list mr-1"></i>ทั้งหมด (50)
-            </button>
-            <button class="day-tab day1" onclick="filterDay('day1', this)">
-              <i class="fa-solid fa-sun mr-1"></i>วันที่ 1
-            </button>
-            <button class="day-tab day2" onclick="filterDay('day2', this)">
-              <i class="fa-solid fa-moon mr-1"></i>วันที่ 2
-            </button>
-          </div>
-          <button onclick="toggleView()" class="nav-btn">
-            <i class="fa-solid fa-grip mr-1"></i
-            ><span id="viewToggleText">Grid View</span>
+      <div class="flex items-center gap-3 flex-wrap">
+        <div class="day-tabs">
+          <button class="day-tab all active" onclick="filterDay('all', this)">
+            <i class="fa-solid fa-list mr-1"></i>ทั้งหมด (50)
+          </button>
+          <button class="day-tab day1" onclick="filterDay('day1', this)">
+            <i class="fa-solid fa-sun mr-1"></i>วันที่ 1
+          </button>
+          <button class="day-tab day2" onclick="filterDay('day2', this)">
+            <i class="fa-solid fa-moon mr-1"></i>วันที่ 2
           </button>
         </div>
-      </div>
-    </div>
-
-    <!-- ═══ SLIDE VIEWER MODE ═══ -->
-    <div id="viewerMode" class="px-2 md:px-4">
-      <div class="progress-bar-wrap">
-        <div class="progress-bar-track">
-          <div
-            class="progress-bar-fill"
-            id="progressBar"
-            style="width: 2%"
-          ></div>
-        </div>
-      </div>
-      <div class="slide-meta">
-        <span class="slide-title-label" id="currentSlideTitle"></span>
-        <span class="day-pill" id="currentDayPill"></span>
-      </div>
-
-      <div class="frame-wrap">
-        <div
-          class="slide-day-badge"
-          id="slideDayBadge"
-          style="display: none"
-        ></div>
-        <div class="slide-viewer">
-          <iframe id="slideFrame" class="slide-frame" src="page1.html"></iframe>
-        </div>
-      </div>
-
-      <div class="nav-section">
-        <button onclick="prevSlide()" id="prevBtn" class="nav-btn">
-          <i class="fa-solid fa-chevron-left mr-1"></i> ก่อนหน้า
+        <button onclick="toggleFullScreen()" class="nav-btn" id="fsBtn" title="Full Screen">
+          <i class="fa-solid fa-expand"></i>
         </button>
-        <div class="slide-info">
-          <span>สไลด์</span>
-          <select
-            id="slideSelector"
-            class="slide-selector"
-            onchange="goToSlideByIndex(this.value)"
-          ></select>
-          <span>จาก <span id="totalSlides">50</span></span>
-        </div>
-        <button onclick="nextSlide()" id="nextBtn" class="nav-btn primary">
-          ถัดไป <i class="fa-solid fa-chevron-right ml-1"></i>
+        <button onclick="toggleView()" class="nav-btn">
+          <i class="fa-solid fa-grip mr-1"></i><span id="viewToggleText">Grid View</span>
         </button>
       </div>
-      <div class="kbd-hint">
-        <span class="kbd">←</span> <span class="kbd">→</span> หรือ
-        <span class="kbd">Space</span> สำหรับเลื่อน Slide
+    </div>
+  </div>
+
+  <!-- ═══ SLIDE VIEWER MODE ═══ -->
+  <div id="viewerMode" class="px-2 md:px-4">
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="progressBar" style="width: 2%"></div>
+      </div>
+    </div>
+    <div class="slide-meta">
+      <span class="slide-title-label" id="currentSlideTitle"></span>
+      <span class="day-pill" id="currentDayPill"></span>
+    </div>
+
+    <div class="frame-wrap">
+      <div class="slide-day-badge" id="slideDayBadge" style="display: none"></div>
+      <div class="slide-viewer">
+        <iframe id="slideFrame" class="slide-frame" src="page1.html"></iframe>
       </div>
     </div>
 
-    <!-- ═══ GRID VIEW MODE ═══ -->
-    <div id="gridMode" style="display: none">
-      <div class="slide-grid" id="slideGrid"></div>
+    <div class="nav-section">
+      <button onclick="prevSlide()" id="prevBtn" class="nav-btn">
+        <i class="fa-solid fa-chevron-left mr-1"></i> ก่อนหน้า
+      </button>
+      <div class="slide-info">
+        <span>สไลด์</span>
+        <select id="slideSelector" class="slide-selector" onchange="goToSlideByIndex(this.value)"></select>
+        <span>จาก <span id="totalSlides">50</span></span>
+      </div>
+      <button onclick="nextSlide()" id="nextBtn" class="nav-btn primary">
+        ถัดไป <i class="fa-solid fa-chevron-right ml-1"></i>
+      </button>
     </div>
+    <div class="kbd-hint">
+      <span class="kbd">←</span> <span class="kbd">→</span> หรือ
+      <span class="kbd">Space</span> เลื่อน Slide | <span class="kbd">F</span> เต็มจอ
+    </div>
+  </div>
 
-    <script>
-      const ALL_SLIDES = [
-        { num: 1, title: "หลักสูตร Laravel + AI", day: "intro", focus: true },
-        { num: 2, title: "ประวัติวิทยากร", day: "intro", focus: true },
-        {
-          num: 3,
-          title: "กลุ่มเป้าหมาย (Target Audience)",
-          day: "intro",
-          focus: true,
-        },
-        {
-          num: 4,
-          title: "ภาพรวมหลักสูตร (Course Overview)",
-          day: "intro",
-          focus: true,
-        },
-        { num: 5, title: "ทำไมต้อง Laravel?", day: "intro", focus: true },
-        { num: 6, title: "AI Tools สำหรับนักพัฒนา", day: "intro", focus: true },
-        {
-          num: 7,
-          title: "การติดตั้ง — System Requirements",
-          day: "day1",
-          focus: true,
-        },
-        { num: 8, title: "การติดตั้ง — PHP", day: "day1", focus: true },
-        {
-          num: 9,
-          title: "การติดตั้ง — Composer & Laravel",
-          day: "day1",
-          focus: true,
-        },
-        { num: 10, title: "IDE Setup — VS Code", day: "day1", focus: true },
-        {
-          num: 11,
-          title: "โครงสร้างโปรเจกต์ Laravel",
-          day: "day1",
-          focus: true,
-        },
-        {
-          num: 12,
-          title: "Laravel Architecture (MVC)",
-          day: "day1",
-          focus: true,
-        },
-        { num: 13, title: "Service Container & DI", day: "day1", focus: false },
-        { num: 14, title: "Facades in Laravel", day: "day1", focus: false },
-        { num: 15, title: "Routing — พื้นฐาน", day: "day1", focus: true },
-        { num: 16, title: "Advanced Routing", day: "day1", focus: true },
-        {
-          num: 17,
-          title: "Controllers — การสร้างและใช้งาน",
-          day: "day1",
-          focus: true,
-        },
-        { num: 18, title: "Resource Controllers", day: "day1", focus: true },
-        {
-          num: 19,
-          title: "Controller Best Practices",
-          day: "day1",
-          focus: false,
-        },
-        { num: 20, title: "Models & Eloquent ORM", day: "day1", focus: true },
-        {
-          num: 21,
-          title: "Eloquent Relationships — ตอนที่ 1",
-          day: "day1",
-          focus: true,
-        },
-        {
-          num: 22,
-          title: "Eloquent Relationships — ตอนที่ 2",
-          day: "day1",
-          focus: true,
-        },
-        { num: 23, title: "Eloquent Query Scopes", day: "day1", focus: false },
-        {
-          num: 24,
-          title: "Eloquent Accessors & Mutators",
-          day: "day1",
-          focus: false,
-        },
-        {
-          num: 25,
-          title: "Eloquent Attribute Casting",
-          day: "day1",
-          focus: false,
-        },
-        { num: 26, title: "Eloquent Collections", day: "day1", focus: false },
-        { num: 27, title: "Views & Blade — พื้นฐาน", day: "day1", focus: true },
-        { num: 28, title: "Blade Components", day: "day1", focus: true },
-        { num: 29, title: "Blade Layouts", day: "day1", focus: true },
-        {
-          num: 30,
-          title: "Blade Layouts (เพิ่มเติม)",
-          day: "day1",
-          focus: false,
-        },
-        { num: 31, title: "Forms & CSRF Protection", day: "day1", focus: true },
-        { num: 32, title: "Validation", day: "day1", focus: true },
-        { num: 33, title: "Authentication", day: "day2", focus: true },
-        {
-          num: 34,
-          title: "Starter Kits (Laravel Breeze)",
-          day: "day2",
-          focus: true,
-        },
-        {
-          num: 35,
-          title: "Authorization (Gates & Policies)",
-          day: "day2",
-          focus: true,
-        },
-        {
-          num: 36,
-          title: "Security — ภัยคุกคามและการป้องกัน",
-          day: "day2",
-          focus: true,
-        },
-        { num: 37, title: "Database Security", day: "day2", focus: true },
-        { num: 38, title: "CRUD System — ครบวงจร", day: "day2", focus: true },
-        { num: 39, title: "Reporting System", day: "day2", focus: true },
-        { num: 40, title: "Testing & Debugging", day: "day2", focus: false },
-        { num: 41, title: "Performance & Caching", day: "day2", focus: false },
-        { num: 42, title: "Queues & Jobs", day: "day2", focus: false },
-        { num: 43, title: "Deployment", day: "day2", focus: true },
-        { num: 44, title: "Best Practices", day: "day2", focus: true },
-        {
-          num: 45,
-          title: "Workshop — แนะนำโปรเจกต์",
-          day: "day2",
-          focus: true,
-        },
-        { num: 46, title: "Workshop — ขั้นตอนที่ 1", day: "day2", focus: true },
-        { num: 47, title: "Workshop — ขั้นตอนที่ 2", day: "day2", focus: true },
-        { num: 48, title: "Workshop — ขั้นตอนที่ 3", day: "day2", focus: true },
-        { num: 49, title: "สรุปบทเรียน", day: "day2", focus: true },
-        { num: 50, title: "Q&A & Closing", day: "day2", focus: true },
-      ];
+  <!-- ═══ GRID VIEW MODE ═══ -->
+  <div id="gridMode" style="display: none">
+    <div class="slide-grid" id="slideGrid"></div>
+  </div>
 
-      const DAY_LABELS = { intro: "บทนำ", day1: "วันที่ 1", day2: "วันที่ 2" };
-      const DAY_PILL = {
-        intro: "pill-intro",
-        day1: "pill-day1",
-        day2: "pill-day2",
-      };
-      const DAY_BADGE = { day1: "badge-day1", day2: "badge-day2" };
+  <script>
+    const ALL_SLIDES = [
+      { num: 1, title: "หลักสูตร Laravel + AI", day: "intro", focus: true },
+      { num: 2, title: "ประวัติวิทยากร", day: "intro", focus: true },
+      {
+        num: 3,
+        title: "กลุ่มเป้าหมาย (Target Audience)",
+        day: "intro",
+        focus: true,
+      },
+      {
+        num: 4,
+        title: "ภาพรวมหลักสูตร (Course Overview)",
+        day: "intro",
+        focus: true,
+      },
+      { num: 5, title: "ทำไมต้อง Laravel?", day: "intro", focus: true },
+      { num: 6, title: "AI Tools สำหรับนักพัฒนา", day: "intro", focus: true },
+      {
+        num: 7,
+        title: "การติดตั้ง — System Requirements",
+        day: "day1",
+        focus: true,
+      },
+      { num: 8, title: "การติดตั้ง — PHP", day: "day1", focus: true },
+      {
+        num: 9,
+        title: "การติดตั้ง — Composer & Laravel",
+        day: "day1",
+        focus: true,
+      },
+      { num: 10, title: "IDE Setup — VS Code", day: "day1", focus: true },
+      {
+        num: 11,
+        title: "โครงสร้างโปรเจกต์ Laravel",
+        day: "day1",
+        focus: true,
+      },
+      {
+        num: 12,
+        title: "Laravel Architecture (MVC)",
+        day: "day1",
+        focus: true,
+      },
+      { num: 13, title: "Service Container & DI", day: "day1", focus: false },
+      { num: 14, title: "Facades in Laravel", day: "day1", focus: false },
+      { num: 15, title: "Routing — พื้นฐาน", day: "day1", focus: true },
+      { num: 16, title: "Advanced Routing", day: "day1", focus: true },
+      {
+        num: 17,
+        title: "Controllers — การสร้างและใช้งาน",
+        day: "day1",
+        focus: true,
+      },
+      { num: 18, title: "Resource Controllers", day: "day1", focus: true },
+      {
+        num: 19,
+        title: "Controller Best Practices",
+        day: "day1",
+        focus: false,
+      },
+      { num: 20, title: "Models & Eloquent ORM", day: "day1", focus: true },
+      {
+        num: 21,
+        title: "Eloquent Relationships — ตอนที่ 1",
+        day: "day1",
+        focus: true,
+      },
+      {
+        num: 22,
+        title: "Eloquent Relationships — ตอนที่ 2",
+        day: "day1",
+        focus: true,
+      },
+      { num: 23, title: "Eloquent Query Scopes", day: "day1", focus: false },
+      {
+        num: 24,
+        title: "Eloquent Accessors & Mutators",
+        day: "day1",
+        focus: false,
+      },
+      {
+        num: 25,
+        title: "Eloquent Attribute Casting",
+        day: "day1",
+        focus: false,
+      },
+      { num: 26, title: "Eloquent Collections", day: "day1", focus: false },
+      { num: 27, title: "Views & Blade — พื้นฐาน", day: "day1", focus: true },
+      { num: 28, title: "Blade Components", day: "day1", focus: true },
+      { num: 29, title: "Blade Layouts", day: "day1", focus: true },
+      {
+        num: 30,
+        title: "Blade Layouts (เพิ่มเติม)",
+        day: "day1",
+        focus: false,
+      },
+      { num: 31, title: "Forms & CSRF Protection", day: "day1", focus: true },
+      { num: 32, title: "Validation", day: "day1", focus: true },
+      { num: 33, title: "Authentication", day: "day2", focus: true },
+      {
+        num: 34,
+        title: "Starter Kits (Laravel Breeze)",
+        day: "day2",
+        focus: true,
+      },
+      {
+        num: 35,
+        title: "Authorization (Gates & Policies)",
+        day: "day2",
+        focus: true,
+      },
+      {
+        num: 36,
+        title: "Security — ภัยคุกคามและการป้องกัน",
+        day: "day2",
+        focus: true,
+      },
+      { num: 37, title: "Database Security", day: "day2", focus: true },
+      { num: 38, title: "CRUD System — ครบวงจร", day: "day2", focus: true },
+      { num: 39, title: "Reporting System", day: "day2", focus: true },
+      { num: 40, title: "Testing & Debugging", day: "day2", focus: false },
+      { num: 41, title: "Performance & Caching", day: "day2", focus: false },
+      { num: 42, title: "Queues & Jobs", day: "day2", focus: false },
+      { num: 43, title: "Deployment", day: "day2", focus: true },
+      { num: 44, title: "Best Practices", day: "day2", focus: true },
+      {
+        num: 45,
+        title: "Workshop — แนะนำโปรเจกต์",
+        day: "day2",
+        focus: true,
+      },
+      { num: 46, title: "Workshop — ขั้นตอนที่ 1", day: "day2", focus: true },
+      { num: 47, title: "Workshop — ขั้นตอนที่ 2", day: "day2", focus: true },
+      { num: 48, title: "Workshop — ขั้นตอนที่ 3", day: "day2", focus: true },
+      { num: 49, title: "สรุปบทเรียน", day: "day2", focus: true },
+      { num: 50, title: "Q&A & Closing", day: "day2", focus: true },
+    ];
 
-      let currentFilter = "all";
-      let filteredSlides = [];
-      let currentIndex = 0;
-      let isGridView = false;
+    const DAY_LABELS = { intro: "บทนำ", day1: "วันที่ 1", day2: "วันที่ 2" };
+    const DAY_PILL = {
+      intro: "pill-intro",
+      day1: "pill-day1",
+      day2: "pill-day2",
+    };
+    const DAY_BADGE = { day1: "badge-day1", day2: "badge-day2" };
 
-      function buildFiltered() {
-        filteredSlides =
-          currentFilter === "all"
-            ? ALL_SLIDES.slice()
-            : ALL_SLIDES.filter(
-                (s) => s.day === currentFilter || s.day === "intro",
-              );
+    let currentFilter = "all";
+    let filteredSlides = [];
+    let currentIndex = 0;
+    let isGridView = false;
+
+    function buildFiltered() {
+      filteredSlides =
+        currentFilter === "all"
+          ? ALL_SLIDES.slice()
+          : ALL_SLIDES.filter(
+            (s) => s.day === currentFilter || s.day === "intro",
+          );
+    }
+
+    function renderSlide() {
+      const slide = filteredSlides[currentIndex];
+      if (!slide) return;
+      document.getElementById("slideFrame").src = `page${slide.num}.html`;
+      document.getElementById("currentSlideTitle").textContent =
+        `${slide.num}. ${slide.title}`;
+      const pill = document.getElementById("currentDayPill");
+      pill.textContent = DAY_LABELS[slide.day] || "";
+      pill.className = "day-pill " + (DAY_PILL[slide.day] || "");
+      const badge = document.getElementById("slideDayBadge");
+      const bc = DAY_BADGE[slide.day];
+      if (bc) {
+        badge.textContent = DAY_LABELS[slide.day];
+        badge.className = "slide-day-badge " + bc;
+        badge.style.display = "block";
+      } else {
+        badge.style.display = "none";
       }
+      const pct =
+        filteredSlides.length > 1
+          ? ((currentIndex + 1) / filteredSlides.length) * 100
+          : 100;
+      document.getElementById("progressBar").style.width = pct + "%";
+      document.getElementById("prevBtn").disabled = currentIndex === 0;
+      document.getElementById("nextBtn").disabled =
+        currentIndex === filteredSlides.length - 1;
+      document.getElementById("slideSelector").value = currentIndex;
+      document.getElementById("totalSlides").textContent =
+        filteredSlides.length;
+      updateGridActive();
+    }
 
-      function renderSlide() {
-        const slide = filteredSlides[currentIndex];
-        if (!slide) return;
-        document.getElementById("slideFrame").src = `page${slide.num}.html`;
-        document.getElementById("currentSlideTitle").textContent =
-          `${slide.num}. ${slide.title}`;
-        const pill = document.getElementById("currentDayPill");
-        pill.textContent = DAY_LABELS[slide.day] || "";
-        pill.className = "day-pill " + (DAY_PILL[slide.day] || "");
-        const badge = document.getElementById("slideDayBadge");
-        const bc = DAY_BADGE[slide.day];
-        if (bc) {
-          badge.textContent = DAY_LABELS[slide.day];
-          badge.className = "slide-day-badge " + bc;
-          badge.style.display = "block";
-        } else {
-          badge.style.display = "none";
+    function populateSelector() {
+      const sel = document.getElementById("slideSelector");
+      sel.innerHTML = "";
+      filteredSlides.forEach((s, i) => {
+        const o = document.createElement("option");
+        o.value = i;
+        o.textContent = `${s.num}. ${s.title}`;
+        sel.appendChild(o);
+      });
+    }
+
+    function populateGrid() {
+      const grid = document.getElementById("slideGrid");
+      grid.innerHTML = "";
+      let lastDay = null;
+      filteredSlides.forEach((s, i) => {
+        if (s.day !== lastDay) {
+          const hdr = document.createElement("div");
+          hdr.className = "grid-section-header";
+          const icons = {
+            intro: "📋 บทนำ",
+            day1: "☀️ วันที่ 1 — พื้นฐาน Laravel",
+            day2: "🌙 วันที่ 2 — Laravel ขั้นสูง & Workshop",
+          };
+          const sub = {
+            intro: "Introduction & Overview",
+            day1: "การติดตั้ง · Routing · Eloquent · Blade · Forms (9:00–16:30)",
+            day2: "Auth · Security · CRUD · Report · Deploy · Workshop (9:00–16:30)",
+          };
+          hdr.innerHTML = `<span class="section-badge ${s.day}">${icons[s.day]}</span><span class="section-label">${sub[s.day]}</span>`;
+          grid.appendChild(hdr);
+          lastDay = s.day;
         }
-        const pct =
-          filteredSlides.length > 1
-            ? ((currentIndex + 1) / filteredSlides.length) * 100
-            : 100;
-        document.getElementById("progressBar").style.width = pct + "%";
-        document.getElementById("prevBtn").disabled = currentIndex === 0;
-        document.getElementById("nextBtn").disabled =
-          currentIndex === filteredSlides.length - 1;
-        document.getElementById("slideSelector").value = currentIndex;
-        document.getElementById("totalSlides").textContent =
-          filteredSlides.length;
-        updateGridActive();
-      }
-
-      function populateSelector() {
-        const sel = document.getElementById("slideSelector");
-        sel.innerHTML = "";
-        filteredSlides.forEach((s, i) => {
-          const o = document.createElement("option");
-          o.value = i;
-          o.textContent = `${s.num}. ${s.title}`;
-          sel.appendChild(o);
-        });
-      }
-
-      function populateGrid() {
-        const grid = document.getElementById("slideGrid");
-        grid.innerHTML = "";
-        let lastDay = null;
-        filteredSlides.forEach((s, i) => {
-          if (s.day !== lastDay) {
-            const hdr = document.createElement("div");
-            hdr.className = "grid-section-header";
-            const icons = {
-              intro: "📋 บทนำ",
-              day1: "☀️ วันที่ 1 — พื้นฐาน Laravel",
-              day2: "🌙 วันที่ 2 — Laravel ขั้นสูง & Workshop",
-            };
-            const sub = {
-              intro: "Introduction & Overview",
-              day1: "การติดตั้ง · Routing · Eloquent · Blade · Forms (9:00–16:30)",
-              day2: "Auth · Security · CRUD · Report · Deploy · Workshop (9:00–16:30)",
-            };
-            hdr.innerHTML = `<span class="section-badge ${s.day}">${icons[s.day]}</span><span class="section-label">${sub[s.day]}</span>`;
-            grid.appendChild(hdr);
-            lastDay = s.day;
-          }
-          const card = document.createElement("div");
-          card.className = "slide-card";
-          card.id = `card-${i}`;
-          card.innerHTML = `<div class="card-day-stripe stripe-${s.day}"></div>
+        const card = document.createElement("div");
+        card.className = "slide-card";
+        card.id = `card-${i}`;
+        card.innerHTML = `<div class="card-day-stripe stripe-${s.day}"></div>
                 <div class="card-num">${s.num}</div>
                 <div class="card-title">${s.title}</div>
                 ${!s.focus ? '<div class="card-adv">⚡ ขั้นสูง / ข้ามได้</div>' : ""}`;
-          card.onclick = () => {
-            currentIndex = i;
-            renderSlide();
-            if (isGridView) toggleView();
-          };
-          grid.appendChild(card);
-        });
-      }
-
-      function updateGridActive() {
-        document
-          .querySelectorAll(".slide-card")
-          .forEach((c, i) => c.classList.toggle("active", i === currentIndex));
-      }
-
-      function nextSlide() {
-        if (currentIndex < filteredSlides.length - 1) {
-          currentIndex++;
+        card.onclick = () => {
+          currentIndex = i;
           renderSlide();
-        }
-      }
-      function prevSlide() {
-        if (currentIndex > 0) {
-          currentIndex--;
-          renderSlide();
-        }
-      }
-      function goToSlideByIndex(idx) {
-        currentIndex = parseInt(idx);
-        renderSlide();
-      }
-
-      function filterDay(day, btnEl) {
-        const curNum = filteredSlides[currentIndex]?.num;
-        currentFilter = day;
-        buildFiltered();
-        let ni = filteredSlides.findIndex((s) => s.num === curNum);
-        currentIndex = ni < 0 ? 0 : ni;
-        document
-          .querySelectorAll(".day-tab")
-          .forEach((b) => b.classList.remove("active"));
-        btnEl.classList.add("active");
-        populateSelector();
-        populateGrid();
-        renderSlide();
-      }
-
-      function toggleView() {
-        isGridView = !isGridView;
-        document.getElementById("viewerMode").style.display = isGridView
-          ? "none"
-          : "block";
-        document.getElementById("gridMode").style.display = isGridView
-          ? "block"
-          : "none";
-        document.getElementById("viewToggleText").textContent = isGridView
-          ? "Slide View"
-          : "Grid View";
-        if (isGridView) updateGridActive();
-      }
-
-      document.addEventListener("keydown", (e) => {
-        if (isGridView) return;
-        if (e.key === "ArrowRight" || e.key === " ") {
-          e.preventDefault();
-          nextSlide();
-        } else if (e.key === "ArrowLeft") {
-          e.preventDefault();
-          prevSlide();
-        }
+          if (isGridView) toggleView();
+        };
+        grid.appendChild(card);
       });
+    }
 
+    function updateGridActive() {
+      document
+        .querySelectorAll(".slide-card")
+        .forEach((c, i) => c.classList.toggle("active", i === currentIndex));
+    }
+
+    function nextSlide() {
+      if (currentIndex < filteredSlides.length - 1) {
+        currentIndex++;
+        renderSlide();
+      }
+    }
+    function prevSlide() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderSlide();
+      }
+    }
+    function goToSlideByIndex(idx) {
+      currentIndex = parseInt(idx);
+      renderSlide();
+    }
+
+    function filterDay(day, btnEl) {
+      const curNum = filteredSlides[currentIndex]?.num;
+      currentFilter = day;
       buildFiltered();
+      let ni = filteredSlides.findIndex((s) => s.num === curNum);
+      currentIndex = ni < 0 ? 0 : ni;
+      document
+        .querySelectorAll(".day-tab")
+        .forEach((b) => b.classList.remove("active"));
+      btnEl.classList.add("active");
       populateSelector();
       populateGrid();
       renderSlide();
-    </script>
-  </body>
+    }
+
+    function toggleView() {
+      isGridView = !isGridView;
+      document.getElementById("viewerMode").style.display = isGridView
+        ? "none"
+        : "block";
+      document.getElementById("gridMode").style.display = isGridView
+        ? "block"
+        : "none";
+      document.getElementById("viewToggleText").textContent = isGridView
+        ? "Slide View"
+        : "Grid View";
+      if (isGridView) updateGridActive();
+    }
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch((err) => {
+          console.log(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+        });
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    document.addEventListener("fullscreenchange", () => {
+      const fsIcon = document.querySelector("#fsBtn i");
+      if (document.fullscreenElement) {
+        document.body.classList.add("is-fullscreen");
+        if (fsIcon) fsIcon.className = "fa-solid fa-compress";
+      } else {
+        document.body.classList.remove("is-fullscreen");
+        if (fsIcon) fsIcon.className = "fa-solid fa-expand";
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (isGridView) return;
+      if (e.key === "ArrowRight" || e.key === " ") {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key.toLowerCase() === "f") {
+        e.preventDefault();
+        toggleFullScreen();
+      }
+    });
+
+    buildFiltered();
+    populateSelector();
+    populateGrid();
+    renderSlide();
+  </script>
+</body>
+
 </html>
