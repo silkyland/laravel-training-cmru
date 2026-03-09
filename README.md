@@ -1,45 +1,119 @@
 # 🚀 Laravel + AI Training Course
+
 ## หลักสูตรการประยุกต์ใช้ AI เพื่อการพัฒนาระบบสารสนเทศและฐานข้อมูลองค์กร
 
 ![Course Cover](assets/images/hero-cover.png)
 
-![Laravel](https://img.shields.io/badge/Laravel-v10.x-red)
+![Laravel](https://img.shields.io/badge/Laravel-v11.x-red)
 ![PHP](https://img.shields.io/badge/PHP-8.2+-blue)
 ![AI](https://img.shields.io/badge/AI-Powered-purple)
 
-> 📚 เอกสารประกอบการอบรม Laravel Framework พร้อมการใช้ AI ช่วยพัฒนา  
-> 🎓 สำนักดิจิทัลเพื่อการศึกษา มหาวิทยาลัยราชภัฏเชียงใหม่  
-> 📅 14-15 มีนาคม 2568
+> 📚 เอกสารประกอบการอบรม Laravel Framework พร้อมการใช้ AI ช่วยพัฒนา
+> 🎓 สำนักดิจิทัลเพื่อการศึกษา มหาวิทยาลัยราชภัฏเชียงใหม่
+> 📅 **14–15 มีนาคม 2569** (2 วัน | 12 ชั่วโมง)
 
 ---
 
 ## 👨‍🏫 วิทยากร
 
-**นายบัณฑิต นันทะเทศ**  
+**นายบัณฑิต นันทะเทศ (Bundit Nuntates)**
 Senior PHP Developer, Data Horizon Co., Ltd.
+GitHub: [@silkyland](https://github.com/silkyland)
 
 ---
 
 ## 📖 เกี่ยวกับหลักสูตร
 
-หลักสูตรนี้ออกแบบมาเพื่อสอนการพัฒนาระบบสารสนเทศด้วย Laravel Framework โดยเน้นการใช้ AI เป็นตัวช่วยเพื่อเพิ่มประสิทธิภาพในการเขียนโค้ด พร้อมทั้งเรียนรู้เรื่องความปลอดภัยของระบบและฐานข้อมูล
+หลักสูตรนี้ออกแบบมาเพื่อสอน **อาจารย์และบุคลากรมหาวิทยาลัย** ให้สามารถพัฒนาระบบสารสนเทศด้วย **Laravel Framework** โดยเน้นการใช้ **AI** เป็นตัวช่วยเพิ่มประสิทธิภาพการพัฒนา พร้อมเรียนรู้เรื่องความปลอดภัยของระบบ
 
 ### 🎯 วัตถุประสงค์
 
 - เข้าใจโครงสร้างและการทำงานของ Laravel Framework
 - ใช้ AI ช่วยเขียนโค้ดและพัฒนาระบบได้อย่างมีประสิทธิภาพ
-- สร้างระบบที่ปลอดภัยจากการโจมตีพื้นฐาน
-- พัฒนาระบบต้นแบบที่ใช้งานได้จริง
+- สร้างระบบที่ปลอดภัยจากการโจมตีพื้นฐาน (XSS, CSRF, SQL Injection)
+- พัฒนาระบบต้นแบบที่ใช้งานได้จริงใน Workshop
 
-### ✅ ผลลัพธ์ที่ได้รับ
+### ✅ ผลลัพธ์ที่คาดหวัง
 
-- [ ] ลดระยะเวลาในการพัฒนาระบบด้วย AI 30-50%
-- [ ] มีระบบต้นแบบที่ทำงานได้ครบวงจร (CRUD + Report)
+- [ ] ลดระยะเวลาในการพัฒนาระบบด้วย AI 30–50%
+- [ ] มีระบบต้นแบบ CRUD + Authentication + Report ที่ทำงานได้ครบวงจร
 - [ ] เข้าใจหลักการป้องกันช่องโหว่ความปลอดภัยพื้นฐาน
 
 ---
 
-## 📚 สารบัญ
+## 🎓 กลุ่มเป้าหมาย
+
+| กลุ่ม                           | ความรู้ที่ควรมีก่อน              |
+| ------------------------------- | -------------------------------- |
+| อาจารย์สาขาคอมพิวเตอร์          | PHP พื้นฐาน / HTML / CSS         |
+| บุคลากร IT มหาวิทยาลัย          | พื้นฐาน Web Development          |
+| นักพัฒนาที่ต้องการเรียน Laravel | ประสบการณ์ PHP อย่างน้อย 6 เดือน |
+
+---
+
+## 📅 กำหนดการอบรม 2 วัน
+
+### ☀️ วันที่ 1 — พื้นฐาน Laravel (14 มีนาคม 2569)
+
+| เวลา            | หัวข้อ                                     | Slides |
+| --------------- | ------------------------------------------ | ------ |
+| 09:00–09:30     | แนะนำหลักสูตร, วิทยากร, AI Tools           | 1–6    |
+| 09:30–10:30     | การติดตั้ง PHP, Composer, Laravel, VS Code | 7–10   |
+| 10:30–11:00     | Laravel Architecture & Project Structure   | 11–12  |
+| 11:00–12:00     | Routing (Basic & Advanced)                 | 15–16  |
+| **12:00–13:00** | **🍽️ พักกลางวัน**                          |        |
+| 13:00–14:00     | Controllers & Resource Controllers         | 17–18  |
+| 14:00–15:00     | Models, Eloquent ORM & Relationships       | 20–22  |
+| 15:00–15:15     | ☕ พักสั้น                                 |        |
+| 15:15–16:00     | Views, Blade Templates & Layouts           | 27–29  |
+| 16:00–16:30     | Forms, CSRF & Validation                   | 31–32  |
+
+> ⚡ **Slides ขั้นสูง (ข้ามได้ถ้าเวลาไม่พอ):** 13, 14, 19, 23–26, 30
+
+### 🌙 วันที่ 2 — Laravel ขั้นสูง & Workshop (15 มีนาคม 2569)
+
+| เวลา            | หัวข้อ                                              | Slides |
+| --------------- | --------------------------------------------------- | ------ |
+| 09:00–10:00     | Authentication, Laravel Breeze, Authorization       | 33–35  |
+| 10:00–11:00     | Security: XSS, CSRF, SQL Injection, Mass Assignment | 36–37  |
+| 11:00–12:00     | CRUD System ครบวงจร                                 | 38     |
+| **12:00–13:00** | **🍽️ พักกลางวัน**                                   |        |
+| 13:00–14:00     | Reporting System (PDF, Excel Export)                | 39     |
+| 14:00–14:30     | Deployment & Best Practices                         | 43–44  |
+| 14:30–14:45     | ☕ พักสั้น                                          |        |
+| 14:45–16:15     | 🏋️ Workshop: สร้างระบบต้นแบบ                        | 45–48  |
+| 16:15–16:30     | สรุป & Q&A                                          | 49–50  |
+
+> ⚡ **Slides เพิ่มเติม (ถ้าเวลาเหลือ):** 40 Testing, 41 Caching, 42 Queues
+
+---
+
+## 🖥️ วิธีใช้ Slide Viewer
+
+```bash
+cd resources/slides
+
+# Python 3
+python3 -m http.server 8080
+
+# หรือ PHP
+php -S localhost:8080
+```
+
+เปิดเบราว์เซอร์: **http://localhost:8080/index.html**
+
+**ฟีเจอร์ใหม่ใน Slide Viewer:**
+
+- 🔍 **Filter วัน** — กรองเฉพาะ "วันที่ 1" หรือ "วันที่ 2" ได้
+- 📋 **Grid View** — ดูภาพรวม Slides พร้อม Day badge
+- ⌨️ **Keyboard** — ← → หรือ Space เลื่อน slide
+- 📊 **Progress Bar** — แสดงความคืบหน้า
+- 🏷️ **Day Badge** — แสดงว่า slide อยู่วันไหน
+- ⚡ **Marker ขั้นสูง** — บอกว่า slide ใดข้ามได้
+
+---
+
+## 📚 สารบัญเนื้อหา (Docs)
 
 ### 📘 Part 1: Introduction & Fundamentals
 
@@ -70,8 +144,8 @@ Senior PHP Developer, Data Horizon Co., Ltd.
   - [5.1 Introduction to Eloquent](docs/05-models-eloquent/01-eloquent-introduction.md)
   - [5.2 Database Design with AI](docs/05-models-eloquent/02-database-design.md)
   - [5.3 Eloquent Relationships](docs/05-models-eloquent/03-relationships.md)
-  - [5.4 Advanced Eloquent](docs/05-models-eloquent/04-advanced-eloquent.md)
-  - [5.5 Eloquent Collections](docs/05-models-eloquent/05-collections.md)
+  - [5.4 Advanced Eloquent](docs/05-models-eloquent/04-advanced-eloquent.md) _(ขั้นสูง)_
+  - [5.5 Eloquent Collections](docs/05-models-eloquent/05-collections.md) _(ขั้นสูง)_
 
 ### 🎨 Part 3: Frontend & Forms
 
@@ -92,7 +166,7 @@ Senior PHP Developer, Data Horizon Co., Ltd.
   - [8.1 Authentication Introduction](docs/08-authentication/01-auth-introduction.md)
   - [8.2 Implementing Authentication](docs/08-authentication/02-implementing-auth.md)
   - [8.3 Authorization (Gates & Policies)](docs/08-authentication/03-authorization.md)
-  - [8.4 Multi-Auth Systems](docs/08-authentication/04-multi-auth.md)
+  - [8.4 Multi-Auth Systems](docs/08-authentication/04-multi-auth.md) _(ขั้นสูง)_
 
 - **Module 9: Database Security**
   - [9.1 SQL Injection Prevention](docs/09-database-security/01-sql-injection.md)
@@ -110,19 +184,19 @@ Senior PHP Developer, Data Horizon Co., Ltd.
 
 - **Module 11: Complete CRUD System**
   - [11.1 Project Planning](docs/11-crud-system/01-planning.md)
-  - [11.2 Create Operation](docs/11-crud-system/02-create.md)
-  - [11.3 Read Operation](docs/11-crud-system/03-read.md)
-  - [11.4 Update Operation](docs/11-crud-system/04-update.md)
-  - [11.5 Delete Operation](docs/11-crud-system/05-delete.md)
-  - [11.6 Advanced Features](docs/11-crud-system/06-advanced-features.md)
+  - [11.2 Create](docs/11-crud-system/02-create.md)
+  - [11.3 Read](docs/11-crud-system/03-read.md)
+  - [11.4 Update](docs/11-crud-system/04-update.md)
+  - [11.5 Delete](docs/11-crud-system/05-delete.md)
+  - [11.6 Advanced Features](docs/11-crud-system/06-advanced-features.md) _(ขั้นสูง)_
 
 - **Module 12: Reporting System**
   - [12.1 Report Design](docs/12-reporting/01-report-design.md)
   - [12.2 PDF Generation](docs/12-reporting/02-pdf-generation.md)
   - [12.3 Excel Export](docs/12-reporting/03-excel-export.md)
-  - [12.4 Real-time Reports](docs/12-reporting/04-realtime-reports.md)
+  - [12.4 Real-time Reports](docs/12-reporting/04-realtime-reports.md) _(ขั้นสูง)_
 
-### 🧪 Part 6: Testing & Optimization
+### 🧪 Part 6: Testing & Optimization _(ขั้นสูง — ถ้าเวลาเหลือ)_
 
 - **Module 13: Testing & Debugging**
   - [13.1 Testing Introduction](docs/13-testing/01-testing-introduction.md)
@@ -134,7 +208,7 @@ Senior PHP Developer, Data Horizon Co., Ltd.
   - [14.2 Database Optimization](docs/14-performance/02-database-optimization.md)
   - [14.3 Code Optimization](docs/14-performance/03-code-optimization.md)
 
-### 🚀 Part 7: Deployment & Best Practices
+### 🚀 Part 7: Deployment & Workshop
 
 - **Module 15: Deployment**
   - [15.1 Deployment Preparation](docs/15-deployment/01-deployment-prep.md)
@@ -148,66 +222,92 @@ Senior PHP Developer, Data Horizon Co., Ltd.
 
 ---
 
-## 🎓 Workshop Project
+## 💡 ตัวอย่าง AI Prompts สำหรับ Laravel
 
-สร้างระบบต้นแบบที่มีฟีเจอร์ครบถ้วน:
+โฟลเดอร์ `examples/ai-prompts/` มี prompt สำเร็จรูปสำหรับ:
 
-### Required Features Checklist
-
-- [ ] **Create** - ฟอร์มเพิ่มข้อมูลพร้อม validation
-- [ ] **Read** - แสดงรายการข้อมูล (pagination, search, filter, sort)
-- [ ] **Update** - แก้ไขข้อมูลพร้อม confirmation
-- [ ] **Delete** - ลบข้อมูล (soft delete) พร้อม confirmation
-- [ ] **Report** - สร้างรายงาน PDF หรือ Excel
-- [ ] **Authentication** - ระบบ login/logout
-- [ ] **Authorization** - การจัดการสิทธิ์ผู้ใช้
-- [ ] **Security** - ป้องกัน SQL Injection, XSS, CSRF
-- [ ] **Validation** - ตรวจสอบข้อมูลทุก input
-- [ ] **AI Documentation** - เอกสารแสดงการใช้ AI ในการพัฒนา
+| โปรเจกต์             | ไฟล์                                                                       |
+| -------------------- | -------------------------------------------------------------------------- |
+| Laravel general      | [laravel-prompts.md](examples/ai-prompts/laravel-prompts.md)               |
+| ระบบจองห้องประชุม    | [meeting-room-booking.md](examples/ai-prompts/meeting-room-booking.md)     |
+| ระบบจองยานพาหนะ      | [vehicle-booking.md](examples/ai-prompts/vehicle-booking.md)               |
+| ระบบแจ้งซ่อม         | [maintenance-request.md](examples/ai-prompts/maintenance-request.md)       |
+| ระบบจองประชุมออนไลน์ | [online-meeting-booking.md](examples/ai-prompts/online-meeting-booking.md) |
 
 ---
 
-## 💻 ตัวอย่างโค้ด
+## 🏋️ Workshop Project
 
-โฟลเดอร์ `examples/` ประกอบด้วย:
+สร้างระบบต้นแบบที่มีฟีเจอร์ครบถ้วน (เลือก 1 ระบบ):
 
-- **Code Snippets** - ตัวอย่างโค้ดแยกตามหัวข้อ
-- **Complete Projects** - โปรเจกต์ตัวอย่างที่สมบูรณ์
-- **AI Prompts** - รวม prompts ที่ใช้ได้ผลดี
+**ตัวเลือกระบบที่แนะนำ:**
+
+- ระบบจองห้องประชุม
+- ระบบแจ้งซ่อมบำรุง
+- ระบบจัดการบุคลากร
+- ระบบที่ตนเองสนใจ (ปรึกษาวิทยากร)
+
+**Feature Checklist:**
+
+- [ ] **Create** — ฟอร์มเพิ่มข้อมูลพร้อม Validation
+- [ ] **Read** — แสดงรายการ (Pagination + Search)
+- [ ] **Update** — แก้ไขข้อมูลพร้อม Confirmation
+- [ ] **Delete** — ลบข้อมูล (Soft Delete)
+- [ ] **Authentication** — Login / Logout / Register
+- [ ] **Authorization** — จัดการสิทธิ์ผู้ใช้
+- [ ] **Report** — PDF หรือ Excel Export
+- [ ] **Security** — ป้องกัน SQL Injection, XSS, CSRF
+- [ ] **AI Documentation** — แสดงการใช้ AI ในกระบวนการพัฒนา
+
+---
+
+## 🛠️ Software Requirements
+
+| Software      | Version | Download                        |
+| ------------- | ------- | ------------------------------- |
+| PHP           | 8.2+    | https://www.php.net             |
+| Composer      | 2.x     | https://getcomposer.org         |
+| Node.js & npm | 18+     | https://nodejs.org              |
+| Git           | 2.x     | https://git-scm.com             |
+| VS Code       | Latest  | https://code.visualstudio.com   |
+| MySQL         | 8.0+    | https://dev.mysql.com/downloads |
+
+### VS Code Extensions แนะนำ
+
+```
+Laravel Blade Snippets     PHP Intelephense
+Laravel Snippets           GitLens
+MySQL (Jun Han)            GitHub Copilot / Codeium
+```
+
+### ตรวจสอบก่อนอบรม
+
+```bash
+php -v        # PHP 8.2.x
+composer -V   # Composer 2.x
+node -v       # v18+
+git --version # 2.x
+```
 
 ---
 
 ## 📚 แหล่งเรียนรู้เพิ่มเติม
 
-### Official Documentation
-- [Laravel Documentation](https://laravel.com/docs)
-- [Laravel Bootcamp](https://bootcamp.laravel.com/)
-- [Laracasts](https://laracasts.com/)
-
-### AI Tools
-- [Claude AI](https://claude.ai)
-- [ChatGPT](https://chat.openai.com)
-- [GitHub Copilot](https://github.com/features/copilot)
-
-### Community
-- [Laravel Thailand Community](https://www.facebook.com/groups/laravelthailand)
-- [Laravel Discord](https://discord.gg/laravel)
-- [Laracasts Forum](https://laracasts.com/discuss)
-
----
-
-## 🤝 การมีส่วนร่วม
-
-หากพบข้อผิดพลาดหรือต้องการเพิ่มเติมเนื้อหา สามารถ:
-- สร้าง Issue
-- ส่ง Pull Request
-- ติดต่อวิทยากร
+| แหล่ง                      | ลิงก์                                           |
+| -------------------------- | ----------------------------------------------- |
+| Laravel Official Docs      | https://laravel.com/docs                        |
+| Laravel Bootcamp           | https://bootcamp.laravel.com                    |
+| Laracasts                  | https://laracasts.com                           |
+| Laravel Daily              | https://laraveldaily.com                        |
+| Claude AI                  | https://claude.ai                               |
+| GitHub Copilot             | https://github.com/features/copilot             |
+| Laravel Thailand Community | https://www.facebook.com/groups/laravelthailand |
 
 ---
 
 ## 📞 ติดต่อ
 
-**สำนักดิจิทัลเพื่อการศึกษา**  
+**สำนักดิจิทัลเพื่อการศึกษา**
 มหาวิทยาลัยราชภัฏเชียงใหม่
 
 ---
@@ -219,5 +319,4 @@ Senior PHP Developer, Data Horizon Co., Ltd.
 ---
 
 **Happy Coding! 🚀**
-
 Made with ❤️ by Digital Office for Education, CMRU
